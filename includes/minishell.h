@@ -105,6 +105,15 @@ typedef	struct s_parsing
 	t_lexer	*lexer;
 }		t_parsing;
 
+//typedef	struct s_abstract_syntax_tree
+//{
+//	t_cmd	*cmd;
+//	t_token	*root;
+//	t_ast *left_branch;
+//	t_ast *right_branch;
+//
+//}		t_ast;
+
 /*
 * 	Data struct, containing references to all other structs, whcih includes:
 * 	1) a matrix of all the commands that exist, with all the information needed for each command
@@ -112,17 +121,22 @@ typedef	struct s_parsing
 * 	Things that can be potentially added:
 * 	1) A split version of the "PATH" variable, to have an easy access to each directory
 * 	2) The env variable that is sent from main, stored for easy access
-* */
+*/
 typedef struct s_data
 {
 	t_env		*env;
 	t_cmd		**cmd; 	//if each command has a seaprate entry in its own struct, it is not necessary to have a double pointer of cmds in the struct itself
 						//or, we can store all commands in that single struct, with it having a double pointer.
 	t_parsing	*parse_data;
-	char	**envp;
-	char	**path;
+	char		**envp;
+	char		**path;
 	t_pipe		(*)pipe;
 	t_redirect	(*)redirect;
 }				t_data;
+
+
+//Creating a tree, where the left branch will be executed first.
+
+
 
 #endif
