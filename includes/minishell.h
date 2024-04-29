@@ -92,13 +92,18 @@ typedef struct s_env
 * */
 typedef struct s_lexer
 {
-	t_token	**tokens;
 	int		n_cmds;
 	int		n_pipes;
 	int		n_redirects;
 //	int		n_semicolons;
 //	int		n_newlines;
 }				t_lexer;
+
+typedef	struct s_parsing
+{
+	t_token **tokens;
+	t_lexer	*lexer;
+}		t_parsing;
 
 /*
 * 	Data struct, containing references to all other structs, whcih includes:
@@ -113,6 +118,7 @@ typedef struct s_data
 	t_env		*env;
 	t_cmd		**cmd; 	//if each command has a seaprate entry in its own struct, it is not necessary to have a double pointer of cmds in the struct itself
 						//or, we can store all commands in that single struct, with it having a double pointer.
+	t_parsing	*parse_data;
 	char	**envp;
 	char	**path;
 	t_pipe		(*)pipe;
