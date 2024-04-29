@@ -12,6 +12,7 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+//I worte this comment for salam only
 
 typedef struct s_pipe
 {
