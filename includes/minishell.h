@@ -13,13 +13,20 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+enum e_token_type
+{
+	COMMAND,
+	PIPE,
+	REDIRECT
+	//SEMICOLON,
+	//NEWLINE,
+	//END
+};
+
 /*
 * 	The pipe structure, which indludes:
 * 	1) the pipes (both of them)
 * 	2) the pids of the forked processes
-* 	
-* 	Can potentially add:
-* 	1) The toggle (j), to keep track of where each process should read from and write to
 * */
 typedef struct s_pipe
 {
@@ -34,6 +41,9 @@ typedef struct s_pipe
 *	1)	where it reads from and where its reading to
 *	2) 	the path that stores the executable (if any, or if its a builtin)
 * 	3)	the command itself
+* 
+* 	things that can be added:
+* 	2) a serial number for each command
 */ 
 typedef struct s_cmd
 {
@@ -45,10 +55,13 @@ typedef struct s_cmd
 	int		fd_out;
 }				t_cmd;
 
+/*
+* 	Stores information on tokens
+* */
 typedef struct s_token
 {
-	char	*token;
-	int		type;
+	char			*token;
+	e_token_type	type;
 }				t_token;
 
 /*
@@ -72,7 +85,6 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
-
 /*
 * 	The initial scan of the input, which can include:
 * 	1) number of commands
@@ -80,8 +92,13 @@ typedef struct s_env
 * */
 typedef struct s_lexer
 {
-	
-}	t_lexer;
+	t_token	**tokens;
+	int		n_cmds;
+	int		n_pipes;
+	int		n_redirects;
+//	int		n_semicolons;
+//	int		n_newlines;
+}				t_lexer;
 
 /*
 * 	Data struct, containing references to all other structs, whcih includes:
@@ -94,10 +111,10 @@ typedef struct s_lexer
 typedef struct s_data
 {
 	t_env		*env;
-	t_cmd		(*)*cmd; 	//if each command has a seaprate entry in its own struct, it is not necessary to have a double pointer of cmds in the struct itself
-							//or, we can store all commands in that single struct, with it having a double pointer.
-//	char	**envp;
-//	char	**path;
+	t_cmd		**cmd; 	//if each command has a seaprate entry in its own struct, it is not necessary to have a double pointer of cmds in the struct itself
+						//or, we can store all commands in that single struct, with it having a double pointer.
+	char	**envp;
+	char	**path;
 	t_pipe		(*)pipe;
 	t_redirect	(*)redirect;
 }				t_data;
