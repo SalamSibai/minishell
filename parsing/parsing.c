@@ -57,8 +57,6 @@ bool	pasre_setup(t_parsing *parse)
 	return (true);
 }
 
-void	scan(char **av, t_parsing *parse)
-{
 	/*
 		go through the input (av)
 			1- until there's a space, tab, etc... 
@@ -68,6 +66,8 @@ void	scan(char **av, t_parsing *parse)
 
 	gradually fill in tokens within the tokens struct
 	*/
+void	scan(char **av, t_parsing *parse)
+{
 	int i;
 	int j;
 	int c;
