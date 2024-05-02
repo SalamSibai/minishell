@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/04/29 19:24:00 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:22:07 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_cmd
 typedef struct s_token
 {
 	char			*token;
-	e_token_type	type;
+	int				type;
 }				t_token;
 
 /*
