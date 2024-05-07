@@ -13,11 +13,18 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdbool.h>
+
 enum e_token_type
 {
 	COMMAND,
 	PIPE,
-	REDIRECT
+	REDIRECT,
+	FLAG,
+	ID
 	//SEMICOLON,
 	//NEWLINE,
 	//END
@@ -95,6 +102,7 @@ typedef struct s_lexer
 	int		n_cmds;
 	int		n_pipes;
 	int		n_redirects;
+	int		n_token;
 //	int		n_semicolons;
 //	int		n_newlines;
 }				t_lexer;
@@ -128,12 +136,18 @@ typedef struct s_data
 	t_cmd		**cmd; 	//if each command has a seaprate entry in its own struct, it is not necessary to have a double pointer of cmds in the struct itself
 						//or, we can store all commands in that single struct, with it having a double pointer.
 	t_parsing	*parse_data;
-	char		**envp;
-	char		**path;
-	t_pipe		(*)pipe;
-	t_redirect	(*)redirect;
+	//char		**env_var;
+	//char		**path;
+//	t_pipe		(*)pipe;
+//	t_redirect	(*)redirect;
 }				t_data;
 
+/* ************************************************************************** */
+/*									PARSE UTILS								  */
+/* ************************************************************************** */
+
+int		ft_panic(char *message, int ret);
+void	*ft_safe_malloc(size_t size);
 
 //Creating a tree, where the left branch will be executed first.
 
