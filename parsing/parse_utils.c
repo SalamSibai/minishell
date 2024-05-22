@@ -4,15 +4,15 @@
 int			ft_panic(char *message, int ret)
 {
     //add a function call to cleanup and exit program (if needed)
-	return (ft_putstr_fd(message, 2),  ret);
+	return (ft_putendl_fd(message, 2), free(message), ret);
 }
 
-void	*ft_safe_malloc(size_t size)
+void	*ft_safe_malloc(size_t size, char *msg)
 {
 	void	*ptr;
 
 	ptr = malloc(size);
 	if (!ptr)
-		return (ft_panic("ERROR: MALLOC FAILED IN\n", 0), NULL);
-	return (ptr);
+		return (ft_panic(ft_strjoin("ERROR: MALLOC FAILED IN ", msg), 0), NULL);
+ 	return (ptr);
 }

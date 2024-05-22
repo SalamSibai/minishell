@@ -17,18 +17,22 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include "../libft/libft.h"
 
-enum e_token_type
+typedef enum e_token_type
 {
 	COMMAND,
 	PIPE,
-	REDIRECT,
+	REDIRECT_INPUT,
+	REDIRECT_OUTPUT,
+	HEREDOC,
+	REDIRECT_APPEND,
 	FLAG,
 	ID
 	//SEMICOLON,
 	//NEWLINE,
 	//END
-};
+} e_token_type;
 
 /*
 * 	The pipe structure, which indludes:
@@ -67,8 +71,8 @@ typedef struct s_cmd
 * */
 typedef struct s_token
 {
-	char			*token;
-	int				type;
+	char			*token_string;
+	e_token_type	type;
 }				t_token;
 
 /*
@@ -85,12 +89,12 @@ typedef struct s_redirect
 }				t_redirect;
 
 //Not sure what this is for yet
-typedef struct s_env
+/*typedef struct s_env
 {
 	char	*key;
 	char	*value;
 	struct s_env	*next;
-}				t_env;
+}				t_env;*/
 
 /*
 * 	The initial scan of the input, which can include:
@@ -132,12 +136,12 @@ typedef	struct s_parsing
 */
 typedef struct s_data
 {
-	t_env		*env;
+	t_list		*env;
 	t_cmd		**cmd; 	//if each command has a seaprate entry in its own struct, it is not necessary to have a double pointer of cmds in the struct itself
 						//or, we can store all commands in that single struct, with it having a double pointer.
 	t_parsing	*parse_data;
-	//char		**env_var;
-	//char		**path;
+	char		**env_var;
+	char		**path;
 //	t_pipe		(*)pipe;
 //	t_redirect	(*)redirect;
 }				t_data;
@@ -147,7 +151,14 @@ typedef struct s_data
 /* ************************************************************************** */
 
 int		ft_panic(char *message, int ret);
-void	*ft_safe_malloc(size_t size);
+void	*ft_safe_malloc(size_t size, char *msg);
+
+/* ************************************************************************** */
+/*									SET TOKENS								  */
+/* ************************************************************************** */
+
+t_token	*set_token(char *str);
+int		token_count(char **av);
 
 //Creating a tree, where the left branch will be executed first.
 
