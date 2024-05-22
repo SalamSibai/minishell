@@ -20,6 +20,8 @@
 # include <strings.h>
 # include <stdint.h>
 # include <fcntl.h>
+# include <stdbool.h>
+
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
@@ -38,6 +40,8 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+bool 	ft_isspace(const char str);
+
 
 int		ft_atoi(const char *str);
 int		ft_strlen(const char *str);
@@ -63,6 +67,7 @@ void	ft_free2d(void **arr);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(char *src);
+int		ft_skipspaces(const char *str);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);

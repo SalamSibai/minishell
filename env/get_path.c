@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:00:00 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/08 17:25:24 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:35:36 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //this function will return the node to be used by export and unset
 
-char	**get_path(char **env_str)
+/*char	**get_path(char **env_str)
 {
 	char	**paths;
 	char	*path;
@@ -42,4 +42,34 @@ char	**get_path(char **env_str)
 		
 	
 	}
+}*/
+
+
+void	set_path(char **envp, t_data *data)
+{
+	char	*full_path;
+    char    **split_path;
+    int     i;
+
+    i = -1;
+	full_path = NULL;
+	while (*envp)
+	{
+		if (ft_strncmp("PATH=",*envp, 5) == 0)
+		{
+			full_path = *envp + 5;
+			break ;
+		}
+		envp ++;
+	}
+
+    //if (full_path == NULL)
+    //CODE
+   // else
+		split_path = ft_split(full_path, ':');
+    while (split_path[++i] != NULL)
+    {
+        data->path = ft_strjoin(split_path[i], '/');
+    }
+	ft_free2d(split_path);
 }

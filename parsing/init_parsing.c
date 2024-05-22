@@ -12,6 +12,7 @@
 
 #include "../includes/minishell.h"
 
+# include "minishell.h"
 
 /*
 	execution flow:
@@ -38,7 +39,7 @@ t_token	*set_token(char *str)
 	(void)str;
 
 	token = ft_safe_malloc(sizeof(token), "TOKEN");
-	
+
 	//set type
 	return (token);
 }
@@ -70,7 +71,6 @@ bool	pasre_setup(t_parsing *parse)
 			2- once a set of characters are grouped, send them to set token
 				a- set token mallocs for the token
 				b- sets the type of the token
-
 	gradually fill in tokens within the tokens struct
 	*/
 void	scan(char **av, t_parsing *parse)
@@ -129,3 +129,4 @@ int main(int ac, char **av, char **env)
 	pasre_setup(parse);
 	// scan(av, parse);
 }
+

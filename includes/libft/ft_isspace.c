@@ -18,9 +18,9 @@
  * @param str 
  * @return returns a the string pointed at character after finding a space in the string
  */
-char	*is_space(const char *str)
+bool 	ft_isspace(const char str)
 {
-	int	i;
+	/*int	i;
 
 	i = 0;
 	if (!str)
@@ -28,15 +28,20 @@ char	*is_space(const char *str)
 	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
 		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
 		i++;
-	return ((char *)str + i);
+	return ((char *)str + i);*/
+	if (str == '\t' || str == '\n' || str == '\v'
+		|| str == '\f' || str == '\r' || str == ' ')
+		return (true);
+	return (false);
 }
+
 /**
  * @brief 
  * 
  * @param str 
  * @return returns a the int pointed at character after finding a space in the string
  */
-int		ft_isspace(const char *str)
+int		ft_skipspaces(const char *str)
 {
 	int	i;
 
@@ -62,5 +67,5 @@ int		ft_isspace(const char *str)
 // 		}
 // 		i++;
 // 	}
-	
+
 // }

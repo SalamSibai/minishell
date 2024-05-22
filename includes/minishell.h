@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/08 17:15:15 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:31:42 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,21 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
-# include "./libft/libft.h"
 
-enum e_token_type
+typedef enum e_token_type
 {
 	COMMAND,
 	PIPE,
-	REDIRECT,
+	REDIRECT_INPUT,
+	REDIRECT_OUTPUT,
+	HEREDOC,
+	REDIRECT_APPEND,
 	FLAG,
 	ID
 	//SEMICOLON,
 	//NEWLINE,
 	//END
-};
+} e_token_type;
 
 /*
 * 	The pipe structure, which indludes:
@@ -68,8 +70,8 @@ typedef struct s_cmd
 * */
 typedef struct s_token
 {
-	char			*token;
-	int				type;
+	char			*token_string;
+	e_token_type	type;
 }				t_token;
 
 /*
@@ -86,12 +88,12 @@ typedef struct s_redirect
 }				t_redirect;
 
 //Not sure what this is for yet
-// typedef struct s_env
-// {
-// 	char	*key;
-// 	char	*value;
-// 	struct s_env	*next;
-// }				t_env;
+typedef struct s_env
+{
+	char	*key;
+	char	*value;
+	struct s_env	*next;
+}				t_env;
 
 /*
 * 	The initial scan of the input, which can include:
@@ -148,18 +150,7 @@ typedef struct s_data
 /* ************************************************************************** */
 
 int		ft_panic(char *message, int ret);
-void	*ft_safe_malloc(size_t size, char *msg);
-
-/* ************************************************************************** */
-/*									ENV UTILS								  */
-/* ************************************************************************** */
-t_list	*env_init(char **envp);
-char	**env_to_str(t_list *env);
-
-/* ************************************************************************** */
-/*									PATH UTILS								  */
-/* ************************************************************************** */
-char	**get_path(char **env_str);
+void	*ft_safe_malloc(size_t size);
 
 //Creating a tree, where the left branch will be executed first.
 
