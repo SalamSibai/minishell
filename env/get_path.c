@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:00:00 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/22 18:35:36 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/27 22:12:01 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@
 }*/
 
 
-void	set_path(char **envp, t_data *data)
+char	**set_path(char **envp, t_data *data)
 {
 	char	*full_path;
-    char    **split_path;
-    int     i;
+	char	**split_path;
+	int		i;
 
-    i = -1;
+	i = -1;
 	full_path = NULL;
 	while (*envp)
 	{
@@ -63,13 +63,14 @@ void	set_path(char **envp, t_data *data)
 		envp ++;
 	}
 
-    //if (full_path == NULL)
-    //CODE
-   // else
+	//if (full_path == NULL)
+	//CODE
+	// else
 		split_path = ft_split(full_path, ':');
-    while (split_path[++i] != NULL)
-    {
-        data->path = ft_strjoin(split_path[i], '/');
-    }
-	ft_free2d(split_path);
+	while (split_path[++i] != NULL)
+	{
+		data->path[i] = ft_strjoin(split_path[i], "/");
+	}
+	ft_free2d((void **)split_path);
+	return (data->path);
 }

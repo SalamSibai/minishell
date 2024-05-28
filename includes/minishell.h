@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/22 18:31:42 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:17:27 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include "./libft/libft.h"
+# include <readline/history.h>
+# include <readline/readline.h>
 
 typedef enum e_token_type
 {
@@ -141,16 +144,53 @@ typedef struct s_data
 	t_parsing	*parse_data;
 	char		**env_var;
 	char		**path;
+	char		*buf;
 //	t_pipe		(*)pipe;
 //	t_redirect	(*)redirect;
 }				t_data;
+
+
+
+
+/* ************************************************************************** */
+/*								SYNTAX VALIDATION							  */
+/* ************************************************************************** */
+bool			validate_syntax(char *line);
+bool			validate_unbalanced_qoutes(char *line);
+bool 			validate_pipes(char *line);
+
+/* ************************************************************************** */
+/*									PARSEING								  */
+/* ************************************************************************** */
+bool			pasre_setup(t_parsing *parse, int token_ctr);
+void			scan(char *av, t_parsing *parse);
 
 /* ************************************************************************** */
 /*									PARSE UTILS								  */
 /* ************************************************************************** */
 
-int		ft_panic(char *message, int ret);
-void	*ft_safe_malloc(size_t size);
+int				ft_panic(char *message, int ret);
+void			*ft_safe_malloc(size_t size, char *msg);
+
+/* ************************************************************************** */
+/*									TOKENS UTILS							  */
+/* ************************************************************************** */
+t_token			*set_token(char *str);
+int				token_count(char *av);
+
+
+/* ************************************************************************** */
+/*									ENVIROMENT								  */
+/* ************************************************************************** */
+t_list			*env_init(char **envp);
+char			**env_to_str(t_list *env);
+
+
+/* ************************************************************************** */
+/*									PATH									  */
+/* ************************************************************************** */
+char			**set_path(char **envp, t_data *data);
+
 
 //Creating a tree, where the left branch will be executed first.
 

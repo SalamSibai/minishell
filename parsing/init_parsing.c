@@ -12,7 +12,6 @@
 
 #include "../includes/minishell.h"
 
-# include "minishell.h"
 
 /*
 	execution flow:
@@ -33,22 +32,18 @@
 			- if everything is fine, we initialize and store
 */
 
-t_token	*set_token(char *str)
-{
-	t_token *token;
-	(void)str;
-
-	token = ft_safe_malloc(sizeof(token), "TOKEN");
-
-	//set type
-	return (token);
-}
-
-bool	pasre_setup(t_parsing *parse)
+bool	pasre_setup(t_parsing *parse, int token_ctr)
 {
 	//t_parsing *parse;
 
 	parse =  ft_safe_malloc(sizeof(t_parsing), "PARSING");
+
+/*
+	parse =  ft_safe_malloc(sizeof(t_parsing));
+	if (!parse)
+		return (false);
+*/
+
 	//parse->lexer = ft_safe_malloc(sizeof(t_lexer));
 	//if (!parse->lexer)
 	//{
@@ -57,11 +52,13 @@ bool	pasre_setup(t_parsing *parse)
 	//}
 	// create our lexer and then malloc and setup for our tokens
 
-	if (!(parse->tokens = ft_safe_malloc(sizeof(t_token *), "TOKENS")))
+	if (!(parse->tokens = ft_safe_malloc(sizeof(t_token *) * token_ctr, "TOKENS")))
 	{
 		//cleanup and free for both lexer and parse
 		return (false);
 	}
+	// printf("Token count: %d\n", token_ctr);
+	parse->tokens[token_ctr] = NULL;
 	return (true);
 }
 
@@ -73,29 +70,31 @@ bool	pasre_setup(t_parsing *parse)
 				b- sets the type of the token
 	gradually fill in tokens within the tokens struct
 	*/
-void	scan(char **av, t_parsing *parse)
+void	scan(char *av, t_parsing *parse)
 {
 	int i;
-	int j;
+	// int j;
 	int c;
 	int token_ctr;
-	char *str = NULL;
+	char *str;
 
 	c = 0;
 	token_ctr = 0;
 	i = -1;
-	while (av[++i] != NULL)
+	str = ft_safe_malloc(sizeof(char) * 9999, "TOKEN STRING");
+	while (av[++i])
 	{
-		j = 0;
-		//skip spaces of av[i][j]; (returns an int of where the string starts after skipping spaces)
-		while (av[i][j] != '\0')
+		// j = ft_skipspaces(av[i]);
+		c = 0;
+		i = ft_skipspaces(av);
+		while (av[i] && !ft_isspace(av[i]))
 		{
-			/*
-				1- store character into str[c] = av[i][j];
-					if we find a space, we break
-			*/
+			str[c++] = av[i++];
+			//NOTE: CHECK IF USERS ARE ALLOWED TO SEND MULTIPLE COMMANDS BETWEEN TWO ""
+			//IF YES, WE MUST HAVE AN OUTER LOOP TOO TO STORE EACH TOKEN WITHIN ONE VARIABLE SENT TO MAIN
 		}
 		parse->tokens[token_ctr] = set_token(str);
+		printf("Token: %s\n", parse->tokens[token_ctr]->token_string);
 		/*
 			if (!parse->tokens[token_ctr])
 				free, cleanup, empty, exit
@@ -103,30 +102,17 @@ void	scan(char **av, t_parsing *parse)
 		//empty str;
 		token_ctr ++;
 	}
-
 }
 
-int main(int ac, char **av, char **env)
-{
-	//init and store data in t_data variable
 
-	t_parsing	*parse = NULL;
-	t_data		data;
 
-	(void)ac;
-	(void)av;
-	data.env = env_init(env);
-	data.env_var = env_to_str(data.env);
-	data.path = get_path(data.env_var);
-	/*
-		we need to split the paths:
-		to get the path we need:
-		1- create a function that will loop through the enviroment then it ill get that
-		2- after storing the path in char string we need to divide the path and convert it to a double array string 
-	 */
+// int main ()
+// {
+// 	//check scan function
+// 	//check set_token function
+	
+// 	char *av[] = {"ls", "-l", "echo", "hello", "world", NULL};
+// 	t_parsing *parse = NULL;
 
-	//we need to setup the tokens stucture and the lexers structure inside of data
-	pasre_setup(parse);
-	// scan(av, parse);
-}
-
+// 	scan(av, parse);
+// }
