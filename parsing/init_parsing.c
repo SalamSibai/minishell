@@ -36,7 +36,6 @@ bool	pasre_setup(t_parsing *parse, int token_ctr)
 {
 	//t_parsing *parse;
 
-	parse =  ft_safe_malloc(sizeof(t_parsing), "PARSING");
 
 /*
 	parse =  ft_safe_malloc(sizeof(t_parsing));
@@ -58,7 +57,7 @@ bool	pasre_setup(t_parsing *parse, int token_ctr)
 		return (false);
 	}
 	// printf("Token count: %d\n", token_ctr);
-	parse->tokens[token_ctr] = NULL;
+	//parse->tokens[token_ctr] = NULL;
 	return (true);
 }
 
@@ -70,38 +69,53 @@ bool	pasre_setup(t_parsing *parse, int token_ctr)
 				b- sets the type of the token
 	gradually fill in tokens within the tokens struct
 	*/
-void	scan(char *av, t_parsing *parse)
+
+/// @brief 
+/// @param buff 
+/// @param parse 
+void	scan(char *buff, t_parsing *parse)
 {
 	int i;
-	// int j;
 	int c;
 	int token_ctr;
-	char *str;
 
-	c = 0;
 	token_ctr = 0;
-	i = -1;
-	str = ft_safe_malloc(sizeof(char) * 9999, "TOKEN STRING");
-	while (av[++i])
+	i = 0;
+	while (buff[i])
 	{
-		// j = ft_skipspaces(av[i]);
-		c = 0;
-		i = ft_skipspaces(av);
-		while (av[i] && !ft_isspace(av[i]))
+		printf("i is %d\n", i);
+		i = ft_skipspaces(buff + i);
+		c = i;
+		printf("buff of i is: %c\n", buff[i]);
+		while (!ft_isspace(buff[c]) && buff[c])
+			c++;
+		//i is the start of the string, c-1 is the end of the string before a space
+		if (c > i)
 		{
-			str[c++] = av[i++];
-			//NOTE: CHECK IF USERS ARE ALLOWED TO SEND MULTIPLE COMMANDS BETWEEN TWO ""
-			//IF YES, WE MUST HAVE AN OUTER LOOP TOO TO STORE EACH TOKEN WITHIN ONE VARIABLE SENT TO MAIN
+			printf("found char [%c]\n", buff[i]);
+			parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			parse->tokens[token_ctr]->token_string = ft_substr(buff, i, c - 1);
+			token_ctr++;
 		}
-		parse->tokens[token_ctr] = set_token(str);
-		printf("Token: %s\n", parse->tokens[token_ctr]->token_string);
+		i += (c + 1);
+		printf("i is %d and the char is %c\n", i, buff[i]);
+	}
+	parse->tokens[token_ctr] = NULL;
+
+		// while (av[i] && !ft_isspace(av[i]))
+		// {
+		// 	str[c++] = av[i++];
+		// 	//NOTE: CHECK IF USERS ARE ALLOWED TO SEND MULTIPLE COMMANDS BETWEEN TWO ""
+		// 	//IF YES, WE MUST HAVE AN OUTER LOOP TOO TO STORE EACH TOKEN WITHIN ONE VARIABLE SENT TO MAIN
+		// }
+		// parse->tokens[token_ctr] = set_token(str);
+		// printf("Token: %s\n", parse->tokens[token_ctr]->token_string);
 		/*
 			if (!parse->tokens[token_ctr])
 				free, cleanup, empty, exit
 		*/
 		//empty str;
-		token_ctr ++;
-	}
+
 }
 
 

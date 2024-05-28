@@ -22,34 +22,34 @@ void    set_type(t_token *token)
 	//$? what
 }
 
-t_token	*set_token(char *str)
-{
-	t_token *token;
+// t_token	*set_token(char *str)
+// {
+// 	//t_token *token;
 
-	// printf("im here");
-	token = ft_safe_malloc(sizeof(t_token), "Token data");
-	token->token_string = ft_strdup(str);
+// 	// printf("im here");
+// 	//skip spaces etc
+// 	//save av into token->token_string;
 
-	//set type
-	return (token);
-}
+// //	token->token_string = ft_strdup(str);
+
+// 	//set type
+// 	return (NULL);
+// }
 
 int		token_count(char *av)
 {
 	int i;
-	// int j;
 	int token_ctr;
 
 	token_ctr = 0;
-	i = -1;
-	while (av[++i])
+	i = ft_skipspaces(av);
+	printf("av of i is %c\n", av[i]);
+	while (av[i])
 	{
-		while (av[i] && !ft_isspace(av[i]))
-		{
-			i++;
-		}
-		token_ctr ++;
+		if (ft_isspace(av[i]))
+			token_ctr ++;
+		i ++;
 	}
 	printf("Token count: %d\n", token_ctr);
-	return (token_ctr);
+	return (token_ctr + 1);
 }

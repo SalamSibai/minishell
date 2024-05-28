@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/28 16:05:47 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:31:37 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,45 @@
 
 int main(int ac, char **av, char **env)
 {
-	t_parsing	*parse = NULL;
+	//t_parsing	*parse = NULL;
 	t_data		data;
+	t_parsing *parse;
 
 	(void)ac;
 	(void)av;
 	//initlize enviroment variables
 	data.env = env_init(env);
 	data.env_var = env_to_str(data.env);
-	int i = 0;
-	while (1)
-	{
+//	int i = 0;
+	// while (1)
+	// {
 		data.buf = readline("minishell$ ");
 		add_history(data.buf);
 		if (!data.buf)
 		{
 			printf("exit\n");
-			break ;
+		//	break ;
 		}
 		if (!validate_syntax(data.buf))
 		{
 			free(data.buf);
-			continue ;
+		//	continue ;
 		}
 	//initialize expansion variables
 	//initialize the path
 	//check syntax error
 	//parse the input
+	
+	//token_count(data.buf);
 
+	parse =  ft_safe_malloc(sizeof(t_parsing), "PARSING");
 	pasre_setup(parse, token_count(data.buf));
 	scan(data.buf, parse);
 	//validate the input //pre validation
 	//execute the input
-	}
+
+	//free everything before next itiration
+	//}
 	return (0);
 }
 
