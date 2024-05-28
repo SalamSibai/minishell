@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/28 15:12:22 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:05:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int main(int ac, char **av, char **env)
 	data.env = env_init(env);
 	data.env_var = env_to_str(data.env);
 	int i = 0;
-	while (i < 1)
+	while (1)
 	{
 		data.buf = readline("minishell$ ");
 		add_history(data.buf);
