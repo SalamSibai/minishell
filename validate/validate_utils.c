@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:47:04 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/29 18:54:23 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/29 20:59:44 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	validate_unbalanced_qoutes(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '\"' || line[i] == '\'')
+		if (line[i] == 'c' || line[i] == '\'')
 		{
 			qoute = line[i];
 			i++;

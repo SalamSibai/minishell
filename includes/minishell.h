@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/29 16:22:48 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/29 21:06:58 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ typedef enum e_token_type
 	HEREDOC,
 	REDIRECT_APPEND,
 	FLAG,
-	ID
+	ID,
+	DQOUTES,
+	SQOUTES
 	//SEMICOLON,
 	//NEWLINE,
 	//END
