@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/28 15:17:27 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:05:22 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,11 +159,13 @@ bool			validate_syntax(char *line);
 bool			validate_unbalanced_qoutes(char *line);
 bool 			validate_pipes(char *line);
 
+
 /* ************************************************************************** */
 /*									PARSEING								  */
 /* ************************************************************************** */
 bool			pasre_setup(t_parsing *parse, int token_ctr);
 void			scan(char *av, t_parsing *parse);
+
 
 /* ************************************************************************** */
 /*									PARSE UTILS								  */
@@ -171,6 +173,7 @@ void			scan(char *av, t_parsing *parse);
 
 int				ft_panic(char *message, int ret);
 void			*ft_safe_malloc(size_t size, char *msg);
+
 
 /* ************************************************************************** */
 /*									TOKENS UTILS							  */
@@ -193,5 +196,4 @@ char			**set_path(char **envp, t_data *data);
 
 
 //Creating a tree, where the left branch will be executed first.
-
 #endif

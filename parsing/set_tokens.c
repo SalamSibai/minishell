@@ -36,20 +36,30 @@ void    set_type(t_token *token)
 // 	return (NULL);
 // }
 
-int		token_count(char *av)
-{
-	int i;
-	int token_ctr;
+int	token_count(char *av)
+	{
+	int i = -1;
+	int token_ctr = 0;
+	int in_token = 0;
 
-	token_ctr = 0;
 	i = ft_skipspaces(av);
-	printf("av of i is %c\n", av[i]);
-	while (av[i])
+	while (av[++i])
 	{
 		if (ft_isspace(av[i]))
-			token_ctr ++;
-		i ++;
+		{
+			if (in_token)
+			{
+				in_token = 0;
+				token_ctr++;
+			}
+		}
+		else
+		{
+			if (!in_token)
+				in_token = 1;
+		}
 	}
-	printf("Token count: %d\n", token_ctr);
-	return (token_ctr + 1);
+	if (in_token)
+		token_ctr++;
+	return (token_ctr);
 }

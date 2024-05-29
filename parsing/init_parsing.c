@@ -86,7 +86,7 @@ void	scan(char *buff, t_parsing *parse)
 		printf("i is %d\n", i);
 		i = ft_skipspaces(buff + i);
 		c = i;
-		printf("buff of i is: %c\n", buff[i]);
+		printf("buff of i is: %c\n", buff[c]);
 		while (!ft_isspace(buff[c]) && buff[c])
 			c++;
 		//i is the start of the string, c-1 is the end of the string before a space

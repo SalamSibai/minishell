@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/28 20:31:37 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/29 13:38:27 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int main(int ac, char **av, char **env)
 
 	parse =  ft_safe_malloc(sizeof(t_parsing), "PARSING");
 	pasre_setup(parse, token_count(data.buf));
-	scan(data.buf, parse);
+	// scan(data.buf, parse);
 	//validate the input //pre validation
 	//execute the input
 
