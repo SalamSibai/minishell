@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/29 13:38:27 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:45:19 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,20 @@ int main(int ac, char **av, char **env)
 	//initlize enviroment variables
 	data.env = env_init(env);
 	data.env_var = env_to_str(data.env);
-//	int i = 0;
-	// while (1)
-	// {
+	// int i = 0;
+	while (1)
+	{
 		data.buf = readline("minishell$ ");
 		add_history(data.buf);
 		if (!data.buf)
 		{
 			printf("exit\n");
-		//	break ;
 		}
 		if (!validate_syntax(data.buf))
 		{
 			free(data.buf);
-		//	continue ;
+			// continue ;
+			exit(1);
 		}
 	//initialize expansion variables
 	//initialize the path
@@ -66,12 +66,13 @@ int main(int ac, char **av, char **env)
 
 	parse =  ft_safe_malloc(sizeof(t_parsing), "PARSING");
 	pasre_setup(parse, token_count(data.buf));
-	// scan(data.buf, parse);
+	scan(data.buf, parse);
+	//set the type
 	//validate the input //pre validation
 	//execute the input
 
 	//free everything before next itiration
-	//}
+	}
 	return (0);
 }
 

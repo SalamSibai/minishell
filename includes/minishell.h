@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/28 18:05:22 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:22:48 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void			*ft_safe_malloc(size_t size, char *msg);
 /* ************************************************************************** */
 /*									TOKENS UTILS							  */
 /* ************************************************************************** */
-t_token			*set_token(char *str);
+void			set_type(t_token *token);
 int				token_count(char *av);
 
 

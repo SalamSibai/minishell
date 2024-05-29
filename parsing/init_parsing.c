@@ -57,76 +57,57 @@ bool	pasre_setup(t_parsing *parse, int token_ctr)
 		return (false);
 	}
 	// printf("Token count: %d\n", token_ctr);
-	//parse->tokens[token_ctr] = NULL;
+	// parse->tokens[token_ctr] = NULL;
 	return (true);
 }
 
-	/*
-		go through the input (av)
-			1- until there's a space, tab, etc... 
-			2- once a set of characters are grouped, send them to set token
-				a- set token mallocs for the token
-				b- sets the type of the token
-	gradually fill in tokens within the tokens struct
-	*/
 
-/// @brief 
-/// @param buff 
-/// @param parse 
+/**
+ * @brief filling in the tokens stuct 
+ * 
+ * 
+ * @param buff 
+ * @param parse 
+ */
 void	scan(char *buff, t_parsing *parse)
 {
-	int i;
-	int c;
-	int token_ctr;
+	int i = 0;
+	int c = 0;
+	int token_ctr = 0;
 
-	token_ctr = 0;
-	i = 0;
 	while (buff[i])
 	{
-		printf("i is %d\n", i);
-		i = ft_skipspaces(buff + i);
+		i += ft_skipspaces(buff + i);
 		c = i;
-		printf("buff of i is: %c\n", buff[c]);
-		while (!ft_isspace(buff[c]) && buff[c])
-			c++;
-		//i is the start of the string, c-1 is the end of the string before a space
-		if (c > i)
+		if ((buff[c] == '>' && buff[c + 1] == '>') || (buff[c] == '<' && buff[c + 1] == '<'))
 		{
-			printf("found char [%c]\n", buff[i]);
 			parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
-			parse->tokens[token_ctr]->token_string = ft_substr(buff, i, c - 1);
+			parse->tokens[token_ctr]->token_string = ft_substr(buff, c, 2);
+			set_type(parse->tokens[token_ctr]);
 			token_ctr++;
+			i += 2;
 		}
-		i += (c + 1);
-		printf("i is %d and the char is %c\n", i, buff[i]);
+		else if (buff[c] == '|' || buff[c] == '>' || buff[c] == '<')
+		{
+			parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			parse->tokens[token_ctr]->token_string = ft_substr(buff, c, 1);
+			set_type(parse->tokens[token_ctr]);
+			token_ctr++;
+			i += 1;
+		}
+		else
+		{
+			while (buff[c] && !ft_isspace(buff[c]) && buff[c] != '|' && buff[c] != '>' && buff[c] != '<')
+				c++;
+			if (c > i)
+			{
+				parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				parse->tokens[token_ctr]->token_string = ft_substr(buff, i, c - i);
+				set_type(parse->tokens[token_ctr]);
+				token_ctr++;
+			}
+			i = c;
+		}
 	}
 	parse->tokens[token_ctr] = NULL;
-
-		// while (av[i] && !ft_isspace(av[i]))
-		// {
-		// 	str[c++] = av[i++];
-		// 	//NOTE: CHECK IF USERS ARE ALLOWED TO SEND MULTIPLE COMMANDS BETWEEN TWO ""
-		// 	//IF YES, WE MUST HAVE AN OUTER LOOP TOO TO STORE EACH TOKEN WITHIN ONE VARIABLE SENT TO MAIN
-		// }
-		// parse->tokens[token_ctr] = set_token(str);
-		// printf("Token: %s\n", parse->tokens[token_ctr]->token_string);
-		/*
-			if (!parse->tokens[token_ctr])
-				free, cleanup, empty, exit
-		*/
-		//empty str;
-
 }
-
-
-
-// int main ()
-// {
-// 	//check scan function
-// 	//check set_token function
-	
-// 	char *av[] = {"ls", "-l", "echo", "hello", "world", NULL};
-// 	t_parsing *parse = NULL;
-
-// 	scan(av, parse);
-// }
