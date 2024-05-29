@@ -35,13 +35,13 @@ void	set_type(t_token *token)
 		token->type = REDIRECT_APPEND;
 		printf("redirect append\n");
 	}
-	else if (ft_strcmp(token->token_string[0], '\"'))
+	else if (ft_strcmp(token->token_string[0], "\"") == 0)
 	{
 		//loop until we find the next "
 		token->type = DQOUTES;
 		printf("string in double qoutes");
 	}
-	else if (ft_strncmp(token->token_string[0], '\''))
+	else if (ft_strcmp(token->token_string[0], "\'") == 0)
 	{
 		//loop until we find the next "
 		token->type = SQOUTES;
