@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:47:04 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/28 13:16:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/29 18:54:23 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool	validate_unbalanced_qoutes(char *line)
 	return (true);
 }
 
-bool validate_pipes(char *line) 
+bool validate_pipes(char *line)
 {
 	char *ps;
 	char *es;

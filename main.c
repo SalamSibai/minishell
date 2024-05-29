@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/29 16:45:19 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/29 18:53:41 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,13 @@ int main(int ac, char **av, char **env)
 	//initialize the path
 	//check syntax error
 	//parse the input
-	
-	//token_count(data.buf);
-
-	parse =  ft_safe_malloc(sizeof(t_parsing), "PARSING");
+	//pre validation
+	parse = ft_safe_malloc(sizeof(t_parsing), "PARSING");
 	pasre_setup(parse, token_count(data.buf));
 	scan(data.buf, parse);
-	//set the type
-	//validate the input //pre validation
+	//validate the input
+	
+	
 	//execute the input
 
 	//free everything before next itiration
