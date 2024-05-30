@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
+#    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/05/30 19:33:06 by ssibai           ###   ########.fr        #
+#    Updated: 2024/05/30 20:38:04 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/30 20:21:43 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/30 20:37:51 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
