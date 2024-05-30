@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:47:04 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/29 20:59:44 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:18:58 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	validate_unbalanced_qoutes(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == 'c' || line[i] == '\'')
+		if (line[i] == '\"' || line[i] == '\'')
 		{
 			qoute = line[i];
 			i++;

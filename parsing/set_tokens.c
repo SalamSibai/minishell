@@ -35,17 +35,17 @@ void	set_type(t_token *token)
 		token->type = REDIRECT_APPEND;
 		printf("redirect append\n");
 	}
-	else if (ft_strcmp(token->token_string[0], "\"") == 0)
+	else if (ft_strcmp(&token->token_string[0], "\"") == 0)
 	{
 		//loop until we find the next "
 		token->type = DQOUTES;
-		printf("string in double qoutes");
+		printf("string in double qoutes\n");
 	}
-	else if (ft_strcmp(token->token_string[0], "\'") == 0)
+	else if (ft_strcmp(&token->token_string[0], "\'") == 0)
 	{
 		//loop until we find the next "
 		token->type = SQOUTES;
-		printf("string in double qoutes");
+		printf("string in single qoutes\n");
 	}
 	else
 	{
@@ -56,18 +56,6 @@ void	set_type(t_token *token)
 	//$ env variables
 	//$? what
 }
-
-// t_token	*set_token(char *str)
-// {
-// 	t_token *token;
-
-// 	printf("im here");
-// 	skip spaces etc
-// 	save av into token->token_string;
-
-// 	//set type
-// 	return (NULL);
-// }
 
 int	token_count(char *av)
 {
@@ -97,6 +85,16 @@ int	token_count(char *av)
 			token_ctr++;
 		}
 		else if ((av[i] == '>' && av[i + 1] == '>') || (av[i] == '<' && av[i + 1] == '<'))
+		{
+			if (in_token)
+			{
+				in_token = 0;
+				token_ctr++;
+			}
+			token_ctr++;
+			i++;
+		}
+		else if (av[i] == '\"'  || av[i] == '\'')
 		{
 			if (in_token)
 			{

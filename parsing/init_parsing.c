@@ -87,7 +87,7 @@ void	scan(char *buff, t_parsing *parse)
 			token_ctr++;
 			i += 2;
 		}
-		else if (buff[c] == '|' || buff[c] == '>' || buff[c] == '<')
+		else if (buff[c] == '|' || buff[c] == '>' || buff[c] == '<' || buff[c] == '\"'  || buff[c] == '\'')
 		{
 			parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
 			parse->tokens[token_ctr]->token_string = ft_substr(buff, c, 1);
@@ -97,7 +97,7 @@ void	scan(char *buff, t_parsing *parse)
 		}
 		else
 		{
-			while (buff[c] && !ft_isspace(buff[c]) && buff[c] != '|' && buff[c] != '>' && buff[c] != '<')
+			while (buff[c] && !ft_isspace(buff[c]) && buff[c] != '|' && buff[c] != '>' && buff[c] != '<' && buff[c] != '\"' && buff[c] != '\'')
 				c++;
 			if (c > i)
 			{
