@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/30 19:03:11 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/30 20:23:47 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ bool	validate_id(t_parsing *parse, int index)
 		parse->tokens[index]->type = CMDS;
 	else
 	{
-		if (parse->tokens[index-1]->type == REDIRECT_INPUT
-			|| parse->tokens[index-1]->type == REDIRECT_APPEND
-			|| parse->tokens[index-1]->type == REDIRECT_OUTPUT)
-				parse->tokens[index - 1]->type = CMDS;
-		else if (parse->tokens[index-1]->type == HEREDOC)
-			parse->tokens[index - 1]->type = LIMITER;
+		if (parse->tokens[index - 1]->type == REDIRECT_INPUT
+			|| parse->tokens[index - 1]->type == REDIRECT_APPEND
+			|| parse->tokens[index - 1]->type == REDIRECT_OUTPUT)
+				parse->tokens[index]->type = FILE;
+		else if (parse->tokens[index - 1]->type == HEREDOC)
+			parse->tokens[index]->type = LIMITER;
 		else
 			parse->tokens[index]->type = CMDS;
 	}

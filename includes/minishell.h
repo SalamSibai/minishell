@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/30 18:39:17 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/30 20:23:12 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum e_token_type
 	CMDS,
 	PIPE,
 	LIMITER,
+	FILE,
 	REDIRECT_INPUT,
 	REDIRECT_OUTPUT,
 	HEREDOC,
@@ -158,10 +159,14 @@ typedef struct s_data
 /* ************************************************************************** */
 /*								SYNTAX VALIDATION							  */
 /* ************************************************************************** */
-bool			validate_syntax(char *line);
-bool			validate_unbalanced_qoutes(char *line);
-bool 			validate_pipes(char *line);
 
+bool	validate_syntax(char *line);
+bool	validate_unbalanced_qoutes(char *line);
+bool	validate_pipes(char *line);
+bool	validate_id(t_parsing *parse, int index);
+bool	validate_pipe(t_parsing *parse, int index);
+bool	validate_input_redirection(t_parsing *parse, int index);
+bool	validate_output_redirection(t_parsing *parse, int index);
 
 /* ************************************************************************** */
 /*									PARSEING								  */

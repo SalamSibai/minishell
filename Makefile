@@ -3,19 +3,34 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
+#    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/05/28 13:12:53 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/05/30 19:33:06 by ssibai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = minishell
+NAME			= minishell
 
-SRC = ./parsing/parse_utils.c ./parsing/init_parsing.c ./env/env_init.c ./env/get_path.c \
-		./parsing/set_tokens.c \
-		./validate/validate_syntax.c ./validate/validate_utils.c \
+VALIDATE_DIR	= ./validate
+PARSE_DIR		= ./parsing
+ENV_DIR			= ./env
+
+SRC	=	${PARSE_DIR}/parse_utils.c \
+		${PARSE_DIR}/init_parsing.c \
+
+		${ENV_DIR}/env_init.c \
+		${ENV_DIR}/get_path.c \
+
+		${VALIDATE_DIR}/set_tokens.c \
+		${VALIDATE_DIR}/validate_syntax.c \
+		${VALIDATE_DIR}/validate_utils.c \
+		${VALIDATE_DIR}/validate_id.c \
+		${VALIDATE_DIR}/validate_pipe.c \
+		${VALIDATE_DIR}/validate_input_redirection.c \
+		${VALIDATE_DIR}/validate_output_redirection.c\
+
 		./main.c \
 
 CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 

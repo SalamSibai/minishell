@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/30 19:10:10 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/30 20:21:43 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,6 @@
 		7) a pipe must have an input its reading from, and an output its reading to
 */
 
-bool	validate_id(t_parsing *parse, int index)
-{
-	if (index == 0)
-		parse->tokens[index]->type = CMDS;
-	else
-	{
-		if (parse->tokens[index - 1]->type == REDIRECT_INPUT
-			|| parse->tokens[index - 1]->type == REDIRECT_APPEND
-			|| parse->tokens[index - 1]->type == REDIRECT_OUTPUT)
-				parse->tokens[index - 1]->type = CMDS;
-		else if (parse->tokens[index - 1]->type == HEREDOC)
-			parse->tokens[index - 1]->type = LIMITER;
-		else
-			parse->tokens[index]->type = CMDS;
-	}
-	return (true);
-}
-
-
-
-bool	validate_pipe(t_parsing *parse, int index)
-{
-	if (index == 0)
-		return (false);
-	else
-	{
-		if (parse->tokens[index - 1]->type == CMDS
-			&& parse->tokens[index + 1]->type === ID)
-			return (true);
-	}
-	return (false);
-}
 
 
 
@@ -73,18 +41,13 @@ bool	validate_tokens(t_parsing *parse)
 		if (parse->tokens[i]->type == ID)
 			return (validate_id(parse, i));
 		else if (parse->tokens[i]->type == PIPE)
-			return (validate_pipe(parse, i))
-		else if (parse->tokens[i]->type == REDIRECT_INPUT)
-			//validate input redirection
+			return (validate_pipe(parse, i));
+		else if (parse->tokens[i]->type == REDIRECT_INPUT
+				&& parse->tokens[i]->type == HEREDOC)
+			return (validate_input_redirection(parse, i));
 		else if (parse->tokens[i]->type == REDIRECT_OUTPUT
 				|| parse->tokens[i]->type == REDIRECT_APPEND)
-			//validate output redirection
-		else if (parse->tokens[i]->type == HEREDOC)
-			//validate heredoc
-		else if (parse->tokens[i]->type == DQOUTES)
-			//validate dqoutes
-		else if (parse->tokens[i]->type == SQOUTES)
-			//validate sqoutes
+			return (validate_output_redirection(parse, i));
 	}
-	return (true);
+	return (false);
 }
