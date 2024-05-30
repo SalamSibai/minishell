@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/05/30 20:38:04 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/05/30 22:35:39 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,21 +16,21 @@ NAME			= minishell
 VALIDATE_DIR	= ./validate
 PARSE_DIR		= ./parsing
 ENV_DIR			= ./env
+DEBUG_DIR			= ./debug
 
 SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/init_parsing.c \
-
-		${ENV_DIR}/env_init.c \
-		${ENV_DIR}/get_path.c \
-
-		${VALIDATE_DIR}/set_tokens.c \
-		${VALIDATE_DIR}/validate_syntax.c \
-		${VALIDATE_DIR}/validate_utils.c \
+		${PARSE_DIR}/set_tokens.c \
+		${ENV_DIR}/env_init.c\
+		${ENV_DIR}/get_path.c\
 		${VALIDATE_DIR}/validate_id.c \
-		${VALIDATE_DIR}/validate_pipe.c \
 		${VALIDATE_DIR}/validate_input_redirection.c \
 		${VALIDATE_DIR}/validate_output_redirection.c\
-
+		${VALIDATE_DIR}/validate_pipe.c \
+		${VALIDATE_DIR}/validate_syntax.c \
+		${VALIDATE_DIR}/validate_utils.c \
+		${VALIDATE_DIR}/validate_tokens.c \
+		${DEBUG_DIR}/print_data.c \
 		./main.c \
 
 CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 

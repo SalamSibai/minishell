@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_input_redirection.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:23:52 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/30 19:25:52 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/30 20:45:12 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	validate_input_redirection(t_parsing *parse, int index)
 {
 	if (parse->tokens[index + 1] != NULL)
 	{
-		if (parse->tokens[index + 1] == ID)
+		if (parse->tokens[index + 1]->type == ID)
 			return (true);
 	}
 	return (false);

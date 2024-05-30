@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/30 20:37:51 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:21:07 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /// @brief validates whether the tokens provided are syntactically correct
 /// @param parse the parse struct
 /// @return true if all passed tokens are valid
-bool	validate_tokens(t_parsing *parse)
+bool	validate_tokens(t_parsing *parse) //NOTE: add t_data *data to check to send the id to validate id to check if its executable or not 
 {
 	int i;
 
@@ -39,15 +39,27 @@ bool	validate_tokens(t_parsing *parse)
 	while (parse->tokens[++i])
 	{
 		if (parse->tokens[i]->type == ID)
-			return (validate_id(parse, i));
+		{
+			if (!validate_id(parse, i))
+				return (false);
+		}
 		else if (parse->tokens[i]->type == PIPE)
-			return (validate_pipe(parse, i));
+		{
+			if (!validate_pipe(parse, i))
+				return (false);
+		}
 		else if (parse->tokens[i]->type == REDIRECT_INPUT
 				&& parse->tokens[i]->type == HEREDOC)
-			return (validate_input_redirection(parse, i));
+		{
+			if (!validate_input_redirection(parse, i))
+				return (false);
+		}
 		else if (parse->tokens[i]->type == REDIRECT_OUTPUT
 				|| parse->tokens[i]->type == REDIRECT_APPEND)
-			return (validate_output_redirection(parse, i));
+		{
+			if (!validate_output_redirection(parse, i))
+				return (false);
+		}
 	}
-	return (false);
+	return (true);
 }

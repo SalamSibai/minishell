@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/30 18:30:50 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/30 22:48:38 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ int main(int ac, char **av, char **env)
 	parse = ft_safe_malloc(sizeof(t_parsing), "PARSING");
 	pasre_setup(parse, token_count(data.buf));
 	scan(data.buf, parse);
+	validate_tokens(parse);
+	data.parse_data = parse;
+	print_data(&data);
 	//validate the input
 	
 	
@@ -74,4 +77,3 @@ int main(int ac, char **av, char **env)
 	}
 	return (0);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/30 20:23:12 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/30 22:33:53 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@
 
 typedef enum e_token_type
 {
-	CMDS,
-	PIPE,
-	LIMITER,
-	FILE,
-	REDIRECT_INPUT,
-	REDIRECT_OUTPUT,
-	HEREDOC,
-	REDIRECT_APPEND,
-	FLAG,
-	ID,
-	DQOUTES,
-	SQOUTES
+	CMDS,						// 1
+	PIPE,						// 2
+	LIMITER,					//3
+	FILE_NAME,  				//4
+	REDIRECT_INPUT,				//5
+	REDIRECT_OUTPUT,			//6
+	HEREDOC,					//7
+	REDIRECT_APPEND,			//8
+	FLAG,						//9
+	ID,							//10
+	DQOUTES,					//11
+	SQOUTES						//12
 	//SEMICOLON,
 	//NEWLINE,
 	//END
@@ -163,7 +163,7 @@ typedef struct s_data
 bool	validate_syntax(char *line);
 bool	validate_unbalanced_qoutes(char *line);
 bool	validate_pipes(char *line);
-bool	validate_id(t_parsing *parse, int index);
+bool	validate_id(t_parsing *parse, int index); //  NOTE: we can add t_data *data to check if the id is an executable or not
 bool	validate_pipe(t_parsing *parse, int index);
 bool	validate_input_redirection(t_parsing *parse, int index);
 bool	validate_output_redirection(t_parsing *parse, int index);
@@ -188,6 +188,7 @@ void			*ft_safe_malloc(size_t size, char *msg);
 /* ************************************************************************** */
 void			set_type(t_token *token);
 int				token_count(char *av);
+bool			validate_tokens(t_parsing *parse); //  NOTE: we can add t_data *data to check if the id is an executable or not
 
 
 /* ************************************************************************** */
@@ -202,6 +203,11 @@ char			**env_to_str(t_list *env);
 /* ************************************************************************** */
 char			**set_path(char **envp, t_data *data);
 
+
+/* ************************************************************************** */
+/*									DEBUG									  */
+/* ************************************************************************** */
+void		print_data(t_data *data);
 
 //Creating a tree, where the left branch will be executed first.
 #endif
