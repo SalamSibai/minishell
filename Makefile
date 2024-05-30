@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/05/28 13:12:53 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/05/30 18:46:55 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 
 SRC = ./parsing/parse_utils.c ./parsing/init_parsing.c ./env/env_init.c ./env/get_path.c \
 		./parsing/set_tokens.c \
-		./validate/validate_syntax.c ./validate/validate_utils.c \
+		./validate/validate_syntax.c ./validate/validate_utils.c validate/validate_tokens.c\
 		./main.c \
 
 CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 

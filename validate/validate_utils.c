@@ -6,12 +6,20 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:47:04 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/30 13:18:58 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:48:41 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**
+ * @brief this function will return if the searched token is found in the string
+ * 
+ * @param ps a double pointer that points to the string
+ * @param es a pointer that potins to the end of the string
+ * @param token the token we are looking for
+ * @return return 1 if the token is found, 0 if not
+ */
 int		ft_peek(char **ps, char *es, char *token)
 {
 	char	*s;
@@ -61,7 +69,7 @@ bool validate_pipes(char *line)
 		ps++;
 	if (ft_peek(&ps, es, "|"))
 	{
-		printf("Error: syntax error near unexpected token 1`|'\n");
+		printf("Error: syntax error near unexpected token 1 '|'\n");
 		return (false);
 	}
 	while (ps < es)
@@ -73,7 +81,7 @@ bool validate_pipes(char *line)
 				ps++;
 			if (ps == es || *ps == '|')
 			{
-				printf("Error: syntax error near unexpected token 2`|'\n");
+				printf("Error: syntax error near unexpected token 2 '|'\n");
 				return (false);
 			}
 		}
@@ -82,12 +90,3 @@ bool validate_pipes(char *line)
 	}
 	return true;
 }
-
-
-
-// int main()
-// {
-// 	char *line = strdup(" r >'ls > >|  cat ' | wc" );
-// 	validate_syntax(line);
-// 	return 0;
-// }

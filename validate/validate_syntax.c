@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_syntax.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:43:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/29 20:53:38 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/30 18:31:46 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,7 @@ bool	validate_syntax(char *line)
 
 
 //command 1 |      command 2 | command 3
+
+
+
+//token merge  
