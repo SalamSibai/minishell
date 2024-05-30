@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_tokens.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
+/*   Updated: 2024/05/30 16:58:07 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
@@ -16,28 +27,27 @@
 
 
 
-bool    validate_tokens(t_parsing *parse)
+bool	validate_tokens(t_parsing *parse)
 {
-    int i;
+	int i;
 
-    i = -1;
-    while (parse->tokens[++i])
-    {
-        if (parse->tokens[i]->type == ID)
-            //validate ID
-        else if (parse->tokens[i]->type == PIPE)
-            //validate pipe
-        else if (parse->tokens[i]->type == REDIRECT_INPUT)
-            //validate input redirection
-        else if (parse->tokens[i]->type == REDIRECT_OUTPUT
-                || parse->tokens[i]->type == REDIRECT_APPEND)
-            //validate output redirection
-        else if (parse->tokens[i]->type == HEREDOC)
-            //validate heredoc
-        else if (parse->tokens[i]->type == DQOUTES)
-            //validate dqoutes
-        else if (parse->tokens[i]->type == SQOUTES)
-            //validate sqoutes
-            
-    }
+	i = -1;
+	while (parse->tokens[++i])
+	{
+		if (parse->tokens[i]->type == ID)
+			//validate ID
+		else if (parse->tokens[i]->type == PIPE)
+			//validate pipe
+		else if (parse->tokens[i]->type == REDIRECT_INPUT)
+			//validate input redirection
+		else if (parse->tokens[i]->type == REDIRECT_OUTPUT
+				|| parse->tokens[i]->type == REDIRECT_APPEND)
+			//validate output redirection
+		else if (parse->tokens[i]->type == HEREDOC)
+			//validate heredoc
+		else if (parse->tokens[i]->type == DQOUTES)
+			//validate dqoutes
+		else if (parse->tokens[i]->type == SQOUTES)
+			//validate sqoutes
+	}
 }

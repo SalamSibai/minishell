@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/29 21:06:58 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/30 16:51:33 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 typedef enum e_token_type
 {
-	COMMAND,
 	PIPE,
 	REDIRECT_INPUT,
 	REDIRECT_OUTPUT,
