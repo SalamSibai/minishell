@@ -18,25 +18,13 @@ bool	validate_syntax(char *line)
 		return (false);
 	if (!validate_pipes(line))
 		return (false);
-	
+
 	// if (!validate_redirection(line))
 	// 	return (false);
 	// if (!validate_append(line))
 	// 	return (false);
 	return (true);
 }
-/*
-	to validate the entire input:
-		1) if only 1 id, must be an executable that works
-		2) if heredoc, next token must be an ID
-		3) if redirection into a file (>), its fine.
-		4) if appending into a file, its fine
-		
-		 we must have an ID that is not an executable
-		5) if redirection from a file, the file we are redirecting from must exist in the directory provided
-		6) NO DOUBLE REDIRECTIONS AFTER ONE ANOTHER (except heredoc)
-		7) a pipe must have an input its reading from, and an output its reading to
-*/
 
 /***********pre-parsing***********/
 
