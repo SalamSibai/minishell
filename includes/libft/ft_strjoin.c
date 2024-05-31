@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
+//checks leaks 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	size;
@@ -27,7 +27,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (s1 && s2)
 	{
 		ft_strcat(ft_strcpy(res, (char *)s1), (char *)s2);
-		return (free((char *)s1), res);
+		return (res);
 	}
 	else if (s1 != NULL && s2 == NULL)
 	{
