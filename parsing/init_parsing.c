@@ -103,7 +103,7 @@ void	scan(char *buff, t_parsing *parse)
 			if (c > i)
 			{
 				parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
-				parse->tokens[token_ctr]->token_string = ft_substr(buff, i, c - i + 1);
+				parse->tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
 				set_type(parse->tokens[token_ctr]);
 				token_ctr++;
 			}
@@ -117,7 +117,7 @@ void	scan(char *buff, t_parsing *parse)
 			if (c > i)
 			{
 				parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
-				parse->tokens[token_ctr]->token_string = ft_substr(buff, i, c - i + 1);
+				parse->tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
 				set_type(parse->tokens[token_ctr]);
 				token_ctr++;
 			}
