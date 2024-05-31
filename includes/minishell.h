@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/31 19:51:09 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/31 20:56:17 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ typedef enum e_token_type
 	REDIRECT_APPEND,			//8
 	FLAG,						//9
 	ID,							//10
-	DQOUTES,					//11
-	SQOUTES						//12
+	EXEC_ID,					//11
+	DQOUTES,					//12
+	SQOUTES						//13
 	//SEMICOLON,
 	//NEWLINE,
 	//END

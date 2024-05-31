@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/31 19:50:51 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/31 20:56:34 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ bool validate_id(t_parsing *parse, int index, t_data *data)
 		parse->tokens[index]->type = FILE_NAME;
 	else if (parse->tokens[index - 1]->type == HEREDOC)
 		parse->tokens[index]->type = LIMITER;
+	else if (parse->tokens[index - 1]->type == CMDS)
+		parse->tokens[index]->type = EXEC_ID;
 	else
 	{
 		if (is_cmd(parse->tokens[index]->token_string, data))
