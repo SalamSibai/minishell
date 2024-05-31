@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/30 22:21:07 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:53:20 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,24 @@ bool	validate_tokens(t_parsing *parse) //NOTE: add t_data *data to check to send
 		if (parse->tokens[i]->type == ID)
 		{
 			if (!validate_id(parse, i))
-				return (false);
+				return (printf("ID validation failed\n"));
 		}
 		else if (parse->tokens[i]->type == PIPE)
 		{
 			if (!validate_pipe(parse, i))
-				return (false);
+				return (printf("Pipe validation failed\n"));
 		}
 		else if (parse->tokens[i]->type == REDIRECT_INPUT
 				&& parse->tokens[i]->type == HEREDOC)
 		{
 			if (!validate_input_redirection(parse, i))
-				return (false);
+				return (printf("input redirection failed\n"));
 		}
 		else if (parse->tokens[i]->type == REDIRECT_OUTPUT
 				|| parse->tokens[i]->type == REDIRECT_APPEND)
 		{
 			if (!validate_output_redirection(parse, i))
-				return (false);
+				return (printf("output redirection failed\n"));
 		}
 	}
 	return (true);

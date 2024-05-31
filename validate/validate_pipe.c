@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:05:28 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/30 19:13:50 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/05/31 16:17:52 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ bool	validate_pipe(t_parsing *parse, int index)
 	{
 		if (parse->tokens[index + 1] != NULL)
 		{
-			if (parse->tokens[index - 1]->type == CMDS
+			if ((parse->tokens[index - 1]->type == CMDS
+				|| parse->tokens[index - 1]->type == FILE_NAME
+				|| parse->tokens[index - 1]->type == LIMITER
+				|| parse->tokens[index - 1]->type == REDIRECT_OUTPUT
+				|| parse->tokens[index - 1]->type == DQOUTES
+				|| parse->tokens[index - 1]->type == SQOUTES)
 				&& parse->tokens[index + 1]->type == ID)
 				return (true);
 		}
