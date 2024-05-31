@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/30 22:33:53 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/31 19:51:09 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,8 +162,9 @@ typedef struct s_data
 
 bool	validate_syntax(char *line);
 bool	validate_unbalanced_qoutes(char *line);
+bool	validate_tokens(t_parsing *parse, t_data *data);
 bool	validate_pipes(char *line);
-bool	validate_id(t_parsing *parse, int index); //  NOTE: we can add t_data *data to check if the id is an executable or not
+bool	validate_id(t_parsing *parse, int index, t_data *data);
 bool	validate_pipe(t_parsing *parse, int index);
 bool	validate_input_redirection(t_parsing *parse, int index);
 bool	validate_output_redirection(t_parsing *parse, int index);
@@ -188,8 +189,7 @@ void			*ft_safe_malloc(size_t size, char *msg);
 /* ************************************************************************** */
 void			set_type(t_token *token);
 int				token_count(char *av);
-bool			validate_tokens(t_parsing *parse); //  NOTE: we can add t_data *data to check if the id is an executable or not
-
+bool	is_cmd(char *cmd, t_data *data);
 
 /* ************************************************************************** */
 /*									ENVIROMENT								  */

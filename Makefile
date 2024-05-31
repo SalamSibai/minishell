@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
+#    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/05/30 22:35:39 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/05/31 19:51:55 by ssibai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${VALIDATE_DIR}/validate_syntax.c \
 		${VALIDATE_DIR}/validate_utils.c \
 		${VALIDATE_DIR}/validate_tokens.c \
+		${VALIDATE_DIR}/validate_qoutes.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \
 

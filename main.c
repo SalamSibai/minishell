@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/30 22:48:38 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:11:15 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main(int ac, char **av, char **env)
 	//initlize enviroment variables
 	data.env = env_init(env);
 	data.env_var = env_to_str(data.env);
+	data.path = set_path(env, &data);
 	// int i = 0;
 	while (1)
 	{
@@ -65,7 +66,7 @@ int main(int ac, char **av, char **env)
 	parse = ft_safe_malloc(sizeof(t_parsing), "PARSING");
 	pasre_setup(parse, token_count(data.buf));
 	scan(data.buf, parse);
-	validate_tokens(parse);
+	validate_tokens(parse, &data);
 	data.parse_data = parse;
 	print_data(&data);
 	//validate the input

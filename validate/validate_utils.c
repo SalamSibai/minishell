@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:47:04 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/30 18:48:41 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/31 19:50:55 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,21 @@ bool validate_pipes(char *line)
 			ps++;
 	}
 	return true;
+}
+
+/// @brief checks whether the ID sent is a command
+bool	is_cmd(char *cmd, t_data *data)
+{
+	int		i;
+	char	*cmd_path;
+
+	i = 0;
+	while (data->path[i] != NULL)
+	{
+		cmd_path = ft_strjoin(data->path[i], cmd);
+		if (access(cmd_path, X_OK) == 0)
+			return (true);
+		i++;
+	}
+	return (false);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/31 14:53:20 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/05/31 19:48:19 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /// @brief validates whether the tokens provided are syntactically correct
 /// @param parse the parse struct
 /// @return true if all passed tokens are valid
-bool	validate_tokens(t_parsing *parse) //NOTE: add t_data *data to check to send the id to validate id to check if its executable or not 
+bool	validate_tokens(t_parsing *parse, t_data *data) //NOTE: add t_data *data to check to send the id to validate id to check if its executable or not 
 {
 	int i;
 
@@ -40,7 +40,7 @@ bool	validate_tokens(t_parsing *parse) //NOTE: add t_data *data to check to send
 	{
 		if (parse->tokens[i]->type == ID)
 		{
-			if (!validate_id(parse, i))
+			if (!validate_id(parse, i, data))
 				return (printf("ID validation failed\n"));
 		}
 		else if (parse->tokens[i]->type == PIPE)
@@ -59,6 +59,11 @@ bool	validate_tokens(t_parsing *parse) //NOTE: add t_data *data to check to send
 		{
 			if (!validate_output_redirection(parse, i))
 				return (printf("output redirection failed\n"));
+		}
+		else if (parse->tokens[i]->type == DQOUTES
+				|| parse->tokens[i]->type == SQOUTES)
+		{
+			
 		}
 	}
 	return (true);
