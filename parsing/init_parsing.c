@@ -104,7 +104,8 @@ void	scan(char *buff, t_parsing *parse)
 			{
 				parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
 				parse->tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
-				set_type(parse->tokens[token_ctr]);
+				// set_type(parse->tokens[token_ctr]);
+				parse->tokens[token_ctr]->type = DQOUTES;
 				token_ctr++;
 			}
 			i = c + 1;
@@ -118,7 +119,8 @@ void	scan(char *buff, t_parsing *parse)
 			{
 				parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
 				parse->tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
-				set_type(parse->tokens[token_ctr]);
+				// set_type(parse->tokens[token_ctr]);
+				parse->tokens[token_ctr]->type = SQOUTES;
 				token_ctr++;
 			}
 			i = c + 1;

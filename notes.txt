@@ -77,4 +77,13 @@ bash-3.2$ < mn ls -l obj includes
 				- if everything is fine, we initialize and store
 	*/
 
-//if we have an input redirection its a 
+
+
+
+this could be an issue:   malloc and extra tokens (i believe im counting the qoutes)
+		minishell$ ls"$X"                                              
+		Token count: 4
+		Token string: ls
+		ID
+		Token string: $X
+		ID
