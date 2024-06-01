@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:22:07 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/01 21:29:19 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/01 21:42:53 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,26 @@
 	so we need the enviroment to be passed to the function
 	and the parse data to loop thru all the tokens strings  except fot the string inside of the single quotes and check if we have a $ sign
 */
+
+/*
+*/
+char	*ft_strndup(const char *s1, size_t n)
+{
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	str = (char *)malloc(sizeof(char) * (n + 1));
+	if (!str)
+		return (NULL);
+	while (s1[i] && i < n)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
 
 char	*find_env_var_name(t_list *env, char *var_name)
 {
@@ -72,6 +92,7 @@ t_token		**check_expandable_var(t_token **tokens, t_list *env)
 	int i;
 	char *var_name;
 	char *expanded_str;
+	// char *str;
 
 	i = 0;
 	while (tokens[i])
@@ -81,12 +102,12 @@ t_token		**check_expandable_var(t_token **tokens, t_list *env)
 		{
 			if (ft_strchr(tokens[i]->token_string, '$'))
 			{
-				var_name = get_var_name(ft_strchr(tokens[i]->token_string, '$'));
+				var_name = get_var_name(ft_strchr(tokens[i]->token_string, '$')); //need to free this 
 				expanded_str = find_env_var_name(env, var_name);
 				if (expanded_str)
 				{
-					free(tokens[i]->token_string); // i need to join first the token string with the expanded string
-					tokens[i]->token_string = expanded_str;
+					tokens[i]->token_string = ft_strjoin(ft_strndup(tokens[i]->token_string, ft_strchr(tokens[i]->token_string, '$') - tokens[i]->token_string), expanded_str);
+					// free(tokens[i]->token_string); // i need to join first the token string with the expanded string //i need to join 
 				}
 				else
 				{
