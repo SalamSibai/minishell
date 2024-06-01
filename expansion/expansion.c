@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:22:07 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/01 21:42:53 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/01 21:46:10 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_token		**check_expandable_var(t_token **tokens, t_list *env)
 	while (tokens[i])
 	{
 		if (tokens[i]->type != REDIRECT_APPEND || tokens[i]->type != REDIRECT_INPUT 
-			 || tokens[i]->type != REDIRECT_OUTPUT || tokens[i]->type != PIPE)
+			 || tokens[i]->type != REDIRECT_OUTPUT || tokens[i]->type != PIPE || tokens[i]->type != SQOUTES)
 		{
 			if (ft_strchr(tokens[i]->token_string, '$'))
 			{
