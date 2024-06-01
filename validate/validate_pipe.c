@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:05:28 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/31 21:26:40 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/01 10:42:30 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ bool	validate_pipe(t_parsing *parse, int index)
 				|| parse->tokens[index - 1]->type == REDIRECT_OUTPUT
 				|| parse->tokens[index - 1]->type == DQOUTES
 				|| parse->tokens[index - 1]->type == SQOUTES
-				||( parse->tokens[index - 2]->type == CMDS && parse->tokens[index - 1]->type == ID))
-				&& parse->tokens[index + 1]->type == ID)
+				||( parse->tokens[index - 2]->type == CMDS && parse->tokens[index - 1]->type == ID)
+				||( parse->tokens[index - 2]->type == CMDS && parse->tokens[index - 1]->type == FLAG))
+				&& ((parse->tokens[index + 1]->type == ID
+				|| parse->tokens[index + 1]->type == REDIRECT_INPUT
+				|| parse->tokens[index + 1]->type == REDIRECT_OUTPUT
+				|| parse->tokens[index + 1]->type == REDIRECT_APPEND
+				|| parse->tokens[index + 1]->type == HEREDOC)))
 				return (true);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/31 19:51:09 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/01 12:03:00 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,14 +160,15 @@ typedef struct s_data
 /*								SYNTAX VALIDATION							  */
 /* ************************************************************************** */
 
-bool	validate_syntax(char *line);
-bool	validate_unbalanced_qoutes(char *line);
-bool	validate_tokens(t_parsing *parse, t_data *data);
-bool	validate_pipes(char *line);
-bool	validate_id(t_parsing *parse, int index, t_data *data);
-bool	validate_pipe(t_parsing *parse, int index);
-bool	validate_input_redirection(t_parsing *parse, int index);
-bool	validate_output_redirection(t_parsing *parse, int index);
+bool			validate_syntax(char *line);
+bool			validate_unbalanced_qoutes(char *line);
+bool			validate_tokens(t_parsing *parse, t_data *data);
+bool			validate_pipes(char *line);
+bool			validate_id(t_parsing *parse, int index, t_data *data);
+bool			validate_pipe(t_parsing *parse, int index);
+bool			validate_input_redirection(t_parsing *parse, int index);
+bool			validate_output_redirection(t_parsing *parse, int index);
+bool			validate_qoutes(t_parsing *parse, int index, t_data *data);
 
 /* ************************************************************************** */
 /*									PARSEING								  */
@@ -189,7 +190,7 @@ void			*ft_safe_malloc(size_t size, char *msg);
 /* ************************************************************************** */
 void			set_type(t_token *token);
 int				token_count(char *av);
-bool	is_cmd(char *cmd, t_data *data);
+bool			is_cmd(char *cmd, t_data *data);
 
 /* ************************************************************************** */
 /*									ENVIROMENT								  */
@@ -207,7 +208,7 @@ char			**set_path(char **envp, t_data *data);
 /* ************************************************************************** */
 /*									DEBUG									  */
 /* ************************************************************************** */
-void		print_data(t_data *data);
+void			print_data(t_data *data);
 
 //Creating a tree, where the left branch will be executed first.
 #endif
