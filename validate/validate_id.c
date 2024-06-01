@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_id.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/31 19:50:51 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/01 09:56:36 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,5 @@ bool validate_id(t_parsing *parse, int index, t_data *data)
 	}
 	return true;
 }
+
+

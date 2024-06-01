@@ -32,6 +32,7 @@ ls -l | wc -l
 
 	ls -l | wc -l | ls -l > file
 	ls -l | wc -l | ls -l >> file
+	echo hisham > f2 9 8 7 >> ss 77 66 << ju | < mn cat 5 4 3 
 	
 
 
