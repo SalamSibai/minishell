@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:22:07 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/01 21:46:10 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/02 13:50:40 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,13 @@
 	and the parse data to loop thru all the tokens strings  except fot the string inside of the single quotes and check if we have a $ sign
 */
 
-/*
-*/
-char	*ft_strndup(const char *s1, size_t n)
-{
-	char	*str;
-	size_t	i;
-
-	i = 0;
-	str = (char *)malloc(sizeof(char) * (n + 1));
-	if (!str)
-		return (NULL);
-	while (s1[i] && i < n)
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
+/**
+ * @brief find the variable name in the enviroment
+ * 
+ * @param env 
+ * @param var_name 
+ * @return the expanded string if found and null if not found
+ */
 char	*find_env_var_name(t_list *env, char *var_name)
 {
 	char	*expanded_str;
@@ -97,8 +84,8 @@ t_token		**check_expandable_var(t_token **tokens, t_list *env)
 	i = 0;
 	while (tokens[i])
 	{
-		if (tokens[i]->type != REDIRECT_APPEND || tokens[i]->type != REDIRECT_INPUT 
-			 || tokens[i]->type != REDIRECT_OUTPUT || tokens[i]->type != PIPE || tokens[i]->type != SQOUTES)
+		if (tokens[i]->type != REDIRECT_APPEND && tokens[i]->type != REDIRECT_INPUT 
+			 && tokens[i]->type != REDIRECT_OUTPUT && tokens[i]->type != PIPE && tokens[i]->type != SQOUTES)
 		{
 			if (ft_strchr(tokens[i]->token_string, '$'))
 			{
