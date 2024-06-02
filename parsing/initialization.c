@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_cmds.c                                         :+:      :+:    :+:   */
+/*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/02 22:30:52 by ssibai           ###   ########.fr       */
+/*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
+/*   Updated: 2024/06/02 21:36:11 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-/// @brief loops through the given tokens and sets all arguments and
-///			and redirections linked to that specific command
-///			+ strjoins all into 1 token
-/// @param data 
-void	set_cmds(t_data *data)
+bool	init_redirections(t_redirection *redir)
 {
-	int	i;
-	int	j;
+	redir->fd = -1;
+	redir->type = NONE;
+	redir->file_name = '\0';
+	redir->limiter = '\0';
+}
 
-	i = 0;
-	j = 0;
-	while ()
-	
+bool	init_cmd(t_cmd *cmd)
+{
+	cmd->cmd_str = '\0';
+	cmd->args_str = NULL;
+	cmd->redirection = NULL;
 }
