@@ -78,7 +78,7 @@ bash-3.2$ < mn ls -l obj includes
 	*/
 
 
-
+counting numbers of cmds we based on the number of pipes but for the excep of a pipe preceded with a output redirection
 
 this could be an issue:   malloc and extra tokens (i believe im counting the qoutes)
 		minishell$ ls"$X"                                              

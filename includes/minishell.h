@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/02 21:18:07 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/02 21:49:52 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,15 @@ typedef struct s_env
 	char	*value;
 	struct s_env	*next;
 }				t_env;
+
+typedef struct s_lexer
+{
+	int	n_cmds;
+	int	n_pipes;
+	int	n_redirections;
+	int	n_tokens;
+}	t_lexer;
+
 
 //typedef	struct s_abstract_syntax_tree
 //{

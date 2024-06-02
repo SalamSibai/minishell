@@ -74,7 +74,6 @@ void	scan(char *buff,t_token **tokens)
 			{
 				tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
 				tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
-				// set_type(tokens[token_ctr]);
 				tokens[token_ctr]->type = DQOUTES;
 				printf("Token string: %s\n", tokens[token_ctr]->token_string);
 				printf("string in single qoutes\n");
@@ -91,7 +90,6 @@ void	scan(char *buff,t_token **tokens)
 			{
 				tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
 				tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
-				// set_type(tokens[token_ctr]);
 				tokens[token_ctr]->type = SQOUTES;
 				printf("Token string: %s\n", tokens[token_ctr]->token_string);
 				printf("string in single qoutes\n");
