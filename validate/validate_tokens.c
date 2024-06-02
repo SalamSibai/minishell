@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/02 20:22:21 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/02 22:05:39 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ bool	validate_tokens(t_data *data) //NOTE: add t_data *data to check to send the
 		{
 			if (!validate_pipe(tokens, i))
 				return (printf("Pipe validation failed in string (%s)\n", tokens[i -1]->token_string));
+			data->cmd_num++;
 		}
 		else if (tokens[i]->type == REDIRECT_INPUT
 				&& tokens[i]->type == HEREDOC)

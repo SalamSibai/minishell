@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/02 20:27:18 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/03 01:06:38 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@
 
 int main(int ac, char **av, char **env)
 {
-	t_data		data;
+	t_data	data;
 
 	(void)ac;
 	(void)av;
 	//initlize enviroment variables
+	data.cmd_num = 1;
 	data.env = env_init(env);
 	data.env_var = env_to_str(data.env);
 	data.path = set_path(env, &data);
@@ -60,6 +61,9 @@ int main(int ac, char **av, char **env)
 	scan(data.buf, data.tokens);
 	validate_tokens(&data);
 	data.tokens = check_expandable_var(data.tokens, data.env);
+	data.cmd = ft_safe_malloc(sizeof(t_cmd *) * data.cmd_num, "CMDS");
+	
+	set_cmds(&data);
 	print_data(&data);
 	
 	//execute the input

@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/02 21:18:04 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/02 21:48:19 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool validate_id(int index, t_data *data)
 	if (index == 0 || tokens[index - 1]->type == PIPE)
 		tokens[index]->type = CMDS;
 	else if (tokens[index - 1]->type == REDIRECT_INPUT
-			|| tokens[index - 1]->type == REDIRECT_APPEND
+			|| tokens[index - 1] ->type == REDIRECT_APPEND
 			|| tokens[index - 1]->type == REDIRECT_OUTPUT)
 		tokens[index]->type = FILE_NAME;
 	else if (tokens[index - 1]->type == HEREDOC)

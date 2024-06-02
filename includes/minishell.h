@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/02 21:49:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/03 01:18:31 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef enum e_token_type
 	ID,					//9
 	EXEC_ID,			//10
 	DQOUTES,			//11
-	SQOUTES				//12
+	SQOUTES,			//12
+	NONE
 } e_token_type;
 
 /*
@@ -51,33 +52,21 @@ typedef struct s_pipe
 	//int		fd_out;
 }				t_pipe;
 
-/// @brief
+/// @brief the redirection struct
 typedef struct s_redirection
 {
 	int				fd;
 	e_token_type	type;
 	char			*file_name;
+	char			*limiter;
 }	t_redirection;
-
-typedef struct s_operations
-{
-	t_redirection	**redirections;
-	t_pipe			*pipe;
-
-}	t_operations;
-
-/// @brief 
-typedef struct s_args
-{
-	char			*arg_str;
-	t_redirection	*redirection;
-}	t_args;
 
 /// @brief 
 typedef struct s_cmd
 {
-	char	*cmd_str;
-	t_args	*args;
+	char			*cmd_str;
+	char			**args_str;
+	t_redirection	*redirection;
 }	t_cmd;
 
 /// @brief Stores information on tokens
@@ -122,8 +111,10 @@ typedef struct s_lexer
 * 	1) A split version of the "PATH" variable, to have an easy access to each directory
 * 	2) The env variable that is sent from main, stored for easy access
 */
+
 typedef struct s_data
 {
+	int			cmd_num;
 	t_list		*env;
 	t_cmd		**cmd; 	//if each command has a seaprate entry in its own struct, it is not necessary to have a double pointer of cmds in the struct itself
 						//or, we can store all commands in that single struct, with it having a double pointer.
