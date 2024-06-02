@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/30 20:23:47 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/02 20:15:50 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /// @param parse the parse struct
 /// @param index the index of the ID we are checking
 /// @return true if passed token is valid
-bool	validate_id(t_parsing *parse, int index)
+bool	validate_id(t_token *parse, int index)
 {
 	if (index == 0)
 		parse->tokens[index]->type = CMDS;

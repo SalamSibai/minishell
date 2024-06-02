@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/02 20:08:08 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/02 20:30:55 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,20 @@ typedef struct s_pipe
 	//int		fd_out;
 }				t_pipe;
 
-/// @brief 
+/// @brief
 typedef struct s_redirection
 {
 	int				fd;
 	e_token_type	type;
 	char			*file_name;
 }	t_redirection;
+
+typedef struct s_operations
+{
+	t_redirection	**redirections;
+	t_pipe			*pipe;
+
+}	t_operations;
 
 /// @brief 
 typedef struct s_args
