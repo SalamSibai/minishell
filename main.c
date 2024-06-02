@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/02 22:31:36 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/03 01:06:38 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int main(int ac, char **av, char **env)
 	scan(data.buf, data.tokens);
 	validate_tokens(&data);
 	data.tokens = check_expandable_var(data.tokens, data.env);
-	data.cmd = ft_safe_malloc(sizeof(t_cmd *) * data.cmd_num);
+	data.cmd = ft_safe_malloc(sizeof(t_cmd *) * data.cmd_num, "CMDS");
 	
 	set_cmds(&data);
 	print_data(&data);
