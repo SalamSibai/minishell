@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
+#    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/05/31 19:51:55 by ssibai           ###   ########.fr        #
+#    Updated: 2024/06/01 20:31:45 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,16 @@ NAME			= minishell
 VALIDATE_DIR	= ./validate
 PARSE_DIR		= ./parsing
 ENV_DIR			= ./env
-DEBUG_DIR			= ./debug
+EXPANSION_DIR	= ./expansion
+DEBUG_DIR		= ./debug
+OBJ_DIR			= ./obj
 
 SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/init_parsing.c \
 		${PARSE_DIR}/set_tokens.c \
 		${ENV_DIR}/env_init.c\
 		${ENV_DIR}/get_path.c\
+		${EXPANSION_DIR}/expansion.c\
 		${VALIDATE_DIR}/validate_id.c \
 		${VALIDATE_DIR}/validate_input_redirection.c \
 		${VALIDATE_DIR}/validate_output_redirection.c\
@@ -44,16 +47,17 @@ HEAD = ./
 
 CC = cc
 
-
-OBJ = $(SRC:%.c=%.o)
-
+OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/$(PARSE_DIR) $(OBJ_DIR)/$(ENV_DIR) $(OBJ_DIR)/$(EXPANSION_DIR) $(OBJ_DIR)/$(VALIDATE_DIR) $(OBJ_DIR)/$(DEBUG_DIR)
+
 $(LIBFT):
 	$(MAKE) -C ./includes/libft
-	
-$(OBJ): %.o: %.c
+
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c -I $(HEAD) $< -o $@
 	
 $(NAME): $(OBJ) $(LIBFT)
@@ -61,7 +65,7 @@ $(NAME): $(OBJ) $(LIBFT)
 
 clean:
 	$(MAKE) clean -C ./includes/libft
-	$(RM) $(OBJ)
+	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) fclean -C ./includes/libft

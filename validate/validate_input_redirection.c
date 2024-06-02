@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:23:52 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/30 20:45:12 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/01 12:35:13 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,4 @@ bool	validate_input_redirection(t_parsing *parse, int index)
 	}
 	return (false);
 }
+//here we need to validate if we have a cmd after the file name and then its arguments

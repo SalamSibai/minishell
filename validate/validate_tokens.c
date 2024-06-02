@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/31 19:48:19 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/01 12:04:51 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	validate_tokens(t_parsing *parse, t_data *data) //NOTE: add t_data *data to
 		else if (parse->tokens[i]->type == PIPE)
 		{
 			if (!validate_pipe(parse, i))
-				return (printf("Pipe validation failed\n"));
+				return (printf("Pipe validation failed in string (%s)\n", parse->tokens[i -1]->token_string));
 		}
 		else if (parse->tokens[i]->type == REDIRECT_INPUT
 				&& parse->tokens[i]->type == HEREDOC)
@@ -63,7 +63,7 @@ bool	validate_tokens(t_parsing *parse, t_data *data) //NOTE: add t_data *data to
 		else if (parse->tokens[i]->type == DQOUTES
 				|| parse->tokens[i]->type == SQOUTES)
 		{
-			
+			validate_qoutes(parse, i, data); // it could be arugments for the command 
 		}
 	}
 	return (true);

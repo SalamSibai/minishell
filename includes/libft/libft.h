@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:21:10 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/27 21:59:50 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/02 13:41:39 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_free2d(void **arr);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(char *src);
+char	*ft_strndup(const char *src, size_t n);
 int		ft_skipspaces(const char *str);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);

@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:05:28 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/31 21:04:29 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/02 19:25:20 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,21 @@ bool	validate_pipe(t_parsing *parse, int index)
 	{
 		if (parse->tokens[index + 1] != NULL)
 		{
-			if (index == 1)
-			{
-				if (parse->tokens[index - 1] )
-				
-			}
-			if (index >= 2)
-			{
-				if (
-					|| parse->tokens[index - 1]->type == FILE_NAME
-					|| parse->tokens[index - 1]->type == LIMITER
-					|| parse->tokens[index - 1]->type == REDIRECT_OUTPUT
-					|| parse->tokens[index - 1]->type == DQOUTES
-					|| parse->tokens[index - 1]->type == SQOUTES
-					||( parse->tokens[index - 2]->type == CMDS && parse->tokens[index - 1]->type == ID))
-					&& parse->tokens[index + 1]->type == ID)
-					return (true);
-			}
-			else
-			
+			if ((parse->tokens[index - 1]->type == CMDS
+				|| parse->tokens[index - 1]->type == FILE_NAME
+				|| parse->tokens[index - 1]->type == LIMITER
+				|| parse->tokens[index - 1]->type == REDIRECT_OUTPUT
+				|| parse->tokens[index - 1]->type == DQOUTES
+				|| parse->tokens[index - 1]->type == SQOUTES
+				||( parse->tokens[index - 2]->type == CMDS && parse->tokens[index - 1]->type == ID)
+				||( parse->tokens[index - 2]->type == CMDS && parse->tokens[index - 1]->type == FLAG))
+				&& ((parse->tokens[index + 1]->type == ID
+				|| parse->tokens[index + 1]->type == REDIRECT_INPUT
+				|| parse->tokens[index + 1]->type == REDIRECT_OUTPUT
+				|| parse->tokens[index + 1]->type == REDIRECT_APPEND
+				|| parse->tokens[index + 1]->type == HEREDOC)))
+				return (true);
+		}
 	}
 	return (false);
 }

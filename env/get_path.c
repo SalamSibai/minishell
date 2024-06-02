@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:00:00 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/31 18:17:49 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:43:13 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	**set_path(char **envp, t_data *data)
 	char	**split_path;
 	int		i;
 
+	(void)data;
 	i = -1;
 	full_path = NULL;
 	while (*envp)
@@ -69,8 +70,8 @@ char	**set_path(char **envp, t_data *data)
 	split_path = ft_split(full_path, ':');
 	while (split_path[++i] != NULL)
 	{
-		data->path[i] = ft_strjoin(split_path[i], "/");
+		split_path[i] = ft_strjoin(split_path[i], "/");
 	}
 	//ft_free2d((void **)split_path);
-	return (data->path);
+	return (split_path);
 }

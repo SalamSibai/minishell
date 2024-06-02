@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/31 20:56:34 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/02 19:24:38 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,5 @@ bool validate_id(t_parsing *parse, int index, t_data *data)
 	}
 	return true;
 }
+
+

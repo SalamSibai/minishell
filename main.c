@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/31 18:11:15 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:39:03 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 
 int main(int ac, char **av, char **env)
 {
-	//t_parsing	*parse = NULL;
 	t_data		data;
 	t_parsing *parse;
 
@@ -58,19 +57,13 @@ int main(int ac, char **av, char **env)
 			// continue ;
 			exit(1);
 		}
-	//initialize expansion variables
-	//initialize the path
-	//check syntax error
-	//parse the input
-	//pre validation
 	parse = ft_safe_malloc(sizeof(t_parsing), "PARSING");
 	pasre_setup(parse, token_count(data.buf));
 	scan(data.buf, parse);
 	validate_tokens(parse, &data);
+	parse->tokens = check_expandable_var(parse->tokens, data.env);
 	data.parse_data = parse;
 	print_data(&data);
-	//validate the input
-	
 	
 	//execute the input
 
