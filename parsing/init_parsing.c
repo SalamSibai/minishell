@@ -32,36 +32,6 @@
 			- if everything is fine, we initialize and store
 */
 
-bool	pasre_setup(t_parsing *parse, int token_ctr)
-{
-	//t_parsing *parse;
-
-
-/*
-	parse =  ft_safe_malloc(sizeof(t_parsing));
-	if (!parse)
-		return (false);
-*/
-
-	//parse->lexer = ft_safe_malloc(sizeof(t_lexer));
-	//if (!parse->lexer)
-	//{
-	//	//cleanup and free for parse
-	//	return (false);
-	//}
-	// create our lexer and then malloc and setup for our tokens
-
-	if (!(parse->tokens = ft_safe_malloc(sizeof(t_token *) * token_ctr, "TOKENS")))
-	{
-		//cleanup and free for both lexer and parse
-		return (false);
-	}
-	// printf("Token count: %d\n", token_ctr);
-	// parse->tokens[token_ctr] = NULL;
-	return (true);
-}
-
-
 /**
  * @brief filling in the tokens stuct 
  * 
@@ -69,7 +39,7 @@ bool	pasre_setup(t_parsing *parse, int token_ctr)
  * @param buff 
  * @param parse 
  */
-void	scan(char *buff, t_parsing *parse)
+void	scan(char *buff,t_token **tokens)
 {
 	int i = 0;
 	int c = 0;
@@ -81,17 +51,17 @@ void	scan(char *buff, t_parsing *parse)
 		c = i;
 		if ((buff[c] == '>' && buff[c + 1] == '>') || (buff[c] == '<' && buff[c + 1] == '<'))
 		{
-			parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
-			parse->tokens[token_ctr]->token_string = ft_substr(buff, c, 2);
-			set_type(parse->tokens[token_ctr]);
+			tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			tokens[token_ctr]->token_string = ft_substr(buff, c, 2);
+			set_type(tokens[token_ctr]);
 			token_ctr++;
 			i += 2;
 		}
 		else if (buff[c] == '|' || buff[c] == '>' || buff[c] == '<')
 		{
-			parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
-			parse->tokens[token_ctr]->token_string = ft_substr(buff, c, 1);
-			set_type(parse->tokens[token_ctr]);
+			tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			tokens[token_ctr]->token_string = ft_substr(buff, c, 1);
+			set_type(tokens[token_ctr]);
 			token_ctr++;
 			i += 1;
 		}
@@ -102,10 +72,12 @@ void	scan(char *buff, t_parsing *parse)
 				;
 			if (c > i)
 			{
-				parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
-				parse->tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
-				// set_type(parse->tokens[token_ctr]);
-				parse->tokens[token_ctr]->type = DQOUTES;
+				tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
+				// set_type(tokens[token_ctr]);
+				tokens[token_ctr]->type = DQOUTES;
+				printf("Token string: %s\n", tokens[token_ctr]->token_string);
+				printf("string in single qoutes\n");
 				token_ctr++;
 			}
 			i = c + 1;
@@ -117,10 +89,12 @@ void	scan(char *buff, t_parsing *parse)
 				;
 			if (c > i)
 			{
-				parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
-				parse->tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
-				// set_type(parse->tokens[token_ctr]);
-				parse->tokens[token_ctr]->type = SQOUTES;
+				tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
+				// set_type(tokens[token_ctr]);
+				tokens[token_ctr]->type = SQOUTES;
+				printf("Token string: %s\n", tokens[token_ctr]->token_string);
+				printf("string in single qoutes\n");
 				token_ctr++;
 			}
 			i = c + 1;
@@ -131,13 +105,13 @@ void	scan(char *buff, t_parsing *parse)
 				c++;
 			if (c > i)
 			{
-				parse->tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
-				parse->tokens[token_ctr]->token_string = ft_substr(buff, i, c - i);
-				set_type(parse->tokens[token_ctr]);
+				tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				tokens[token_ctr]->token_string = ft_substr(buff, i, c - i);
+				set_type(tokens[token_ctr]);
 				token_ctr++;
 			}
 			i = c;
 		}
 	}
-	parse->tokens[token_ctr] = NULL;
+	tokens[token_ctr] = NULL;
 }

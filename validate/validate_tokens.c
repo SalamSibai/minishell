@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/01 12:04:51 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:22:21 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,39 +31,41 @@
 /// @brief validates whether the tokens provided are syntactically correct
 /// @param parse the parse struct
 /// @return true if all passed tokens are valid
-bool	validate_tokens(t_parsing *parse, t_data *data) //NOTE: add t_data *data to check to send the id to validate id to check if its executable or not 
+bool	validate_tokens(t_data *data) //NOTE: add t_data *data to check to send the id to validate id to check if its executable or not 
 {
 	int i;
+	t_token **tokens;
 
+	tokens = data->tokens;
 	i = -1;
-	while (parse->tokens[++i])
+	while (tokens[++i])
 	{
-		if (parse->tokens[i]->type == ID)
+		if (tokens[i]->type == ID)
 		{
-			if (!validate_id(parse, i, data))
+			if (!validate_id(i, data))
 				return (printf("ID validation failed\n"));
 		}
-		else if (parse->tokens[i]->type == PIPE)
+		else if (tokens[i]->type == PIPE)
 		{
-			if (!validate_pipe(parse, i))
-				return (printf("Pipe validation failed in string (%s)\n", parse->tokens[i -1]->token_string));
+			if (!validate_pipe(tokens, i))
+				return (printf("Pipe validation failed in string (%s)\n", tokens[i -1]->token_string));
 		}
-		else if (parse->tokens[i]->type == REDIRECT_INPUT
-				&& parse->tokens[i]->type == HEREDOC)
+		else if (tokens[i]->type == REDIRECT_INPUT
+				&& tokens[i]->type == HEREDOC)
 		{
-			if (!validate_input_redirection(parse, i))
+			if (!validate_input_redirection(tokens, i))
 				return (printf("input redirection failed\n"));
 		}
-		else if (parse->tokens[i]->type == REDIRECT_OUTPUT
-				|| parse->tokens[i]->type == REDIRECT_APPEND)
+		else if (tokens[i]->type == REDIRECT_OUTPUT
+				|| tokens[i]->type == REDIRECT_APPEND)
 		{
-			if (!validate_output_redirection(parse, i))
+			if (!validate_output_redirection(tokens, i))
 				return (printf("output redirection failed\n"));
 		}
-		else if (parse->tokens[i]->type == DQOUTES
-				|| parse->tokens[i]->type == SQOUTES)
+		else if (tokens[i]->type == DQOUTES
+				|| tokens[i]->type == SQOUTES)
 		{
-			validate_qoutes(parse, i, data); // it could be arugments for the command 
+			validate_qoutes(i, data); // it could be arugments for the command 
 		}
 	}
 	return (true);

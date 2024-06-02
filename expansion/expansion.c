@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:22:07 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/02 13:50:40 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:29:17 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ t_token		**check_expandable_var(t_token **tokens, t_list *env)
 	int i;
 	char *var_name;
 	char *expanded_str;
-	// char *str;
 
 	i = 0;
 	while (tokens[i])

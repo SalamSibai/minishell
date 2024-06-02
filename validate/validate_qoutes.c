@@ -3,24 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   validate_qoutes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:51:29 by ssibai            #+#    #+#             */
-/*   Updated: 2024/05/31 20:55:43 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/02 20:23:54 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	validate_dqoutes(t_parsing *parse, int index, t_data *data)
+void	validate_dqoutes(int index, t_data *data)
 {
-	if (is_cmd(parse->tokens[index]->token_string, data))
-		parse->tokens[index]->type = CMDS;
+	t_token	**tokens;
+
+	tokens = data->tokens;
+	if (is_cmd(tokens[index]->token_string, data))
+		tokens[index]->type = CMDS;
 }
 
-bool	validate_qoutes(t_parsing *parse, int index, t_data *data)
+bool	validate_qoutes(int index, t_data *data)
 {
-	if (parse->tokens[index]->type == DQOUTES)
-		validate_dqoutes(parse, index, data);
+	t_token	**tokens;
+
+	tokens = data->tokens;
+	if (tokens[index]->type == DQOUTES)
+		validate_dqoutes(index, data);
 	return true;
 }

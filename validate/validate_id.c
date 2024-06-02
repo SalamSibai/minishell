@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_id.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/02 19:24:38 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/02 20:18:57 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,27 @@
 /// @param parse the parse struct
 /// @param index the index of the ID we are checking
 /// @return true if passed token is valid
-bool validate_id(t_parsing *parse, int index, t_data *data)
+bool validate_id(int index, t_data *data)
 {
-	if (index == 0 || parse->tokens[index - 1]->type == PIPE)
-		parse->tokens[index]->type = CMDS;
-	else if (parse->tokens[index - 1]->type == REDIRECT_INPUT
-			|| parse->tokens[index - 1]->type == REDIRECT_APPEND
-			|| parse->tokens[index - 1]->type == REDIRECT_OUTPUT)
-		parse->tokens[index]->type = FILE_NAME;
-	else if (parse->tokens[index - 1]->type == HEREDOC)
-		parse->tokens[index]->type = LIMITER;
-	else if (parse->tokens[index - 1]->type == CMDS)
-		parse->tokens[index]->type = EXEC_ID;
+	t_token **tokens;
+	
+	tokens = data->tokens;
+	if (index == 0 || tokens[index - 1]->type == PIPE)
+		tokens[index]->type = CMDS;
+	else if (tokens[index - 1]->type == REDIRECT_INPUT
+			|| tokens[index - 1]->type == REDIRECT_APPEND
+			|| tokens[index - 1]->type == REDIRECT_OUTPUT)
+		tokens[index]->type = FILE_NAME;
+	else if (tokens[index - 1]->type == HEREDOC)
+		tokens[index]->type = LIMITER;
+	else if (tokens[index - 1]->type == CMDS)
+		tokens[index]->type = EXEC_ID;
 	else
 	{
-		if (is_cmd(parse->tokens[index]->token_string, data))
-			parse->tokens[index]->type = CMDS;
+		if (is_cmd(tokens[index]->token_string, data))
+			tokens[index]->type = CMDS;
 		else
-			parse->tokens[index]->type = ID;
+			tokens[index]->type = ID;
 	}
 	return true;
 }

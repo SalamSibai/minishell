@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/01 20:39:03 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:27:18 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 int main(int ac, char **av, char **env)
 {
 	t_data		data;
-	t_parsing *parse;
 
 	(void)ac;
 	(void)av;
@@ -57,12 +56,10 @@ int main(int ac, char **av, char **env)
 			// continue ;
 			exit(1);
 		}
-	parse = ft_safe_malloc(sizeof(t_parsing), "PARSING");
-	pasre_setup(parse, token_count(data.buf));
-	scan(data.buf, parse);
-	validate_tokens(parse, &data);
-	parse->tokens = check_expandable_var(parse->tokens, data.env);
-	data.parse_data = parse;
+	data.tokens = ft_safe_malloc(sizeof(t_token *) * token_count(data.buf), "TOKENS");
+	scan(data.buf, data.tokens);
+	validate_tokens(&data);
+	data.tokens = check_expandable_var(data.tokens, data.env);
 	print_data(&data);
 	
 	//execute the input

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:23:52 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/01 12:35:13 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:19:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 /// @param parse the parse struct
 /// @param index the index of the token
 /// @return true if the token is valid
-bool	validate_input_redirection(t_parsing *parse, int index)
+bool	validate_input_redirection(t_token **tokens, int index)
 {
-	if (parse->tokens[index + 1] != NULL)
+	if (tokens[index + 1] != NULL)
 	{
-		if (parse->tokens[index + 1]->type == ID)
+		if (tokens[index + 1]->type == ID)
 			return (true);
 	}
 	return (false);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/02 20:09:13 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/02 20:35:59 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,19 @@
 
 typedef enum e_token_type
 {
-	CMDS,						// 1
-	PIPE,						// 2
-	LIMITER,					//3
-	FILE_NAME,  				//4
-	REDIRECT_INPUT,				//5
-	REDIRECT_OUTPUT,			//6
-	HEREDOC,					//7
-	REDIRECT_APPEND,			//8
-	FLAG,						//9
-	ID,							//10
-	EXEC_ID,					//11
-	DQOUTES,					//12
-	SQOUTES						//13
-	//SEMICOLON,
-	//NEWLINE,
-	//END
+	CMDS,				//0
+	PIPE,				//1
+	LIMITER,			//2
+	FILE_NAME,  		//3
+	REDIRECT_INPUT,		//4
+	REDIRECT_OUTPUT,	//5
+	HEREDOC,			//6
+	REDIRECT_APPEND,	//7
+	FLAG,				//8
+	ID,					//9
+	EXEC_ID,			//10
+	DQOUTES,			//11
+	SQOUTES				//12
 } e_token_type;
 
 /*
@@ -129,19 +126,18 @@ typedef struct s_data
 
 bool			validate_syntax(char *line);
 bool			validate_unbalanced_qoutes(char *line);
-bool			validate_tokens(t_parsing *parse, t_data *data);
+bool			validate_tokens(t_data *data);
 bool			validate_pipes(char *line);
-bool			validate_id(t_parsing *parse, int index, t_data *data);
-bool			validate_pipe(t_parsing *parse, int index);
-bool			validate_input_redirection(t_parsing *parse, int index);
-bool			validate_output_redirection(t_parsing *parse, int index);
-bool			validate_qoutes(t_parsing *parse, int index, t_data *data);
+bool			validate_id(int index, t_data *data);
+bool			validate_pipe(t_token **tokens, int index);
+bool			validate_input_redirection(t_token **tokens, int index);
+bool			validate_output_redirection(t_token **tokens, int index);
+bool			validate_qoutes(int index, t_data *data);
 
 /* ************************************************************************** */
 /*									PARSEING								  */
 /* ************************************************************************** */
-bool			pasre_setup(t_parsing *parse, int token_ctr);
-void			scan(char *av, t_parsing *parse);
+void			scan(char *av, t_token **tokens);
 
 
 /* ************************************************************************** */
