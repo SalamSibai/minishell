@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/03 17:23:02 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:31:35 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,28 @@ void	set_cmds(t_data *data)
 			}
 			else if (tokens[j]->type == ID)
 			{
-				//do we need this or we just have it in one arguments no need for a double pointer
-				data->cmds[i]->args_str[c] = ft_strdup(tokens[j]->token_string); 
-				c++;
+				if (c == 0)
+				{
+					data->cmds[i]->args_str = ft_strdup(tokens[j]->token_string);
+					c = 1;
+				}
+				else
+				{
+					data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, " ");
+					data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, tokens[j]->token_string);
+				}
 				j++;
 			}
+			else if (tokens[i]->type == FILE_NAME)
+			{
+				data->cmds[i]->redirection->file_name = ft_strdup(tokens[j]->token_string);
+				j++;
+			}
+			else
+				j++;
 		}
 		i++;
 		j++;
+		
 	}
-	
 }

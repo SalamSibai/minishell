@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/03 17:24:50 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:11:04 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ int main(int ac, char **av, char **env)
 	int i = 0;
 	while (i < data.cmd_num)
 	{
-		printf("here");
 		data.cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
 		data.cmds[i]->cmd_str = NULL;
 		data.cmds[i]->redirection = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
 		i++;
 	}
 	set_cmds(&data);
+	// printf("here\n");
 	print_data(&data);
 	
 	//execute the input

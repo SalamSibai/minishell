@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:31:36 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/03 01:19:21 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:41:17 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,23 @@ void	print_data(t_data *data)
 			printf("Token_string: (%s)\ntoken: string in single qoute\n\n", tokens[i]->token_string);
 		else if (tokens[i]->type == HEREDOC)
 			printf("Token_string: (%s)\ntoken: heredoc\n\n", tokens[i]->token_string);
+		else
+			printf("Token_string: (%s)\ntoken: none\n\n", tokens[i]->token_string);
 		i++;
 	}
+
+
+	printf("****************        After Parsing cmds values       ****************\n");
+	i = 0;
+	while (i < data->cmd_num)
+	{
+		printf("cmd[%d]->cmd: %s\n", i, data->cmds[i]->cmd_str);
+		printf("cmd[%d]->arg: %s\n", i, data->cmds[i]->args_str);
+		printf("cmd[%d]->redirection->type: %d\n", i, data->cmds[i]->redirection->type);
+		// printf("cmd[%d]->redirection->fd: %d\n", i, data->cmds[i]->redirection->fd);
+		// printf("cmd[%d]->redirection->file_name: %s\n", i, data->cmds[i]->redirection->file_name);
+		// printf("cmd[%d]->redirection->limiter: %s\n", i, data->cmds[i]->redirection->limiter);
+		i++;
+	}
+
 }

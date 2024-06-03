@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/03 17:22:12 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:06:52 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_redirection
 typedef struct s_cmd
 {
 	char			*cmd_str;
-	char			**args_str;
+	char			*args_str;
 	t_redirection	*redirection;
 }	t_cmd;
 
