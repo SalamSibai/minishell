@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/01 20:31:45 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/03 13:28:46 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ OBJ_DIR			= ./obj
 SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/init_parsing.c \
 		${PARSE_DIR}/set_tokens.c \
+		${PARSE_DIR}/set_cmds.c \
+		${PARSE_DIR}/initialization.c \
+		${PARSE_DIR}/count_cmds.c \
 		${ENV_DIR}/env_init.c\
 		${ENV_DIR}/get_path.c\
 		${EXPANSION_DIR}/expansion.c\

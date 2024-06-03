@@ -57,6 +57,14 @@ void	scan(char *buff,t_token **tokens)
 			token_ctr++;
 			i += 2;
 		}
+		else if (buff[c] == '>' && buff[c + 1] != '\0' && buff[c + 1] == '|')
+		{
+			tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			tokens[token_ctr]->token_string = ft_substr(buff, c, 1);
+			set_type(tokens[token_ctr]);
+			token_ctr++;
+			i += 2;
+		}
 		else if (buff[c] == '|' || buff[c] == '>' || buff[c] == '<')
 		{
 			tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");

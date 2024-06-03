@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/03 01:11:09 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:23:02 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,48 +19,62 @@
 void	set_cmds(t_data *data)
 {
 	t_token **tokens;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	int 	c;
 	
 	tokens = data->tokens;
 	i = 0;
 	j = 0;
 	while (i < data->cmd_num)
 	{
+		c = 0;
 		while (tokens[j] != NULL && tokens[j]->type != PIPE)
 		{
 			if (tokens[j]->type == CMDS)
 			{
-				data->cmd[i]= ft_strdup(tokens[j]->token_string);
+				data->cmds[i]->cmd_str = ft_strdup(tokens[j]->token_string);
 				j++;
 			}
 			else if (tokens[j]->type == FLAG)
-			{
-				data->cmd[i] = ft_strjoin(data->cmd[i], " ");
-				data->cmd[i] = ft_strjoin(data->cmd[i], tokens[j]->token_string);
+			{ 
+				data->cmds[i]->cmd_str = ft_strjoin(data->cmds[i]->cmd_str, " ");
+				data->cmds[i]->cmd_str = ft_strjoin(data->cmds[i]->cmd_str, tokens[j]->token_string);
 				j++;
 			}
 			else if (tokens[j]->type == REDIRECT_INPUT)
 			{
-				data->cmd[i]->redirection->type = tokens[j]->type;
-				data->cmd[i]->redirection->fd = 0;
+				data->cmds[i]->redirection->type = tokens[j]->type;
+				data->cmds[i]->redirection->fd = 0;
 				j++;
 			}
 			else if (tokens[j]->type == REDIRECT_OUTPUT)
 			{
-				data->cmd[i]->redirection->type = tokens[j]->type;
-				data->cmd[i]->redirection->fd = 1;
+				data->cmds[i]->redirection->type = tokens[j]->type;
+				data->cmds[i]->redirection->fd = 1;
 				j++;
 			}
 			else if (tokens[j]->type == HEREDOC)
 			{
-				data->cmd[i]->redirection->type = tokens[j]->type;
-				data->cmd[i]->redirection->fd = 1;
+				data->cmds[i]->redirection->type = tokens[j]->type;
+				data->cmds[i]->redirection->fd = 1;
 				j++;
 			}
 			else if (tokens[j]->type == FILE_NAME)
 			{
-				data->cmd[i]->redirection->file_name = ft_strdup(tokens[j]->token_string);
+				data->cmds[i]->redirection->file_name = ft_strdup(tokens[j]->token_string);
+				j++;
+			}
+			else if (tokens[j]->type == LIMITER)
+			{
+				data->cmds[i]->redirection->limiter = ft_strdup(tokens[j]->token_string);
+				j++;
+			}
+			else if (tokens[j]->type == ID)
+			{
+				//do we need this or we just have it in one arguments no need for a double pointer
+				data->cmds[i]->args_str[c] = ft_strdup(tokens[j]->token_string); 
+				c++;
 				j++;
 			}
 		}

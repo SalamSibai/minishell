@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/03 01:06:38 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:24:50 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,18 @@ int main(int ac, char **av, char **env)
 	scan(data.buf, data.tokens);
 	validate_tokens(&data);
 	data.tokens = check_expandable_var(data.tokens, data.env);
-	data.cmd = ft_safe_malloc(sizeof(t_cmd *) * data.cmd_num, "CMDS");
-	
+	data.cmd_num = count_cmds(data.tokens);
+	data.cmds = ft_safe_malloc(sizeof(t_cmd *) * data.cmd_num, "CMDS");
+	printf("cmd_num: %d\n", data.cmd_num);
+	int i = 0;
+	while (i < data.cmd_num)
+	{
+		printf("here");
+		data.cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
+		data.cmds[i]->cmd_str = NULL;
+		data.cmds[i]->redirection = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
+		i++;
+	}
 	set_cmds(&data);
 	print_data(&data);
 	
