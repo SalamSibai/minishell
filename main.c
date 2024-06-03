@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/03 18:11:04 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/04 00:34:25 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ int main(int ac, char **av, char **env)
 	{
 		data.cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
 		data.cmds[i]->cmd_str = NULL;
+		data.cmds[i]->args_str = NULL;
 		data.cmds[i]->redirection = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
+		init_redirections(data.cmds[i]->redirection);
 		i++;
 	}
 	set_cmds(&data);
