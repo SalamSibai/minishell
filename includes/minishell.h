@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/03 18:06:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/04 01:22:02 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_cmd
 {
 	char			*cmd_str;
 	char			*args_str;
-	t_redirection	*redirection;
+	t_redirection	*redirection; // i think we need a double pointer here to store all the redirections for each command
 }	t_cmd;
 
 /// @brief Stores information on tokens
