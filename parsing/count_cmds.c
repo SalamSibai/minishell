@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:07:27 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/04 00:46:34 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:36:43 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,22 @@ int	count_cmds(t_token **tokens)
 		i++;
 	}
 	return (cmd_num);
+}
+
+int	count_redir(t_token **tokens)
+{
+	int	i;
+	int	num_of_redir;
+
+	if (tokens == NULL)
+		return (0);
+	i = 0;
+	num_of_redir = 0;
+	while (tokens[i] != NULL)
+	{
+		if (tokens[i - 1]->type == REDIRECT_OUTPUT && tokens[i]->type == PIPE)
+			num_of_redir++;
+		i++;
+	}
+	return (num_of_redir);
 }

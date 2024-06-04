@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/04 21:06:13 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:37:02 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_cmds(t_cmd **cmds, int cmd_num)
 		cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
 		cmds[i]->cmd_str = NULL;
 		cmds[i]->args_str = NULL;
-		cmds[i]->redirection = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
+		cmds[i]->redirection = ft_safe_malloc(sizeof(t_redirection *), "REDIRECTION");
 		init_redirections(cmds[i]->redirection);
 		i++;
 	}
