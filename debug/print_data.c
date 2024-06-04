@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:31:36 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/04 00:35:12 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:58:56 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_data(t_data *data)
 	
 	int i;
 
-	i = -1;
+	// i = -1;
 	// printf("env_var: %s\n", data->env_var);
 	// printf("buf: %s\n", data->buf);
 	// while (data->env_var[++i])

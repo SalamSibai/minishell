@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/04 00:34:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:07:59 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,17 @@ int main(int ac, char **av, char **env)
 	data.cmd_num = count_cmds(data.tokens);
 	data.cmds = ft_safe_malloc(sizeof(t_cmd *) * data.cmd_num, "CMDS");
 	printf("cmd_num: %d\n", data.cmd_num);
-	int i = 0;
-	while (i < data.cmd_num)
-	{
-		data.cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
-		data.cmds[i]->cmd_str = NULL;
-		data.cmds[i]->args_str = NULL;
-		data.cmds[i]->redirection = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
-		init_redirections(data.cmds[i]->redirection);
-		i++;
-	}
+	// int i = 0;
+	// while (i < data.cmd_num)
+	// {
+	// 	data.cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
+	// 	data.cmds[i]->cmd_str = NULL;
+	// 	data.cmds[i]->args_str = NULL;
+	// 	data.cmds[i]->redirection = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
+	// 	init_redirections(data.cmds[i]->redirection);
+	// 	i++;
+	// }
+	init_cmds(data.cmds, data.cmd_num);
 	set_cmds(&data);
 	// printf("here\n");
 	print_data(&data);

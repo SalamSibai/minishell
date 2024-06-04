@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/04 01:22:02 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:07:11 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ bool			validate_qoutes(int index, t_data *data);
 /* ************************************************************************** */
 void			scan(char *av, t_token **tokens);
 void			init_redirections(t_redirection *redir);
-void			init_cmd(t_cmd *cmd);
+void			init_cmds(t_cmd **cmds, int cmd_num);
 void			set_cmds(t_data *data);
 int				count_cmds(t_token **tokens);
 

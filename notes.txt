@@ -87,3 +87,5 @@ this could be an issue:   malloc and extra tokens (i believe im counting the qou
 		ID
 		Token string: $X
 		ID
+
+need to fix the expansion 
