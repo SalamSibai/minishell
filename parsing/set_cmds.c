@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/04 21:33:00 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:10:02 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@ void	set_cmds(t_data *data)
 	int		i;
 	int		j;
 	int 	c;
+	int		r;
 	
 	tokens = data->tokens;
 	i = 0;
 	j = 0;
+	r = 0;
 	while (i < data->cmd_num)
 	{
 		c = 0;
+		r = 0;
 		while (tokens[j] != NULL && tokens[j]->type != PIPE)
 		{
 			if (tokens[j]->type == CMDS)
@@ -44,31 +47,33 @@ void	set_cmds(t_data *data)
 			}
 			else if (tokens[j]->type == REDIRECT_INPUT)
 			{
-				data->cmds[i]->redirection->type = tokens[j]->type;
-				data->cmds[i]->redirection->fd = 0;
+				data->cmds[i]->redirection[r]->type = tokens[j]->type;
+				data->cmds[i]->redirection[r]->fd = 0;
 				j++;
 			}
-			else if (tokens[j]->type == REDIRECT_OUTPUT)
+			else if (tokens[j]->type == REDIRECT_OUTPUT || tokens[j]->type == REDIRECT_APPEND)
 			{
-				data->cmds[i]->redirection->type = tokens[j]->type;
-				data->cmds[i]->redirection->fd = 1;
+				data->cmds[i]->redirection[r]->type = tokens[j]->type;
+				data->cmds[i]->redirection[r]->fd = 1;
 				j++;
 			}
 			else if (tokens[j]->type == HEREDOC)
 			{
-				data->cmds[i]->redirection->type = tokens[j]->type;
-				data->cmds[i]->redirection->fd = 1;
+				data->cmds[i]->redirection[r]->type = tokens[j]->type;
+				data->cmds[i]->redirection[r]->fd = 1;
 				j++;
 			}
 			else if (tokens[j]->type == FILE_NAME)
 			{
-				data->cmds[i]->redirection->file_name = ft_strdup(tokens[j]->token_string);
+				data->cmds[i]->redirection[r]->file_name = ft_strdup(tokens[j]->token_string);
 				j++;
+				r++;
 			}
 			else if (tokens[j]->type == LIMITER)
 			{
-				data->cmds[i]->redirection->limiter = ft_strdup(tokens[j]->token_string);
+				data->cmds[i]->redirection[r]->limiter = ft_strdup(tokens[j]->token_string);
 				j++;
+				r++;
 			}
 			else if (tokens[j]->type == ID)
 			{
@@ -82,11 +87,6 @@ void	set_cmds(t_data *data)
 					data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, " ");
 					data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, tokens[j]->token_string);
 				}
-				j++;
-			}
-			else if (tokens[i]->type == FILE_NAME)
-			{
-				data->cmds[i]->redirection->file_name = ft_strdup(tokens[j]->token_string);
 				j++;
 			}
 			else

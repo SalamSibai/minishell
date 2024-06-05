@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/04 21:07:11 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:58:58 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_cmd
 {
 	char			*cmd_str;
 	char			*args_str;
-	t_redirection	*redirection; // i think we need a double pointer here to store all the redirections for each command
+	t_redirection	**redirection; // i think we need a double pointer here to store all the redirections for each command
 }	t_cmd;
 
 /// @brief Stores information on tokens
@@ -92,25 +92,6 @@ typedef struct s_lexer
 	int	n_redirections;
 	int	n_tokens;
 }	t_lexer;
-
-
-//typedef	struct s_abstract_syntax_tree
-//{
-//	t_cmd	*cmd;
-//	t_token	*root;
-//	t_ast *left_branch;
-//	t_ast *right_branch;
-//
-//}		t_ast;
-
-/*
-* 	Data struct, containing references to all other structs, whcih includes:
-* 	1) a matrix of all the commands that exist, with all the information needed for each command
-* 
-* 	Things that can be potentially added:
-* 	1) A split version of the "PATH" variable, to have an easy access to each directory
-* 	2) The env variable that is sent from main, stored for easy access
-*/
 
 typedef struct s_data
 {
@@ -145,10 +126,11 @@ bool			validate_qoutes(int index, t_data *data);
 /*									PARSEING								  */
 /* ************************************************************************** */
 void			scan(char *av, t_token **tokens);
-void			init_redirections(t_redirection *redir);
-void			init_cmds(t_cmd **cmds, int cmd_num);
+void			init_redirections(t_redirection **redir, int n_redir_in_cmd);
+void			init_cmds(t_data *data);
 void			set_cmds(t_data *data);
 int				count_cmds(t_token **tokens);
+int				count_redir_in_cmd(t_token **tokens, int *start_index);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:07:27 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/04 21:36:43 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:14:59 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,25 @@ int	count_cmds(t_token **tokens)
 	return (cmd_num);
 }
 
-int	count_redir(t_token **tokens)
+int		count_redir_in_cmd(t_token **tokens, int *start_index)
 {
 	int	i;
 	int	num_of_redir;
 
 	if (tokens == NULL)
 		return (0);
-	i = 0;
+
+	i = *start_index;
 	num_of_redir = 0;
 	while (tokens[i] != NULL)
 	{
-		if (tokens[i - 1]->type == REDIRECT_OUTPUT && tokens[i]->type == PIPE)
+		if (tokens[i]->type == PIPE )
+			break;
+		if (tokens[i]->type == REDIRECT_OUTPUT || tokens[i]->type == REDIRECT_APPEND 
+			|| tokens[i]->type == REDIRECT_INPUT || tokens[i]->type == HEREDOC)
 			num_of_redir++;
 		i++;
 	}
-	return (num_of_redir);
+	*start_index = i + 1;
+	return (num_of_redir + 1);
 }
