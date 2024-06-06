@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/06 14:22:27 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:20:24 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 void	set_cmds(t_data *data)
 {
 	t_token **tokens;
+	t_list	*new_arg;
 	int		i;
 	int		j;
 	int 	c;
@@ -66,6 +67,8 @@ void	set_cmds(t_data *data)
 			}
 			else if (tokens[j]->type == FILE_NAME)
 			{
+				printf("im here for some reason\n\n\n\n");
+				printf("token %s\n", tokens[j]->token_string);
 				data->cmds[i]->redirection[r]->file_name = ft_strdup(tokens[j]->token_string);
 				j++;
 				r++;
@@ -80,13 +83,17 @@ void	set_cmds(t_data *data)
 			{
 				if (c == 0)
 				{
-					data->cmds[i]->args_str = ft_strdup(tokens[j]->token_string);
+					// data->cmds[i]->args_str = ft_strdup(tokens[j]->token_string);
+					data->cmds[i]->args = ft_lstnew(tokens[j]->token_string);
 					c = 1;
 				}
 				else
 				{
-					data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, " ");
-					data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, tokens[j]->token_string);
+					new_arg = ft_lstnew(tokens[j]->token_string);
+					ft_lstadd_back(&data->cmds[i]->args, new_arg);
+					
+					// data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, " ");
+					// data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, tokens[j]->token_string);
 				}
 				j++;
 			}

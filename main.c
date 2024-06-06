@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 16:02:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 17:57:23 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ int main(int ac, char **av, char **env)
 		data.tokens = check_expandable_var(data.tokens, data.env);
 		data.cmd_num = count_cmds(data.tokens);
 		data.cmds = ft_safe_malloc(sizeof(t_cmd *) * data.cmd_num, "CMDS");
-		printf("cmd_num: %d\n", data.cmd_num);
+		// printf("cmd_num: %d\n", data.cmd_num);
 		init_cmds(&data);
 		set_cmds(&data);
 		// ft_cd(data.cmds[0],data.env);
+		// ft_echo(data.cmds[0]);
 		print_data(&data);
 	
 	//execute the input

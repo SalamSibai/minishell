@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/04 00:42:05 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 17:55:20 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ bool validate_id(int index, t_data *data)
 		tokens[index]->type = CMDS;
 	else if (tokens[index - 1]->type == REDIRECT_INPUT
 			|| tokens[index - 1] ->type == REDIRECT_APPEND
-			|| tokens[index - 1]->type == REDIRECT_OUTPUT
-			|| tokens[index - 1]->type == FLAG) // we need toc check if the file exist
+			|| tokens[index - 1]->type == REDIRECT_OUTPUT) //|| tokens[index - 1]->type == FLAG// we need toc check if the file exist
 		tokens[index]->type = FILE_NAME;
 	else if (tokens[index - 1]->type == HEREDOC)
 		tokens[index]->type = LIMITER;

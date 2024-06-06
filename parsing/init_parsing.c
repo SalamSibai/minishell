@@ -115,7 +115,7 @@ void	scan(char *buff,t_token **tokens)
 				tokens[token_ctr]->token_string = ft_substr(buff, i, c - i);
 				set_type(tokens[token_ctr]);
 				token_ctr++;
-				printf("here");
+				// printf("here");
 			}
 			i = c;
 		}

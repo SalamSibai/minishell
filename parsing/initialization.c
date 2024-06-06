@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/06 14:21:05 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:11:20 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_cmds(t_data *data)
 		cmds[i]->cmd_str = NULL;
 		cmds[i]->flag = NULL;
 		cmds[i]->args_str = NULL;
+		cmds[i]->args = NULL;
 		n_redir = count_redir_in_cmd(data->tokens, &r_index);
 		if (n_redir > 0)
 		{

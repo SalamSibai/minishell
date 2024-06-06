@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/06 14:08:43 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/06 17:51:06 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${VALIDATE_DIR}/validate_tokens.c \
 		${VALIDATE_DIR}/validate_qoutes.c \
 		${BUILTINS_DIR}/cd.c \
+		${BUILTINS_DIR}/echo.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \
 

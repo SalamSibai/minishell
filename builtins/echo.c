@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:27:51 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 13:57:32 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 17:56:36 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
  * @param args An array of strings representing the command and its arguments.
  * @return the numbers of arguments in the array of strings
  */
-int			nb_args(char **args)
+int			nb_args(t_list *args)
 {
 	int	i;
 
 	i = 0;
-	while (args[i])
+	while (args)
+	{
 		i++;
+		args = args->next;
+	}
 	return (i);
 }
 /**
@@ -34,29 +37,31 @@ int			nb_args(char **args)
  * and args[i] will be the option of to display the text for example with a new line 
  * @return itll return zero on succes
  */
-int		ft_echo(char **args)
+int		ft_echo(t_cmd *cmd)
 {
-	int	i;
-	int	n_option;
+	int		i;
+	int		nl;
+	t_list	*args;
 
-	n_option = 0;
-	i = 1;
+	args = cmd->args;
+	nl = 1;
+	i = 0;
 	if (nb_args(args) > 1)
 	{
-		while (args[i] && ft_strcmp(args[i], "-n") == 0)
+		if (cmd->flag && ft_strncmp(cmd->flag, "-n", 2) == 0)
 		{
-			i++;
-			n_option = 1;
-		}
-		while (args[i])
-		{
-			ft_putstr_fd(args[i], 1);
-			if (args[i + 1] && args[1][0])
-				ft_putchar_fd(' ', 1);
-			i++;
+			nl = 0;
+			args = args->next;
 		}
 	}
-	if (n_option == 0)
-		ft_putchar_fd('\n', 1);
+	while (args)
+	{
+		ft_putstr_fd(args->content, 1);
+		args = args->next;
+		if (args)
+			ft_putstr_fd(" ", 1);
+	}
+	if (nl)
+		ft_putstr_fd("\n", 1);
 	return (0);
 }

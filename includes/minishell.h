@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 14:29:58 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 17:50:19 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_cmd
 	char			*cmd_str;
 	char			*flag;
 	char			*args_str;
+	t_list			*args;
 	t_redirection	**redirection;
 }	t_cmd;
 
@@ -157,6 +158,7 @@ char			**set_path(char **envp, t_data *data);
 /*									BUILTINS								  */
 /* ************************************************************************** */
 int				ft_cd(t_cmd *cmd, t_list *env);
+int				ft_echo(t_cmd *cmd);
 
 /* ************************************************************************** */
 /*									DEBUG									  */
