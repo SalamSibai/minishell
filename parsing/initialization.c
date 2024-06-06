@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/05 15:59:10 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:21:05 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_cmds(t_data *data)
 	{
 		cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
 		cmds[i]->cmd_str = NULL;
+		cmds[i]->flag = NULL;
 		cmds[i]->args_str = NULL;
 		n_redir = count_redir_in_cmd(data->tokens, &r_index);
 		if (n_redir > 0)

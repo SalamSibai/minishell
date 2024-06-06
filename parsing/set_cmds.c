@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/05 16:10:02 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:22:27 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ void	set_cmds(t_data *data)
 			}
 			else if (tokens[j]->type == FLAG)
 			{ 
-				data->cmds[i]->cmd_str = ft_strjoin(data->cmds[i]->cmd_str, " ");
-				data->cmds[i]->cmd_str = ft_strjoin(data->cmds[i]->cmd_str, tokens[j]->token_string);
+				data->cmds[i]->flag = ft_strdup(tokens[j]->token_string);
+				// data->cmds[i]->cmd_str = ft_strjoin(data->cmds[i]->cmd_str, " ");
+				// data->cmds[i]->cmd_str = ft_strjoin(data->cmds[i]->cmd_str, tokens[j]->token_string);
 				j++;
 			}
 			else if (tokens[j]->type == REDIRECT_INPUT)

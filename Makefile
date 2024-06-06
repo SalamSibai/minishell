@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/03 13:28:46 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/06 14:08:43 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ ENV_DIR			= ./env
 EXPANSION_DIR	= ./expansion
 DEBUG_DIR		= ./debug
 OBJ_DIR			= ./obj
+BUILTINS_DIR	= ./builtins
 
 SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/init_parsing.c \
@@ -37,6 +38,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${VALIDATE_DIR}/validate_utils.c \
 		${VALIDATE_DIR}/validate_tokens.c \
 		${VALIDATE_DIR}/validate_qoutes.c \
+		${BUILTINS_DIR}/cd.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \
 
@@ -55,7 +57,7 @@ OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 all: $(NAME)
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/$(PARSE_DIR) $(OBJ_DIR)/$(ENV_DIR) $(OBJ_DIR)/$(EXPANSION_DIR) $(OBJ_DIR)/$(VALIDATE_DIR) $(OBJ_DIR)/$(DEBUG_DIR)
+	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/$(PARSE_DIR) $(OBJ_DIR)/$(ENV_DIR) $(OBJ_DIR)/$(EXPANSION_DIR) $(OBJ_DIR)/$(VALIDATE_DIR) $(OBJ_DIR)/${BUILTINS_DIR} $(OBJ_DIR)/$(DEBUG_DIR)
 
 $(LIBFT):
 	$(MAKE) -C ./includes/libft

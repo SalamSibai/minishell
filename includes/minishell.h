@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/05 15:58:58 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:29:58 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "./libft/libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
+
+# define BUFF_SIZE 4096
 
 typedef enum e_token_type
 {
@@ -65,8 +67,9 @@ typedef struct s_redirection
 typedef struct s_cmd
 {
 	char			*cmd_str;
+	char			*flag;
 	char			*args_str;
-	t_redirection	**redirection; // i think we need a double pointer here to store all the redirections for each command
+	t_redirection	**redirection;
 }	t_cmd;
 
 /// @brief Stores information on tokens
@@ -76,14 +79,6 @@ typedef struct s_token
 	e_token_type	type;
 }				t_token;
 
-
-//Not sure what this is for yet
-typedef struct s_env
-{
-	char	*key;
-	char	*value;
-	struct s_env	*next;
-}				t_env;
 
 typedef struct s_lexer
 {
@@ -97,21 +92,17 @@ typedef struct s_data
 {
 	int			cmd_num;
 	t_list		*env;
-	t_cmd		**cmds; 	//if each command has a seaprate entry in its own struct, it is not necessary to have a double pointer of cmds in the struct itself
-						//or, we can store all commands in that single struct, with it having a double pointer.
+	t_cmd		**cmds;
 	t_token		**tokens;
 	char		**env_var;
 	char		**path;
 	char		*buf;
-//	t_pipe		(*)pipe;
-//	t_redirect	(*)redirect;
-}				t_data;
+}	t_data;
 
 
 /* ************************************************************************** */
 /*								SYNTAX VALIDATION							  */
 /* ************************************************************************** */
-
 bool			validate_syntax(char *line);
 bool			validate_unbalanced_qoutes(char *line);
 bool			validate_tokens(t_data *data);
@@ -132,12 +123,9 @@ void			set_cmds(t_data *data);
 int				count_cmds(t_token **tokens);
 int				count_redir_in_cmd(t_token **tokens, int *start_index);
 
-
-
 /* ************************************************************************** */
 /*									PARSE UTILS								  */
 /* ************************************************************************** */
-
 int				ft_panic(char *message, int ret);
 void			*ft_safe_malloc(size_t size, char *msg);
 
@@ -165,6 +153,10 @@ t_token			**check_expandable_var(t_token **tokens, t_list *env);
 /* ************************************************************************** */
 char			**set_path(char **envp, t_data *data);
 
+/* ************************************************************************** */
+/*									BUILTINS								  */
+/* ************************************************************************** */
+int				ft_cd(t_cmd *cmd, t_list *env);
 
 /* ************************************************************************** */
 /*									DEBUG									  */
