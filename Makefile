@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/06 17:51:06 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/06 23:01:12 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/count_cmds.c \
 		${ENV_DIR}/env_init.c\
 		${ENV_DIR}/get_path.c\
+		${ENV_DIR}/env_utils.c\
 		${EXPANSION_DIR}/expansion.c\
 		${VALIDATE_DIR}/validate_id.c \
 		${VALIDATE_DIR}/validate_input_redirection.c \
@@ -40,6 +41,8 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${VALIDATE_DIR}/validate_qoutes.c \
 		${BUILTINS_DIR}/cd.c \
 		${BUILTINS_DIR}/echo.c \
+		${BUILTINS_DIR}/env.c \
+		${BUILTINS_DIR}/export.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \
 

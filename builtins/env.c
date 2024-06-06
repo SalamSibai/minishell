@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 15:37:29 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 13:57:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:44:17 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,31 +64,31 @@ void		sort_env(char **tab, int env_len)
  * @param env_array char ** this is a string of array that contains the value to be added in the list 
  * @return it returns -1 if it failed to save memeory for the values and 0 if successfull
  */
-int		env_init(t_data *data, char **env_array)
-{
-	t_list	*env;
-	t_list	*new;
-	int		i;
+// int		env_init(t_data *data, char **env_array)
+// {
+// 	t_list	*env;
+// 	t_list	*new;
+// 	int		i;
 	
-	// sort_env(env_array, str_env_len(env_array));
-	if (!(env = malloc(sizeof(t_list))))
-		return (-1);
-	env->content = ft_strdup(env_array[0]);
-	env->next = NULL;
-	data->env = env;
-	i = 1;
-	while (env_array[i])
-	{
-		if (!(new = malloc(sizeof(t_list))))
-			return (1);
-		new->content = ft_strdup(env_array[i]);
-		new->next = NULL;
-		env->next = new;
-		env = new;
-		i++;
-	}
-	return (0);
-}
+// 	// sort_env(env_array, str_env_len(env_array));
+// 	if (!(env = malloc(sizeof(t_list))))
+// 		return (-1);
+// 	env->content = ft_strdup(env_array[0]);
+// 	env->next = NULL;
+// 	data->env = env;
+// 	i = 1;
+// 	while (env_array[i])
+// 	{
+// 		if (!(new = malloc(sizeof(t_list))))
+// 			return (1);
+// 		new->content = ft_strdup(env_array[i]);
+// 		new->next = NULL;
+// 		env->next = new;
+// 		env = new;
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 /**
  * @brief this function prints out the env on the stdout

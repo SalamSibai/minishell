@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:22:07 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/02 20:29:17 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:02:17 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	1-loop thru all the tokens and check if you can find a $ sign
 	2-now we need to find the variable name in the enviroment
 	
-	2-We loop in the enviroment and check if the variable name it found
+	2-We loop in the enviroment and check if the variable name found
 	if we found the variable name we replace the token with the value of the vairable name 
 
 	so we need the enviroment to be passed to the function

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 18:05:33 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 23:02:53 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_cmd
 {
 	char			*cmd_str;
 	char			*flag;
-	char			*args_str;
+	// char			*args_str;
 	t_list			*args;
 	t_redirection	**redirection;
 }	t_cmd;
@@ -144,6 +144,9 @@ bool			is_cmd(char *cmd, t_data *data);
 /* ************************************************************************** */
 t_list			*env_init(char **envp);
 char			**env_to_str(t_list *env);
+int				is_valid_env(const char *var);
+int				is_in_env(t_list *env, char *args);
+
 
 /* ************************************************************************** */
 /*									EXPANSION								  */
@@ -160,11 +163,19 @@ char			**set_path(char **envp, t_data *data);
 /* ************************************************************************** */
 int				ft_cd(t_cmd *cmd, t_list *env);
 int				ft_echo(t_cmd *cmd);
+int				ft_env(t_list *env);
+int				ft_export(t_list *args, t_list *env);
 
 /* ************************************************************************** */
 /*									DEBUG									  */
 /* ************************************************************************** */
 void			print_data(t_data *data);
+
+/* ************************************************************************** */
+/*								Error Handling								  */
+/* ************************************************************************** */
+int				print_error(int error, const char *arg);
+
 
 //Creating a tree, where the left branch will be executed first.
 #endif

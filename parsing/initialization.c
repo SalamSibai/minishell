@@ -6,13 +6,18 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/06 16:11:20 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:34:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-
+/**
+ * @brief function to initialize the redirections structure for each command
+ * 
+ * @param redir 
+ * @param n_redir_in_cmd 
+ */
 void	init_redirections(t_redirection **redir, int n_redir_in_cmd)
 {
 	int i;
@@ -29,7 +34,11 @@ void	init_redirections(t_redirection **redir, int n_redir_in_cmd)
 	}
 	redir[i] = NULL;
 }
-
+/**
+ * @brief  function to initialize the commands structure 
+ * 
+ * @param data 
+ */
 void	init_cmds(t_data *data)
 {
 	t_cmd		**cmds;

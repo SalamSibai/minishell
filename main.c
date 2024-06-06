@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 18:20:32 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 23:16:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ int main(int ac, char **av, char **env)
 		set_cmds(&data);
 		// ft_cd(data.cmds[0],data.env); // we need to add the fds as well to know where are we typing these commands 
 		// ft_echo(data.cmds[0]);  // we need to add the fds 
-		print_data(&data);
+		// print_data(&data);
+		// ft_env(data.env);
+		ft_export(data.cmds[0]->args, data.env);
 	
 	//execute the input
 

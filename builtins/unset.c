@@ -6,12 +6,13 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 13:58:41 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 13:57:27 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:36:19 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 /**
+ * still needs updates to work with our new structure 
  * @brief remove the variable if found in the env list
  * @param env  t_env sturcture contains the enviroment list
  * @param args the string that need to be compared with the enviroment value thats in the enviroment list to be removed
@@ -40,6 +41,7 @@ int			is_in_env_remove(t_list *env, char *args)
 	return (0);
 }
 /**
+ *  need to update to make it work with our new structure /////////
  * @brief this function unset the values and attributes of the variable 
  * in the export list and the enviroment list
  * @param args its an array of strings the contains the strings in the command

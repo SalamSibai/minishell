@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 13:57:18 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 23:16:21 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,28 @@ int			env_add(char *value, t_list *env)
  * @param env t_env the list that contains all the enviroment values to add on the new variable
  * @return it return zero on success
  */
-int			ft_export(char **args, t_list *env)
+int			ft_export(t_list *args, t_list *env)
 {
+	// t_list	*tmp;
 	int		new_env;
 	int		error_ret;
 
 	new_env = 0;
-	if (!args[1])
+	if (!args && !args->content)
 	{
 		print_env(env);
 		return (1);
 	}
 	else
 	{
-		error_ret = is_valid_env(args[1]);
-		if (args[1][0] == '=')
+		error_ret = is_valid_env(args->content);
+		if (ft_strncmp(args->content, "=", 1) == 0)
 			error_ret = -42;
 		if (error_ret <= 0)
-			return (print_error(error_ret, args[1]));
-		new_env = is_in_env(env, args[1]);
+			return (print_error(error_ret, args->content));
+		new_env = is_in_env(env, args->content);
 		if (new_env == 0)
-			env_add(args[1], env);
+			env_add(args->content, env);
 	}
 	return (0);
 }

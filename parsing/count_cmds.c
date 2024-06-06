@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:07:27 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 18:22:40 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:34:59 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int	count_cmds(t_token **tokens)
 
 
 /**
- * @brief 
- * 
- * 
+ * @brief this function counts the number of redirections in a command
  * @param tokens 
  * @param start_index 
  * @return 
