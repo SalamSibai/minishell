@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:07:27 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 16:27:34 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:22:40 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ int		count_redir_in_cmd(t_token **tokens, int *start_index)
 		if (tokens[i]->type == PIPE )
 			break;
 		if (tokens[i]->type == REDIRECT_OUTPUT || tokens[i]->type == REDIRECT_APPEND 
-			|| tokens[i]->type == REDIRECT_INPUT || tokens[i]->type == HEREDOC
-			|| tokens[i]->type == FILE_NAME) // NEED TO CONFIRM THIS IS ASWELL 
+			|| tokens[i]->type == REDIRECT_INPUT || tokens[i]->type == HEREDOC)
 			num_of_redir++;
 		i++;
 	}

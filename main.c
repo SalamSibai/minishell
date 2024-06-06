@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 17:57:23 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:20:32 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int main(int ac, char **av, char **env)
 		// printf("cmd_num: %d\n", data.cmd_num);
 		init_cmds(&data);
 		set_cmds(&data);
-		// ft_cd(data.cmds[0],data.env);
-		// ft_echo(data.cmds[0]);
+		// ft_cd(data.cmds[0],data.env); // we need to add the fds as well to know where are we typing these commands 
+		// ft_echo(data.cmds[0]);  // we need to add the fds 
 		print_data(&data);
 	
 	//execute the input
