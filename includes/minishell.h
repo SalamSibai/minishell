@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ++4 <++4@students.42abudhabi.ae>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 23:02:53 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:21:12 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_cmd
 {
 	char			*cmd_str;
 	char			*flag;
-	// char			*args_str;
+	char			*args_str;
 	t_list			*args;
 	t_redirection	**redirection;
 }	t_cmd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ++4 <++4@students.42abudhabi.ae>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:27:51 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 18:20:01 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:21:32 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int			nb_args(t_list *args)
  */
 int		ft_echo(t_cmd *cmd)
 {
-	int		i;
+	// int		i;
 	int		nl;
 	t_list	*args;
 
 	args = cmd->args;
 	nl = 1;
-	i = 0;
+	// i = 0;
 	if (nb_args(args) > 1)
 	{
 		if (cmd->flag && ft_strncmp(cmd->flag, "-n", 2) == 0)

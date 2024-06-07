@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ++4 <++4@students.42abudhabi.ae>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 23:16:21 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/07 23:51:34 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int			env_add(char *value, t_list *env)
 
 	if (env && env->content == NULL)
 	{
+		// env->content = ft_strdup("\"");
 		env->content = ft_strdup(value);
+		// env->content = ft_strdup(value);
+		// env->content = ft_strjoin(env->content, "\"");
 		return (0);
 	}
 	if (!(new = malloc(sizeof(t_list))))
@@ -62,13 +65,13 @@ int			env_add(char *value, t_list *env)
  */
 int			ft_export(t_list *args, t_list *env)
 {
-	// t_list	*tmp;
 	int		new_env;
 	int		error_ret;
 
 	new_env = 0;
-	if (!args && !args->content)
+	if (!args)
 	{
+		// printf("export: not enough arguments\n");
 		print_env(env);
 		return (1);
 	}

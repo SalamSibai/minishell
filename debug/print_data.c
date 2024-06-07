@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ++4 <++4@students.42abudhabi.ae>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:31:36 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 18:18:19 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/07 21:17:19 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	print_data(t_data *data)
 {
-	t_token	**tokens;
+	// t_token	**tokens;
 
-	tokens = data->tokens;
+	// tokens = data->tokens;
 	
 	int i;
 
@@ -51,7 +51,7 @@ void	print_data(t_data *data)
 	// 	else if (tokens[i]->type == REDIRECT_APPEND)
 	// 		printf("Token_string: (%s)\ntoken: redirect_append\n\n", tokens[i]->token_string);
 	// 	else if (tokens[i]->type == FLAG)
-	// 		printf("Token_string: (%s)\ntoken: flag\n\n", tokens[i]->token_string);
+	// 		printf("Token_string: (%s)\ntoken: flag\n\n", tokens[i]->token_string);'
 	// 	else if (tokens[i]->type == DQOUTES)
 	// 		printf("Token_string: (%s)\ntoken: string in double quote\n\n", tokens[i]->token_string);
 	// 	else if (tokens[i]->type == SQOUTES)
@@ -76,7 +76,7 @@ void	print_data(t_data *data)
 		k = 0;
 		while (data->cmds[i]->args)
 		{
-			printf("cmd[%d]->arg[%d]: %s\n", i, k, data->cmds[i]->args->content);
+			printf("cmd[%d]->arg[%d]: %s\n", i, k, (char *)data->cmds[i]->args->content);
 			data->cmds[i]->args = data->cmds[i]->args->next;
 			k++;
 		}
