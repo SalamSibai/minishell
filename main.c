@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/08 21:01:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/08 21:29:59 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int main(int ac, char **av, char **env)
 			break ;
 		fill_data(&data);
 		//need to free the tokens
-		// print_data(&data);
+		print_data(&data);
 		// ft_cd(data.cmds[0],data.env); // we need to add the fds as well to know where are we typing these commands 
 		// ft_echo(data.cmds[0]);  // we need to add the fds 
 		// ft_export(data.cmds[0]->args, data.env);
