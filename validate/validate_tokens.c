@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/02 22:05:39 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/08 18:44:41 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,29 @@ bool	validate_tokens(t_data *data) //NOTE: add t_data *data to check to send the
 		if (tokens[i]->type == ID)
 		{
 			if (!validate_id(i, data))
-				return (printf("ID validation failed\n"));
+				return (false);
 		}
 		else if (tokens[i]->type == PIPE)
 		{
 			if (!validate_pipe(tokens, i))
-				return (printf("Pipe validation failed in string (%s)\n", tokens[i -1]->token_string));
+				return (false);
 			data->cmd_num++;
 		}
 		else if (tokens[i]->type == REDIRECT_INPUT
 				&& tokens[i]->type == HEREDOC)
 		{
 			if (!validate_input_redirection(tokens, i))
-				return (printf("input redirection failed\n"));
+				return (false);
 		}
 		else if (tokens[i]->type == REDIRECT_OUTPUT
 				|| tokens[i]->type == REDIRECT_APPEND)
 		{
 			if (!validate_output_redirection(tokens, i))
-				return (printf("output redirection failed\n"));
+				return (false);
 		}
 		else if (tokens[i]->type == DQOUTES
 				|| tokens[i]->type == SQOUTES)
-		{
 			validate_qoutes(i, data); // it could be arugments for the command 
-		}
 	}
 	return (true);
 }

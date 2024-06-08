@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:05:21 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 16:02:06 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/08 20:49:51 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,17 @@ int	ft_cd(t_cmd *cmd, t_list *env)
 {
 	int	cd_ret;
 
-	if (!cmd->args_str && !cmd->flag)
+	if (!cmd->args && !cmd->flag)
 		return (goto_path(0, env));
 	if (cmd->flag && ft_strcmp(cmd->flag, "-") == 0)
 		cd_ret = goto_path(1, env);
 	else
 	{
-		cd_ret = chdir(cmd->args_str);
+		cd_ret = chdir(cmd->args->content);
 		if (cd_ret == -1)
 		{
 			ft_putstr_fd("cd: ", 2);
-			ft_putstr_fd(cmd->args_str, 2);
+			ft_putstr_fd(cmd->args->content, 2);
 			ft_putendl_fd(": No such file or directory", 2);
 		}
 	}

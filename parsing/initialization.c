@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/08 16:23:54 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/08 20:47:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	init_cmds(t_data *data)
 		data->cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
 		data->cmds[i]->cmd_str = NULL;
 		data->cmds[i]->flag = NULL;
-		data->cmds[i]->args_str = NULL;
+		// data->cmds[i]->args_str = NULL;
 		data->cmds[i]->args = NULL;
 		i++;
 	}

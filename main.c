@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/08 17:06:15 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/08 21:01:08 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,22 @@
 			- if everything is fine, we initialize and store
 */
 
+static void	set_env(t_data *data, char **env)
+{
+	data->env = env_init(env);
+	data->env_var = env_to_str(data->env);
+	data->path = set_path(env, data);
+}
+
+static void	fill_data(t_data *data)
+{
+	data->tokens = check_expandable_var(data->tokens, data->env);
+	data->cmd_num = count_cmds(data->tokens);
+	data->cmds = ft_safe_malloc(sizeof(t_cmd *) * data->cmd_num, "CMDS");
+	init_cmds(data);
+	set_cmds(data);
+}
+
 int main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -38,9 +54,7 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 
-	data.env = env_init(env);
-	data.env_var = env_to_str(data.env);
-	data.path = set_path(env, &data);
+	set_env(&data, env);
 	while (1)
 	{
 		data.buf = readline("minishell$ ");
@@ -48,30 +62,24 @@ int main(int ac, char **av, char **env)
 		if (!data.buf)
 		{
 			printf("exit\n");
+			exit(1);
 		}
 		if (!validate_syntax(data.buf))
 		{
 			free(data.buf);
-			// continue ;
-			exit(1);
+			continue;
 		}
 		data.tokens = ft_safe_malloc(sizeof(t_token *) * token_count(data.buf), "TOKENS");
 		scan(data.buf, data.tokens);
-		validate_tokens(&data);
-		data.tokens = check_expandable_var(data.tokens, data.env);
-		data.cmd_num = count_cmds(data.tokens);
-		data.cmds = ft_safe_malloc(sizeof(t_cmd *) * data.cmd_num, "CMDS");
-		// printf("cmd_num: %d\n", data.cmd_num);
-		init_cmds(&data);
-		set_cmds(&data);
+		if (!validate_tokens(&data))
+			break ;
+		fill_data(&data);
 		//need to free the tokens
-		
-		print_data(&data);
+		// print_data(&data);
 		// ft_cd(data.cmds[0],data.env); // we need to add the fds as well to know where are we typing these commands 
 		// ft_echo(data.cmds[0]);  // we need to add the fds 
-		// ft_env(data.env);
 		// ft_export(data.cmds[0]->args, data.env);
-	
+		// ft_env(data.env);
 	//execute the input
 
 	//free everything before next itiration

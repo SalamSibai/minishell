@@ -6,12 +6,15 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:51:29 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/08 17:03:32 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/08 20:26:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+
+
+//we just add quotes to the same function that we are using for validating the ID
 void	validate_dqoutes(int index, t_data *data)
 {
 	t_token	**tokens;
@@ -26,6 +29,8 @@ void	validate_dqoutes(int index, t_data *data)
 	else if (tokens[index - 1]->type == HEREDOC)
 		tokens[index]->type = LIMITER;
 	else if (tokens[index - 1]->type == CMDS)
+		tokens[index]->type = ID;
+	else
 		tokens[index]->type = ID;
 }
 
