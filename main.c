@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/08 13:49:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:06:15 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ int main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	//initlize enviroment variables
-	data.cmd_num = 1;
+
 	data.env = env_init(env);
 	data.env_var = env_to_str(data.env);
 	data.path = set_path(env, &data);
-	// int i = 0;
 	while (1)
 	{
 		data.buf = readline("minishell$ ");
@@ -66,9 +64,11 @@ int main(int ac, char **av, char **env)
 		// printf("cmd_num: %d\n", data.cmd_num);
 		init_cmds(&data);
 		set_cmds(&data);
+		//need to free the tokens
+		
+		print_data(&data);
 		// ft_cd(data.cmds[0],data.env); // we need to add the fds as well to know where are we typing these commands 
 		// ft_echo(data.cmds[0]);  // we need to add the fds 
-		print_data(&data);
 		// ft_env(data.env);
 		// ft_export(data.cmds[0]->args, data.env);
 	

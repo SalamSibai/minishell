@@ -6,16 +6,22 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/08 16:16:30 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:41:28 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-/// @brief loops through the given tokens and sets all arguments and
-///			and redirections linked to that specific command
-///			+ strjoins all into 1 token
-/// @param data 
+/**
+ * @brief loops through the given tokens and sets all arguments and
+ * redirections linked to that specific command + strjoins all into 1 token
+ * also redirection is a linked list that is linked to the command 
+ * and when we have a limiter we create a new linked list that is linked to 
+ * the redirection linked list so we can always keep the heredoc limiter 
+ * the top of the redirection linked list for each command
+ * 
+ * @param data 
+ */
 void	set_cmds(t_data *data)
 {
 	t_token			**tokens;
