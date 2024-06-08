@@ -6,34 +6,42 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/06 18:34:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:23:54 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
 /**
- * @brief function to initialize the redirections structure for each command
+ * @brief this function counts the number of commands in the tokens
+ * based on the number of pipes except if there was a redirection output 
+ * will start with one command and will increment the command number
+ * because a pipe could never be the first token and to avoid accessing a null pointer
+ * and also because we will always start with one command
  * 
- * @param redir 
- * @param n_redir_in_cmd 
+ * based on this number will malloc how many commands structure we have
+ *
+ * @param tokens 
+ * @return number of commands 
  */
-void	init_redirections(t_redirection **redir, int n_redir_in_cmd)
+int	count_cmds(t_token **tokens)
 {
-	int i;
+	int	i;
+	int	cmd_num;
 
-	i = 0;
-	while (i < n_redir_in_cmd - 1)
+	if (tokens == NULL)
+		return (0);
+	i = 1;
+	cmd_num = 1;
+	while (tokens[i] != NULL)
 	{
-		redir[i] = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
-		redir[i]->fd = -1;
-		redir[i]->type = NONE;
-		redir[i]->file_name = NULL;
-		redir[i]->limiter = NULL;
+		if (tokens[i - 1]->type != REDIRECT_OUTPUT && tokens[i]->type == PIPE)
+			cmd_num++;
 		i++;
 	}
-	redir[i] = NULL;
+	return (cmd_num);
 }
+
 /**
  * @brief  function to initialize the commands structure 
  * 
@@ -41,29 +49,16 @@ void	init_redirections(t_redirection **redir, int n_redir_in_cmd)
  */
 void	init_cmds(t_data *data)
 {
-	t_cmd		**cmds;
-	int			cmd_num;
-	int			n_redir;
 	int			i;
-	int			r_index;
 
-	cmds= data->cmds;
-	cmd_num = data->cmd_num;
 	i = 0;
-	r_index = 0;
-	while (i < cmd_num)
+	while (i < data->cmd_num)
 	{
-		cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
-		cmds[i]->cmd_str = NULL;
-		cmds[i]->flag = NULL;
-		cmds[i]->args_str = NULL;
-		cmds[i]->args = NULL;
-		n_redir = count_redir_in_cmd(data->tokens, &r_index);
-		if (n_redir > 0)
-		{
-			cmds[i]->redirection = ft_safe_malloc(sizeof(t_redirection *) * n_redir, "REDIRECTION *"); // dont return ft_panic need to be fix  or put exit in ft_panic
-			init_redirections(cmds[i]->redirection, n_redir);
-		}
+		data->cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
+		data->cmds[i]->cmd_str = NULL;
+		data->cmds[i]->flag = NULL;
+		data->cmds[i]->args_str = NULL;
+		data->cmds[i]->args = NULL;
 		i++;
 	}
 }

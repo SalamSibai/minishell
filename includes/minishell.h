@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <++4@students.42abudhabi.ae>           +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/07 17:21:12 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/08 16:24:42 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ typedef struct s_pipe
 /// @brief the redirection struct
 typedef struct s_redirection
 {
-	int				fd;
-	e_token_type	type;
-	char			*file_name;
-	char			*limiter;
+	int						fd;
+	e_token_type			type;
+	char					*file_name;
+	char					*limiter;
+	struct s_redirection	*next;		//TYPE LIST
 }	t_redirection;
 
 /// @brief 
@@ -71,7 +72,7 @@ typedef struct s_cmd
 	char			*flag;
 	char			*args_str;
 	t_list			*args;
-	t_redirection	**redirection;
+	t_redirection	*redirection;
 }	t_cmd;
 
 /// @brief Stores information on tokens
@@ -119,11 +120,9 @@ bool			validate_qoutes(int index, t_data *data);
 /*									PARSEING								  */
 /* ************************************************************************** */
 void			scan(char *av, t_token **tokens);
-void			init_redirections(t_redirection **redir, int n_redir_in_cmd);
 void			init_cmds(t_data *data);
 void			set_cmds(t_data *data);
 int				count_cmds(t_token **tokens);
-int				count_redir_in_cmd(t_token **tokens, int *start_index);
 
 /* ************************************************************************** */
 /*									PARSE UTILS								  */
@@ -146,6 +145,14 @@ t_list			*env_init(char **envp);
 char			**env_to_str(t_list *env);
 int				is_valid_env(const char *var);
 int				is_in_env(t_list *env, char *args);
+
+/* ************************************************************************** */
+/*									REDIRECTION								  */
+/* ************************************************************************** */
+t_redirection	*redir_new(int fd, e_token_type type, char *file_name, char *limiter);
+t_redirection	*redir_last(t_redirection *redir);
+void			redir_add_back(t_redirection **redir, t_redirection *new);
+void			redir_add_front(t_redirection **redir, t_redirection *new);
 
 
 /* ************************************************************************** */

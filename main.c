@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <++4@students.42abudhabi.ae>           +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/07 23:53:46 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/08 13:49:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int main(int ac, char **av, char **env)
 		set_cmds(&data);
 		// ft_cd(data.cmds[0],data.env); // we need to add the fds as well to know where are we typing these commands 
 		// ft_echo(data.cmds[0]);  // we need to add the fds 
-		// print_data(&data);
+		print_data(&data);
 		// ft_env(data.env);
 		// ft_export(data.cmds[0]->args, data.env);
 	

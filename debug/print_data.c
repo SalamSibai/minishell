@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <++4@students.42abudhabi.ae>           +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:31:36 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/07 21:17:19 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/08 16:08:14 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_data(t_data *data)
 	// 	else if (tokens[i]->type == REDIRECT_APPEND)
 	// 		printf("Token_string: (%s)\ntoken: redirect_append\n\n", tokens[i]->token_string);
 	// 	else if (tokens[i]->type == FLAG)
-	// 		printf("Token_string: (%s)\ntoken: flag\n\n", tokens[i]->token_string);'
+	// 		printf("Token_string: (%s)\ntoken: flag\n\n", tokens[i]->token_string);
 	// 	else if (tokens[i]->type == DQOUTES)
 	// 		printf("Token_string: (%s)\ntoken: string in double quote\n\n", tokens[i]->token_string);
 	// 	else if (tokens[i]->type == SQOUTES)
@@ -82,13 +82,14 @@ void	print_data(t_data *data)
 		}
 			
 		int j = 0;
-		while (data->cmds[i]->redirection[j] != NULL)
+		while (data->cmds[i]->redirection != NULL)
 		{
 			printf("__________________________________Redirections num %d for cmd[%d] *********\n\n", j, i);
-			printf("redirection[%d]->type: %d\n", j, data->cmds[i]->redirection[j]->type);
-			printf("redirection[%d]->fd: %d\n", j, data->cmds[i]->redirection[j]->fd);
-			printf("redirection[%d]->file_name: %s\n", j, data->cmds[i]->redirection[j]->file_name);
-			printf("redirection[%d]->limiter: %s\n", j, data->cmds[i]->redirection[j]->limiter);
+			printf("redirection[%d]->type: %d\n", j, data->cmds[i]->redirection->type);
+			printf("redirection[%d]->fd: %d\n", j, data->cmds[i]->redirection->fd);
+			printf("redirection[%d]->file_name: %s\n", j, data->cmds[i]->redirection->file_name);
+			printf("redirection[%d]->limiter: %s\n", j, data->cmds[i]->redirection->limiter);
+			data->cmds[i]->redirection = data->cmds[i]->redirection->next;
 			j++;
 		}
 		printf("\n\n");

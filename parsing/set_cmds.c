@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/06 16:20:24 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:16:30 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,22 @@
 /// @param data 
 void	set_cmds(t_data *data)
 {
-	t_token **tokens;
-	t_list	*new_arg;
-	int		i;
-	int		j;
-	int 	c;
-	int		r;
+	t_token			**tokens;
+	t_list			*new_arg;
+	t_redirection	*head;
+	t_redirection	*head_limiter;
+	int				i;
+	int				j;
+	int 			c;
 	
-	tokens = data->tokens;
 	i = 0;
 	j = 0;
-	r = 0;
+	tokens = data->tokens;
 	while (i < data->cmd_num)
 	{
 		c = 0;
-		r = 0;
+		head = NULL;
+		head_limiter = NULL;
 		while (tokens[j] != NULL && tokens[j]->type != PIPE)
 		{
 			if (tokens[j]->type == CMDS)
@@ -43,47 +44,37 @@ void	set_cmds(t_data *data)
 			else if (tokens[j]->type == FLAG)
 			{ 
 				data->cmds[i]->flag = ft_strdup(tokens[j]->token_string);
-				// data->cmds[i]->cmd_str = ft_strjoin(data->cmds[i]->cmd_str, " ");
-				// data->cmds[i]->cmd_str = ft_strjoin(data->cmds[i]->cmd_str, tokens[j]->token_string);
 				j++;
 			}
 			else if (tokens[j]->type == REDIRECT_INPUT)
 			{
-				data->cmds[i]->redirection[r]->type = tokens[j]->type;
-				data->cmds[i]->redirection[r]->fd = 0;
+				redir_add_back(&head, redir_new(0, REDIRECT_INPUT, NULL, NULL));
 				j++;
 			}
 			else if (tokens[j]->type == REDIRECT_OUTPUT || tokens[j]->type == REDIRECT_APPEND)
 			{
-				data->cmds[i]->redirection[r]->type = tokens[j]->type;
-				data->cmds[i]->redirection[r]->fd = 1;
+				redir_add_back(&head, redir_new(1, tokens[j]->type, NULL, NULL));
 				j++;
 			}
 			else if (tokens[j]->type == HEREDOC)
 			{
-				data->cmds[i]->redirection[r]->type = tokens[j]->type;
-				data->cmds[i]->redirection[r]->fd = 1;
+				redir_add_back(&head_limiter, redir_new(1, HEREDOC, NULL, NULL));
 				j++;
 			}
 			else if (tokens[j]->type == FILE_NAME)
 			{
-				printf("im here for some reason\n\n\n\n");
-				printf("token %s\n", tokens[j]->token_string);
-				data->cmds[i]->redirection[r]->file_name = ft_strdup(tokens[j]->token_string);
+				redir_last(head)->file_name = ft_strdup(tokens[j]->token_string);
 				j++;
-				r++;
 			}
 			else if (tokens[j]->type == LIMITER)
 			{
-				data->cmds[i]->redirection[r]->limiter = ft_strdup(tokens[j]->token_string);
+				redir_last(head_limiter)->limiter = ft_strdup(tokens[j]->token_string);
 				j++;
-				r++;
 			}
 			else if (tokens[j]->type == ID)
 			{
 				if (c == 0)
 				{
-					// data->cmds[i]->args_str = ft_strdup(tokens[j]->token_string);
 					data->cmds[i]->args = ft_lstnew(tokens[j]->token_string);
 					c = 1;
 				}
@@ -91,17 +82,21 @@ void	set_cmds(t_data *data)
 				{
 					new_arg = ft_lstnew(tokens[j]->token_string);
 					ft_lstadd_back(&data->cmds[i]->args, new_arg);
-					
-					// data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, " ");
-					// data->cmds[i]->args_str = ft_strjoin(data->cmds[i]->args_str, tokens[j]->token_string);
 				}
 				j++;
 			}
 			else
 				j++;
 		}
+		if (head_limiter)
+		{
+			data->cmds[i]->redirection = head_limiter;
+			if (head != NULL)
+				redir_last(head_limiter)->next = head;
+		}
+		else
+			data->cmds[i]->redirection = head;
 		i++;
 		j++;
-		
 	}
 }
