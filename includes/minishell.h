@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/08 20:46:45 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/09 21:52:20 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,14 @@ int				ft_cd(t_cmd *cmd, t_list *env);
 int				ft_echo(t_cmd *cmd);
 int				ft_env(t_list *env);
 int				ft_export(t_list *args, t_list *env);
+int				ft_pwd(void);
+
+/* ************************************************************************** */
+/*									EXECUTION								  */
+/* ************************************************************************** */
+void			execute_cmds(t_data *data);
+int				is_builtin(char *command);
+int				exec_builtin(t_cmd *cmd, t_data *data);
 
 /* ************************************************************************** */
 /*									DEBUG									  */

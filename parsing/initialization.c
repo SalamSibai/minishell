@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/08 20:47:47 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/09 21:22:20 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	count_cmds(t_token **tokens)
 	int	i;
 	int	cmd_num;
 
-	if (tokens == NULL)
+	if (tokens == NULL && !*tokens) 
 		return (0);
 	i = 1;
 	cmd_num = 1;
