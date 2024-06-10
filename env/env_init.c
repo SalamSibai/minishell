@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:03:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/27 14:18:43 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:41:42 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ char	**env_to_str(t_list *env)
 	char *tmp;
 
 	i = 0;
-	env_str = ft_safe_malloc((sizeof(char *) * (ft_lstsize(env))), "**ENV_STR");
+	// env_str = ft_safe_malloc((sizeof(char *) * (ft_lstsize(env))), "**ENV_STR");
+	env_str = ft_calloc((ft_lstsize(env)), sizeof(char *));
 	while (env && env->next)
 	{
-			env_str[i] = ft_safe_malloc(sizeof(char) * ft_strlen(env->content) + 1, "*env_str");
+			// env_str[i] = ft_safe_malloc(sizeof(char) * ft_strlen(env->content) + 1, "*env_str");
+			env_str[i] = ft_calloc(ft_strlen(env->content) + 1, sizeof(char));
 			tmp = ft_strdup(env->content);
 			j = -1;
 			while (tmp[++j])

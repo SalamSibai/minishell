@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_redir.c                                       :+:      :+:    :+:   */
+/*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 13:31:17 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/08 13:40:03 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:43:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_redirection	*redir_new(int fd, e_token_type type, char *file_name, char *limit
 {
 	t_redirection	*new;
 
-	new = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
+	// new = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
+	new = ft_calloc(1, sizeof(t_redirection));
 	new->fd = fd;
 	new->type = type;
 	new->file_name = file_name;

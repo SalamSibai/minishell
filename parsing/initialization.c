@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/09 21:22:20 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:42:15 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	init_cmds(t_data *data)
 	i = 0;
 	while (i < data->cmd_num)
 	{
-		data->cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
+		// data->cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
+		data->cmds[i] = ft_calloc(1, sizeof(t_cmd));
 		data->cmds[i]->cmd_str = NULL;
 		data->cmds[i]->flag = NULL;
 		// data->cmds[i]->args_str = NULL;

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:51:29 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/08 20:26:47 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:50:17 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	validate_dqoutes(int index, t_data *data)
 
 bool	validate_qoutes(int index, t_data *data)
 {
-	t_token	**tokens;
+	// t_token	**tokens;
 
-	tokens = data->tokens;
+	// tokens = data->tokens;
 	// if (tokens[index]->type == DQOUTES)
 	validate_dqoutes(index, data);
 	return true;

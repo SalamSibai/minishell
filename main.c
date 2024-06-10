@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/09 22:42:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:58:13 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static void	fill_data(t_data *data)
 {
 	data->tokens = check_expandable_var(data->tokens, data->env);
 	data->cmd_num = count_cmds(data->tokens);
-	data->cmds = ft_safe_malloc(sizeof(t_cmd *) * data->cmd_num, "CMDS");
+	printf("cmd_numbers %d\n", data->cmd_num);
+	// data->cmds = ft_safe_malloc(sizeof(t_cmd *) * data->cmd_num + 1, "CMDS");
+	data->cmds = ft_calloc(data->cmd_num + 1, sizeof(t_cmd *));
 	init_cmds(data);
 	set_cmds(data);
 }
@@ -55,10 +57,13 @@ int main(int ac, char **av, char **env)
 	(void)av;
 
 	set_env(&data, env);
-	while (1)
-	{
-		data.buf = readline("minishell$ ");
-		add_history(data.buf);
+
+	///
+	data.buf = "echo hello world > df > 1 < 2 ";
+	// while (1)
+	// {
+	// 	data.buf = readline("minishell$ ");
+		// add_history(data.buf);
 		if (!data.buf )
 		{
 			printf("exit\n");
@@ -67,12 +72,14 @@ int main(int ac, char **av, char **env)
 		if (!validate_syntax(data.buf))
 		{
 			free(data.buf);
-			continue;
+			// continue;
 		}
-		data.tokens = ft_safe_malloc(sizeof(t_token *) * token_count(data.buf), "TOKENS");
+		// data.tokens = ft_safe_malloc(sizeof(t_token *) * token_count(data.buf), "TOKENS");
+		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
 		scan(data.buf, data.tokens);
 		if (!validate_tokens(&data))
-			break ;
+			return 0;
+			// break ;
 		fill_data(&data);
 		//need to free the tokens
 		// print_data(&data);
@@ -83,9 +90,10 @@ int main(int ac, char **av, char **env)
 		// ft_echo(data.cmds[0]);  // we need to add the fds 
 		// ft_export(data.cmds[0]->args, data.env);
 		// ft_env(data.env);
+		// free_data(&data);
 	//execute the input
 
 	//free everything before next itiration
 	}
-	return (0);
-}
+	// return (0);
+// }

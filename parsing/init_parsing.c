@@ -51,7 +51,8 @@ void	scan(char *buff,t_token **tokens)
 		c = i;
 		if ((buff[c] == '>' && buff[c + 1] == '>') || (buff[c] == '<' && buff[c + 1] == '<'))
 		{
-			tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			// tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			tokens[token_ctr] = ft_calloc(1, sizeof(t_token));
 			tokens[token_ctr]->token_string = ft_substr(buff, c, 2);
 			set_type(tokens[token_ctr]);
 			token_ctr++;
@@ -59,7 +60,8 @@ void	scan(char *buff,t_token **tokens)
 		}
 		else if (buff[c] == '>' && buff[c + 1] != '\0' && buff[c + 1] == '|')
 		{
-			tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			// tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			tokens[token_ctr] = ft_calloc(1, sizeof(t_token));
 			tokens[token_ctr]->token_string = ft_substr(buff, c, 1);
 			set_type(tokens[token_ctr]);
 			token_ctr++;
@@ -67,7 +69,8 @@ void	scan(char *buff,t_token **tokens)
 		}
 		else if (buff[c] == '|' || buff[c] == '>' || buff[c] == '<')
 		{
-			tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			// tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+			tokens[token_ctr] = ft_calloc(1, sizeof(t_token));
 			tokens[token_ctr]->token_string = ft_substr(buff, c, 1);
 			set_type(tokens[token_ctr]);
 			token_ctr++;
@@ -80,7 +83,8 @@ void	scan(char *buff,t_token **tokens)
 				;
 			if (c > i)
 			{
-				tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				// tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				tokens[token_ctr] = ft_calloc(1, sizeof(t_token));
 				tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
 				tokens[token_ctr]->type = DQOUTES;
 				printf("Token string: %s\n", tokens[token_ctr]->token_string);
@@ -96,7 +100,8 @@ void	scan(char *buff,t_token **tokens)
 				;
 			if (c > i)
 			{
-				tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				// tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				tokens[token_ctr] = ft_calloc(1, sizeof(t_token));
 				tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
 				tokens[token_ctr]->type = SQOUTES;
 				printf("Token string: %s\n", tokens[token_ctr]->token_string);
@@ -111,7 +116,8 @@ void	scan(char *buff,t_token **tokens)
 				c++;
 			if (c > i)
 			{
-				tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				// tokens[token_ctr] = ft_safe_malloc(sizeof(t_token), "Token data");
+				tokens[token_ctr] = ft_calloc(1, sizeof(t_token));
 				tokens[token_ctr]->token_string = ft_substr(buff, i, c - i);
 				set_type(tokens[token_ctr]);
 				token_ctr++;
