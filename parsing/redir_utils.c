@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 13:31:17 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/10 16:43:47 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:25:30 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,22 @@ void	redir_add_front(t_redirection **redir, t_redirection *new)
 	*redir = new;
 }
 
-// void	redir_clear(t_redirection **redir)
-// {
-// 	t_redirection	*tmp;
+void	redir_clear(t_redirection **redir)
+{
+	t_redirection	*tmp;
+	t_redirection	*next;
 
-// 	while (*redir)
-// 	{
-// 		tmp = (*redir)->next;
-// 		free((*redir)->file_name);
-// 		free((*redir)->limiter);
-// 		free(*redir);
-// 		*redir = tmp;
-// 	}
-// }
+	tmp = *redir;
+	next = NULL;
+	while (tmp)
+	{
+		next = tmp->next;
+		if (tmp->file_name)
+			free(tmp->file_name);
+		if (tmp->limiter)
+			free(tmp->limiter);
+		free(tmp);
+		tmp = next;
+	}
+	*redir = NULL;
+}

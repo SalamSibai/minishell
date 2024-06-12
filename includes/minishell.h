@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/10 08:51:05 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:21:55 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ t_redirection	*redir_new(int fd, e_token_type type, char *file_name, char *limit
 t_redirection	*redir_last(t_redirection *redir);
 void			redir_add_back(t_redirection **redir, t_redirection *new);
 void			redir_add_front(t_redirection **redir, t_redirection *new);
-
+void			redir_clear(t_redirection **redir);
 
 /* ************************************************************************** */
 /*									EXPANSION								  */

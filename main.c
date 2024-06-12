@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/10 16:58:13 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:34:05 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	fill_data(t_data *data)
 {
 	data->tokens = check_expandable_var(data->tokens, data->env);
 	data->cmd_num = count_cmds(data->tokens);
-	printf("cmd_numbers %d\n", data->cmd_num);
+	// printf("cmd_numbers %d\n", data->cmd_num);
 	// data->cmds = ft_safe_malloc(sizeof(t_cmd *) * data->cmd_num + 1, "CMDS");
 	data->cmds = ft_calloc(data->cmd_num + 1, sizeof(t_cmd *));
 	init_cmds(data);
@@ -63,7 +63,7 @@ int main(int ac, char **av, char **env)
 	// while (1)
 	// {
 	// 	data.buf = readline("minishell$ ");
-		// add_history(data.buf);
+	// 	add_history(data.buf);
 		if (!data.buf )
 		{
 			printf("exit\n");
@@ -84,16 +84,17 @@ int main(int ac, char **av, char **env)
 		//need to free the tokens
 		// print_data(&data);
 
-		execute_cmds(&data);
+		// execute_cmds(&data);
 		// ft_pwd(); 
 		// ft_cd(data.cmds[0],data.env); // we need to add the fds as well to know where are we typing these commands 
 		// ft_echo(data.cmds[0]);  // we need to add the fds 
 		// ft_export(data.cmds[0]->args, data.env);
 		// ft_env(data.env);
-		// free_data(&data);
+		free_data(&data);
+		
 	//execute the input
 
 	//free everything before next itiration
-	}
+	// }
 	// return (0);
-// }
+}
