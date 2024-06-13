@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/08 16:41:28 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/13 21:31:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	set_cmds(t_data *data)
 	t_token			**tokens;
 	t_list			*new_arg;
 	t_redirection	*head;
-	t_redirection	*head_limiter;
+	// t_redirection	*head_limiter;
 	int				i;
 	int				j;
 	int 			c;
@@ -39,7 +39,7 @@ void	set_cmds(t_data *data)
 	{
 		c = 0;
 		head = NULL;
-		head_limiter = NULL;
+		// head_limiter = NULL;
 		while (tokens[j] != NULL && tokens[j]->type != PIPE)
 		{
 			if (tokens[j]->type == CMDS)
@@ -64,7 +64,7 @@ void	set_cmds(t_data *data)
 			}
 			else if (tokens[j]->type == HEREDOC)
 			{
-				redir_add_back(&head_limiter, redir_new(1, HEREDOC, NULL, NULL));
+				redir_add_back(&head, redir_new(1, HEREDOC, NULL, NULL));
 				j++;
 			}
 			else if (tokens[j]->type == FILE_NAME)
@@ -74,7 +74,7 @@ void	set_cmds(t_data *data)
 			}
 			else if (tokens[j]->type == LIMITER)
 			{
-				redir_last(head_limiter)->limiter = ft_strdup(tokens[j]->token_string);
+				redir_last(head)->limiter = ft_strdup(tokens[j]->token_string);
 				j++;
 			}
 			else if (tokens[j]->type == ID)
@@ -94,14 +94,14 @@ void	set_cmds(t_data *data)
 			else
 				j++;
 		}
-		if (head_limiter)
-		{
-			data->cmds[i]->redirection = head_limiter;
-			if (head != NULL)
-				redir_last(head_limiter)->next = head;
-		}
-		else
-			data->cmds[i]->redirection = head;
+		// if (head_limiter)
+		// {
+		// 	data->cmds[i]->redirection = head_limiter;
+		// 	if (head != NULL)
+		// 		redir_last(head_limiter)->next = head;
+		// }
+		// else
+		data->cmds[i]->redirection = head;
 		i++;
 		j++;
 	}

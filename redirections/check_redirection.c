@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:16:42 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/13 19:36:15 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/13 21:34:59 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	check_redirections(t_cmd **cmds)
 {
 	int	i;
+	t_redirection	*tmp;
 
 	i = -1;
+	tmp = NULL;
 	while (cmds[++i])
 	{
 		if (cmds[i]->redirection != NULL)
@@ -38,6 +40,17 @@ void	check_type(t_redirection *redir)
 			
 		// }
 		if (temp->type == REDIRECT_INPUT)
+		{
+			redirect_input(temp);
+		}
+		else if (temp->type == REDIRECT_OUTPUT)
+		{
+			redirect_output(temp);
+		}
+		else if (temp->type == REDIRECT_APPEND)
+		{
+			redirect_append(temp);
+		}
 
 	}
 }

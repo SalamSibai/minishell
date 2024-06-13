@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:00:00 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/01 20:43:13 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/13 23:13:34 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	**set_path(char **envp, t_data *data)
 {
 	char	*full_path;
 	char	**split_path;
+	char	*tmp;
 	int		i;
 
 	(void)data;
@@ -70,8 +71,10 @@ char	**set_path(char **envp, t_data *data)
 	split_path = ft_split(full_path, ':');
 	while (split_path[++i] != NULL)
 	{
-		split_path[i] = ft_strjoin(split_path[i], "/");
+		tmp = ft_strdup(split_path[i]);
+		free(split_path[i]);
+		split_path[i] = ft_strjoin(tmp, "/");
+		free(tmp);
 	}
-	//ft_free2d((void **)split_path);
 	return (split_path);
 }

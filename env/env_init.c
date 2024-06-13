@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:03:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/11 21:59:19 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/13 22:28:12 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,19 @@ char	**env_to_str(t_list *env)
 	char *tmp;
 
 	i = 0;
-	// env_str = ft_safe_malloc((sizeof(char *) * (ft_lstsize(env))), "**ENV_STR");
 	env_str = ft_calloc((ft_lstsize(env)), sizeof(char *));
 	while (env && env->next)
 	{
-			// env_str[i] = ft_safe_malloc(sizeof(char) * ft_strlen(env->content) + 1, "*env_str");
-			env_str[i] = ft_calloc(ft_strlen(env->content) + 1, sizeof(char));
-			tmp = ft_strdup(env->content);
-			j = -1;
-			while (tmp[++j])
-				env_str[i][j] = tmp[j];
-			env_str[i][j] = '\0';
-			env = env->next;
-			i++;
+		env_str[i] = ft_calloc(ft_strlen(env->content) + 1, sizeof(char));
+		tmp = ft_strdup(env->content);
+		j = -1;
+		while (tmp[++j])
+			env_str[i][j] = tmp[j];
+		env_str[i][j] = '\0';
+		env = env->next;
+		free(tmp);
+		i++;
 	}
 	env_str[i] = NULL;
-	free(tmp);
 	return (env_str);
 }

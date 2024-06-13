@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/13 19:13:10 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/13 22:31:35 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static void	fill_data(t_data *data)
 {
 	data->tokens = check_expandable_var(data->tokens, data->env);
 	data->cmd_num = count_cmds(data->tokens);
-	// printf("cmd_numbers %d\n", data->cmd_num);
-	// data->cmds = ft_safe_malloc(sizeof(t_cmd *) * data->cmd_num + 1, "CMDS");
 	data->cmds = ft_calloc(data->cmd_num + 1, sizeof(t_cmd *));
 	init_cmds(data);
 	set_cmds(data);
@@ -59,7 +57,7 @@ int main(int ac, char **av, char **env)
 	set_env(&data, env);
 
 	///
-	data.buf = "echo hello world > df > 1 < 2 ";
+	data.buf = "echo hello world > df > 1 < 2 | echo 'hello world' << f > 3 > 4 > 7 | ls -l ";
 	// while (1)
 	// {
 	// 	data.buf = readline("minishell$ ");
@@ -82,7 +80,7 @@ int main(int ac, char **av, char **env)
 			// break ;
 		fill_data(&data);
 		//need to free the tokens
-		print_data(&data);
+		// print_data(&data);
 		//function that checks for redirections within each cmd
 
 		// execute_cmds(&data);

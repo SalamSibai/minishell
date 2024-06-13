@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/13 19:33:53 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/13 21:32:13 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	execute_cmds(t_data *data)
 	int		i;
 
 	i = 0;
-	check_redirections(data->cmds);
+	// check_redirections(data->cmds);
 
 	// printf("cmds to execute: %s\n", data->cmds[i]->cmd_str);
 	while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)

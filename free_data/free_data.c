@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/12 20:30:31 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/13 22:31:01 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@
 void	free_data(t_data *data)
 {
 	int				i;
-	// t_redirection	*tmp;
-
+	
 	i = 0;
 	while (data->tokens[i])
 	{
@@ -43,7 +42,6 @@ void	free_data(t_data *data)
 	ft_free2d((void **)data->path);
 	ft_free2d((void **)data->env_var);
 	ft_lstclear(&data->env, (void *)del);
-	// ft_free2d((void **)data->cmds);
 	i = 0;
 	while (data->cmds[i])
 	{
@@ -57,10 +55,7 @@ void	free_data(t_data *data)
 			ft_lstclear(&data->cmds[i]->args, (void *)del);
 		if (data->cmds[i]->redirection)
 			redir_clear(&data->cmds[i]->redirection);
-		//free redirection list 
-			
 		i++;
-		free(data->cmds[i]);
 	}
 	ft_free2d((void **)data->cmds);
 }
