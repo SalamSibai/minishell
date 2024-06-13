@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/12 20:21:55 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:33:56 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_redirection
 	e_token_type			type;
 	char					*file_name;
 	char					*limiter;
-	struct s_redirection	*next;		//TYPE LIST
+	struct s_redirection	*next;	//TYPE LIST
 }	t_redirection;
 
 /// @brief 
