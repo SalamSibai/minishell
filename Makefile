@@ -6,7 +6,7 @@
 #    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/14 19:21:35 by ssibai           ###   ########.fr        #
+#    Updated: 2024/06/14 20:58:08 by ssibai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${VALIDATE_DIR}/validate_qoutes.c \
 		${REDIR_DIR}/check_redirection.c\
 		${REDIR_DIR}/get_input.c\
+		${REDIR_DIR}/set_output.c\
 		${BUILTINS_DIR}/cd.c \
 		${BUILTINS_DIR}/echo.c \
 		${BUILTINS_DIR}/env.c \

@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/14 19:22:31 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/14 20:57:41 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void			redir_clear(t_redirection **redir);
 void			check_redirections(t_cmd **cmds);
 void			check_type(t_redirection *redir);
 bool			get_input(t_redirection *redir, bool heredoc);
+bool			set_output(t_redirection *redir, bool append);
 
 /* ************************************************************************** */
 /*									EXPANSION								  */

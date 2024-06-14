@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:16:42 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/14 19:47:24 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/14 20:59:05 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,16 @@ void	check_type(t_redirection *redir)
 			if (!get_input(redir, true))
 				temp->type = REDIR_INPUT_FAILED;
 		}
+		else if (temp->type == REDIRECT_OUTPUT)
+		{
+			if (!set_output(redir, false))
+				temp->type = REDIR_OUTPUT_FAILDED;
+		}
+		else if (temp->type == REDIRECT_APPEND)
+		{
+			if (!set_output(redir, true))
+				temp->type = REDIR_OUTPUT_FAILDED;
+		}
 		temp ++;
-		// else if (temp->type == REDIRECT_OUTPUT)
-		// {
-			
-		// }
 	}
 }

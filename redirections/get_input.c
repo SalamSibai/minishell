@@ -6,12 +6,16 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/14 19:48:35 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/14 20:55:35 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/// @brief executes heredoc and stores input in the redir fd
+///			NOTE: HEREDOC APPENDS TO WHATEVER THE OUTPUT IS.
+/// @param redir the redir struct
+/// @return true if open succeeds.
 bool	execute_heredoc(t_redirection *redir)
 {
 	int		in_len;
@@ -45,12 +49,11 @@ bool	get_input(t_redirection *redir, bool heredoc)
 		redir->fd = open(redir->file_name, O_RDONLY);
 		if (redir->fd < 0)
 			return (false);
-		return (true);
 	}
 	else
 	{
 		if (!execute_heredoc(redir))
 			return (false);
-		return (true);
 	}
+	return (true);
 }
