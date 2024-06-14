@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/13 19:13:10 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/14 19:04:53 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int main(int ac, char **av, char **env)
 		//need to free the tokens
 		print_data(&data);
 		//function that checks for redirections within each cmd
-
+		check_redirections((&data)->cmds);
 		// execute_cmds(&data);
 		// ft_pwd(); 
 		// ft_cd(data.cmds[0],data.env); // we need to add the fds as well to know where are we typing these commands 
