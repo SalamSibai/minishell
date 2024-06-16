@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:16:42 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/13 21:34:59 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/14 20:59:05 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	check_redirections(t_cmd **cmds)
 	}
 }
 
+/// @brief checks the type of the redirection, and calls the
+//			corresponding function to store the fd of 
+//			that redirection
+/// @param redir redirection struct
 void	check_type(t_redirection *redir)
 {
 	t_redirection	*temp;
@@ -35,22 +39,26 @@ void	check_type(t_redirection *redir)
 	temp = redir;
 	while (temp)
 	{
-		// if (temp->type == HEREDOC)
-		// {
-			
-		// }
 		if (temp->type == REDIRECT_INPUT)
 		{
-			redirect_input(temp);
+			if (!get_input(redir, false))
+				temp->type = REDIR_INPUT_FAILED;
+		}
+		else if (temp->type == HEREDOC)
+		{
+			if (!get_input(redir, true))
+				temp->type = REDIR_INPUT_FAILED;
 		}
 		else if (temp->type == REDIRECT_OUTPUT)
 		{
-			redirect_output(temp);
+			if (!set_output(redir, false))
+				temp->type = REDIR_OUTPUT_FAILDED;
 		}
 		else if (temp->type == REDIRECT_APPEND)
 		{
-			redirect_append(temp);
+			if (!set_output(redir, true))
+				temp->type = REDIR_OUTPUT_FAILDED;
 		}
-
+		temp ++;
 	}
 }

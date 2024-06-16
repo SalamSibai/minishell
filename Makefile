@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
+#    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/12 15:35:03 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/14 20:58:08 by ssibai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ OBJ_DIR			= ./obj
 BUILTINS_DIR	= ./builtins
 EXEC_DIR		= ./execution
 FREE_DIR		= ./free_data
+REDIR_DIR		= ./redirections
 
 SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/init_parsing.c \
@@ -41,6 +42,9 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${VALIDATE_DIR}/validate_utils.c \
 		${VALIDATE_DIR}/validate_tokens.c \
 		${VALIDATE_DIR}/validate_qoutes.c \
+		${REDIR_DIR}/check_redirection.c\
+		${REDIR_DIR}/get_input.c\
+		${REDIR_DIR}/set_output.c\
 		${BUILTINS_DIR}/cd.c \
 		${BUILTINS_DIR}/echo.c \
 		${BUILTINS_DIR}/env.c \

@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/13 18:33:56 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/14 20:57:41 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef enum e_token_type
 	REDIRECT_OUTPUT,	//5
 	HEREDOC,			//6
 	REDIRECT_APPEND,	//7
+	REDIR_INPUT_FAILED,
+	REDIR_OUTPUT_FAILDED,
 	FLAG,				//8
 	ID,					//9
 	EXEC_ID,			//10
@@ -154,6 +156,10 @@ t_redirection	*redir_last(t_redirection *redir);
 void			redir_add_back(t_redirection **redir, t_redirection *new);
 void			redir_add_front(t_redirection **redir, t_redirection *new);
 void			redir_clear(t_redirection **redir);
+void			check_redirections(t_cmd **cmds);
+void			check_type(t_redirection *redir);
+bool			get_input(t_redirection *redir, bool heredoc);
+bool			set_output(t_redirection *redir, bool append);
 
 /* ************************************************************************** */
 /*									EXPANSION								  */
