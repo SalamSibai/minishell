@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
+#    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/14 20:58:08 by ssibai           ###   ########.fr        #
+#    Updated: 2024/06/17 21:08:15 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \
 
-CFLAGS = -Wall -Werror -Wextra -g3 
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3 
 
 RM = rm -rf
 
@@ -71,7 +71,7 @@ OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 all: $(NAME)
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/$(PARSE_DIR) $(OBJ_DIR)/$(ENV_DIR) $(OBJ_DIR)/$(EXPANSION_DIR) $(OBJ_DIR)/$(VALIDATE_DIR) $(OBJ_DIR)/${BUILTINS_DIR} $(OBJ_DIR)/${EXEC_DIR} $(OBJ_DIR)/${FREE_DIR} $(OBJ_DIR)/$(DEBUG_DIR)
+	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/$(PARSE_DIR) $(OBJ_DIR)/$(ENV_DIR) $(OBJ_DIR)/$(EXPANSION_DIR) $(OBJ_DIR)/${REDIR_DIR} $(OBJ_DIR)/$(VALIDATE_DIR) $(OBJ_DIR)/${BUILTINS_DIR} $(OBJ_DIR)/${EXEC_DIR} $(OBJ_DIR)/${FREE_DIR} $(OBJ_DIR)/$(DEBUG_DIR)
 
 $(LIBFT):
 	$(MAKE) -C ./includes/libft

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/14 20:55:35 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/18 00:37:11 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	execute_heredoc(t_redirection *redir)
 	line = get_next_line(0);
 	while (line)
 	{
-		if (!(ft_strncmp(line, redir->file_name, in_len)) && line[in_len + 1] == '\0')
+		if (!(ft_strncmp(line, redir->limiter, in_len)) && line[in_len + 1] == '\0')
 			break ;
 		write(pipe_in[1], line, ft_strlen(line));
 		write (1, "> ", 2);

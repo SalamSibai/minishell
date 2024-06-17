@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:16:42 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/14 20:59:05 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/18 00:27:48 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,24 @@ void	check_type(t_redirection *redir)
 	{
 		if (temp->type == REDIRECT_INPUT)
 		{
-			if (!get_input(redir, false))
+			if (!get_input(temp, false))
 				temp->type = REDIR_INPUT_FAILED;
 		}
 		else if (temp->type == HEREDOC)
 		{
-			if (!get_input(redir, true))
+			if (!get_input(temp, true))
 				temp->type = REDIR_INPUT_FAILED;
 		}
 		else if (temp->type == REDIRECT_OUTPUT)
 		{
-			if (!set_output(redir, false))
+			if (!set_output(temp, false))
 				temp->type = REDIR_OUTPUT_FAILDED;
 		}
 		else if (temp->type == REDIRECT_APPEND)
 		{
-			if (!set_output(redir, true))
+			if (!set_output(temp, true))
 				temp->type = REDIR_OUTPUT_FAILDED;
 		}
-		temp ++;
+		temp = temp->next;
 	}
 }

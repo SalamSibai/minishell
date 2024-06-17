@@ -6,10 +6,10 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/14 19:04:53 by ssibai           ###   ########.fr       */
-/*   Updated: 2024/06/13 22:31:35 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/17 21:05:24 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "includes/minishell.h"
 
@@ -58,11 +58,11 @@ int main(int ac, char **av, char **env)
 	set_env(&data, env);
 
 	///
-	data.buf = "echo hello world > df > 1 < 2 | echo 'hello world' << f > 3 > 4 > 7 | ls -l ";
-	// while (1)
-	// {
-	// 	data.buf = readline("minishell$ ");
-	// 	add_history(data.buf);
+	// data.buf = "echo hello world > df > 1 < 2 | echo 'hello world' << f > 3 > 4 > 7 | ls -l ";
+	while (1)
+	{
+		data.buf = readline("minishell$ ");
+		add_history(data.buf);
 		if (!data.buf )
 		{
 			printf("exit\n");
@@ -84,17 +84,12 @@ int main(int ac, char **av, char **env)
 		// print_data(&data);
 		//function that checks for redirections within each cmd
 		check_redirections((&data)->cmds);
-		// execute_cmds(&data);
-		// ft_pwd(); 
-		// ft_cd(data.cmds[0],data.env); // we need to add the fds as well to know where are we typing these commands 
-		// ft_echo(data.cmds[0]);  // we need to add the fds 
-		// ft_export(data.cmds[0]->args, data.env);
-		// ft_env(data.env);
-		free_data(&data);
+		execute_cmds(&data);
+		// free_data(&data);
 		
 	//execute the input
 
-	//free everything before next itiration
-	// }
+	// free everything before next itiration
+	}
 	// return (0);
 }
