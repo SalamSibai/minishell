@@ -89,3 +89,8 @@ this could be an issue:   malloc and extra tokens (i believe im counting the qou
 		ID
 
 need to fix the expansion 
+
+ Opening File Descriptors for Reading and Writing
+       The redirection operator
+
+              [n]<>wordq

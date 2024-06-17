@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/18 00:16:17 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 01:25:41 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ t_list			*env_init(char **envp);
 char			**env_to_str(t_list *env);
 int				is_valid_env(const char *var);
 int				is_in_env(t_list *env, char *args);
+char			*get_env_name(char *dest, const char *src);
+void			print_env(t_list *env, bool export);
 
 /* ************************************************************************** */
 /*									REDIRECTION								  */
@@ -179,6 +181,7 @@ int				ft_echo(t_cmd *cmd);
 int				ft_env(t_list *env);
 int				ft_export(t_list *args, t_list *env);
 int				ft_pwd(void);
+int				ft_unset(t_list *args, t_list *env);
 
 /* ************************************************************************** */
 /*									EXECUTION								  */

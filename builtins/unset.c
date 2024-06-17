@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 13:58:41 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 18:36:19 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 01:18:00 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int			is_in_env_remove(t_list *env, char *args)
 		get_env_name(env_name, env->content);
 		if (ft_strcmp(var_name, env_name) == 0)
 		{
-			// free(env->value);
 			if (env->next->next)
 				env->next = env->next->next;
 			else
@@ -48,14 +47,14 @@ int			is_in_env_remove(t_list *env, char *args)
  * @param env t_env sturcture contains the enviroment list
  * @return it returns 0 if theres no arguments for unset and it return on succes 
  */
-int	ft_unset(char **args, t_list *env)
+int	ft_unset(t_list *args, t_list *env)
 {
-	int		i;
-
-	i = 1;
-	if (!args[1])
+	if (!args)
 		return (0);
-	while (args[i])
-		is_in_env_remove(env, args[i++]);
+	while (args)
+	{
+		is_in_env_remove(env, args->content);
+		args = args->next;
+	}
 	return (1);
 }

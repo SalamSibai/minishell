@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 15:37:29 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 22:44:17 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 01:26:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,39 +56,6 @@ void		sort_env(char **tab, int env_len)
 		env_len--;
 	}
 }
-/**
- * @brief this function initialze the env list and malloc a space in the memory
- * for the list and the value to be added to the list, itll keep adding the values until theres no more to be added
- * also uses bubble sort to sort the values to be used by export 
- * @param mini t_execution * this is the structure for the minishell that contains the env to be added in
- * @param env_array char ** this is a string of array that contains the value to be added in the list 
- * @return it returns -1 if it failed to save memeory for the values and 0 if successfull
- */
-// int		env_init(t_data *data, char **env_array)
-// {
-// 	t_list	*env;
-// 	t_list	*new;
-// 	int		i;
-	
-// 	// sort_env(env_array, str_env_len(env_array));
-// 	if (!(env = malloc(sizeof(t_list))))
-// 		return (-1);
-// 	env->content = ft_strdup(env_array[0]);
-// 	env->next = NULL;
-// 	data->env = env;
-// 	i = 1;
-// 	while (env_array[i])
-// 	{
-// 		if (!(new = malloc(sizeof(t_list))))
-// 			return (1);
-// 		new->content = ft_strdup(env_array[i]);
-// 		new->next = NULL;
-// 		env->next = new;
-// 		env = new;
-// 		i++;
-// 	}
-// 	return (0);
-// }
 
 /**
  * @brief this function prints out the env on the stdout
@@ -97,12 +64,13 @@ void		sort_env(char **tab, int env_len)
  */
 int		ft_env(t_list *env)
 {
-	while (env && env->next != NULL)
-	{
-		ft_putendl_fd(env->content, 1);
-		env = env->next;
-	}
-	if (env)
-		ft_putendl_fd(env->content, 1);
+	// while (env && env->next != NULL)
+	// {
+	// 	ft_putendl_fd(env->content, 1);
+	// 	env = env->next;
+	// }
+	// if (env)
+	// 	ft_putendl_fd(env->content, 1);
+	print_env(env, false);
 	return (0);
 }

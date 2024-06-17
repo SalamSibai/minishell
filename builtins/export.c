@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/09 22:42:43 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 01:29:38 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
  * the extension of "declare -x"
  * @param env the env sturcture to print from the env list 
  */
-void		print_env(t_list *env)
+void		print_env(t_list *env, bool export)
 {
 	while (env->next && env)
 	{
-		ft_putstr_fd("declare -x ", 1);
+		if (export)
+			ft_putstr_fd("declare -x ", 1);
 		ft_putendl_fd(env->content, 1);
 		env = env->next;
 	}
@@ -72,7 +73,7 @@ int			ft_export(t_list *args, t_list *env)
 	if (!args)
 	{
 		// printf("export: not enough arguments\n");
-		print_env(env);
+		print_env(env, true);
 		return (1);
 	}
 	else
