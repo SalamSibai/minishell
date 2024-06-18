@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/18 01:25:41 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 21:29:35 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_pipe
 /// @brief the redirection struct
 typedef struct s_redirection
 {
-	int						fd;
+	//int						fd;
 	e_token_type			type;
 	char					*file_name;
 	char					*limiter;
@@ -70,6 +70,8 @@ typedef struct s_redirection
 /// @brief 
 typedef struct s_cmd
 {
+	int				fd_in;
+	int				fd_out;
 	char			*cmd_str;
 	char			*flag;
 	char			*args_str;
@@ -153,15 +155,15 @@ void			print_env(t_list *env, bool export);
 /* ************************************************************************** */
 /*									REDIRECTION								  */
 /* ************************************************************************** */
-t_redirection	*redir_new(int fd, e_token_type type, char *file_name, char *limiter);
+t_redirection	*redir_new(e_token_type type, char *file_name, char *limiter);
 t_redirection	*redir_last(t_redirection *redir);
 void			redir_add_back(t_redirection **redir, t_redirection *new);
 void			redir_add_front(t_redirection **redir, t_redirection *new);
 void			redir_clear(t_redirection **redir);
 void			check_redirections(t_cmd **cmds);
-void			check_type(t_redirection *redir);
-bool			get_input(t_redirection *redir, bool heredoc);
-bool			set_output(t_redirection *redir, bool append);
+void			check_type(t_cmd *cmd);
+bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir);
+bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
 
 /* ************************************************************************** */
 /*									EXPANSION								  */
@@ -189,6 +191,7 @@ int				ft_unset(t_list *args, t_list *env);
 void			execute_cmds(t_data *data);
 int				is_builtin(char *command);
 int				exec_builtin(t_cmd *cmd, t_data *data);
+void			execution(t_data *data);
 
 /* ************************************************************************** */
 /*									DEBUG									  */

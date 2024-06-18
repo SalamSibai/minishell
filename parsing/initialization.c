@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/10 16:42:15 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 21:11:41 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	count_cmds(t_token **tokens)
 	int	i;
 	int	cmd_num;
 
-	if (tokens == NULL && !*tokens) 
+	if (tokens == NULL && !*tokens)
 		return (0);
 	i = 1;
 	cmd_num = 1;
@@ -55,6 +55,8 @@ void	init_cmds(t_data *data)
 	while (i < data->cmd_num)
 	{
 		// data->cmds[i] = ft_safe_malloc(sizeof(t_cmd), "CMD");
+		data->cmds[i]->fd_in = -1;
+		data->cmds[i]->fd_out = -1;
 		data->cmds[i] = ft_calloc(1, sizeof(t_cmd));
 		data->cmds[i]->cmd_str = NULL;
 		data->cmds[i]->flag = NULL;

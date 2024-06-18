@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/18 00:37:11 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 21:27:28 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ///			NOTE: HEREDOC APPENDS TO WHATEVER THE OUTPUT IS.
 /// @param redir the redir struct
 /// @return true if open succeeds.
-bool	execute_heredoc(t_redirection *redir)
+bool	execute_heredoc(t_cmd *cmd, t_redirection *redir)
 {
 	int		in_len;
 	char	*line;
@@ -38,21 +38,21 @@ bool	execute_heredoc(t_redirection *redir)
 	}
 	free(line);
 	close(pipe_in[1]);
-	redir->fd = pipe_in[0];
+	cmd->fd_in = pipe_in[0];
 	return (true);
 }
 
-bool	get_input(t_redirection *redir, bool heredoc)
+bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 {
 	if (!heredoc)
 	{
-		redir->fd = open(redir->file_name, O_RDONLY);
-		if (redir->fd < 0)
+		cmd->fd_in = open(redir->file_name, O_RDONLY);
+		if (cmd->fd_in < 0)
 			return (false);
 	}
 	else
 	{
-		if (!execute_heredoc(redir))
+		if (!execute_heredoc(cmd, redir))
 			return (false);
 	}
 	return (true);

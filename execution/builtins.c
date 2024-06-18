@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:37:54 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/18 00:56:10 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 20:29:55 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ int		is_builtin(char *command)
 
 /**
  * @brief 
- *
- * 
- *
  * @param cmd 
  * @param exec 
  * @return 
@@ -60,6 +57,6 @@ int		exec_builtin(t_cmd *cmd, t_data *data)
 	if (ft_strcmp(cmd->cmd_str, "export") == 0)
 		ft_export(cmd->args, data->env);
 	if (ft_strcmp(cmd->cmd_str, "unset") == 0)
-		ft_unset(cmd->args, data->env);	
+		ft_unset(cmd->args, data->env);
 	return (result);
 }

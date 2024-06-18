@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:16:42 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/18 00:27:48 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 21:27:10 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_redirections(t_cmd **cmds)
 	{
 		if (cmds[i]->redirection != NULL)
 		{
-			check_type(cmds[i]->redirection);
+			check_type(cmds[i]);
 		}
 	}
 }
@@ -32,31 +32,31 @@ void	check_redirections(t_cmd **cmds)
 //			corresponding function to store the fd of 
 //			that redirection
 /// @param redir redirection struct
-void	check_type(t_redirection *redir)
+void	check_type(t_cmd *cmd)
 {
 	t_redirection	*temp;
 
-	temp = redir;
+	temp = cmd->redirection;
 	while (temp)
 	{
 		if (temp->type == REDIRECT_INPUT)
 		{
-			if (!get_input(temp, false))
+			if (!get_input(cmd, false, temp))
 				temp->type = REDIR_INPUT_FAILED;
 		}
 		else if (temp->type == HEREDOC)
 		{
-			if (!get_input(temp, true))
+			if (!get_input(cmd, true, temp))
 				temp->type = REDIR_INPUT_FAILED;
 		}
 		else if (temp->type == REDIRECT_OUTPUT)
 		{
-			if (!set_output(temp, false))
+			if (!set_output(cmd, false, temp))
 				temp->type = REDIR_OUTPUT_FAILDED;
 		}
 		else if (temp->type == REDIRECT_APPEND)
 		{
-			if (!set_output(temp, true))
+			if (!set_output(cmd, true, temp))
 				temp->type = REDIR_OUTPUT_FAILDED;
 		}
 		temp = temp->next;

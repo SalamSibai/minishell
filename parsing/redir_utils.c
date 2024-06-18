@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 13:31:17 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/12 20:25:30 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 21:29:18 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-t_redirection	*redir_new(int fd, e_token_type type, char *file_name, char *limiter)
+t_redirection	*redir_new(e_token_type type, char *file_name, char *limiter)
 {
 	t_redirection	*new;
 
 	// new = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
 	new = ft_calloc(1, sizeof(t_redirection));
-	new->fd = fd;
+	//new->fd = fd;
 	new->type = type;
 	new->file_name = file_name;
 	new->limiter = limiter;
