@@ -94,3 +94,11 @@ need to fix the expansion
        The redirection operator
 
               [n]<>wordq
+
+
+bash-3.2$ cat << l << k 
+> 123
+> l
+> 456
+> k
+456

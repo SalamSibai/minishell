@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/18 01:29:38 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:57:41 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
  * the extension of "declare -x"
  * @param env the env sturcture to print from the env list 
  */
+
+// i need to send the t_cmd to give it the fd
 void		print_env(t_list *env, bool export)
 {
 	while (env->next && env)
