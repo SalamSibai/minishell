@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/17 21:05:24 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/19 13:18:28 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 static void	set_env(t_data *data, char **env)
 {
 	data->env = env_init(env);
+	data->export_env = export_env_init(data->env);
 	data->env_var = env_to_str(data->env);
 	data->path = set_path(env, data);
 }
@@ -84,7 +85,8 @@ int main(int ac, char **av, char **env)
 		// print_data(&data);
 		//function that checks for redirections within each cmd
 		check_redirections((&data)->cmds);
-		execute_cmds(&data);
+		exec_builtin((&data)->cmds[0], &data);
+		// execute_cmds(&data);
 		// free_data(&data);
 		
 	//execute the input

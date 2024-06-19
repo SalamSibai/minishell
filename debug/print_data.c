@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:31:36 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/08 16:08:14 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/19 13:27:48 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	print_data(t_data *data)
 		{
 			printf("__________________________________Redirections num %d for cmd[%d] *********\n\n", j, i);
 			printf("redirection[%d]->type: %d\n", j, data->cmds[i]->redirection->type);
-			printf("redirection[%d]->fd: %d\n", j, data->cmds[i]->redirection->fd);
+			// printf("redirection[%d]->fd: %d\n", j, data->cmds[i]->redirection->fd);
 			printf("redirection[%d]->file_name: %s\n", j, data->cmds[i]->redirection->file_name);
 			printf("redirection[%d]->limiter: %s\n", j, data->cmds[i]->redirection->limiter);
 			data->cmds[i]->redirection = data->cmds[i]->redirection->next;

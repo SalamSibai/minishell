@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:03:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/13 22:28:12 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/19 10:24:17 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,26 @@ t_list	*env_init(char **envp)
 		ft_lstadd_back(&env, new);
 	}
 	return (env);
+}
+/**
+ * @brief copy the env list to the export env list
+ * 
+ * @param env 
+ * @return 
+ */
+t_list	*export_env_init(t_list *env)
+{
+	t_list *export_env;
+	t_list *new;
+
+	export_env = ft_lstnew(env->content);
+	while (env->next)
+	{
+		new = ft_lstnew(env->next->content);
+		ft_lstadd_back(&export_env, new);
+		env = env->next;
+	}
+	return (export_env);
 }
 
 /**

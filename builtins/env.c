@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 15:37:29 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/18 01:26:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/19 13:09:41 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,6 @@ void		sort_env(char **tab, int env_len)
  */
 int		ft_env(t_list *env)
 {
-	// while (env && env->next != NULL)
-	// {
-	// 	ft_putendl_fd(env->content, 1);
-	// 	env = env->next;
-	// }
-	// if (env)
-	// 	ft_putendl_fd(env->content, 1);
 	print_env(env, false);
 	return (0);
 }
