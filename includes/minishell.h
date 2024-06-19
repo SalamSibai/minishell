@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/18 21:29:35 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/19 18:30:11 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void			print_data(t_data *data);
 /* ************************************************************************** */
 int				print_error(int error, const char *arg);
 void			free_data(t_data *data);
+bool			close_fds(int fd);
 
 
 //Creating a tree, where the left branch will be executed first.

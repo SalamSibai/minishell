@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:27:51 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/18 19:23:40 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/19 19:42:23 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ int		ft_echo(t_cmd *cmd)
 	t_list	*args;
 	int		fd;
 	
-	if (!cmd->redirection)
-		fd = 0;
-	else
-		fd = redir_last(cmd->redirection)->fd;
+	// if (!cmd->redirection)
+	// 	fd = 0;
+	// else
+	// 	fd = redir_last(cmd->redirection)->fd;
+	//print whatever the argumnets are
 	args = cmd->args;
 	nl = 1;
 	if (nb_args(args) > 1)
@@ -57,10 +58,10 @@ int		ft_echo(t_cmd *cmd)
 	while (args)
 	{
 		//how could we find the last redirection output file to write to it??
-		ft_putstr_fd(args->content, fd);
+		ft_putstr_fd(args->content, cmd->fd_out);
 		args = args->next;
 		if (args)
-			ft_putstr_fd(" ", fd);
+			ft_putstr_fd(" ", cmd->fd_out);
 	}
 	if (nl)
 		ft_putstr_fd("\n", fd);
