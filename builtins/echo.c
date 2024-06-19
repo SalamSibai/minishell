@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:27:51 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 13:13:58 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:52:08 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int		ft_echo(t_cmd *cmd)
 	int		nl;
 	t_list	*args;
 	
+	// if (!cmd->redirection)
+	// 	fd = 0;
+	// else
+	// 	fd = redir_last(cmd->redirection)->fd;
+	//print whatever the argumnets are
 	args = cmd->args;
 	nl = 1;
 	if (nb_args(args) > 1)

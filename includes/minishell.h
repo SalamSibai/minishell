@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 13:27:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:52:23 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ void			print_data(t_data *data);
 /*								Error Handling								  */
 /* ************************************************************************** */
 void			free_data(t_data *data);
+bool			close_fds(int fd);
 
 
 //Creating a tree, where the left branch will be executed first.

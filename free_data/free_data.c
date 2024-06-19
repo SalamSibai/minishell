@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/13 22:31:01 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:29:12 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 void	free_data(t_data *data)
 {
-	int				i;
-	
+	int	i;
+
 	i = 0;
 	while (data->tokens[i])
 	{

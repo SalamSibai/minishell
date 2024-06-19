@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/19 10:11:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:52:28 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ bool	execute_heredoc(t_cmd *cmd, t_redirection *redir)
 
 bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 {
+	if (!close_fds(cmd->fd_in))
+		return (false);
 	if (!heredoc)
 	{
 		cmd->fd_in = open(redir->file_name, O_RDONLY);

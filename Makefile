@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
+#    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/18 00:59:53 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/19 18:29:41 by ssibai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${EXEC_DIR}/builtins.c \
 		${EXEC_DIR}/exec_cmds.c \
 		${FREE_DIR}/free_data.c \
+		${FREE_DIR}/close_fds.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \
 
