@@ -6,60 +6,107 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/18 20:45:22 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/19 21:00:52 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// int	read_infile(t_data *d)
-// {
-// 	if (dup2(d->infile, STDIN_FILENO) == -1)
-// 		return (0);
-// 	return (1);
-// }
+	// check_redirections(data->cmds);
 
-// int	read_pipe(t_pipe *p, int i)
-// {
-// 	if (dup2(p->fd[i][0], STDIN_FILENO) == -1)
-// 		return (0);
-// 	return (1);
-// }
+	/*
+	check number of comands
+		if 1: execute that comand and print into the redirected fd if available
 
-// int	write_pipe(t_pipe *p, int i)
-// {
-// 	if (dup2(p->fd[i][1], STDOUT_FILENO) == -1)
-// 		return (0);
-// 	return (1);
-// }
+		if its the last command:
+			redirect to whatever the last output redirection is (if available)
+			otherwise print on std out
+			
+		else:
+			redirect to the pipe (write end) ONLY IF THERES NO REDIRECTION OUTPUT
+		
+		when reading:
 
-// int	write_outfile(t_data *d)
-// {
-// 	if (dup2(d->outfile, STDOUT_FILENO) == -1)
-// 		return (0);
-// 	return (1);
-// }
+		if its the first command:
+			read from either the file, the heredoc (redir->fd), or stdin (ONLY IF PASSES)
+		else
+			read from the read end of the previous pipe 
+	*/
 
-void	redirect_files(t_cmd *cmd, int j)
+bool	redirect_file_input(t_cmd *cmd)
+{
+	if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
+		return (false);
+	return (true);
+}
+
+/// @brief dup2 the input to the correct pipe
+/// @param pipe the pipe struct
+/// @param j flipflop
+/// @return true if passes
+bool	redirect_pipe_input(t_pipe *pipe, int j)
+{
+	if (dup2(pipe->fd[j][0], STDIN_FILENO) == -1)
+		return (false);
+	return (true);
+}
+
+bool	redirect_file_output(t_cmd *cmd)
+{
+	if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
+		return (false);
+	return (true);
+}
+
+bool	redirect_pipe_output(t_pipe *pipe, int j)
+{
+	if (dup2(pipe->fd[j][0], STDOUT_FILENO) == -1)
+		return (false);
+	return (true);
+}
+
+bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 {
 	if (i == 0)
 	{
-		if (read_infile(d) == 0)
-			error_handler("Infile: READ dupe error\n", 1, d, p);
+		if (cmd->fd_in != -1)
+		{
+			if (!redirect_file_input(cmd))
+				return (false);
+		}
 	}
 	else
 	{
-		if (read_pipe(p, !j) == 0)
-			error_handler("Pipe: READ dupe error\n", 1, d, p);
+		if (cmd->fd_in != -1)
+		{
+			if (!redirect_file_input(cmd))
+				return (false);
+		}
+		else
+		{
+			if (!redirect_pipe_input(data->pipe, !j))
+				return (false);
+		}
 	}
-	if (i == d->cmd_num -1)
+
+
+
+	if (i == data->cmd_num - 1)
 	{
-		if (write_outfile(d) == 0)
-			error_handler("Outfile: WRITE dupe error\n", 1, d, p);
+		if (cmd->fd_out != -1)
+		{
+			if (!redirect_file_output(cmd))
+				return (false);
+			else
+				dup2(data->origin_fds[1], STDOUT_FILENO);
+		}
+		else
+		{
+			if (cmd->fd_out != -1)
+			
+			if (!redirect_pipe_output(data->pipe, j))
+				return (false);
+		}
 	}
-	else
-	{
-		if (write_pipe(p, j) == 0)
-			error_handler("Pipe: WRITE dupe error\n", 1, d, p);
-	}
+	return (true);
 }

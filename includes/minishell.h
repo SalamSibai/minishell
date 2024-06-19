@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 19:52:23 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/19 20:45:55 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,9 @@ typedef enum e_token_type
 * */
 typedef struct s_pipe
 {
-	int	pipe[2][2];
+	int	fd[2][2];
 	int	*pid;
-	//int		fd_in;
-	//int		fd_out;
-}				t_pipe;
+}	t_pipe;
 
 /// @brief the redirection struct
 typedef struct s_redirection
@@ -99,10 +97,12 @@ typedef struct s_lexer
 typedef struct s_data
 {
 	int			cmd_num;
+	int			origin_fds[2];
 	t_list		*env;
 	t_list		*export_env;
 	t_cmd		**cmds;
 	t_token		**tokens;
+	t_pipe		*pipe;
 	char		**env_var;
 	char		**path;
 	char		*buf;
