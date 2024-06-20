@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 20:02:15 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/20 17:06:11 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
  */
 void	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
-	
+	(void)i;
+	(void)j;
+	redirect_fds(data, cmd, i, j);
 	if (is_builtin(cmd->cmd_str))
 		exec_builtin(cmd, data);
 	else
@@ -39,12 +41,11 @@ void	execution(t_data *data)
 
 	i = 0;
 	j = 0;
-
-
 	if (data->cmd_num > 1)
 	{
 		while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)
 		{
+
 			exec_cmd(data->cmds[i], data, i, j);
 			i++;
 			j = !j;

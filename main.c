@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 20:44:59 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/20 17:04:40 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static void	set_env(t_data *data, char **env)
 
 static void	fill_data(t_data *data)
 {
-	data->origin_fds[0] = dup(STDIN_FILENO);
-	data->origin_fds[1] = dup(STDOUT_FILENO);
 	data->tokens = check_expandable_var(data->tokens, data->env);
 	data->cmd_num = count_cmds(data->tokens);
 	data->cmds = ft_calloc(data->cmd_num + 1, sizeof(t_cmd *));
-	data->pipe = ft_calloc(data->pipe, sizeof(t_pipe));
+	data->origin_fds[0] = dup(STDIN_FILENO);
+	data->origin_fds[1] = dup(STDOUT_FILENO);
+	data->pipe = ft_calloc(1, sizeof(t_pipe));
 	init_cmds(data);
 	set_cmds(data);
 }
@@ -88,6 +88,7 @@ int main(int ac, char **av, char **env)
 		// print_data(&data);
 		//function that checks for redirections within each cmd
 		check_redirections((&data)->cmds);
+		execution(&data);
 		//exec_builtin((&data)->cmds[0], &data);
 		// execute_cmds(&data);
 		// free_data(&data);

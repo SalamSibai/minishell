@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 19:43:54 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:24:00 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*add_quotes(char *value)
 		tmp = ft_strndup(value, (ft_strchr(value, '=') + 1 - value));
 		tmp1 = ft_strjoin("\"", ft_strchr(value, '=')+ 1);
 		tmp2 = ft_strjoin(tmp1, "\"");
-		// printf("tmp2 = %s\n", tmp2);
 		env_value = ft_strjoin(tmp, tmp2);
 	}
 	free(tmp);
@@ -66,17 +65,23 @@ void		print_env(t_list *env, bool export)
 * @param env t_env sturcture contains the enviroment list to add to it
 * @returns int 0 if sucess
 */
-int			env_add(char *value, t_list *env)
+int			env_add(char *value, t_list *env, bool export)
 {
 	t_list	*new;
 	t_list	*tmp;
 
 	if (env && env->content == NULL)
 	{
-		env->content = add_quotes(value);
+		if (export)
+			env->content = ft_strdup(value);
+		else
+			env->content = add_quotes(value);
 		return (0);
 	}
-	new = ft_lstnew(add_quotes(value));
+	if (export)
+		new = ft_lstnew(add_quotes(value));
+	else
+		new = ft_lstnew(ft_strdup(value));
 	while (env && env->next && env->next->next)
 		env = env->next;
 	tmp = env->next;
@@ -92,7 +97,7 @@ int			env_add(char *value, t_list *env)
  * @param env t_env the list that contains all the enviroment values to add on the new variable
  * @return it return zero on success
  */
-bool		ft_export(t_list *args, t_list *export_env)
+bool		ft_export(t_list *args, t_list *export_env, t_list *env)
 {
 	if (!args)
 		print_env(export_env, true);
@@ -100,10 +105,11 @@ bool		ft_export(t_list *args, t_list *export_env)
 	{
 		while (args)
 		{
-			if (is_valid_env(args->content) && ft_strncmp(args->content, "=", 1) == 0)
+			if (!is_valid_env(args->content) || ft_strncmp(args->content, "=", 1) == 0)
 				return (print_error(args->content));
 			is_in_env(export_env, args->content);
-			env_add(args->content, export_env);
+			env_add(args->content, export_env, true);
+			env_add(args->content, env, false);
 			args = args->next;
 		}
 	}
