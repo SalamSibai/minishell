@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 21:03:13 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/20 21:35:14 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_cmd
 {
 	int				fd_in;
 	int				fd_out;
+	char			*cmd_path;
 	char			*cmd_str;
 	char			*flag;
 	char			*args_str;

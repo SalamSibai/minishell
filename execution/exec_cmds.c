@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 21:12:29 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/20 21:32:22 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	// 	error_handler(FORK_ERR, 1, d, p);
 	if (pid == 0)
 	{
+		redirect_fds(data, cmd, i, j);
 		if (is_builtin(cmd->cmd_str))
 		{
 			exec_builtin(cmd, data);
+			close_fds(data, i);
 			exit(0);
 		}
 		else
 		{
-			redirect_fds()
+			
 		}
 	}
 }

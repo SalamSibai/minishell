@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/20 17:02:21 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/20 21:35:48 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	init_cmds(t_data *data)
 		data->cmds[i] = ft_calloc(1, sizeof(t_cmd));
 		data->cmds[i]->fd_in = -1;
 		data->cmds[i]->fd_out = -1;
+		data->cmd[i]->cmd_path = NULL;
 		data->cmds[i]->cmd_str = NULL;
 		data->cmds[i]->flag = NULL;
 		// data->cmds[i]->args_str = NULL;
