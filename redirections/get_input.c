@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/20 16:47:01 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/20 20:04:12 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ bool	execute_heredoc(t_cmd *cmd, t_redirection *redir)
 
 bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 {
-	if (!close_fds(cmd->fd_in))
-		return (false);
+	if (cmd->fd_in != -1)
+	{
+		if (!close_fd(cmd->fd_in))
+			return (false);
+	}
 	if (!heredoc)
 	{
 		cmd->fd_in = open(redir->file_name, O_RDONLY);

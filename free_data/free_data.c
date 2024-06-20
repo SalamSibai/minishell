@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 18:29:12 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/20 20:49:00 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 			then free the redirection
 * 	3) free buf
 */
+
+//MAKE SURE THAT WE RESET THE STDIN AND STDOUT FROM ORIGIN_FDS
 
 void	free_data(t_data *data)
 {

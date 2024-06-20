@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/19 21:00:52 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/20 21:03:48 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,47 +32,23 @@
 		else
 			read from the read end of the previous pipe 
 	*/
-
-bool	redirect_file_input(t_cmd *cmd)
-{
-	if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
-		return (false);
-	return (true);
-}
-
-/// @brief dup2 the input to the correct pipe
-/// @param pipe the pipe struct
-/// @param j flipflop
-/// @return true if passes
-bool	redirect_pipe_input(t_pipe *pipe, int j)
-{
-	if (dup2(pipe->fd[j][0], STDIN_FILENO) == -1)
-		return (false);
-	return (true);
-}
-
-bool	redirect_file_output(t_cmd *cmd)
-{
-	if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
-		return (false);
-	return (true);
-}
-
-bool	redirect_pipe_output(t_pipe *pipe, int j)
-{
-	if (dup2(pipe->fd[j][0], STDOUT_FILENO) == -1)
-		return (false);
-	return (true);
-}
-
 bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 {
 	if (i == 0)
 	{
 		if (cmd->fd_in != -1)
 		{
+			close_fd(data->origin_fds[0]);
 			if (!redirect_file_input(cmd))
 				return (false);
+		}
+		else
+		{
+			data->origin_fds[0] = dup(STDIN_FILENO);
+			close_fd(STDIN_FILENO);
+			if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
+				return (false);
+			return (true);
 		}
 	}
 	else
@@ -88,8 +64,10 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 				return (false);
 		}
 	}
-
-
+	
+/* ************************************************************************** */
+/*									OUTPUT								  */
+/* ************************************************************************** */
 
 	if (i == data->cmd_num - 1)
 	{
@@ -98,12 +76,20 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 			if (!redirect_file_output(cmd))
 				return (false);
 			else
-				dup2(data->origin_fds[1], STDOUT_FILENO);
+			{
+				data->origin_fds[1] = dup(STDOUT_FILENO);
+				close_fd(STDOUT_FILENO);
+				if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
+					return (false);
+				return (true);
+			}
 		}
 		else
 		{
 			if (cmd->fd_out != -1)
-			
+			{
+				dup2(cmd->fd_out, STDOUT_FILENO);
+			}
 			if (!redirect_pipe_output(data->pipe, j))
 				return (false);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 17:06:11 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/20 21:04:26 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
 	(void)i;
 	(void)j;
-	redirect_fds(data, cmd, i, j);
+	/*
+		WE MUST FORK FIRST AND IN THE CHILD WE REDIRECT AND EXECUTE
+	*/
+	
 	if (is_builtin(cmd->cmd_str))
 		exec_builtin(cmd, data);
 	else

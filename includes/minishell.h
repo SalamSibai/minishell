@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 17:21:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/20 21:03:13 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,10 @@ void			check_type(t_cmd *cmd);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
 bool			redirect_fds(t_data *data,t_cmd *cmd, int i, int j);
+bool			redirect_file_input(t_cmd *cmd);
+bool			redirect_pipe_input(t_pipe *pipe, int j);
+bool			redirect_file_output(t_cmd *cmd);
+bool			redirect_pipe_output(t_pipe *pipe, int j);
 
 /* ************************************************************************** */
 /*									EXPANSION								  */
@@ -208,8 +212,8 @@ void			print_data(t_data *data);
 /*								Error Handling								  */
 /* ************************************************************************** */
 void			free_data(t_data *data);
-bool			close_fds(int fd);
-
+bool			close_fd(int fd);
+bool			close_fds(t_data *data, int i);
 
 //Creating a tree, where the left branch will be executed first.
 #endif
