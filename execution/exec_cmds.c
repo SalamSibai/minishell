@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 21:04:26 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/20 21:12:29 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,29 @@
  * @brief 
  * 
  */
-void	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
+int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
 	(void)i;
 	(void)j;
 	/*
 		WE MUST FORK FIRST AND IN THE CHILD WE REDIRECT AND EXECUTE
 	*/
-	
-	if (is_builtin(cmd->cmd_str))
-		exec_builtin(cmd, data);
-	else
+	int	pid;
+
+	pid = fork();
+	// if (pid == -1)
+	// 	error_handler(FORK_ERR, 1, d, p);
+	if (pid == 0)
 	{
-		
+		if (is_builtin(cmd->cmd_str))
+		{
+			exec_builtin(cmd, data);
+			exit(0);
+		}
+		else
+		{
+			redirect_fds()
+		}
 	}
 }
 
@@ -48,8 +58,7 @@ void	execution(t_data *data)
 	{
 		while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)
 		{
-
-			exec_cmd(data->cmds[i], data, i, j);
+			data->pipe->pid[i] = (data->cmds[i], data, i, j);
 			i++;
 			j = !j;
 		}
