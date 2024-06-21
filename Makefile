@@ -61,7 +61,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3 
+CFLAGS = -Wall -Werror -Wextra
 
 RM = rm -rf
 

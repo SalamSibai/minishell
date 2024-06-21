@@ -15,7 +15,10 @@
 bool	redirect_file_input(t_cmd *cmd)
 {
 	if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
+	{
+
 		return (false);
+	}
 	return (true);
 }
 
@@ -29,37 +32,3 @@ bool	redirect_pipe_input(t_pipe *pipe, int j)
 		return (false);
 	return (true);
 }
-
-// bool	redirect_input(t_cmd *cmd, t_data *data, int i, int j)
-// {
-// 	if (i == 0)
-// 	{
-// 		if (cmd->fd_in != -1)
-// 		{
-// 			close_fd(data->origin_fds[0]);
-// 			if (!redirect_file_input(cmd))
-// 				return (false);
-// 		}
-// 		else
-// 		{
-// 			data->origin_fds[0] = dup(STDIN_FILENO);
-// 			close_fd(STDIN_FILENO);
-// 			if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
-// 				return (false);
-// 			return (true);
-// 		}
-// 	}
-// 	else
-// 	{
-// 		if (cmd->fd_in != -1)
-// 		{
-// 			if (!redirect_file_input(cmd))
-// 				return (false);
-// 		}
-// 		else
-// 		{
-// 			if (!redirect_pipe_input(data->pipe, !j))
-// 				return (false);
-// 		}
-// 	}
-// }

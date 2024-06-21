@@ -38,17 +38,25 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 	{
 		if (cmd->fd_in != -1)
 		{
+			ft_putstr_fd("fd in is a file\n", 1);
 			close_fd(data->origin_fds[0]);
 			if (!redirect_file_input(cmd))
 				return (false);
 		}
 		else
 		{
-			data->origin_fds[0] = dup(STDIN_FILENO);
-			close_fd(STDIN_FILENO);
-			if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
+			cmd->fd_in = dup(STDIN_FILENO);
+			if (cmd->fd_in == -1)
+			{
+				ft_putstr_fd("still -1\n", 1);
 				return (false);
-			return (true);
+			}
+			data->origin_fds[0] = dup(STDIN_FILENO);
+			if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
+			{
+				ft_putstr_fd("failed at input\n", 1);
+				return (false);
+			}
 		}
 	}
 	else
@@ -71,28 +79,37 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 
 	if (i == data->cmd_num - 1)
 	{
+		//printf("last cmd\n");
 		if (cmd->fd_out != -1)
 		{
 			if (!redirect_file_output(cmd))
 				return (false);
-			else
-			{
-				data->origin_fds[1] = dup(STDOUT_FILENO);
-				close_fd(STDOUT_FILENO);
-				if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
-					return (false);
-				return (true);
-			}
 		}
 		else
 		{
-			if (cmd->fd_out != -1)
+			cmd->fd_out = dup(STDOUT_FILENO);
+			if (cmd->fd_out == -1)
 			{
-				dup2(cmd->fd_out, STDOUT_FILENO);
-			}
-			if (!redirect_pipe_output(data->pipe, j))
+				ft_putstr_fd("still -1\n", 1);
 				return (false);
+			}
+			data->origin_fds[0] = dup(STDOUT_FILENO);
+			if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
+			{
+				ft_putstr_fd("failed at input\n", 1);
+				return (false);
+			}
 		}
+	}
+	else
+	{
+		if (cmd->fd_out != -1)
+		{
+			dup2(cmd->fd_out, STDOUT_FILENO);
+		}
+		if (!redirect_pipe_output(data->pipe, j))
+			return (false);
 	}
 	return (true);
 }
+

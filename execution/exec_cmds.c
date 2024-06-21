@@ -28,7 +28,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	// 	error_handler(FORK_ERR, 1, d, p);
 	if (pid == 0)
 	{
-		redirect_fds(data, cmd, i, j);
+		if (!redirect_fds(data, cmd, i, j))
+			ft_putstr_fd("\n redirect failed\n", 1);
 		if (is_builtin(cmd->cmd_str))
 		{
 			if (is_env_builtin(cmd->cmd_str))
@@ -66,11 +67,11 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
  */
 void	execution(t_data *data)
 {
-	int	i;
-	int	j;
+	//int	i;
+	//int	j;
 
-	i = 0;
-	j = 0;
+	//i = 0;
+	//j = 0;
 	// if (data->cmd_num > 1)
 	// {
 	// 	while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)

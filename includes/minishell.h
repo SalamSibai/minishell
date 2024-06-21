@@ -21,7 +21,8 @@
 # include "./libft/libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
-#include <termios.h>
+# include <termios.h>
+# include <sys/wait.h>
 
 # define BUFF_SIZE 4096
 
