@@ -42,7 +42,17 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		} 
 		else
 		{
-			
+			if (!get_path(data, cmd))
+				ft_putstr_fd("failed to find path for the command\n", 1); //free and cleanup
+			close_fds(data, i);
+			if (cmd->flag)
+			{
+				if (join_cmd_and_flag(cmd))
+					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env);
+				//else exit (failed)
+			}
+			else
+				execve(cmd->cmd_path, cmd->cmd_str, data->env);
 		}
 	}
 	else
@@ -72,15 +82,24 @@ void	execution(t_data *data)
 
 	i = 0;
 	j = 0;
-	 if (data->cmd_num > 1)
-	 {
-	 	while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)
-	 	{
-	 		data->pipe->pid[i] = exec_cmd(data->cmds[i], data, i, j);
-	 		i++;
-	 		j = !j;
-	 	}
-	 }
-	 else
+	alloc_pids(data);
+	if (!make_pipes(data->pipe))
+		ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
+	if (data->cmd_num > 1)
+	{
+		while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)
+		{
+			data->pipe->pid[i] = exec_cmd(data->cmds[i], data, i, j);
+			if (i >= 1 && i < data->cmd_num - 1)
+			{
+				close_fds(data, i);
+				if (pipe(data->pipe->fd[!j] == -1))
+					ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
+			}
+			i++;
+			j = !j;
+		}
+	}
+	else
 		exec_cmd(data->cmds[0], data, 0 , 0);
 }

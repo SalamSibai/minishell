@@ -74,6 +74,7 @@ typedef struct s_cmd
 	int				fd_out;
 	char			*cmd_path;
 	char			*cmd_str;
+	char			*cmd_with_flag;
 	char			*flag;
 	char			*args_str;
 	t_list			*args;
@@ -124,6 +125,9 @@ bool			validate_pipe(t_token **tokens, int index);
 bool			validate_input_redirection(t_token **tokens, int index);
 bool			validate_output_redirection(t_token **tokens, int index);
 bool			validate_qoutes(int index, t_data *data);
+
+void	alloc_pids(t_data *d);
+bool		make_pipes(t_pipe *p);
 
 /* ************************************************************************** */
 /*									PARSEING								  */

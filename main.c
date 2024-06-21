@@ -32,6 +32,28 @@
 			- if everything is fine, we initialize and store
 */
 
+bool	make_pipes(t_pipe *p)
+{
+	int	i;
+
+	i = 0;
+	while (i < 2)
+	{
+		if (pipe(p->fd[i]) == -1)
+			return (false);
+		i ++;
+	}
+	return (true);
+}
+
+void	alloc_pids(t_data *data)
+{
+	data->pipe->pid = (int *)malloc(data->cmd_num * sizeof(int));
+	if (!data->pipe->pid)
+		return (NULL);
+		//error_handler("Malloc: no space for pids", 1, d, p);
+}
+
 static void	set_env(t_data *data, char **env)
 {
 	data->env = env_init(env);

@@ -59,6 +59,7 @@ void	init_cmds(t_data *data)
 		data->cmds[i]->fd_out = -1;
 		data->cmds[i]->cmd_path = NULL;
 		data->cmds[i]->cmd_str = NULL;
+		data->cmds[i]->cmd_with_flag = NULL;
 		data->cmds[i]->flag = NULL;
 		// data->cmds[i]->args_str = NULL;
 		data->cmds[i]->args = NULL;

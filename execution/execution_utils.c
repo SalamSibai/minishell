@@ -14,10 +14,34 @@
 
 //create function that checks whether the fd we read/write to is the pipe or the set fd
 
-char *get_path(t_data *data, t_cmd *cmd)
+bool get_path(t_data *data, t_cmd *cmd)
 {
-	int	i; 
+	int		i;
 
 	i = 0;
-	while (data->)
+	while (data->path[i] != NULL)
+	{
+		cmd->cmd_path = ft_strjoin(data->path[i], cmd->cmd_str);
+		if (!cmd->cmd_path)
+			return (false);
+		if (access(cmd->cmd_path, F_OK) == 0)
+			return (true);
+		free(cmd->cmd_path);
+		i ++;
+	}
+	return (false);
+}
+
+bool	join_cmd_and_flag(t_cmd *cmd)
+{
+	char 	*full_cmd;
+	char	*temp;
+	temp = ft_strjoin(cmd->cmd_str, " ");
+	if (!temp)
+		return (false);
+	cmd->cmd_with_flag = ft_strjoin(temp, cmd->flag);
+	if (!cmd->cmd_with_flag)
+		return (false);
+	free (temp);
+	return (true);
 }
