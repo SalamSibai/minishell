@@ -36,33 +36,32 @@ bool	join_cmd_and_flag(t_cmd *cmd)
 {
 	char	*temp;
 	int		index = 0;
+	t_list	*args_temp;
 	
-	
-	temp = ft_strjoin(cmd->cmd_str, " ");
+	args_temp = cmd->args;
 	if (!temp)
 		return (false);
 	if (cmd->flag)
 	{
+		temp = ft_strjoin(cmd->cmd_str, " ");
 		temp = ft_strjoin(temp, cmd->flag);
 		if (!cmd->cmd_with_flag)
 			return (false);
 	}
 	if (cmd->args)
 	{
-		
-		while (cmd->args)
+		while (args_temp)
 		{
-			
 			temp = ft_strjoin(temp, " ");
 			if (!temp)
 				return (false);
-			temp = ft_strjoin(temp, cmd->args->content);
+			temp = ft_strjoin(temp, args_temp->content);
 			if (!temp)
 				return (false);
-			cmd->args = cmd->args->next;
+			args_temp = args_temp->next;
 		}
 	}
-		cmd->cmd_with_flag = ft_strjoin(temp, cmd->args->content);
+	cmd->cmd_with_flag = temp;
 	if (!cmd->cmd_with_flag)
 		return (false);
 	free (temp);
