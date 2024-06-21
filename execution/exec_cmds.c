@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 21:32:22 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/21 17:15:48 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
  */
 int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
-	(void)i;
-	(void)j;
 	/*
 		WE MUST FORK FIRST AND IN THE CHILD WE REDIRECT AND EXECUTE
 	*/
@@ -36,12 +34,21 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			exec_builtin(cmd, data);
 			close_fds(data, i);
 			exit(0);
-		}
+		} 
 		else
 		{
 			
 		}
 	}
+	else
+	{
+		//global variable status
+		waitpid(pid, 0, 0);
+		if (!strcmp(cmd->cmd_str, "export"))
+			ft_export(cmd->args, data->export_env, data->env);
+		// close_fds(data, i);
+	}
+	return (0);
 }
 
 /**

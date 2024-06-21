@@ -1,7 +1,0 @@
-1- fill in the enviroment list
-2- copy env list to a new export list
-2- if export has value ex. "l" add this to the export list only
-3- if "export value=something"  this to the export env list
-4- you need to check if there is a =  sign 
-
-we make a function that will add qoutation after the equal sign 

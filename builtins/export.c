@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 17:24:00 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:12:52 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,12 @@ void		print_env(t_list *env, bool export)
 	while (env->next && env)
 	{
 		if (export)
+		{
 			ft_putstr_fd("declare -x ", 1);
-		ft_putendl_fd(env->content, 1);
+			ft_putendl_fd(add_quotes(env->content), 1);
+		}
+		else
+			ft_putendl_fd(env->content, 1);
 		env = env->next;
 	}
 }
@@ -70,18 +74,13 @@ int			env_add(char *value, t_list *env, bool export)
 	t_list	*new;
 	t_list	*tmp;
 
+	(void)export;
 	if (env && env->content == NULL)
 	{
-		if (export)
-			env->content = ft_strdup(value);
-		else
-			env->content = add_quotes(value);
+		env->content = ft_strdup(value);
 		return (0);
 	}
-	if (export)
-		new = ft_lstnew(add_quotes(value));
-	else
-		new = ft_lstnew(ft_strdup(value));
+	new = ft_lstnew(value);
 	while (env && env->next && env->next->next)
 		env = env->next;
 	tmp = env->next;
