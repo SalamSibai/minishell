@@ -99,6 +99,7 @@ typedef struct s_lexer
 typedef struct s_data
 {
 	int			cmd_num;
+	int			cmd_ctr;
 	int			origin_fds[2];
 	t_list		*env;
 	t_list		*export_env;

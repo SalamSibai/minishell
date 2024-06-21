@@ -42,6 +42,7 @@ static void	set_env(t_data *data, char **env)
 
 static void	fill_data(t_data *data)
 {
+	data->cmd_ctr = 0;
 	data->tokens = check_expandable_var(data->tokens, data->env);
 	data->cmd_num = count_cmds(data->tokens);
 	data->cmds = ft_calloc(data->cmd_num + 1, sizeof(t_cmd *));
@@ -78,6 +79,7 @@ int main(int ac, char **av, char **env)
 		// data.tokens = ft_safe_malloc(sizeof(t_token *) * token_count(data.buf), "TOKENS");
 		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
 		scan(data.buf, data.tokens);
+		data.cmd_ctr = 0;
 		if (!validate_tokens(&data))
 			return 0;
 			// break ;

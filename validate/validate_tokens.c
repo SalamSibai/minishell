@@ -50,6 +50,7 @@ bool	validate_tokens(t_data *data) //NOTE: add t_data *data to check to send the
 			if (!validate_pipe(tokens, i))
 				return (false);
 			data->cmd_num++;
+			data->cmd_ctr = 0;
 		}
 		else if (tokens[i]->type == REDIRECT_INPUT
 				&& tokens[i]->type == HEREDOC)
