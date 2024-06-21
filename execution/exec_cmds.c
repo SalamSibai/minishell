@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 21:42:21 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:51:20 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			close_fds(data, i);
 			if (cmd->flag || cmd->args)
 			{
-				printf("here\n");
 				if (join_cmd_and_flag(cmd))
 					execve(cmd->cmd_path, &cmd->cmd_with_flag, data->env_var);
 				//else exit (failed)

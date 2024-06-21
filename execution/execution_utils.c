@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:00:18 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/21 21:46:14 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:51:04 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ bool	join_cmd_and_flag(t_cmd *cmd)
 		}
 	}
 	cmd->cmd_with_flag = ft_strdup(temp);
-	printf("cmd_with_flag: %s\n", cmd->cmd_with_flag);
 	if (!cmd->cmd_with_flag)
 		return (false);
 	free (temp);
