@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 21:10:55 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:42:21 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		WE MUST FORK FIRST AND IN THE CHILD WE REDIRECT AND EXECUTE
 	*/
 	int	pid;
-
+	
 	pid = fork();
 	// if (pid == -1)
 	// 	error_handler(FORK_ERR, 1, d, p);
@@ -47,12 +47,14 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			close_fds(data, i);
 			if (cmd->flag || cmd->args)
 			{
+				printf("here\n");
 				if (join_cmd_and_flag(cmd))
 					execve(cmd->cmd_path, &cmd->cmd_with_flag, data->env_var);
 				//else exit (failed)
 			}
 			else
 				execve(cmd->cmd_path, &cmd->cmd_str, data->env_var);
+			
 		}
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:00:18 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/21 21:14:35 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:46:14 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,15 @@ bool get_path(t_data *data, t_cmd *cmd)
 bool	join_cmd_and_flag(t_cmd *cmd)
 {
 	char	*temp;
-	int		index = 0;
 	t_list	*args_temp;
 	
 	args_temp = cmd->args;
-	if (!temp)
-		return (false);
+
+	temp = NULL;
 	if (cmd->flag)
 	{
 		temp = ft_strjoin(cmd->cmd_str, " ");
 		temp = ft_strjoin(temp, cmd->flag);
-		if (!cmd->cmd_with_flag)
-			return (false);
 	}
 	if (cmd->args)
 	{
@@ -61,7 +58,8 @@ bool	join_cmd_and_flag(t_cmd *cmd)
 			args_temp = args_temp->next;
 		}
 	}
-	cmd->cmd_with_flag = temp;
+	cmd->cmd_with_flag = ft_strdup(temp);
+	printf("cmd_with_flag: %s\n", cmd->cmd_with_flag);
 	if (!cmd->cmd_with_flag)
 		return (false);
 	free (temp);
