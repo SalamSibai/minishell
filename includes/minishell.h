@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 17:47:48 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:00:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,8 @@ bool			is_env_builtin(char *command);
 int				exec_builtin(t_cmd *cmd, t_data *data);
 void			execute_cmds(t_data *data);
 void			execution(t_data *data);
+bool			get_path(t_data *data, t_cmd *cmd);
+bool	join_cmd_and_flag(t_cmd *cmd);
 
 /* ************************************************************************** */
 /*									DEBUG									  */

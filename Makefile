@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/21 14:37:04 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/21 21:02:19 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${BUILTINS_DIR}/unset.c \
 		${EXEC_DIR}/builtins.c \
 		${EXEC_DIR}/exec_cmds.c \
+		${EXEC_DIR}/execution_utils.c \
 		${FREE_DIR}/free_data.c \
 		${FREE_DIR}/close_fds.c \
 		${DEBUG_DIR}/print_data.c \

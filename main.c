@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 14:51:47 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:02:49 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	alloc_pids(t_data *data)
 {
 	data->pipe->pid = (int *)malloc(data->cmd_num * sizeof(int));
 	if (!data->pipe->pid)
-		return (NULL);
+		return ;
 		//error_handler("Malloc: no space for pids", 1, d, p);
 }
 
@@ -107,10 +107,10 @@ int main(int ac, char **av, char **env)
 			// break ;
 		fill_data(&data);
 		//need to free the tokens
-		print_data(&data);
+		// print_data(&data);
 		//function that checks for redirections within each cmd
-		//check_redirections((&data)->cmds);
-		//execution(&data);
+		check_redirections((&data)->cmds);
+		execution(&data);
 		//exec_builtin((&data)->cmds[0], &data);
 		// execute_cmds(&data);
 		

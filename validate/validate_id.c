@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/06 17:55:20 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:08:01 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ bool validate_id(int index, t_data *data)
 	tokens = data->tokens;
 	if (index == 0 || tokens[index - 1]->type == PIPE || tokens[index - 1]->type == FILE_NAME)
 	{
-		printf("cm,d ctr is %d\n", data->cmd_ctr);
 		if (data->cmd_ctr == 0)
 		{
 			data->cmd_ctr++;
@@ -31,7 +30,6 @@ bool validate_id(int index, t_data *data)
 		}
 		else
 			tokens[index]->type = ID;
-		printf("the cmd is %d\n", tokens[index]->type );
 	}
 	else if (tokens[index - 1]->type == REDIRECT_INPUT
 			|| tokens[index - 1] ->type == REDIRECT_APPEND

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:00:18 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/20 21:39:37 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/21 21:14:35 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,35 @@ bool get_path(t_data *data, t_cmd *cmd)
 
 bool	join_cmd_and_flag(t_cmd *cmd)
 {
-	char 	*full_cmd;
 	char	*temp;
+	int		index = 0;
+	
+	
 	temp = ft_strjoin(cmd->cmd_str, " ");
 	if (!temp)
 		return (false);
-	cmd->cmd_with_flag = ft_strjoin(temp, cmd->flag);
+	if (cmd->flag)
+	{
+		temp = ft_strjoin(temp, cmd->flag);
+		if (!cmd->cmd_with_flag)
+			return (false);
+	}
+	if (cmd->args)
+	{
+		
+		while (cmd->args)
+		{
+			
+			temp = ft_strjoin(temp, " ");
+			if (!temp)
+				return (false);
+			temp = ft_strjoin(temp, cmd->args->content);
+			if (!temp)
+				return (false);
+			cmd->args = cmd->args->next;
+		}
+	}
+		cmd->cmd_with_flag = ft_strjoin(temp, cmd->args->content);
 	if (!cmd->cmd_with_flag)
 		return (false);
 	free (temp);

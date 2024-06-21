@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 17:52:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:10:55 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			if (!get_path(data, cmd))
 				ft_putstr_fd("failed to find path for the command\n", 1); //free and cleanup
 			close_fds(data, i);
-			if (cmd->flag)
+			if (cmd->flag || cmd->args)
 			{
 				if (join_cmd_and_flag(cmd))
-					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env);
+					execve(cmd->cmd_path, &cmd->cmd_with_flag, data->env_var);
 				//else exit (failed)
 			}
 			else
-				execve(cmd->cmd_path, cmd->cmd_str, data->env);
+				execve(cmd->cmd_path, &cmd->cmd_str, data->env_var);
 		}
 	}
 	else
@@ -93,7 +93,7 @@ void	execution(t_data *data)
 			if (i >= 1 && i < data->cmd_num - 1)
 			{
 				close_fds(data, i);
-				if (pipe(data->pipe->fd[!j] == -1))
+				if (pipe(data->pipe->fd[!j]) == -1)
 					ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
 			}
 			i++;
