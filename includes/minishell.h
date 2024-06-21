@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 21:35:14 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/21 17:47:48 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,15 +193,16 @@ int				ft_cd(t_cmd *cmd, t_list *env);
 int				ft_echo(t_cmd *cmd);
 int				ft_env(t_list *env);
 bool			ft_export(t_list *args, t_list *export_env, t_list *env);
-int				ft_pwd(void);
+int				ft_pwd(int fd);
 int				ft_unset(t_list *args, t_list *env);
 
 /* ************************************************************************** */
 /*									EXECUTION								  */
 /* ************************************************************************** */
-void			execute_cmds(t_data *data);
-int				is_builtin(char *command);
+bool			is_builtin(char *command);
+bool			is_env_builtin(char *command);
 int				exec_builtin(t_cmd *cmd, t_data *data);
+void			execute_cmds(t_data *data);
 void			execution(t_data *data);
 
 /* ************************************************************************** */

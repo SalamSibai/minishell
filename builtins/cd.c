@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:05:21 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/08 20:49:51 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 17:28:45 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,12 @@ int	goto_path(int option, t_list *env)
 	if (option == 0)
 	{
 		env_path = get_env_path(env, "HOME", 4);
-		// printf("%s\n", env_path);
 		if (!env_path)
 			return (ft_putendl_fd("minishell : cd: HOME not set", 2), 42);
 	}
 	else if (option == 1)
 	{
 		env_path = get_env_path(env, "OLDPWD", 6);
-		// printf("%s\n", env_path);
 		if (!env_path)
 			return (ft_putendl_fd("minishell : cd: OLDPWD not set", 2), 42);
 	}

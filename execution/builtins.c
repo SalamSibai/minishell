@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:37:54 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 15:06:56 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 17:46:41 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,40 @@
  * @param command 
  * @return 
  */
-int		is_builtin(char *command)
+bool		is_builtin(char *command)
 {
 	if (ft_strcmp(command, "echo") == 0)
-		return (1);
+		return (true);
 	if (ft_strcmp(command, "pwd") == 0)
-		return (1);
+		return (true);
 	if (ft_strcmp(command, "cd") == 0)
-		return (1);
+		return (true);
 	if (ft_strcmp(command, "env") == 0)
-		return (1);
+		return (true);
 	if (ft_strcmp(command, "export") == 0)
-		return (1);
+		return (true);
 	if (ft_strcmp(command, "unset") == 0)
-		return (1);
-	return (0);
+		return (true);
+	return (false);
+}
+
+/**
+ * @brief these builtins function to be executed in the main shell and 
+ * to exit the child process
+ * @param command 
+ * @return true if the command is not a builtin
+*/
+bool	is_env_builtin(char *command)
+{
+	if (ft_strcmp(command, "cd") == 0)
+		return(true);
+	if (ft_strcmp(command, "env") == 0)
+		return(true);
+	if (ft_strcmp(command, "export") == 0)
+		return(true);
+	if (ft_strcmp(command, "unset") == 0)
+		return(true);
+	return (false);
 }
 
 /**
@@ -51,7 +70,7 @@ int		exec_builtin(t_cmd *cmd, t_data *data)
 	if (ft_strcmp(cmd->cmd_str, "cd") == 0)
 		result = ft_cd(cmd, data->env);
 	if (ft_strcmp(cmd->cmd_str, "pwd") == 0)
-		result = ft_pwd();
+		result = ft_pwd(cmd->fd_out);
 	if (ft_strcmp(cmd->cmd_str, "env") == 0)
 		ft_env(data->env);
 	if (ft_strcmp(cmd->cmd_str, "export") == 0)

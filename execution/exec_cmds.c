@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 17:15:48 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/21 17:52:52 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		redirect_fds(data, cmd, i, j);
 		if (is_builtin(cmd->cmd_str))
 		{
+			if (is_env_builtin(cmd->cmd_str))
+			{
+				exit (2);
+			}
 			exec_builtin(cmd, data);
 			close_fds(data, i);
-			exit(0);
+			exit(2);
 		} 
 		else
 		{
@@ -44,8 +48,12 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	{
 		//global variable status
 		waitpid(pid, 0, 0);
-		if (!strcmp(cmd->cmd_str, "export"))
-			ft_export(cmd->args, data->export_env, data->env);
+		if (is_env_builtin(cmd->cmd_str))
+		{
+			exec_builtin(cmd, data);
+			// close_fds(data, i);
+		}
+			
 		// close_fds(data, i);
 	}
 	return (0);
@@ -63,15 +71,15 @@ void	execution(t_data *data)
 
 	i = 0;
 	j = 0;
-	if (data->cmd_num > 1)
-	{
-		while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)
-		{
-			data->pipe->pid[i] = (data->cmds[i], data, i, j);
-			i++;
-			j = !j;
-		}
-	}
-	else
+	// if (data->cmd_num > 1)
+	// {
+	// 	while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)
+	// 	{
+	// 		data->pipe->pid[i] = (data->cmds[i], data, i, j);
+	// 		i++;
+	// 		j = !j;
+	// 	}
+	// }
+	// else
 		exec_cmd(data->cmds[0], data, 0 , 0);
 }
