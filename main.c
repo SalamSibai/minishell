@@ -83,10 +83,10 @@ int main(int ac, char **av, char **env)
 			// break ;
 		fill_data(&data);
 		//need to free the tokens
-		// print_data(&data);
+		print_data(&data);
 		//function that checks for redirections within each cmd
-		check_redirections((&data)->cmds);
-		execution(&data);
+		//check_redirections((&data)->cmds);
+		//execution(&data);
 		//exec_builtin((&data)->cmds[0], &data);
 		// execute_cmds(&data);
 		

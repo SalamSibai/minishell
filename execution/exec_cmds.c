@@ -67,20 +67,20 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
  */
 void	execution(t_data *data)
 {
-	//int	i;
-	//int	j;
+	int	i;
+	int	j;
 
-	//i = 0;
-	//j = 0;
-	// if (data->cmd_num > 1)
-	// {
-	// 	while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)
-	// 	{
-	// 		data->pipe->pid[i] = (data->cmds[i], data, i, j);
-	// 		i++;
-	// 		j = !j;
-	// 	}
-	// }
-	// else
+	i = 0;
+	j = 0;
+	 if (data->cmd_num > 1)
+	 {
+	 	while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)
+	 	{
+	 		data->pipe->pid[i] = exec_cmd(data->cmds[i], data, i, j);
+	 		i++;
+	 		j = !j;
+	 	}
+	 }
+	 else
 		exec_cmd(data->cmds[0], data, 0 , 0);
 }

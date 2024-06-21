@@ -21,7 +21,7 @@ bool validate_id(int index, t_data *data)
 	t_token **tokens;
 	
 	tokens = data->tokens;
-	if (index == 0 || tokens[index - 1]->type == PIPE)
+	if (index == 0 || tokens[index - 1]->type == PIPE || tokens[index - 1]->type == FILE_NAME)
 		tokens[index]->type = CMDS;
 	else if (tokens[index - 1]->type == REDIRECT_INPUT
 			|| tokens[index - 1] ->type == REDIRECT_APPEND
@@ -31,9 +31,9 @@ bool validate_id(int index, t_data *data)
 		tokens[index]->type = LIMITER;
 	else if (tokens[index - 1]->type == CMDS)
 		tokens[index]->type = ID;  //what this type for -> EXEC_ID
-	// else
-	// {
-	// 	if (is_cmd(tokens[index]->token_string, data))
+	//else if (is_cmd(tokens[index]->token_string, data))
+	//{
+		
 	// 		tokens[index]->type = CMDS;
 	else
 		tokens[index]->type = ID;
