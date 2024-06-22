@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 14:15:31 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/22 18:14:51 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ bool	make_pipes(t_pipe *p)
 		if (pipe(p->fd[i]) == -1)
 			return (false);
 		i ++;
+		ft_putstr_fd("pipe open\n", 1);
 	}
 	return (true);
 }

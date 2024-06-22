@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 14:49:36 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/22 16:47:50 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ bool			redirect_file_output(t_cmd *cmd);
 bool			redirect_pipe_output(t_pipe *pipe, int j);
 bool			redirect_stdin(t_data *data, t_cmd *cmd);
 bool			redirect_stdout(t_data *data, t_cmd *cmd);
+bool			close_pipe(t_pipe *pipe, int i);
 
 
 /* ************************************************************************** */
@@ -214,7 +215,7 @@ bool			is_env_builtin(char *command);
 int				exec_builtin(t_cmd *cmd, t_data *data);
 void			execute_cmds(t_data *data);
 void			execution(t_data *data);
-bool	join_cmd_and_flag(t_cmd *cmd);
+bool			join_cmd_and_flag(t_cmd *cmd);
 
 /* ************************************************************************** */
 /*									DEBUG									  */
@@ -227,6 +228,7 @@ void			print_data(t_data *data);
 void			free_data(t_data *data);
 bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i);
+bool			close_pipes(t_pipe *pipe);
 
 //Creating a tree, where the left branch will be executed first.
 #endif
