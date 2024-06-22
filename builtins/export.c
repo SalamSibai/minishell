@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 21:24:39 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/22 21:40:20 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*add_quotes(char *value)
 		tmp2 = ft_strjoin(tmp1, "\"");
 		env_value = ft_strjoin(tmp, tmp2);
 	}
+	else
+		env_value = ft_strdup(value);
 	free(tmp);
 	free(tmp1);
 	free(tmp2);
@@ -60,7 +62,7 @@ void		print_env(t_list *env, bool export, int fd)
 			ft_putstr_fd("declare -x ", 1);
 			ft_putendl_fd(add_quotes(env->content), 1);
 		}
-		else
+		else if (ft_strchr(env->content, '='))
 			ft_putendl_fd(env->content, 1);
 		env = env->next;
 	}
@@ -73,12 +75,11 @@ void		print_env(t_list *env, bool export, int fd)
 * @param env t_env sturcture contains the enviroment list to add to it
 * @returns int 0 if sucess
 */
-int			env_add(char *value, t_list *env, bool export)
+int			env_add(char *value, t_list *env)
 {
 	t_list	*new;
 	t_list	*tmp;
 
-	(void)export;
 	if (env && env->content == NULL)
 	{
 		env->content = ft_strdup(value);
@@ -115,9 +116,9 @@ bool		ft_export(t_cmd *cmd, t_list *export_env, t_list *env)
 			if (!is_valid_env(cmd->args->content) || ft_strncmp(cmd->args->content, "=", 1) == 0)
 				return (print_error(cmd->args->content));
 			if (!is_in_env(export_env, cmd->args->content))
-				env_add(cmd->args->content, export_env, true);
+				env_add(cmd->args->content, export_env);
 			if (!is_in_env(env, cmd->args->content))
-				env_add(cmd->args->content, env, false);
+				env_add(cmd->args->content, env);
 			cmd->args = cmd->args->next;
 		}
 		cmd->args = args;
