@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 15:37:29 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 20:59:31 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:49:14 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void		sort_env(char **tab, int env_len)
  * @param env t_env the list that contains all the enviroment contents
  * @return it returns zero when succses
  */
-int		ft_env(t_list *env)
+int		ft_env(t_list *env, int fd)
 {
-	print_env(env, false);
+	print_env(env, false, fd);
 	return (0);
 }

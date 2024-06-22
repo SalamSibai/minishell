@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 14:49:36 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/22 20:20:38 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ bool			validate_input_redirection(t_token **tokens, int index);
 bool			validate_output_redirection(t_token **tokens, int index);
 bool			validate_qoutes(int index, t_data *data);
 
-void	alloc_pids(t_data *d);
-bool		make_pipes(t_pipe *p);
+void			alloc_pids(t_data *d);
+bool			make_pipes(t_pipe *p);
 
 /* ************************************************************************** */
 /*									PARSEING								  */
@@ -143,26 +143,12 @@ int				count_cmds(t_token **tokens);
 int				ft_panic(char *message, int ret);
 void			*ft_safe_malloc(size_t size, char *msg);
 
-
 /* ************************************************************************** */
 /*									TOKENS UTILS							  */
 /* ************************************************************************** */
 void			set_type(t_token *token);
 int				token_count(char *av);
 bool			is_cmd(char *cmd, t_data *data);
-
-/* ************************************************************************** */
-/*									ENVIROMENT								  */
-/* ************************************************************************** */
-t_list			*env_init(char **envp);
-t_list			*export_env_init(t_list *env);
-char			**env_to_str(t_list *env);
-bool			is_valid_env(const char *var);
-char			*add_quotes(char *value);
-void			is_in_env(t_list *env, char *args);
-char			*get_env_name(char *dest, const char *src);
-void			print_env(t_list *env, bool export);
-bool			print_error(const char *arg);
 
 /* ************************************************************************** */
 /*									REDIRECTION								  */
@@ -184,7 +170,6 @@ bool			redirect_pipe_output(t_pipe *pipe, int j);
 bool			redirect_stdin(t_data *data, t_cmd *cmd);
 bool			redirect_stdout(t_data *data, t_cmd *cmd);
 
-
 /* ************************************************************************** */
 /*									EXPANSION								  */
 /* ************************************************************************** */
@@ -197,12 +182,25 @@ char			**set_path(char **envp, t_data *data);
 bool			get_path(t_data *data, t_cmd *cmd);
 
 /* ************************************************************************** */
+/*									ENVIROMENT								  */
+/* ************************************************************************** */
+t_list			*env_init(char **envp);
+t_list			*export_env_init(t_list *env);
+char			**env_to_str(t_list *env);
+bool			is_valid_env(const char *var);
+char			*add_quotes(char *value);
+bool			is_in_env(t_list *env, char *args);
+char			*get_env_name(char *dest, const char *src);
+void			print_env(t_list *env, bool export, int fd);
+bool			print_error(const char *arg);
+
+/* ************************************************************************** */
 /*									BUILTINS								  */
 /* ************************************************************************** */
 int				ft_cd(t_cmd *cmd, t_list *env);
 int				ft_echo(t_cmd *cmd);
-int				ft_env(t_list *env);
-bool			ft_export(t_list *args, t_list *export_env, t_list *env);
+int				ft_env(t_list *env, int fd);
+bool			ft_export(t_cmd *cmd, t_list *export_env, t_list *env);
 int				ft_pwd(int fd);
 int				ft_unset(t_list *args, t_list *env);
 
@@ -214,7 +212,7 @@ bool			is_env_builtin(char *command);
 int				exec_builtin(t_cmd *cmd, t_data *data);
 void			execute_cmds(t_data *data);
 void			execution(t_data *data);
-bool	join_cmd_and_flag(t_cmd *cmd);
+bool			join_cmd_and_flag(t_cmd *cmd);
 
 /* ************************************************************************** */
 /*									DEBUG									  */

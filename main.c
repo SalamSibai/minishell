@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 14:15:31 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/22 20:15:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,24 @@ int main(int ac, char **av, char **env)
 			// break ;
 		fill_data(&data);
 		//need to free the tokens
-		//print_data(&data);
+		// print_data(&data);
+		// printf("-----------------------1---------------------------------------------\n\n\n");
+		// print_env(data.export_env, true, 1);
+		// printf("\n\n\n");
+		// print_data(&data);
+		// printf("-----------------------1---------------------------------------------\n\n\n");
 		//function that checks for redirections within each cmd
 		check_redirections((&data)->cmds);
+		// printf("-----------------------2----------------------------------------------\n\n\n");
 		execution(&data);
+		// printf("\n\n\n");
+		// print_data(&data);
+		// printf("-----------------------2----------------------------------------------\n\n\n");
+		// printf("-----------------------3----------------------------------------------\n\n\n");
+		// print_env(data.export_env, true, 1);
+		// printf("\n\n\n");
+		// print_data(&data);
+		// printf("-----------------------3----------------------------------------------\n\n\n");
 		//exec_builtin((&data)->cmds[0], &data);
 		// execute_cmds(&data);
 		

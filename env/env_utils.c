@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:51:26 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 13:17:26 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/22 21:19:37 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char		*get_env_name(char *dest, const char *src)
 {
 	int		i;
 
+	if (!src)
+		return (NULL);
 	i = 0;
 	while (src[i] && src[i] != '=' && ft_strlen(src) < BUFF_SIZE)
 	{
@@ -54,26 +56,42 @@ char		*get_env_name(char *dest, const char *src)
  * @param args the value of the env that need to be check if it already exist in the list
  * @return it returns 1 on succes of finding the name in the list and 0 on nothing to be found
  */
-void		is_in_env(t_list *env, char *args)
+bool		is_in_env(t_list *env, char *args)
 {
 	char	*env_name;
+	char	*args_w;
 	char	*tmp;
-	
+	t_list	*head;
+
+
+	head = NULL;
 	env_name = malloc(BUFF_SIZE);
+	memset(env_name, 0, BUFF_SIZE);
+	args_w = malloc(BUFF_SIZE);
+	memset(args_w, 0, BUFF_SIZE);
+	tmp = NULL;
 	if (!env_name)
-		return ;
+		return false;
+	head = env;
 	while (env)
 	{
 		tmp = env->content;
 		get_env_name(env_name, tmp);
-		if (ft_strcmp(env_name, args) == 0)
+		get_env_name(args_w, args);
+		if (ft_strcmp(env_name, args_w) == 0)
 		{
+			env->content = ft_strdup(args);
 			free(env_name);
-			return ;
+			free(args_w);
+			args_w = NULL;
+			env_name = NULL;
+			env = head;
+			return (true);
 		}
 		env = env->next;
 	}
-	return ;
+	env = head;
+	return false;
 }
 /**
  * @brief this function checks if the env variable is valid or not 
