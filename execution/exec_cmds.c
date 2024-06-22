@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 21:06:57 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/23 00:26:18 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
 	int	pid;
 
+	if (!redirect_fds(data, cmd, i, j))
+		ft_putstr_fd("\n redirect failed\n", 1);
 	pid = fork();
 	//  if (pid == -1)
 	//  	error_handler(FORK_ERR, 1, d, p);
 	if (pid == 0)
 	{
-		if (!redirect_fds(data, cmd, i, j))
-			ft_putstr_fd("\n redirect failed\n", 1);
 		if (is_builtin(cmd->cmd_str))
 		{
 			if (is_env_builtin(cmd->cmd_str))
@@ -42,7 +42,6 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			if (join_cmd_and_flag(cmd))
 			{
 				//close_fds(data, i);
-				
 				if (get_path(data, cmd))
 					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
 				else
@@ -74,6 +73,7 @@ void	execution(t_data *data)
 
 	i = 0;
 	j = 0;
+
 	if (data->cmd_num > 1)
 	{
 		alloc_pids(data);
@@ -94,6 +94,8 @@ void	execution(t_data *data)
 	}
 	else
 		exec_cmd(data->cmds[0], data, 0 , 0);
+	dup2(data->origin_fds[0], STDIN_FILENO);
+	dup2(data->origin_fds[1], STDOUT_FILENO);
 	i = 0;
 	// while (i < data->cmd_num)
 	// {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_fds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/22 17:57:59 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/23 00:25:05 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 		if (cmd->fd_in != -1)
 		{
 			ft_putstr_fd("READING FROM A FILE\n", 1);
-			//close_fd(data->origin_fds[0]);
-			//ft_putstr_fd(ft_itoa(cmd->fd_in), 1);
 			if (!redirect_file_input(cmd))
 				return (false);
 		}
@@ -61,6 +59,7 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 		}
 		else
 		{
+			printf("here(out)\n\n");
 			redirect_stdout(data, cmd);
 		}
 	}
