@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 21:00:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/22 14:49:36 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_cmd
 	int				fd_out;
 	char			*cmd_path;
 	char			*cmd_str;
-	char			*cmd_with_flag;
+	char			**cmd_with_flag;
 	char			*flag;
 	char			*args_str;
 	t_list			*args;
@@ -181,6 +181,9 @@ bool			redirect_file_input(t_cmd *cmd);
 bool			redirect_pipe_input(t_pipe *pipe, int j);
 bool			redirect_file_output(t_cmd *cmd);
 bool			redirect_pipe_output(t_pipe *pipe, int j);
+bool			redirect_stdin(t_data *data, t_cmd *cmd);
+bool			redirect_stdout(t_data *data, t_cmd *cmd);
+
 
 /* ************************************************************************** */
 /*									EXPANSION								  */
@@ -191,6 +194,7 @@ t_token			**check_expandable_var(t_token **tokens, t_list *env);
 /*									PATH									  */
 /* ************************************************************************** */
 char			**set_path(char **envp, t_data *data);
+bool			get_path(t_data *data, t_cmd *cmd);
 
 /* ************************************************************************** */
 /*									BUILTINS								  */
@@ -204,13 +208,12 @@ int				ft_unset(t_list *args, t_list *env);
 
 /* ************************************************************************** */
 /*									EXECUTION								  */
-/* ************************************************************************** */
+/* *********************************************************************** */
 bool			is_builtin(char *command);
 bool			is_env_builtin(char *command);
 int				exec_builtin(t_cmd *cmd, t_data *data);
 void			execute_cmds(t_data *data);
 void			execution(t_data *data);
-bool			get_path(t_data *data, t_cmd *cmd);
 bool	join_cmd_and_flag(t_cmd *cmd);
 
 /* ************************************************************************** */

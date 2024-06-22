@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 21:51:20 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/22 14:50:13 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,27 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		} 
 		else
 		{
-			if (!get_path(data, cmd))
 				ft_putstr_fd("failed to find path for the command\n", 1); //free and cleanup
-			close_fds(data, i);
-			if (cmd->flag || cmd->args)
-			{
+			//close_fds(data, i);
+			// if (cmd->flag || cmd->args)
+			// {
 				if (join_cmd_and_flag(cmd))
-					execve(cmd->cmd_path, &cmd->cmd_with_flag, data->env_var);
+				{
+					if (get_path(data, cmd))
+						execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
+					else
+						ft_putstr_fd("FAILED TO EXECUTE CMD\n", 1);
+				}
 				//else exit (failed)
-			}
-			else
-				execve(cmd->cmd_path, &cmd->cmd_str, data->env_var);
-			
+			// }
+			// }
+			// else
+			// {
+			// 	if (get_path(data, cmd, false))
+			// 		execve(cmd->cmd_path, &cmd->cmd_str, data->env_var);
+			// 	else
+			// 		ft_putstr_fd("FAILED TO EXECUTE CMD\n", 1);
+			// }
 		}
 	}
 	else

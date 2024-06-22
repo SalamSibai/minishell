@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_id.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/21 21:08:01 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/22 13:56:30 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ bool validate_id(int index, t_data *data)
 		tokens[index]->type = ID;  //what this type for -> EXEC_ID
 	//else if (is_cmd(tokens[index]->token_string, data))
 	//{
-		
 	// 		tokens[index]->type = CMDS;
 	else
 		tokens[index]->type = ID;

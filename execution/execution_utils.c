@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:00:18 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/21 21:51:04 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/22 14:49:50 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ bool get_path(t_data *data, t_cmd *cmd)
 	while (data->path[i] != NULL)
 	{
 		cmd->cmd_path = ft_strjoin(data->path[i], cmd->cmd_str);
-		if (!cmd->cmd_path)
-			return (false);
+		// if (!cmd->cmd_path)
+		// 	return (false);
 		if (access(cmd->cmd_path, F_OK) == 0)
 			return (true);
 		free(cmd->cmd_path);
@@ -34,33 +34,27 @@ bool get_path(t_data *data, t_cmd *cmd)
 
 bool	join_cmd_and_flag(t_cmd *cmd)
 {
-	char	*temp;
 	t_list	*args_temp;
-	
-	args_temp = cmd->args;
+	int		size;
+	int		i;
 
-	temp = NULL;
+	i = 1;
+	size = ft_lstsize(cmd->args);
 	if (cmd->flag)
+		size ++;
+	cmd->cmd_with_flag = ft_calloc(size + 2, sizeof(char *));
+	args_temp = cmd->args;
+	cmd->cmd_with_flag[0] = ft_strdup(cmd->cmd_str);
+	if (cmd->flag)
+		cmd->cmd_with_flag[i++] = ft_strdup(cmd->flag);
+	while (args_temp)
 	{
-		temp = ft_strjoin(cmd->cmd_str, " ");
-		temp = ft_strjoin(temp, cmd->flag);
+		cmd->cmd_with_flag[i] = ft_strdup(args_temp->content);
+		args_temp = args_temp->next;
+		i ++;
 	}
-	if (cmd->args)
-	{
-		while (args_temp)
-		{
-			temp = ft_strjoin(temp, " ");
-			if (!temp)
-				return (false);
-			temp = ft_strjoin(temp, args_temp->content);
-			if (!temp)
-				return (false);
-			args_temp = args_temp->next;
-		}
-	}
-	cmd->cmd_with_flag = ft_strdup(temp);
+	cmd->cmd_with_flag[i] = NULL;
 	if (!cmd->cmd_with_flag)
 		return (false);
-	free (temp);
 	return (true);
 }
