@@ -6,54 +6,12 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 17:30:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 00:43:35 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "includes/minishell.h"
-
-/*
-	execution flow:
-		1) create t_data struct and initialize
-			- split the PATH into the **path variable
-			- store env in **envp
-			- initialize and set t_env variable
-		2) malloc for and initialize parse_data
-		3) scan and fill in lexer & tokens
-			- check the tokens, sets the type, and the string that represents the token.
-			- increments the lexer (based on the token type)
-			- this function also cleans up the string, making sure there are no spaces etc
-		4) start filling in **cmd variable from the tokens
-		5) if we have pipes:
-			- initialzie and set the *pipe varibale from the lexer and the tokenizer
-		6) if we have redirections:
-			- "> outfile_name" we check the syntax correctness (has a filename or limiter after)
-			- if everything is fine, we initialize and store
-*/
-
-bool	make_pipes(t_pipe *p)
-{
-	int	i;
-
-	i = 0;
-	while (i < 2)
-	{
-		if (pipe(p->fd[i]) == -1)
-			return (false);
-		i ++;
-		ft_putstr_fd("pipe open\n", 1);
-	}
-	return (true);
-}
-
-void	alloc_pids(t_data *data)
-{
-	data->pipe->pid = (int *)malloc(data->cmd_num * sizeof(int));
-	if (!data->pipe->pid)
-		return ;
-		//error_handler("Malloc: no space for pids", 1, d, p);
-}
 
 static void	set_env(t_data *data, char **env)
 {
@@ -80,44 +38,36 @@ int main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-
 	set_env(&data, env);
-
-	///
-	// data.buf = "echo hello world > df > 1 < 2 | echo 'hello world' << f > 3 > 4 > 7 | ls -l ";
 	while (1)
 	{
+		data.buf = NULL;
 		data.buf = readline("minishell$ ");
-		add_history(data.buf);
 		if (!data.buf )
 		{
 			printf("exit\n");
 			exit(1);
 		}
+		if (ft_strcmp(data.buf, "") == 0)
+				return (1);
+		if (ft_strlen(data.buf) > 0)
+			add_history(data.buf);
 		if (!validate_syntax(data.buf))
 		{
 			free(data.buf);
 			// continue;
 		}
-		// data.tokens = ft_safe_malloc(sizeof(t_token *) * token_count(data.buf), "TOKENS");
 		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
 		scan(data.buf, data.tokens);
 		data.cmd_ctr = 0;
 		if (!validate_tokens(&data))
 			return 0;
-			// break ;
 		fill_data(&data);
 		//need to free the tokens
-		//print_data(&data);
-		//function that checks for redirections within each cmd
+		// print_data(&data);
 		check_redirections((&data)->cmds);
 		execution(&data);
-		//exec_builtin((&data)->cmds[0], &data);
-		// execute_cmds(&data);
-		
-	//execute the input
-
-	// free everything before next itiration
+		// printf("data.buf: %s\n", data.buf);
 	}
 	// free_data(&data);
 	// return (0);

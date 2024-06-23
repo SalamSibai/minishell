@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_inputs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:49:48 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 19:12:55 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/24 00:00:55 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 bool	redirect_file_input(t_cmd *cmd)
 {
-	printf("Redirecting file input\n");
 	if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
 		return (false);
 	close(cmd->fd_in);

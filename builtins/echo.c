@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:27:51 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 19:52:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 23:37:02 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int			nb_args(t_list *args)
 }
 /**
  * @brief this function display the a line of text that given by args[0]
- * 
- *
  * @param args An array of strings representing the command and its arguments.
  * an array of strings represent the text to be displayed in args[0]
  * and args[i] will be the option of to display the text for example with a new line 
@@ -39,14 +37,9 @@ int			nb_args(t_list *args)
  */
 int		ft_echo(t_cmd *cmd)
 {
-	int		nl;
 	t_list	*args;
-	
-	// if (!cmd->redirection)
-	// 	fd = 0;
-	// else
-	// 	fd = redir_last(cmd->redirection)->fd;
-	//print whatever the argumnets are
+	int		nl;
+
 	args = cmd->args;
 	nl = 1;
 	if (nb_args(args) > 1)
@@ -56,13 +49,12 @@ int		ft_echo(t_cmd *cmd)
 	}
 	while (args)
 	{
-		//how could we find the last redirection output file to write to it??
-		ft_putstr_fd(args->content, cmd->fd_out);
+		ft_putstr_fd(args->content, 1);
 		args = args->next;
 		if (args)
-			ft_putstr_fd(" ", cmd->fd_out);
+			ft_putstr_fd(" ", 1);
 	}
 	if (nl)
-		ft_putstr_fd("\n", cmd->fd_out);
+		ft_putstr_fd("\n", 1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 19:18:24 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/24 00:40:25 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,15 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		{
 			if (is_env_builtin(cmd->cmd_str))
 				exit (2);
-			//close_fds(data, i);
 			exec_builtin(cmd, data);
 			exit(2);
 		} 
 		else
 		{
-			// if (!redirect_fds(data, cmd, i, j))
-			// 	ft_putstr_fd("\n redirect failed\n", 1);
 			if (join_cmd_and_flag(cmd))
 			{
 				if (get_path(data, cmd))
 				{
-					//close_fds(data, i);
 					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
 				}
 				else
@@ -63,7 +59,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			exec_builtin(cmd, data);
 		//close_fds(data, i);
 	}
-	return (0);
+	return (pid);
 }
 
 /**
@@ -85,7 +81,7 @@ void	execution(t_data *data)
 		alloc_pids(data);
 		if (!make_pipes(data->pipe))
 			ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
-		while (data->cmds[i] != NULL && data->cmds[i]->cmd_str != NULL)
+		while (data->cmds[i] != NULL)
 		{
 			data->pipe->pid[i] = exec_cmd(data->cmds[i], data, i, j);
 			if (i >= 1 && i < data->cmd_num - 1)
@@ -100,14 +96,15 @@ void	execution(t_data *data)
 	}
 	else
 		exec_cmd(data->cmds[0], data, 0 , 0);
-	i = 0;
-	dup2(data->origin_fds[0], STDIN_FILENO);
-	dup2(data->origin_fds[1], STDOUT_FILENO);
-	while (i < data->cmd_num)
-		close_fds(data, i++);
-	//i = 0;
+	// i = 0;
 	// while (i < data->cmd_num)
 	// {
-	// 	waitpid(data->pipe->pid[i++], 0, 0);
+	// 	waitpid(data->pipe->pid[i], 0, 0);
+	// 	i++;
 	// }
+	// dup2(data->origin_fds[0], STDIN_FILENO);
+	// dup2(data->origin_fds[1], STDOUT_FILENO);
+	// while (i < data->cmd_num)
+	// 	close_fds(data, i++);
+	//i = 0;
 }

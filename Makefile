@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/22 20:38:52 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/23 23:37:28 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${REDIR_DIR}/redirect_fds.c\
 		${REDIR_DIR}/redirect_inputs.c\
 		${REDIR_DIR}/redirect_output.c\
+		${REDIR_DIR}/pipes_utils.c\
 		${BUILTINS_DIR}/cd.c \
 		${BUILTINS_DIR}/echo.c \
 		${BUILTINS_DIR}/env.c \

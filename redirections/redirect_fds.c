@@ -3,86 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_fds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 19:13:08 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/24 00:37:42 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
+static bool	redirect_inputs(t_data *data,t_cmd *cmd, int i, int j)
 {
-	printf(" i is %d\n", i);
 	if (i == 0)
 	{
 		data->origin_fds[0] = dup(STDIN_FILENO);
 		data->origin_fds[1] = dup(STDOUT_FILENO);
-		printf("fd in is %d\n", cmd->fd_in);
 		if (cmd->fd_in != -1)
 		{
 			if (!redirect_file_input(cmd))
 				return (false);
 		}
-		else
-		{
-			if (!redirect_stdin(data, cmd))
-				return (false);
-		}
+		else if (!redirect_stdin(data, cmd))
+			return (false);
 	}
 	else
 	{
-		printf("going here!\n");
 		if (cmd->fd_in != -1)
 		{
 			if (!redirect_file_input(cmd))
-			{
-				printf("failed at input\n");
 				return (false);
-			}
 		}
-		else
-		{
-			if (!redirect_pipe_input(data->pipe, !j))
-			{
-				printf("failed at input\n");
-				return (false);
-			}
-		}
+		else if (!redirect_pipe_input(data->pipe, !j))
+			return (false);
 	}
+	return (true);
+}
+
+static bool	redirect_outputs(t_data *data,t_cmd *cmd, int i, int j)
+{
 	if (i == data->cmd_num - 1)
 	{
 		if (cmd->fd_out != -1)
 		{
 			if (!redirect_file_output(cmd))
-			{
-				printf("failed at output\n");
-				return (false);
-			}
-		}
-		else
-		{
-			if (!redirect_stdout(data, cmd))
 				return (false);
 		}
+		else if (!redirect_stdout(data, cmd))
+			return (false);
 	}
 	else
 	{
 		if (cmd->fd_out != -1)
 		{
 			if (!redirect_file_output(cmd))
-			{
-				printf("failed at output\n");
 				return (false);
-			}
 		}
 		else if (!redirect_pipe_output(data->pipe, j))
-		{
-			printf("failed at output\n");
 			return (false);
-		}
 	}
 	return (true);
 }
 
+bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
+{
+	if (!redirect_inputs(data, cmd, i, j))
+		return (false);
+	if (!redirect_outputs(data, cmd, i, j))
+		return (false);
+	return (true);
+}
