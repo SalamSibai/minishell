@@ -103,3 +103,5 @@ bash-3.2$ cat << l << k
 > k
 456
 
+
+any syntax error 258 
