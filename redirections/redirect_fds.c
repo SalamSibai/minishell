@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 00:25:05 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:55:08 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 	{
 		if (cmd->fd_in != -1)
 		{
-			ft_putstr_fd("READING FROM A FILE\n", 1);
 			if (!redirect_file_input(cmd))
 				return (false);
 		}
@@ -59,17 +58,21 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 		}
 		else
 		{
-			printf("here(out)\n\n");
-			redirect_stdout(data, cmd);
+			if (redirect_stdout(data, cmd))
+				return (false);
 		}
 	}
 	else
 	{
 		if (cmd->fd_out != -1)
 		{
-			dup2(cmd->fd_out, STDOUT_FILENO);
+			if (!redirect_file_output(cmd))
+			{
+				printf("failed at output\n");
+				return (false);
+			}
 		}
-		if (!redirect_pipe_output(data->pipe, j))
+		else if (!redirect_pipe_output(data->pipe, j))
 		{
 			printf("failed at output\n");
 			return (false);

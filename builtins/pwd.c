@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:14:41 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 17:48:28 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 14:15:09 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
  * @brief this function will printed the current working directory 
  * @return itll return 1 on succes and zero on failure
  */
-int		ft_pwd(int fd)
+int		ft_pwd(void)
 {
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, PATH_MAX))
 	{
-		ft_putendl_fd(cwd, fd);
+		ft_putendl_fd(cwd, 1);
 		return (1);
 	}
 	else

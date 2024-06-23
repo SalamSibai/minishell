@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 00:26:18 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:55:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	//  	error_handler(FORK_ERR, 1, d, p);
 	if (pid == 0)
 	{
+			
 		if (is_builtin(cmd->cmd_str))
 		{
 			if (is_env_builtin(cmd->cmd_str))
