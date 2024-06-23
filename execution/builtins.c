@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:37:54 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 20:20:34 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:30:00 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		exec_builtin(t_cmd *cmd, t_data *data)
 	if (ft_strcmp(cmd->cmd_str, "cd") == 0)
 		result = ft_cd(cmd, data->env);
 	if (ft_strcmp(cmd->cmd_str, "pwd") == 0)
-		result = ft_pwd(cmd->fd_out);
+		result = ft_pwd();
 	if (ft_strcmp(cmd->cmd_str, "env") == 0)
 		ft_env(data->env, cmd->fd_out);
 	if (ft_strcmp(cmd->cmd_str, "export") == 0)

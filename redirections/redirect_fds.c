@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_fds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/22 14:04:35 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/23 17:12:14 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 	{
 		if (cmd->fd_in != -1)
 		{
-			close_fd(data->origin_fds[0]);
 			if (!redirect_file_input(cmd))
 				return (false);
 		}
@@ -59,16 +58,21 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 		}
 		else
 		{
-			redirect_stdout(data, cmd);
+			if (!redirect_stdout(data, cmd))
+				return (false);
 		}
 	}
 	else
 	{
 		if (cmd->fd_out != -1)
 		{
-			dup2(cmd->fd_out, STDOUT_FILENO);
+			if (!redirect_file_output(cmd))
+			{
+				printf("failed at output\n");
+				return (false);
+			}
 		}
-		if (!redirect_pipe_output(data->pipe, j))
+		else if (!redirect_pipe_output(data->pipe, j))
 		{
 			printf("failed at output\n");
 			return (false);

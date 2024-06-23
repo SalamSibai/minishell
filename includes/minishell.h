@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 20:20:38 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:34:19 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ bool			redirect_file_output(t_cmd *cmd);
 bool			redirect_pipe_output(t_pipe *pipe, int j);
 bool			redirect_stdin(t_data *data, t_cmd *cmd);
 bool			redirect_stdout(t_data *data, t_cmd *cmd);
+bool			close_pipe(t_pipe *pipe, int i);
 
 /* ************************************************************************** */
 /*									EXPANSION								  */
@@ -201,7 +202,7 @@ int				ft_cd(t_cmd *cmd, t_list *env);
 int				ft_echo(t_cmd *cmd);
 int				ft_env(t_list *env, int fd);
 bool			ft_export(t_cmd *cmd, t_list *export_env, t_list *env);
-int				ft_pwd(int fd);
+int				ft_pwd(void);
 int				ft_unset(t_list *args, t_list *env);
 
 /* ************************************************************************** */
@@ -225,6 +226,7 @@ void			print_data(t_data *data);
 void			free_data(t_data *data);
 bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i);
+bool			close_pipes(t_pipe *pipe);
 
 //Creating a tree, where the left branch will be executed first.
 #endif

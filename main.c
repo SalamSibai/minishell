@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 21:35:05 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:30:08 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ bool	make_pipes(t_pipe *p)
 		if (pipe(p->fd[i]) == -1)
 			return (false);
 		i ++;
+		ft_putstr_fd("pipe open\n", 1);
 	}
 	return (true);
 }

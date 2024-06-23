@@ -6,14 +6,14 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:00:18 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/22 14:49:50 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/22 15:36:09 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//create function that checks whether the fd we read/write to is the pipe or the set fd
-
+/// @brief returns the path where the cmd is
+/// @return true if the path was found
 bool get_path(t_data *data, t_cmd *cmd)
 {
 	int		i;
@@ -22,8 +22,6 @@ bool get_path(t_data *data, t_cmd *cmd)
 	while (data->path[i] != NULL)
 	{
 		cmd->cmd_path = ft_strjoin(data->path[i], cmd->cmd_str);
-		// if (!cmd->cmd_path)
-		// 	return (false);
 		if (access(cmd->cmd_path, F_OK) == 0)
 			return (true);
 		free(cmd->cmd_path);
@@ -32,6 +30,8 @@ bool get_path(t_data *data, t_cmd *cmd)
 	return (false);
 }
 
+/// @brief fills the double pointer that holds the cmd and its flags &args
+/// @return true if it succeeds.
 bool	join_cmd_and_flag(t_cmd *cmd)
 {
 	t_list	*args_temp;
