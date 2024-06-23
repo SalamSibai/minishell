@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 18:42:55 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 19:18:24 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	if (!redirect_fds(data, cmd, i, j))
 		ft_putstr_fd("\n redirect failed\n", 1);
 	pid = fork();
-	//  if (pid == -1)
-	//  	error_handler(FORK_ERR, 1, d, p);
+	if (pid == -1)
+		ft_putstr_fd("ERROR WITH FORK", 1);
 	if (pid == 0)
 	{
-			
 		if (is_builtin(cmd->cmd_str))
 		{
 			if (is_env_builtin(cmd->cmd_str))
@@ -40,14 +39,20 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		} 
 		else
 		{
+			// if (!redirect_fds(data, cmd, i, j))
+			// 	ft_putstr_fd("\n redirect failed\n", 1);
 			if (join_cmd_and_flag(cmd))
 			{
-				//close_fds(data, i);
 				if (get_path(data, cmd))
+				{
+					//close_fds(data, i);
 					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
+				}
 				else
 					ft_putstr_fd("FAILED TO EXECUTE CMD\n", 1);
 			}
+			else
+				ft_putstr_fd("COMMAND NOT FOUND\n", 1);
 		}
 	}
 	else
@@ -95,9 +100,12 @@ void	execution(t_data *data)
 	}
 	else
 		exec_cmd(data->cmds[0], data, 0 , 0);
+	i = 0;
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
-	i = 0;
+	while (i < data->cmd_num)
+		close_fds(data, i++);
+	//i = 0;
 	// while (i < data->cmd_num)
 	// {
 	// 	waitpid(data->pipe->pid[i++], 0, 0);

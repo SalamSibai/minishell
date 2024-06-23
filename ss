@@ -1,6 +1,2 @@
-failed at input
-
- redirect failed
-FAILED TO EXECUTE CMD
-minishell$ 
-minishell$ ^Dexit
+ i is 1
+going here!
