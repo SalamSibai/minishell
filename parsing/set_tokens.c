@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:24:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 20:18:49 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 20:22:02 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,5 @@ int	token_count(char *av)
 	if (in_token)
 		token_ctr++;
 	// printf("Token count: %d\n", token_ctr);
-	return (token_ctr + 1);
+	return (token_ctr + 2);
 }

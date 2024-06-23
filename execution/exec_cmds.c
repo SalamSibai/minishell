@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 00:40:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:07:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		ft_putstr_fd("ERROR WITH FORK", 1);
 	if (pid == 0)
 	{
+		// if (!redirect_fds(data, cmd, i, j))
+		// 	ft_putstr_fd("\n redirect failed\n", 1);
 		if (is_builtin(cmd->cmd_str))
 		{
 			if (is_env_builtin(cmd->cmd_str))
@@ -96,7 +98,12 @@ void	execution(t_data *data)
 	}
 	else
 		exec_cmd(data->cmds[0], data, 0 , 0);
-	// i = 0;
+	i = 0;
+	dup2(STDIN_FILENO, data->origin_fds[0]);
+	dup2(STDOUT_FILENO, data->origin_fds[1]);
+	while (i < data->cmd_num)
+		close_fds(data, i++);
+	//i = 0;
 	// while (i < data->cmd_num)
 	// {
 	// 	waitpid(data->pipe->pid[i], 0, 0);

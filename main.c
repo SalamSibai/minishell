@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 00:43:35 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:06:23 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ int main(int ac, char **av, char **env)
 	{
 		data.buf = NULL;
 		data.buf = readline("minishell$ ");
+		add_history(data.buf);
 		if (!data.buf )
 		{
 			printf("exit\n");
-			exit(1);
+			exit(3);
 		}
 		if (ft_strcmp(data.buf, "") == 0)
 				return (1);
