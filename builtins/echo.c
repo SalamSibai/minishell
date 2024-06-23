@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:27:51 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 19:52:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 19:50:56 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int		ft_echo(t_cmd *cmd)
 	while (args)
 	{
 		//how could we find the last redirection output file to write to it??
-		ft_putstr_fd(args->content, cmd->fd_out);
+		ft_putstr_fd(args->content, 1);
 		args = args->next;
 		if (args)
-			ft_putstr_fd(" ", cmd->fd_out);
+			ft_putstr_fd(" ", 1);
 	}
 	if (nl)
-		ft_putstr_fd("\n", cmd->fd_out);
+		ft_putstr_fd("\n", 1);
 	return (0);
 }
