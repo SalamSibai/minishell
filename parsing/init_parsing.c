@@ -126,5 +126,6 @@ void	scan(char *buff,t_token **tokens)
 			i = c;
 		}
 	}
-	tokens[token_ctr] = NULL;
+	printf("token ctr %d\n", token_ctr); 
+	// tokens[token_ctr] = NULL;
 }

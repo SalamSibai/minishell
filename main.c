@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 17:30:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 19:57:07 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ int main(int ac, char **av, char **env)
 			// break ;
 		fill_data(&data);
 		//need to free the tokens
-		//print_data(&data);
+		print_data(&data);
 		//function that checks for redirections within each cmd
-		check_redirections((&data)->cmds);
-		execution(&data);
+		// check_redirections((&data)->cmds);
+		// execution(&data);
 		//exec_builtin((&data)->cmds[0], &data);
 		// execute_cmds(&data);
 		
