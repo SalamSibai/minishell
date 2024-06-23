@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 16:55:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:12:14 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 		}
 		else
 		{
-			if (redirect_stdout(data, cmd))
+			if (!redirect_stdout(data, cmd))
 				return (false);
 		}
 	}
