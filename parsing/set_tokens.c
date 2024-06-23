@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:24:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/08 21:29:34 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 20:18:49 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,11 @@ void	set_type(t_token *token)
 int	token_count(char *av)
 {
 	int i = -1;
-	int token_ctr = 0;
+	int token_ctr = 1;
 	int in_token = 0;
 
+	if (av[i + 1] == '\0')
+		return (token_ctr);
 	i = ft_skipspaces(av);
 	while (av[++i])
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_id.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/22 13:56:30 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/23 20:14:37 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ bool validate_id(int index, t_data *data)
 	t_token **tokens;
 	
 	tokens = data->tokens;
-	if (index == 0 || tokens[index - 1]->type == PIPE || tokens[index - 1]->type == FILE_NAME)
+	if (index == 0 || tokens[index - 1]->type == PIPE || tokens[index - 1]->type == FILE_NAME 
+			|| tokens[index - 1]->type == LIMITER)
 	{
 		if (data->cmd_ctr == 0)
 		{
