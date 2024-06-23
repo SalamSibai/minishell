@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 18:48:16 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/23 19:18:24 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
 	int	pid;
 
-	// if (!redirect_fds(data, cmd, i, j))
-	// 	ft_putstr_fd("\n redirect failed\n", 1);
+	if (!redirect_fds(data, cmd, i, j))
+		ft_putstr_fd("\n redirect failed\n", 1);
 	pid = fork();
 	if (pid == -1)
 		ft_putstr_fd("ERROR WITH FORK", 1);
@@ -39,13 +39,13 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		} 
 		else
 		{
-			if (!redirect_fds(data, cmd, i, j))
-				ft_putstr_fd("\n redirect failed\n", 1);
+			// if (!redirect_fds(data, cmd, i, j))
+			// 	ft_putstr_fd("\n redirect failed\n", 1);
 			if (join_cmd_and_flag(cmd))
 			{
 				if (get_path(data, cmd))
 				{
-					close_fds(data, i);
+					//close_fds(data, i);
 					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
 				}
 				else
@@ -101,10 +101,10 @@ void	execution(t_data *data)
 	else
 		exec_cmd(data->cmds[0], data, 0 , 0);
 	i = 0;
+	dup2(data->origin_fds[0], STDIN_FILENO);
+	dup2(data->origin_fds[1], STDOUT_FILENO);
 	while (i < data->cmd_num)
 		close_fds(data, i++);
-	// dup2(data->origin_fds[0], STDIN_FILENO);
-	// dup2(data->origin_fds[1], STDOUT_FILENO);
 	//i = 0;
 	// while (i < data->cmd_num)
 	// {

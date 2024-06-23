@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:49:57 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 18:37:14 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 19:11:24 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ bool	redirect_pipe_output(t_pipe *pipe, int j)
 
 bool	redirect_stdout(t_data *data, t_cmd *cmd)
 {
+	// data->origin_fds[1] = dup(STDOUT_FILENO);
 	cmd->fd_out = data->origin_fds[1];
 	if (dup2(data->origin_fds[1], STDOUT_FILENO) == -1)
 	{
-		ft_putstr_fd("failed at input\n", 1);
+		ft_putstr_fd("failed at output\n", 1);
 		return (false);
 	}
 	close(cmd->fd_out);
