@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 19:57:07 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/23 22:06:12 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ int main(int ac, char **av, char **env)
 	{
 		data.buf = readline("minishell$ ");
 		add_history(data.buf);
-		if (!data.buf )
+		if (!data.buf)
 		{
 			printf("exit\n");
-			exit(1);
+			exit(3);
 		}
 		if (!validate_syntax(data.buf))
 		{
@@ -108,10 +108,10 @@ int main(int ac, char **av, char **env)
 			// break ;
 		fill_data(&data);
 		//need to free the tokens
-		print_data(&data);
+		//print_data(&data);
 		//function that checks for redirections within each cmd
-		// check_redirections((&data)->cmds);
-		// execution(&data);
+		check_redirections((&data)->cmds);
+		execution(&data);
 		//exec_builtin((&data)->cmds[0], &data);
 		// execute_cmds(&data);
 		
