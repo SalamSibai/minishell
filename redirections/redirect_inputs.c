@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:49:48 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 18:01:55 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:37:23 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ bool	redirect_file_input(t_cmd *cmd)
 	if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
 		return (false);
 	close(cmd->fd_in);
-	ft_putstr_fd("successful redirection\n", 1);
 	return (true);
 }
 
