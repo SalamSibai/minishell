@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_fds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 16:55:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:13:03 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 		}
 		else
 		{
-			if (redirect_stdout(data, cmd))
+			if (!redirect_stdout(data, cmd))
 				return (false);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 14:15:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:31:24 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void			print_data(t_data *data);
 void			free_data(t_data *data);
 bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i);
-bool			close_pipes(t_pipe *pipe);
+bool			close_pipe(t_pipe *pipe, int i);
 
 //Creating a tree, where the left branch will be executed first.
 #endif
