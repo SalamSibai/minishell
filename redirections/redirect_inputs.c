@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:49:48 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 16:42:46 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:37:23 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ bool	redirect_file_input(t_cmd *cmd)
 	if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
 		return (false);
 	close(cmd->fd_in);
-	ft_putstr_fd("successful redirection\n", 1);
 	return (true);
 }
 
@@ -38,11 +37,11 @@ bool	redirect_stdin(t_data *data, t_cmd *cmd)
 	data->origin_fds[0] = dup(STDIN_FILENO);
 	data->origin_fds[1] = dup(STDOUT_FILENO);
 	cmd->fd_in = data->origin_fds[0];
-	// cmd->fd_out = data->origin_fds[1];
-	if (cmd->fd_in == -1)
+	if (dup2(data->origin_fds[0], STDIN_FILENO) == -1)
 	{
-		ft_putstr_fd("still -1\n", 1);
+		ft_putstr_fd("failed at input\n", 1);
 		return (false);
 	}
+	close(cmd->fd_in);
 	return (true);
 }

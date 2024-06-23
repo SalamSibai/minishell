@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 13:58:41 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 20:38:22 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/22 21:22:37 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ int			is_in_env_remove(t_list *env, char *args)
 {
 	char	var_name[BUFF_SIZE];
 	char	env_name[BUFF_SIZE];
+	t_list	*head;
 
+	head = env;
 	get_env_name(var_name, args);
-	while (env && env->next)
+	while (env)
 	{
-		get_env_name(env_name, env->content);
-		if (ft_strcmp(var_name, env_name) == 0)
+		if ((env)->next && (env)->next->content)
 		{
-			if (env->next->next)
+			get_env_name(env_name, (env)->next->content);
+			if (ft_strcmp(var_name, env_name) == 0)
 				env->next = env->next->next;
-			else
-				env->next = NULL;
-			return (1);
 		}
 		env = env->next;
 	}
+	env = head;
 	return (0);
 }
 /**
@@ -49,12 +49,15 @@ int			is_in_env_remove(t_list *env, char *args)
  */
 int	ft_unset(t_list *args, t_list *env)
 {
-	if (!args)
+	t_list *tmp;
+
+	tmp = args;
+	if (!tmp)
 		return (0);
-	while (args)
+	while (tmp)
 	{
-		is_in_env_remove(env, args->content);
-		args = args->next;
+		is_in_env_remove(env, tmp->content);
+		tmp = tmp->next;
 	}
 	return (1);
 }
