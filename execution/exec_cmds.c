@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 19:03:17 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 20:06:56 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,17 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
 	int	pid;
 
-	if (!redirect_fds(data, cmd, i, j))
-		ft_putstr_fd("\n redirect failed\n", 1);
+	// if (!redirect_fds(data, cmd, i, j))
+	// 	ft_putstr_fd("\n redirect failed\n", 1);
 	pid = fork();
 	if (pid == -1)
 		ft_putstr_fd("ERROR WITH FORK", 1);
 	if (pid == 0)
 	{
+		data->origin_fds[0] = dup(STDIN_FILENO);
+		data->origin_fds[1] = dup(STDOUT_FILENO);
+		if (!redirect_fds(data, cmd, i, j))
+			ft_putstr_fd("\n redirect failed\n", 1);
 		if (is_builtin(cmd->cmd_str))
 		{
 			if (is_env_builtin(cmd->cmd_str))
@@ -51,12 +55,12 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 				ft_putstr_fd("COMMAND NOT FOUND\n", 1);
 		}
 	}
-	else
-	{
-		waitpid(pid, 0, 0);
-		if (is_env_builtin(cmd->cmd_str))
-			exec_builtin(cmd, data);
-	}
+	// else
+	// {
+	// 	waitpid(pid, 0, 0);
+	// 	if (is_env_builtin(cmd->cmd_str))
+	// 		exec_builtin(cmd, data);
+	// }
 	return (pid);
 }
 
@@ -74,9 +78,9 @@ void	execution(t_data *data)
 	i = 0;
 	j = 0;
 
+	alloc_pids(data);
 	if (data->cmd_num > 1)
 	{
-		alloc_pids(data);
 		if (!make_pipes(data->pipe))
 			ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
 		while (data->cmds[i] != NULL)
@@ -93,8 +97,13 @@ void	execution(t_data *data)
 		}
 	}
 	else
-		exec_cmd(data->cmds[0], data, 0 , 0);
-	i = 0;
+		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0 , 0);
+	int k = 0;
+	while (i-- > 0)
+	{
+		waitpid(data->pipe->pid[k], 0, 0);
+		k++;
+	}
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
 	

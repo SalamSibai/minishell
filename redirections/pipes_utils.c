@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 23:35:28 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 23:39:48 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 20:06:31 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ bool	make_pipes(t_pipe *p)
 
 void	alloc_pids(t_data *data)
 {
+	printf("cmd_num: %d\n", data->cmd_num);
 	data->pipe->pid = (int *)malloc(data->cmd_num * sizeof(int));
 	if (!data->pipe->pid)
 		return ;
