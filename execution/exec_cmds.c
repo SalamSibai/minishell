@@ -57,10 +57,9 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	}
 	else
 	{
-        // Parent process: close unused pipe ends
-        if (i > 0) // If not the first command, close previous pipe's read end
+        if (i > 0)
             close(data->pipe->fd[!j][0]);
-        if (i < data->cmd_num - 1) // If not the last command, close current pipe's write end
+        if (i < data->cmd_num - 1)
             close(data->pipe->fd[j][1]);
 	}
 	// else
