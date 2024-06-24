@@ -33,6 +33,11 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		data->origin_fds[1] = dup(STDOUT_FILENO);
 		if (!redirect_fds(data, cmd, i, j))
 			ft_putstr_fd("\n redirect failed\n", 1);
+
+        for (int k = 0; k < data->cmd_num - 1; k++) {
+            close(data->pipe->fd[k][0]);
+            close(data->pipe->fd[k][1]);
+        }
 		if (is_builtin(cmd->cmd_str))
 		{
 			if (is_env_builtin(cmd->cmd_str))
