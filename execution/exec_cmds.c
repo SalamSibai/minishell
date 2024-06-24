@@ -55,6 +55,14 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 				ft_putstr_fd("COMMAND NOT FOUND\n", 1);
 		}
 	}
+	else
+	{
+        // Parent process: close unused pipe ends
+        if (i > 0) // If not the first command, close previous pipe's read end
+            close(data->pipe->fd[!j][0]);
+        if (i < data->cmd_num - 1) // If not the last command, close current pipe's write end
+            close(data->pipe->fd[j][1]);
+	}
 	// else
 	// {
 	// 	waitpid(pid, 0, 0);
@@ -106,5 +114,4 @@ void	execution(t_data *data)
 	}
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
-	
 }
