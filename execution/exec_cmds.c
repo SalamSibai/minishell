@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 01:07:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:33:09 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ void	execution(t_data *data)
 	else
 		exec_cmd(data->cmds[0], data, 0 , 0);
 	i = 0;
-	dup2(STDIN_FILENO, data->origin_fds[0]);
-	dup2(STDOUT_FILENO, data->origin_fds[1]);
-	while (i < data->cmd_num)
-		close_fds(data, i++);
+	dup2(data->origin_fds[0], STDIN_FILENO);
+	dup2(data->origin_fds[1], STDOUT_FILENO);
+	// while (i < data->cmd_num)
+	// 	close_fds(data, i++);
 	//i = 0;
 	// while (i < data->cmd_num)
 	// {

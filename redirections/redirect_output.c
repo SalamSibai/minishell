@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:49:57 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/24 00:00:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:32:40 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ bool	redirect_pipe_output(t_pipe *pipe, int j)
 
 bool	redirect_stdout(t_data *data, t_cmd *cmd)
 {
-	cmd->fd_out = data->origin_fds[1];
 	if (dup2(data->origin_fds[1], STDOUT_FILENO) == -1)
 	{
 		ft_putstr_fd("failed at output\n", 1);

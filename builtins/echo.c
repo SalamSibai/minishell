@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:27:51 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 01:08:34 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:30:33 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int		ft_echo(t_cmd *cmd)
 	}
 	while (args)
 	{
-		//how could we find the last redirection output file to write to it??
-		ft_putstr_fd(args->content, 1);
 		ft_putstr_fd(args->content, 1);
 		args = args->next;
 		if (args)
