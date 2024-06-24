@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 18:48:07 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/24 18:27:27 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@
 # include <readline/readline.h>
 # include <termios.h>
 # include <sys/wait.h>
+ #include <signal.h>
 
 # define BUFF_SIZE 4096
+
+typedef struct sigaction	t_sigaction;
 
 typedef enum e_token_type
 {
@@ -99,19 +102,26 @@ typedef struct s_lexer
 
 typedef struct s_data
 {
+	t_token		**tokens;
+	t_list		*env;
+	t_list		*export_env;
+	char		**env_var;
+	char		**path;
+	t_cmd		**cmds;
+	t_pipe		*pipe;
+	char		*buf;
 	int			cmd_num;
 	int			cmd_ctr;
 	int			origin_fds[2];
-	t_list		*env;
-	t_list		*export_env;
-	t_cmd		**cmds;
-	t_token		**tokens;
-	t_pipe		*pipe;
-	char		**env_var;
-	char		**path;
-	char		*buf;
 }	t_data;
 
+typedef struct g_data_sig
+{
+	int		exit_status;
+	char 	*siglist[NSIG];
+}	g_data_sig;
+
+g_data_sig		sig_data;
 
 /* ************************************************************************** */
 /*								SYNTAX VALIDATION							  */
@@ -228,5 +238,4 @@ bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i);
 bool			close_pipe(t_pipe *pipe, int i);
 
-//Creating a tree, where the left branch will be executed first.
 #endif

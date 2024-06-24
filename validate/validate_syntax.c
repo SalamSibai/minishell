@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:43:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/05/30 18:31:46 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:57:11 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ bool	validate_syntax(char *line)
 		return (false);
 	if (!validate_pipes(line))
 		return (false);
-
 	// if (!validate_redirection(line))
 	// 	return (false);
 	// if (!validate_append(line))

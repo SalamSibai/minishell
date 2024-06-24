@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 15:33:09 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:03:17 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		ft_putstr_fd("ERROR WITH FORK", 1);
 	if (pid == 0)
 	{
-		// if (!redirect_fds(data, cmd, i, j))
-		// 	ft_putstr_fd("\n redirect failed\n", 1);
 		if (is_builtin(cmd->cmd_str))
 		{
 			if (is_env_builtin(cmd->cmd_str))
@@ -55,11 +53,9 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	}
 	else
 	{
-		//global variable status
 		waitpid(pid, 0, 0);
 		if (is_env_builtin(cmd->cmd_str))
 			exec_builtin(cmd, data);
-		//close_fds(data, i);
 	}
 	return (pid);
 }
@@ -101,17 +97,5 @@ void	execution(t_data *data)
 	i = 0;
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
-	// while (i < data->cmd_num)
-	// 	close_fds(data, i++);
-	//i = 0;
-	// while (i < data->cmd_num)
-	// {
-	// 	waitpid(data->pipe->pid[i], 0, 0);
-	// 	i++;
-	// }
-	// dup2(data->origin_fds[0], STDIN_FILENO);
-	// dup2(data->origin_fds[1], STDOUT_FILENO);
-	// while (i < data->cmd_num)
-	// 	close_fds(data, i++);
-	//i = 0;
+	
 }

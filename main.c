@@ -6,12 +6,13 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 01:06:23 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:32:38 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "includes/minishell.h"
+
 
 static void	set_env(t_data *data, char **env)
 {
@@ -38,7 +39,10 @@ int main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	if (ac != 1 || !*env)
+		return (1);
 	set_env(&data, env);
+	// init_sigaction(&sig_data);
 	while (1)
 	{
 		data.buf = NULL;
@@ -55,14 +59,19 @@ int main(int ac, char **av, char **env)
 			add_history(data.buf);
 		if (!validate_syntax(data.buf))
 		{
+			printf("im here\n");
 			free(data.buf);
-			// continue;
+			continue;
 		}
 		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
 		scan(data.buf, data.tokens);
 		data.cmd_ctr = 0;
 		if (!validate_tokens(&data))
-			return 0;
+		{
+			printf("im here2\n");
+			free(data.buf);
+			continue;
+		}
 		fill_data(&data);
 		//need to free the tokens
 		// print_data(&data);

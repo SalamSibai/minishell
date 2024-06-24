@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/24 01:08:44 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/24 18:36:02 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ BUILTINS_DIR	= ./builtins
 EXEC_DIR		= ./execution
 FREE_DIR		= ./free_data
 REDIR_DIR		= ./redirections
+SIG_DIR		= ./signals
 
 SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/init_parsing.c \
@@ -60,6 +61,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${EXEC_DIR}/execution_utils.c \
 		${FREE_DIR}/free_data.c \
 		${FREE_DIR}/close_fds.c \
+		${SIG_DIR}/termios.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \
 
@@ -78,16 +80,16 @@ OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 all: $(NAME)
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/$(PARSE_DIR) $(OBJ_DIR)/$(ENV_DIR) $(OBJ_DIR)/$(EXPANSION_DIR) $(OBJ_DIR)/${REDIR_DIR} $(OBJ_DIR)/$(VALIDATE_DIR) $(OBJ_DIR)/${BUILTINS_DIR} $(OBJ_DIR)/${EXEC_DIR} $(OBJ_DIR)/${FREE_DIR} $(OBJ_DIR)/$(DEBUG_DIR)
+	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/$(PARSE_DIR) $(OBJ_DIR)/$(ENV_DIR) $(OBJ_DIR)/$(EXPANSION_DIR) $(OBJ_DIR)/${REDIR_DIR} $(OBJ_DIR)/$(VALIDATE_DIR) $(OBJ_DIR)/${BUILTINS_DIR} $(OBJ_DIR)/${EXEC_DIR} $(OBJ_DIR)/${FREE_DIR} $(OBJ_DIR)/$(SIG_DIR) $(OBJ_DIR)/$(DEBUG_DIR)
 
 $(LIBFT):
 	$(MAKE) -C ./includes/libft
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c -I $(HEAD) $< -o $@
+	$(CC) $(CFLAGS) -c -I/Users/mohammoh/Documents/Tools/homebrew/opt/readline/include -I $(HEAD) $< -o $@
 	
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline -Iincludes/minishell.h -o minishell
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -L /Users/mohammoh/Documents/Tools/homebrew/opt/readline/lib -lreadline  -Iincludes/minishell.h -o minishell
 
 clean:
 	$(MAKE) clean -C ./includes/libft
