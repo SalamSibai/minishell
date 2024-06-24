@@ -6,46 +6,12 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:38:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 18:20:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 22:40:20 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/**
- * @brief this function initializes the signals list
- * basically it sets the signals to their respective names 
- * 
- * @param data 
- */
-void	init_sig_list(g_data_sig *sig_data)
-{
-	char	**sys_siglist;
-
-	sys_siglist = sig_data->siglist;
-	memset(sys_siglist, 0, NSIG * sizeof(char));
-	sys_siglist[SIGHUP] = "Hangup";
-	sys_siglist[SIGQUIT] = "Quit";
-	sys_siglist[SIGILL] = "Illegal instruction";
-	sys_siglist[SIGTRAP] = "BPT trace/trap";
-	sys_siglist[SIGABRT] = "ABORT instruction";
-	sys_siglist[SIGFPE] = "Floating point exception";
-	sys_siglist[SIGKILL] = "Killed";
-	sys_siglist[SIGBUS] = "Bus error";
-	sys_siglist[SIGSEGV] = "Segmentation fault";
-	sys_siglist[SIGSYS] = "Bad system call";
-	sys_siglist[SIGTERM] = "Terminated";
-	sys_siglist[SIGURG] = "Urgent IO condition";
-	sys_siglist[SIGSTOP] = "Stopped (signal)";
-	sys_siglist[SIGTSTP] = "Stopped";
-	sys_siglist[SIGTTIN] = "Stopped (tty input)";
-	sys_siglist[SIGTTOU] = "Stopped (tty output)";
-	sys_siglist[SIGIO] = "I/O ready";
-	sys_siglist[SIGXCPU] = "CPU limit";
-	sys_siglist[SIGXFSZ] = "File limit";
-	sys_siglist[SIGUSR1] = "User defined signal 1";
-	sys_siglist[SIGUSR2] = "User defined signal 2";
-}
 /**
  * @brief this function disables the ctrl+c echo
  *  bisaclly it sets old terminal settings to a new terminal settings
@@ -92,7 +58,7 @@ void	signals_handler(int sig, siginfo_t *siginfo, void *ptr)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		sig_data.exit_status = 1;
+		g_exit_status = 1;
 	}
 }
 /**
@@ -113,18 +79,21 @@ void	mask_sig(t_sigaction *sa)
  * and set the signal handler to the signals_handler function
  * and then mask the signals
  * and then catch the signals
+ * (rl_catch_signals = 0) this is a readline function 
+ * is used to disable the ctrl c signals unfortuantly 
+ * its not allowed in the project
+ * so we will use the term struct to disable the ctrl+c echo
  * @param data 
  */
-void	init_sigaction(g_data_sig *sig_data)
+void	init_sigaction(void)
 {
 	t_sigaction	sa;
 
-	init_sig_list(sig_data);
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_sigaction = &signals_handler;
 	sa.sa_flags = 0;
-	// rl_catch_signals = 0;
-	sig_data->exit_status = 0;
+	sa.sa_flags = SA_SIGINFO;
+	g_exit_status = 0;
 	mask_sig(&sa);
 	catch_sig(&sa);
 }

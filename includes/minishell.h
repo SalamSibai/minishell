@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 18:27:27 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 22:47:35 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,7 @@ typedef struct s_data
 	int			origin_fds[2];
 }	t_data;
 
-typedef struct g_data_sig
-{
-	int		exit_status;
-	char 	*siglist[NSIG];
-}	g_data_sig;
-
-g_data_sig		sig_data;
+int g_exit_status;
 
 /* ************************************************************************** */
 /*								SYNTAX VALIDATION							  */
@@ -136,8 +130,11 @@ bool			validate_input_redirection(t_token **tokens, int index);
 bool			validate_output_redirection(t_token **tokens, int index);
 bool			validate_qoutes(int index, t_data *data);
 
-void			alloc_pids(t_data *d);
-bool			make_pipes(t_pipe *p);
+/* ************************************************************************** */
+/*									SIGNALS									  */
+/* ************************************************************************** */
+void			init_sigaction(void);
+void			disable_ctrl_c_echo(void);
 
 /* ************************************************************************** */
 /*									PARSEING								  */
@@ -161,13 +158,17 @@ int				token_count(char *av);
 bool			is_cmd(char *cmd, t_data *data);
 
 /* ************************************************************************** */
-/*									REDIRECTION								  */
+/*								REDIRECTION	UTILS							  */
 /* ************************************************************************** */
 t_redirection	*redir_new(int fd, e_token_type type, char *file_name, char *limiter);
 t_redirection	*redir_last(t_redirection *redir);
 void			redir_add_back(t_redirection **redir, t_redirection *new);
 void			redir_add_front(t_redirection **redir, t_redirection *new);
 void			redir_clear(t_redirection **redir);
+
+/* ************************************************************************** */
+/*								PIPES,FDs REDIRECTION		 				  */
+/* ************************************************************************** */
 void			check_redirections(t_cmd **cmds);
 void			check_type(t_cmd *cmd);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir);
@@ -180,6 +181,8 @@ bool			redirect_pipe_output(t_pipe *pipe, int j);
 bool			redirect_stdin(t_data *data, t_cmd *cmd);
 bool			redirect_stdout(t_data *data, t_cmd *cmd);
 bool			close_pipe(t_pipe *pipe, int i);
+void			alloc_pids(t_data *d);
+bool			make_pipes(t_pipe *p);
 
 /* ************************************************************************** */
 /*									EXPANSION								  */

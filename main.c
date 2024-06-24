@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 18:32:38 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/24 23:32:03 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,22 @@ int main(int ac, char **av, char **env)
 {
 	t_data	data;
 
-	(void)ac;
 	(void)av;
 	if (ac != 1 || !*env)
 		return (1);
 	set_env(&data, env);
-	// init_sigaction(&sig_data);
+	disable_ctrl_c_echo();
+	init_sigaction();
 	while (1)
 	{
-		data.buf = NULL;
 		data.buf = readline("minishell$ ");
-		add_history(data.buf);
-		if (!data.buf )
+		if (!data.buf)
 		{
 			printf("exit\n");
-			exit(3);
+			exit(1);
 		}
 		if (ft_strcmp(data.buf, "") == 0)
-				return (1);
+				continue;
 		if (ft_strlen(data.buf) > 0)
 			add_history(data.buf);
 		if (!validate_syntax(data.buf))
@@ -77,6 +75,7 @@ int main(int ac, char **av, char **env)
 		// print_data(&data);
 		check_redirections((&data)->cmds);
 		execution(&data);
+		
 		// printf("data.buf: %s\n", data.buf);
 	}
 	// free_data(&data);
