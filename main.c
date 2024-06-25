@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 18:35:34 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 19:14:08 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int ac, char **av, char **env)
 	while (1)
 	{
 		data.buf = readline("minishell$ ");
-		if (!data.buf)
+		if (!data.buf || ft_strcmp(data.buf, "exit") == 0)
 		{
 			printf("exit\n");
 			exit(1);
@@ -76,6 +76,7 @@ int main(int ac, char **av, char **env)
 		// print_data(&data);
 		check_redirections((&data)->cmds);
 		execution(&data);
+		// free_data(&data);
 		
 		// printf("data.buf: %s\n", data.buf);
 	}

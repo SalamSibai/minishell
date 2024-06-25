@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/25 17:14:59 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/25 18:52:55 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ DEBUG_DIR		= ./debug
 OBJ_DIR			= ./obj
 BUILTINS_DIR	= ./builtins
 EXEC_DIR		= ./execution
-FREE_DIR		= ./free_data
+FREE_DIR		= ./cleanup
 REDIR_DIR		= ./redirections
 SIG_DIR		= ./signals
 

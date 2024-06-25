@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 17:14:31 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 19:04:49 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_cmd
 	char			*cmd_str;
 	char			**cmd_with_flag;
 	char			*flag;
-	char			*args_str;
 	t_list			*args;
 	t_redirection	*redirection;
 }	t_cmd;
@@ -90,14 +89,6 @@ typedef struct s_token
 	e_token_type	type;
 }				t_token;
 
-
-typedef struct s_lexer
-{
-	int	n_cmds;
-	int	n_pipes;
-	int	n_redirections;
-	int	n_tokens;
-}	t_lexer;
 
 typedef struct s_data
 {
@@ -237,6 +228,7 @@ void			print_data(t_data *data);
 /*								Error Handling								  */
 /* ************************************************************************** */
 void			free_data(t_data *data);
+void			cleanup(t_data *data);
 bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i);
 bool			close_pipe(t_pipe *pipe, int i);

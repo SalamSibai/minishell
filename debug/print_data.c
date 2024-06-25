@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:31:36 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 19:29:27 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 19:00:57 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	print_data(t_data *data)
 		printf("*********        CMD NUMBER %d    *********\n", i);
 		printf("cmd[%d]->cmd: %s\n", i, data->cmds[i]->cmd_str);
 		printf("cmd[%d]->flag: %s\n", i, data->cmds[i]->flag);
-		// printf("cmd[%d]->arg: %s\n", i, data->cmds[i]->args_str);
 		k = 0;
 		temp = data->cmds[i]->args;
 		while (data->cmds[i]->args)

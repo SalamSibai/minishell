@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 13:31:17 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 16:57:22 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 19:07:58 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ void	redir_clear(t_redirection **redir)
 	next = NULL;
 	while (tmp)
 	{
-		next = tmp->next;
+		if (tmp->next != NULL)
+			next = tmp->next;
 		if (tmp->file_name)
 			free(tmp->file_name);
 		if (tmp->limiter)
 			free(tmp->limiter);
 		free(tmp);
-		tmp = next;
+		if (next)
+			tmp = next;
 	}
 	*redir = NULL;
 }

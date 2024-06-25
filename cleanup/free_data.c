@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/20 20:49:00 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/25 19:11:18 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 //MAKE SURE THAT WE RESET THE STDIN AND STDOUT FROM ORIGIN_FDS
 
-void	free_data(t_data *data)
+void	cleanup(t_data *data)
 {
 	int	i;
 
@@ -51,8 +51,6 @@ void	free_data(t_data *data)
 			free(data->cmds[i]->cmd_str);
 		if (data->cmds[i]->flag)
 			free(data->cmds[i]->flag);
-		if (data->cmds[i]->args_str)
-			free(data->cmds[i]->args_str);
 		if (data->cmds[i]->args)
 			ft_lstclear(&data->cmds[i]->args, (void *)del);
 		if (data->cmds[i]->redirection)
@@ -60,4 +58,59 @@ void	free_data(t_data *data)
 		i++;
 	}
 	ft_free2d((void **)data->cmds);
+}
+
+/**
+ * @brief this function free the data structure for the next command
+ * 	t_token		**tokens;
+ * 						char			*token_string;
+						e_token_type	type;
+	t_cmd		**cmds;
+						char			*cmd_path;
+						char			*cmd_str;
+						char			**cmd_with_flag;
+						char			*flag;
+						t_list			*args;
+						t_redirection	*redirection;
+										e_token_type			type;
+										char					*file_name;
+										char					*limiter;
+										struct s_redirection	*next;	//TYPE LIST
+			
+	t_pipe		*pipe;
+	char		*buf;
+	int			origin_fds[2];
+ * @param data 
+ */
+
+void	free_data(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->tokens[i])
+	{
+		free(data->tokens[i]->token_string);
+		free(data->tokens[i]);
+		i++;
+	}
+	free(data->tokens);
+
+	i = 0;
+	while (data->cmds[i])
+	{
+		if (data->cmds[i]->cmd_path)
+			free(data->cmds[i]->cmd_path);
+		if (data->cmds[i]->cmd_str)
+			free(data->cmds[i]->cmd_str);
+		if (data->cmds[i]->cmd_with_flag)
+			free(data->cmds[i]->cmd_with_flag);
+		if (data->cmds[i]->flag)
+			free(data->cmds[i]->flag);
+		if (data->cmds[i]->args)
+			ft_lstclear(&data->cmds[i]->args, (void *)del);
+		// if (data->cmds[i]->redirection)
+		// 	redir_clear(&data->cmds[i]->redirection);
+		i++;
+	}
 }
