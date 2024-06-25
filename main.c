@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 18:11:13 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:35:34 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int main(int ac, char **av, char **env)
 		if (!validate_syntax(data.buf))
 		{
 			printf("im here\n");
+			g_exit_status = 258;
 			free(data.buf);
 			continue;
 		}
