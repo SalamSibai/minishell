@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 00:08:02 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:12:33 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		print_env(t_list *env, bool export, int fd)
 	{
 		if (export)
 		{
+			bubble_sort(env, ft_strcmp);
 			ft_putstr_fd("declare -x ", 1);
 			ft_putendl_fd(add_quotes(env->content), 1);
 		}

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 23:32:03 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:47:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	set_env(t_data *data, char **env)
 
 static void	fill_data(t_data *data)
 {
-	data->cmd_ctr = 0;
 	data->tokens = check_expandable_var(data->tokens, data->env);
 	data->cmd_num = count_cmds(data->tokens);
 	data->cmds = ft_calloc(data->cmd_num + 1, sizeof(t_cmd *));
@@ -66,8 +65,8 @@ int main(int ac, char **av, char **env)
 		data.cmd_ctr = 0;
 		if (!validate_tokens(&data))
 		{
-			printf("im here2\n");
 			free(data.buf);
+			//free tokens
 			continue;
 		}
 		fill_data(&data);

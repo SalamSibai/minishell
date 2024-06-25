@@ -6,20 +6,17 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 13:31:17 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/19 13:12:28 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:57:22 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-t_redirection	*redir_new(int fd, e_token_type type, char *file_name, char *limiter)
+t_redirection	*redir_new(e_token_type type, char *file_name, char *limiter)
 {
 	t_redirection	*new;
 
-	(void)fd;
-	// new = ft_safe_malloc(sizeof(t_redirection), "REDIRECTION");
 	new = ft_calloc(1, sizeof(t_redirection));
-	// new->fd_in = fd;
 	new->type = type;
 	new->file_name = file_name;
 	new->limiter = limiter;

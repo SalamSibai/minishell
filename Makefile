@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/24 18:36:02 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/25 17:14:59 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${ENV_DIR}/env_init.c\
 		${ENV_DIR}/get_path.c\
 		${ENV_DIR}/env_utils.c\
+		${ENV_DIR}/env_sort.c\
 		${EXPANSION_DIR}/expansion.c\
 		${VALIDATE_DIR}/validate_id.c \
 		${VALIDATE_DIR}/validate_input_redirection.c \

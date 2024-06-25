@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/24 17:46:02 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:46:13 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ bool	validate_tokens(t_data *data) //NOTE: add t_data *data to check to send the
 			data->cmd_ctr = 0;
 		}
 		else if (tokens[i]->type == REDIRECT_INPUT
-				&& tokens[i]->type == HEREDOC)
+				|| tokens[i]->type == HEREDOC)
 		{
 			if (!validate_input_redirection(tokens, i))
 				return (false);

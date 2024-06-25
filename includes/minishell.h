@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 22:47:35 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:14:31 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_pipe
 /// @brief the redirection struct
 typedef struct s_redirection
 {
-	//int						fd;
 	e_token_type			type;
 	char					*file_name;
 	char					*limiter;
@@ -160,7 +159,7 @@ bool			is_cmd(char *cmd, t_data *data);
 /* ************************************************************************** */
 /*								REDIRECTION	UTILS							  */
 /* ************************************************************************** */
-t_redirection	*redir_new(int fd, e_token_type type, char *file_name, char *limiter);
+t_redirection	*redir_new(e_token_type type, char *file_name, char *limiter);
 t_redirection	*redir_last(t_redirection *redir);
 void			redir_add_back(t_redirection **redir, t_redirection *new);
 void			redir_add_front(t_redirection **redir, t_redirection *new);
@@ -207,6 +206,7 @@ bool			is_in_env(t_list *env, char *args);
 char			*get_env_name(char *dest, const char *src);
 void			print_env(t_list *env, bool export, int fd);
 bool			print_error(const char *arg);
+void			bubble_sort(t_list *head, int (*cmp)(const char *, const char *));
 
 /* ************************************************************************** */
 /*									BUILTINS								  */

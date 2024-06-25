@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/24 22:36:33 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:58:49 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ void	set_cmds(t_data *data)
 			}
 			else if (tokens[j]->type == REDIRECT_INPUT)
 			{
-				redir_add_back(&head, redir_new(0, REDIRECT_INPUT, NULL, NULL));
+				redir_add_back(&head, redir_new(REDIRECT_INPUT, NULL, NULL));
 				j++;
 			}
 			else if (tokens[j]->type == REDIRECT_OUTPUT || tokens[j]->type == REDIRECT_APPEND)
 			{
-				redir_add_back(&head, redir_new(1, tokens[j]->type, NULL, NULL));
+				redir_add_back(&head, redir_new(tokens[j]->type, NULL, NULL));
 				j++;
 			}
 			else if (tokens[j]->type == HEREDOC)
 			{
-				redir_add_back(&head, redir_new(1, HEREDOC, NULL, NULL));
+				redir_add_back(&head, redir_new(HEREDOC, NULL, NULL));
 				j++;
 			}
 			else if (tokens[j]->type == FILE_NAME)
