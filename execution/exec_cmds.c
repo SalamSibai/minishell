@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 23:53:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:21:12 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
 	int	pid;
 
-	// if (!redirect_fds(data, cmd, i, j))
-	// 	ft_putstr_fd("\n redirect failed\n", 1);
 	pid = fork();
 	if (pid == -1)
 		ft_putstr_fd("ERROR WITH FORK", 1);
@@ -34,9 +32,9 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		if (!redirect_fds(data, cmd, i, j))
 			ft_putstr_fd("\n redirect failed\n", 1);
 
-        for (int k = 0; k < data->cmd_num - 1; k++) {
-            close(data->pipe->fd[k][0]);
-            close(data->pipe->fd[k][1]);
+		for (int k = 0; k < data->cmd_num - 1; k++) {
+			close(data->pipe->fd[k][0]);
+			close(data->pipe->fd[k][1]);
         }
 		if (is_builtin(cmd->cmd_str) && (i >= 1 && i <= data->cmd_num - 1))
 		{
@@ -62,16 +60,18 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	}
 	else
 	{
+		if (is_env_builtin(cmd->cmd_str) && !(i >= 1 && i <= data->cmd_num - 1))
+		{
+			if (!redirect_fds(data, cmd, i, j))
+				ft_putstr_fd("\n redirect failed\n", 1);
+			exec_builtin(cmd, data);
+			pid = getpid();
+		}
         if (i > 0)
             close(data->pipe->fd[!j][0]);
         if (i < data->cmd_num - 1)
             close(data->pipe->fd[j][1]);
 	}
-	// if (is_env_builtin(cmd->cmd_str))
-	// {
-	// 	exec_builtin(cmd, data);
-	// 	pid = getpid();
-	// }
 	return (pid);
 }
 
