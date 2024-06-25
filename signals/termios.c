@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termios.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:38:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 22:40:20 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 20:17:41 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	signals_handler(int sig, siginfo_t *siginfo, void *ptr)
 	{
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_redisplay();
 		g_exit_status = 1;
 	}
