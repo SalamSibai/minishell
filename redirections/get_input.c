@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/25 20:44:32 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/25 21:59:28 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 		path = getcwd(cwd, PATH_MAX);
 		file_path = ft_strjoin(path, "/");
 		file_path = ft_strjoin(file_path, redir->file_name);
-		if (access(file_path, X_OK) != 0)
+		if (access(file_path, R_OK) != 0)
 		{
 			printf("access denied\n");
 			return (free(file_path), false);

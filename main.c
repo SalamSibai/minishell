@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 19:14:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 21:49:07 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int main(int ac, char **av, char **env)
 		// print_data(&data);
 		check_redirections((&data)->cmds);
 		execution(&data);
-		// free_data(&data);
+		free_data(&data, false);
 		
 		// printf("data.buf: %s\n", data.buf);
 	}

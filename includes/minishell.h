@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 19:04:49 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 21:49:53 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <readline/readline.h>
 # include <termios.h>
 # include <sys/wait.h>
- #include <signal.h>
+#include <signal.h>
 
 # define BUFF_SIZE 4096
 
@@ -211,7 +211,7 @@ int				ft_unset(t_list *args, t_list *env);
 
 /* ************************************************************************** */
 /*									EXECUTION								  */
-/* *********************************************************************** */
+/* ************************************************************************** */
 bool			is_builtin(char *command);
 bool			is_env_builtin(char *command);
 int				exec_builtin(t_cmd *cmd, t_data *data);
@@ -227,7 +227,7 @@ void			print_data(t_data *data);
 /* ************************************************************************** */
 /*								Error Handling								  */
 /* ************************************************************************** */
-void			free_data(t_data *data);
+void			free_data(t_data *data, bool done);
 void			cleanup(t_data *data);
 bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 19:11:18 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/25 21:49:57 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ void	cleanup(t_data *data)
 	t_pipe		*pipe;
 	char		*buf;
 	int			origin_fds[2];
- * @param data 
+ * @param data	
+ * @param done	whether or not env should also be freed (minishell has exited)
  */
 
-void	free_data(t_data *data)
+void	free_data(t_data *data, bool done)
 {
 	int	i;
-
+(void) done;
 	i = 0;
 	while (data->tokens[i])
 	{
@@ -109,8 +110,8 @@ void	free_data(t_data *data)
 			free(data->cmds[i]->flag);
 		if (data->cmds[i]->args)
 			ft_lstclear(&data->cmds[i]->args, (void *)del);
-		// if (data->cmds[i]->redirection)
-		// 	redir_clear(&data->cmds[i]->redirection);
+		if (data->cmds[i]->redirection)
+			redir_clear(&data->cmds[i]->redirection);
 		i++;
 	}
 }
