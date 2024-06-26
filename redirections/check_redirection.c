@@ -30,33 +30,48 @@ void	check_redirections(t_cmd **cmds)
 //			corresponding function to store the fd of 
 //			that redirection
 /// @param redir redirection struct
-void	check_type(t_cmd *cmd)
+int	check_type(t_cmd *cmd)
 {
 	t_redirection	*temp;
+	int				ret_value;
 
+	ret_value = 0;
 	temp = cmd->redirection;
 	while (temp)
 	{
 		if (temp->type == REDIRECT_INPUT)
 		{
 			if (!get_input(cmd, false, temp))
+			{
 				temp->type = REDIR_INPUT_FAILED;
+				ret_value = -1;
+			}
 		}
 		else if (temp->type == HEREDOC)
 		{
 			if (!get_input(cmd, true, temp))
+			{
 				temp->type = REDIR_INPUT_FAILED;
+				ret_value = -1;
+			}
 		}
 		else if (temp->type == REDIRECT_OUTPUT)
 		{
 			if (!set_output(cmd, false, temp))
+			{
 				temp->type = REDIR_OUTPUT_FAILDED;
+				ret_value = -2;
+			}
 		}
 		else if (temp->type == REDIRECT_APPEND)
 		{
 			if (!set_output(cmd, true, temp))
+			{
 				temp->type = REDIR_OUTPUT_FAILDED;
+				ret_value = -2;
+			}
 		}
 		temp = temp->next;
 	}
+	return (ret_value);
 }

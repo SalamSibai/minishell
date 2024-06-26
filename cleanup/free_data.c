@@ -29,6 +29,9 @@
 
 //MAKE SURE THAT WE RESET THE STDIN AND STDOUT FROM ORIGIN_FDS
 
+
+
+
 void	cleanup(t_data *data)
 {
 	int	i;

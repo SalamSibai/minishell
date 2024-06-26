@@ -35,6 +35,7 @@ static void	fill_data(t_data *data)
 int main(int ac, char **av, char **env)
 {
 	t_data	data;
+	int		redir_return;
 
 	(void)av;
 	if (ac != 1 || !*env)
@@ -74,7 +75,13 @@ int main(int ac, char **av, char **env)
 		fill_data(&data);
 		//need to free the tokens
 		// print_data(&data);
-		check_redirections((&data)->cmds);
+		redir_return = check_redirections((&data)->cmds);
+		if (redir_return < 0)
+		{
+			if (redir_return == -1)
+				error_handler(INFILE_ER_MSG, INFILE_ER, &data);
+			error_handler(OUTFILE_ER_MSG, INFILE_ER, &data);
+		}
 		execution(&data);
 		free_data(&data, false);
 		

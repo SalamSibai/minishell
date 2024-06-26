@@ -26,6 +26,23 @@
 #include <signal.h>
 
 # define BUFF_SIZE 4096
+# define INFILE_ER_MSG "Error opening the infile.\n"
+# define OUTFILE_ER_MSG "Error opening the outfile.\n"
+# define PATH_ER_MSG "Path doesn't exist\n"
+# define PIPE_ER_MSG "Error opening the pipes.\n"
+# define FORK_ER_MSG "Fork Error.\n"
+# define CMD_ER_MSG "Command doesn't exits.\n"
+
+typedef enum e_error_type
+{
+	INFILE_ER,
+	OUTFILE_ER,
+	PATH_ER,
+	PATH_ER,
+	PIPE_ER,
+	FORK_ER,
+	CMD_ER
+} e_token_type;
 
 typedef struct sigaction	t_sigaction;
 
@@ -159,7 +176,7 @@ void			redir_clear(t_redirection **redir);
 /* ************************************************************************** */
 /*								PIPES,FDs REDIRECTION		 				  */
 /* ************************************************************************** */
-void			check_redirections(t_cmd **cmds);
+int				check_redirections(t_cmd **cmds);
 void			check_type(t_cmd *cmd);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
