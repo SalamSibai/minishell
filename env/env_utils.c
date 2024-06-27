@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:51:26 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 21:32:30 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/27 19:08:54 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,20 @@ char		*get_env_name(char *dest, const char *src)
  */
 bool		is_in_env(t_list *env, char *args)
 {
-	char	*env_name;
-	char	*args_w;
+	char	env_name[BUFF_SIZE];
+	char	args_w[BUFF_SIZE];
 	char	*tmp;
 	t_list	*head;
 
 
 	head = NULL;
-	env_name = malloc(BUFF_SIZE);
-	memset(env_name, 0, BUFF_SIZE);
-	args_w = malloc(BUFF_SIZE);
-	memset(args_w, 0, BUFF_SIZE);
+	// env_name = malloc(BUFF_SIZE);
+	// memset(env_name, 0, BUFF_SIZE);
+	// args_w = malloc(BUFF_SIZE);
+	// memset(args_w, 0, BUFF_SIZE);
 	tmp = NULL;
-	if (!env_name)
-		return false;
+	// if (!env_name)
+	// 	return false;
 	head = env;
 	while (env)
 	{
@@ -81,10 +81,10 @@ bool		is_in_env(t_list *env, char *args)
 		if (ft_strcmp(env_name, args_w) == 0)
 		{
 			env->content = ft_strdup(args);
-			free(env_name);
-			free(args_w);
-			args_w = NULL;
-			env_name = NULL;
+			// free(env_name);
+			// free(args_w);
+			// args_w = NULL;
+			// env_name = NULL;
 			env = head;
 			return (true);
 		}

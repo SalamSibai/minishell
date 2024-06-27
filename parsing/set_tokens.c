@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:24:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 16:53:33 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/27 23:19:07 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	token_count(char *av)
 	if (av[i + 1] == '\0')
 		return (token_ctr);
 	i = ft_skipspaces(av);
-	while (av[++i])
+	while (av[i++])
 	{
 		if (ft_isspace(av[i]))
 		{

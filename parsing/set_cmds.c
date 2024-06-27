@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/25 16:58:49 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/27 23:57:31 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	set_cmds(t_data *data)
 			{
 				if (c == 0)
 				{
+					printf("tokens[%d]->string = %s\n", j, tokens[j]->token_string);
 					data->cmds[i]->args = ft_lstnew(tokens[j]->token_string);
 					c = 1;
 				}

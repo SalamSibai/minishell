@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termios.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:38:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 21:32:03 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/26 19:05:49 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	signals_handler(int sig, siginfo_t *siginfo, void *ptr)
 		rl_on_new_line();
 		//rl_replace_line("", 0);
 		rl_redisplay();
-		g_exit_status = 1;
+		// g_exit_status = 1;
 	}
 }
 /**
@@ -93,7 +93,7 @@ void	init_sigaction(void)
 	sa.sa_sigaction = &signals_handler;
 	sa.sa_flags = 0;
 	sa.sa_flags = SA_SIGINFO;
-	g_exit_status = 0;
+	// g_exit_status = 0;
 	mask_sig(&sa);
 	catch_sig(&sa);
 }

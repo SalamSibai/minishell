@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 21:49:53 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/27 23:29:32 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_data
 	int			origin_fds[2];
 }	t_data;
 
-int g_exit_status;
+// int g_exit_status;
 
 /* ************************************************************************** */
 /*								SYNTAX VALIDATION							  */
@@ -195,7 +195,7 @@ bool			is_valid_env(const char *var);
 char			*add_quotes(char *value);
 bool			is_in_env(t_list *env, char *args);
 char			*get_env_name(char *dest, const char *src);
-void			print_env(t_list *env, bool export, int fd);
+void			print_env(t_list *env, bool export);
 bool			print_error(const char *arg);
 void			bubble_sort(t_list *head, int (*cmp)(const char *, const char *));
 
@@ -204,7 +204,7 @@ void			bubble_sort(t_list *head, int (*cmp)(const char *, const char *));
 /* ************************************************************************** */
 int				ft_cd(t_cmd *cmd, t_list *env);
 int				ft_echo(t_cmd *cmd);
-int				ft_env(t_list *env, int fd);
+int				ft_env(t_list *env);
 bool			ft_export(t_cmd *cmd, t_list *export_env, t_list *env);
 int				ft_pwd(void);
 int				ft_unset(t_list *args, t_list *env);

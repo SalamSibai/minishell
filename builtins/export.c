@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 17:12:33 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/27 18:05:16 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ char	*add_quotes(char *value)
 		tmp1 = ft_strjoin("\"", ft_strchr(value, '=')+ 1);
 		tmp2 = ft_strjoin(tmp1, "\"");
 		env_value = ft_strjoin(tmp, tmp2);
+		free(tmp);
+		free(tmp1);
+		free(tmp2);
 	}
 	else
 		env_value = ft_strdup(value);
-	free(tmp);
-	free(tmp1);
-	free(tmp2);
 	return (env_value);
 }
 
@@ -50,18 +50,21 @@ char	*add_quotes(char *value)
  */
 
 // i need to send the t_cmd to give it the fd
-void		print_env(t_list *env, bool export, int fd)
+void		print_env(t_list *env, bool export)
 {
-	(void)fd;
 	t_list *tmp = env;
-	
+	char *quoted_value;
+
+	quoted_value = NULL;
 	while (env)
 	{
 		if (export)
 		{
 			bubble_sort(env, ft_strcmp);
 			ft_putstr_fd("declare -x ", 1);
-			ft_putendl_fd(add_quotes(env->content), 1);
+			quoted_value = add_quotes(env->content);
+			ft_putendl_fd(quoted_value, 1);
+			free(quoted_value);
 		}
 		else if (ft_strchr(env->content, '='))
 			ft_putendl_fd(env->content, 1);
@@ -108,7 +111,7 @@ bool		ft_export(t_cmd *cmd, t_list *export_env, t_list *env)
 	
 
 	if (!cmd->args)
-		print_env(export_env, true, cmd->fd_out);
+		print_env(export_env, true);
 	else
 	{
 		args = cmd->args;
