@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/27 23:29:32 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/28 07:08:25 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ typedef enum e_token_type
 	REDIRECT_OUTPUT,	//5
 	HEREDOC,			//6
 	REDIRECT_APPEND,	//7
-	REDIR_INPUT_FAILED,
-	REDIR_OUTPUT_FAILDED,
-	FLAG,				//8
-	ID,					//9
-	EXEC_ID,			//10
-	DQOUTES,			//11
-	SQOUTES,			//12
-	NONE				//13
+	REDIR_INPUT_FAILED, //8
+	REDIR_OUTPUT_FAILDED,//9
+	FLAG,				//10
+	ID,					//11
+	EXEC_ID,			//12
+	DQOUTES,			//13
+	SQOUTES,			//14
+	NONE				//15
 } e_token_type;
 
 /*
@@ -87,6 +87,7 @@ typedef struct s_token
 {
 	char			*token_string;
 	e_token_type	type;
+	bool			expandable;
 }				t_token;
 
 
@@ -105,7 +106,7 @@ typedef struct s_data
 	int			origin_fds[2];
 }	t_data;
 
-// int g_exit_status;
+int g_exit_status;
 
 /* ************************************************************************** */
 /*								SYNTAX VALIDATION							  */

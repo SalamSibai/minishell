@@ -60,6 +60,7 @@ void	scan(char *buff,t_token **tokens)
 				tokens[token_ctr] = ft_calloc(1, sizeof(t_token));
 				tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
 				tokens[token_ctr]->type = DQOUTES;
+				tokens[token_ctr]->expandable = true;
 				token_ctr++;
 			}
 			i = c + 1;
@@ -74,6 +75,7 @@ void	scan(char *buff,t_token **tokens)
 				tokens[token_ctr] = ft_calloc(1, sizeof(t_token));
 				tokens[token_ctr]->token_string = ft_substr(buff, i + 1, c - i - 1);
 				tokens[token_ctr]->type = SQOUTES;
+				tokens[token_ctr]->expandable = false;
 				token_ctr++;
 			}
 			i = c + 1;

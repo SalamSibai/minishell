@@ -105,3 +105,6 @@ bash-3.2$ cat << l << k
 
 
 any syntax error 258 
+
+having parsing issue with this command
+echo "        '"$hisham"'"

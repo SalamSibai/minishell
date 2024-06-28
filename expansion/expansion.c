@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:22:07 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 22:02:17 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/28 08:57:51 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ char	*get_var_name(char *token_string)
 	i = 1;
 	while (token_string[i])
 		i++;
+	if (token_string[i - 1] == '\'')
+		i--;
 	var_name = ft_substr(token_string, 1, i - 1);
 	return (var_name);
 }
@@ -83,7 +85,7 @@ t_token		**check_expandable_var(t_token **tokens, t_list *env)
 	i = 0;
 	while (tokens[i])
 	{
-		if (tokens[i]->type != REDIRECT_APPEND && tokens[i]->type != REDIRECT_INPUT 
+		if (tokens[i]->expandable == true && tokens[i]->type != REDIRECT_APPEND && tokens[i]->type != REDIRECT_INPUT 
 			 && tokens[i]->type != REDIRECT_OUTPUT && tokens[i]->type != PIPE && tokens[i]->type != SQOUTES)
 		{
 			if (ft_strchr(tokens[i]->token_string, '$'))
@@ -92,8 +94,10 @@ t_token		**check_expandable_var(t_token **tokens, t_list *env)
 				expanded_str = find_env_var_name(env, var_name);
 				if (expanded_str)
 				{
-					tokens[i]->token_string = ft_strjoin(ft_strndup(tokens[i]->token_string, ft_strchr(tokens[i]->token_string, '$') - tokens[i]->token_string), expanded_str);
-					// free(tokens[i]->token_string); // i need to join first the token string with the expanded string //i need to join 
+					if (tokens[i]->token_string[ft_strlen(tokens[i]->token_string) - 1]  == '\'')
+						tokens[i]->token_string = ft_strjoin(ft_strjoin(ft_strndup(tokens[i]->token_string, ft_strchr(tokens[i]->token_string, '$') - tokens[i]->token_string), expanded_str), "'");
+					else
+						tokens[i]->token_string = ft_strjoin(ft_strndup(tokens[i]->token_string, ft_strchr(tokens[i]->token_string, '$') - tokens[i]->token_string), expanded_str);
 				}
 				else
 				{

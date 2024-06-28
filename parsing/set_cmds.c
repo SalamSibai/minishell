@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/27 23:57:31 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/28 08:09:36 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	set_cmds(t_data *data)
 	{
 		c = 0;
 		head = NULL;
+		printf("tokens[%d]->string = %s\n", j, tokens[j]->token_string);
 		while (tokens[j] != NULL && tokens[j]->type != PIPE)
 		{
 			if (tokens[j]->type == CMDS)

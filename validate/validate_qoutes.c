@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_qoutes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:51:29 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/28 00:01:06 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/28 08:16:43 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ bool	validate_qoutes(int index, t_data *data)
 	// t_token	**tokens;
 
 	// tokens = data->tokens;
-	// if (tokens[index]->type == DQOUTES)
+	// if (tokens[index]->type == SQOUTES)
+	// 	tokens[index]->expandable = false;
+	printf("---------validate_qoutes-------\n");
 	printf("tokens[%d]->string = %s\n", index, data->tokens[index]->token_string);
 	printf("tokens[%d]->type = %d\n", index, data->tokens[index]->type);
 	validate_dqoutes(index, data);

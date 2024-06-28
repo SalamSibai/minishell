@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:24:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/27 23:19:07 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/28 07:26:52 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	set_type(t_token *token)
 {
+	token->expandable = true;
 	if (ft_strcmp(token->token_string, "|") == 0)
 		token->type = PIPE;
 	else if (ft_strncmp(token->token_string, "-", 1) == 0)

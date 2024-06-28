@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/27 23:58:27 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/28 09:18:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ static void	set_env(t_data *data, char **env)
 
 static void	fill_data(t_data *data)
 {
-	printf("before\n\ntokens[%d]->string = %s\n", 1, data->tokens[1]->token_string);
 	data->tokens = check_expandable_var(data->tokens, data->env);
 	data->cmd_num = count_cmds(data->tokens);
 	data->cmds = ft_calloc(data->cmd_num + 1, sizeof(t_cmd *));
 	data->pipe = ft_calloc(1, sizeof(t_pipe));
 	init_cmds(data);
 	set_cmds(data);
-	printf("after\n\ntokens[%d]->string = %s\n", 1, data->tokens[1]->token_string);
 }
 
 int main(int ac, char **av, char **env)
@@ -44,8 +42,6 @@ int main(int ac, char **av, char **env)
 	set_env(&data, env);
 	disable_ctrl_c_echo();
 	init_sigaction();
-	// data.buf = av[1];
-	// data.buf = "env > 3 | ls";
 	while (1)
 	{
 		data.buf = readline("minishell$ ");
@@ -61,9 +57,9 @@ int main(int ac, char **av, char **env)
 		if (!validate_syntax(data.buf))
 		{
 			printf("im here\n");
-			// g_exit_status = 258;
-			// free(data.buf);
-			// continue;
+			g_exit_status = 258;
+			free(data.buf);
+			continue;
 		}
 		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
 		scan(data.buf, data.tokens);
@@ -71,17 +67,16 @@ int main(int ac, char **av, char **env)
 		if (!validate_tokens(&data))
 		{
 			free(data.buf);
-			// g_exit_status = 258;
-			//free tokens
-			// continue;
+			g_exit_status = 258;
+			// free tokens
+			continue;
 		}
-		fill_data(&data);
+		// fill_data(&data);
 		//need to free the tokens
-		print_data(&data);
+		// print_data(&data);
 		check_redirections((&data)->cmds);
 		execution(&data);
 		// free_data(&data, false);
-		
 		// printf("data.buf: %s\n", data.buf);
 	}
 	cleanup(&data);
