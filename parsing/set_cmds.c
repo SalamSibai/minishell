@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/28 08:09:36 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/28 10:20:59 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	set_cmds(t_data *data)
 	{
 		c = 0;
 		head = NULL;
-		printf("tokens[%d]->string = %s\n", j, tokens[j]->token_string);
+		// printf("tokens[%d]->string = %s\n", j, tokens[j]->token_string);
 		while (tokens[j] != NULL && tokens[j]->type != PIPE)
 		{
 			if (tokens[j]->type == CMDS)
@@ -80,7 +80,7 @@ void	set_cmds(t_data *data)
 			{
 				if (c == 0)
 				{
-					printf("tokens[%d]->string = %s\n", j, tokens[j]->token_string);
+					// printf("tokens[%d]->string = %s\n", j, tokens[j]->token_string);
 					data->cmds[i]->args = ft_lstnew(tokens[j]->token_string);
 					c = 1;
 				}

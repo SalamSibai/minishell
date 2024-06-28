@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/28 09:18:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/28 20:16:32 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int main(int ac, char **av, char **env)
 {
 	t_data	data;
 
+	ft_memset(&data, 0, sizeof(t_data));
 	(void)av;
 	if (ac != 1 || !*env)
 		return (1);
@@ -56,7 +57,7 @@ int main(int ac, char **av, char **env)
 			add_history(data.buf);
 		if (!validate_syntax(data.buf))
 		{
-			printf("im here\n");
+			// printf("im here\n");
 			g_exit_status = 258;
 			free(data.buf);
 			continue;
@@ -71,11 +72,12 @@ int main(int ac, char **av, char **env)
 			// free tokens
 			continue;
 		}
-		// fill_data(&data);
+		fill_data(&data);
 		//need to free the tokens
 		// print_data(&data);
 		check_redirections((&data)->cmds);
 		execution(&data);
+		g_exit_status = 0;
 		// free_data(&data, false);
 		// printf("data.buf: %s\n", data.buf);
 	}

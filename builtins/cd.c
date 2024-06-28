@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:05:21 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/21 17:28:45 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/28 11:12:50 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ int	ft_cd(t_cmd *cmd, t_list *env)
 			ft_putstr_fd("cd: ", 2);
 			ft_putstr_fd(cmd->args->content, 2);
 			ft_putendl_fd(": No such file or directory", 2);
+			g_exit_status = 1;
 		}
 	}
+	g_exit_status = 0;
 	return (cd_ret);
 }
