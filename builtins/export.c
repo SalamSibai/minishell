@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/27 18:05:16 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/30 10:44:42 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
  */
 char	*add_quotes(char *value)
 {
-	char *env_value = NULL;
-	char *tmp = NULL;
-	char *tmp1 = NULL;
-	char *tmp2 = NULL;
+	char	*env_value = NULL;
+	char	*tmp = NULL;
+	char	*tmp1 = NULL;
+	char	*tmp2 = NULL;
 	
 	if (ft_strchr(value, '='))
 	{
@@ -48,9 +48,7 @@ char	*add_quotes(char *value)
  * the extension of "declare -x"
  * @param env the env sturcture to print from the env list 
  */
-
-// i need to send the t_cmd to give it the fd
-void		print_env(t_list *env, bool export)
+void	print_env(t_list *env, bool export)
 {
 	t_list *tmp = env;
 	char *quoted_value;
@@ -72,6 +70,7 @@ void		print_env(t_list *env, bool export)
 	}
 	env = tmp;
 }
+
 /**
 *
 * @brief adds new env to env list
@@ -79,7 +78,7 @@ void		print_env(t_list *env, bool export)
 * @param env t_env sturcture contains the enviroment list to add to it
 * @returns int 0 if sucess
 */
-int			env_add(char *value, t_list *env)
+int		env_add(char *value, t_list *env)
 {
 	t_list	*new;
 	t_list	*tmp;
@@ -101,14 +100,15 @@ int			env_add(char *value, t_list *env)
  * @brief this function set the export attribute for variables and 
  * it'll add the variable to the env and itll print it to the stdout 
  * it also check if the variable is already added 
- * @param args an array of string of the variable that wanna be added to the export list
- * @param env t_env the list that contains all the enviroment values to add on the new variable
+ * @param args an array of string of the variable that wanna be added 
+ * to the export list
+ * @param env t_env the list that contains all
+ *  the enviroment values to add on the new variable
  * @return it return zero on success
  */
-bool		ft_export(t_cmd *cmd, t_list *export_env, t_list *env)
+bool	ft_export(t_cmd *cmd, t_list *export_env, t_list *env)
 {
 	t_list	*args;
-	
 
 	if (!cmd->args)
 		print_env(export_env, true);
@@ -117,7 +117,8 @@ bool		ft_export(t_cmd *cmd, t_list *export_env, t_list *env)
 		args = cmd->args;
 		while (cmd->args)
 		{
-			if (!is_valid_env(cmd->args->content) || ft_strncmp(cmd->args->content, "=", 1) == 0)
+			if (!is_valid_env(cmd->args->content) 
+				|| ft_strncmp(cmd->args->content, "=", 1) == 0)
 				return (print_error(cmd->args->content));
 			if (!is_in_env(export_env, cmd->args->content))
 				env_add(cmd->args->content, export_env);

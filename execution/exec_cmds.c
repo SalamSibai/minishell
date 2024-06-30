@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/28 10:16:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 11:10:50 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			close(data->pipe->fd[k][0]);
 			close(data->pipe->fd[k][1]);
 		}
-		if (is_builtin(cmd->cmd_str) && (i >= 1 && i <= data->cmd_num - 1))
+		if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
 		{
 			exec_builtin(cmd, data);
 			exit(2);
@@ -61,7 +61,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	}
 	else
 	{
-		if (is_env_builtin(cmd->cmd_str) && !(i >= 1 && i <= data->cmd_num - 1))
+		if (is_env_builtin(cmd->cmd_str) && data->cmd_num == 1)
 		{
 			if (!redirect_fds(data, cmd, i, j))
 				ft_putstr_fd("\n redirect failed\n", 1);
