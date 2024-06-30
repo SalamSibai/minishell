@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_fds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/24 19:59:44 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 17:09:55 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static bool	redirect_outputs(t_data *data,t_cmd *cmd, int i, int j)
 bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 {
 	if (!redirect_inputs(data, cmd, i, j))
-		return (false);
+		return (error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, false), false);
 	if (!redirect_outputs(data, cmd, i, j))
-		return (false);
+		return (error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false), false);
 	return (true);
 }

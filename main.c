@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 14:52:02 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 16:15:40 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ int main(int ac, char **av, char **env)
 		if (!validate_syntax(data.buf))
 		{
 			// printf("im here\n");
-			g_exit_status = 258;
-			free(data.buf);
+			error_handler(INVALID_IN_MSG, INVALID_IN_ER, &data, false);
+			// g_exit_status = 127;
+			// free(data.buf);
 			continue;
 		}
 		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
@@ -68,8 +69,9 @@ int main(int ac, char **av, char **env)
 		data.cmd_ctr = 0;
 		if (!validate_tokens(&data))
 		{
-			free(data.buf);
-			g_exit_status = 258;
+			error_handler(INVALID_IN_MSG, INVALID_IN_ER, &data, false);
+			// free(data.buf);
+			// g_exit_status = 127;
 			// free tokens
 			continue;
 		}
@@ -80,8 +82,8 @@ int main(int ac, char **av, char **env)
 		if (redir_return < 0)
 		{
 			if (redir_return == -1)
-				error_handler(INFILE_ER_MSG, INFILE_ER, &data);
-			error_handler(OUTFILE_ER_MSG, INFILE_ER, &data);
+				error_handler(INPUT_REDIR_MSG, IN_REDIR_ER, &data, false);
+			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, &data, false);
 		}
 		execution(&data);
 		g_exit_status = 0;

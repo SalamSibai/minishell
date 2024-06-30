@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/28 07:08:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 17:09:48 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,19 @@
 #include <signal.h>
 
 # define BUFF_SIZE 4096
-# define INFILE_ER_MSG "Error opening the infile.\n"
-# define OUTFILE_ER_MSG "Error opening the outfile.\n"
-# define PATH_ER_MSG "Path doesn't exist\n"
-# define PIPE_ER_MSG "Error opening the pipes.\n"
-# define FORK_ER_MSG "Fork Error.\n"
-# define CMD_ER_MSG "Command doesn't exits.\n"
+# define INVALID_IN_MSG "Error: Invalid input\n"
+# define INPUT_REDIR_ER_MSG "Error: Input redirection error.\n"
+# define OUTPUT_REDIR_ER_MSG "Error: Output redirection error.\n"
+# define PATH_ER_MSG "Error: Path doesn't exist\n"
+# define PIPE_ER_MSG "Error: Couldn't opern pipes.\n"
+# define FORK_ER_MSG "Error: Fork.\n"
+# define CMD_ER_MSG "Error: Command doesn't exits.\n"
 
 typedef enum e_error_type
 {
-	INFILE_ER,
-	OUTFILE_ER,
-	PATH_ER,
+	INVALID_IN_ER,
+	IN_REDIR_ER,
+	OUT_REDIR_ER,
 	PATH_ER,
 	PIPE_ER,
 	FORK_ER,
@@ -181,7 +182,7 @@ int				check_redirections(t_cmd **cmds);
 void			check_type(t_cmd *cmd);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
-bool			redirect_fds(t_data *data,t_cmd *cmd, int i, int j);
+bool				redirect_fds(t_data *data,t_cmd *cmd, int i, int j);
 bool			redirect_file_input(t_cmd *cmd);
 bool			redirect_pipe_input(t_pipe *pipe, int j);
 bool			redirect_file_output(t_cmd *cmd);
@@ -234,7 +235,7 @@ bool			is_builtin(char *command);
 bool			is_env_builtin(char *command);
 int				exec_builtin(t_cmd *cmd, t_data *data);
 void			execute_cmds(t_data *data);
-void			execution(t_data *data);
+bool			execution(t_data *data);
 bool			join_cmd_and_flag(t_cmd *cmd);
 
 /* ************************************************************************** */
@@ -245,10 +246,11 @@ void			print_data(t_data *data);
 /* ************************************************************************** */
 /*								Error Handling								  */
 /* ************************************************************************** */
-void			free_data(t_data *data, bool done);
-void			cleanup(t_data *data);
-bool			close_fd(int fd);
-bool			close_fds(t_data *data, int i);
-bool			close_pipe(t_pipe *pipe, int i);
+void	error_handler(char *err_str, int err_type, t_data *data, bool done);
+void	free_data(t_data *data, bool done);
+void	cleanup(t_data *data);
+bool	close_fd(int fd);
+bool	close_fds(t_data *data, int i);
+bool	close_pipe(t_pipe *pipe, int i);
 
 #endif

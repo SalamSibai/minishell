@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handler.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/30 15:17:41 by ssibai            #+#    #+#             */
+/*   Updated: 2024/06/30 16:53:58 by ssibai           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
@@ -9,13 +20,39 @@
  * @param data reference to data
  * @param done whether minishell program should be terminated or not
  */
-void    error_handler(char *err_str, int err_type, t_data *data, bool done)
+void	error_handler(char *err_str, int err_type, t_data *data, bool done)
 {
-    perror(err_str);
-    /*
-        if the error is within input or output:
-            MAKE SURE: frees everything
-    */
-    
-    
+	perror(err_str);
+	if (err_type == INVALID_IN_ER)
+	{
+		g_exit_status = 258;
+		free(data->buf);
+	}
+	else if (err_type == IN_REDIR_ER || err_type == OUT_REDIR_ER)
+	{
+		g_exit_status = 1;
+		//free(data->buf);
+	}
+	else if (err_type == PATH_ER)
+	{
+
+	}
+	else if (err_type == PIPE_ER)
+	{
+
+	}
+	else if (err_type == FORK_ER)
+	{
+
+	}
+	else if (err_type == CMD_ER)
+	{
+		
+	}
+	if (done)
+		exit(g_exit_status);
+	/*
+		if the error is within input or output:
+			MAKE SURE: frees everything
+	*/
 }

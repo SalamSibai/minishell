@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 11:10:50 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 17:20:27 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 
 	pid = fork();
 	if (pid == -1)
-		ft_putstr_fd("ERROR WITH FORK", 1);
+		return (error_handler(FORK_ER_MSG, FORK_ER, data, false), pid);
+		//ft_putstr_fd("ERROR WITH FORK", 1);
 	if (pid == 0)
 	{
 		data->origin_fds[0] = dup(STDIN_FILENO);
 		data->origin_fds[1] = dup(STDOUT_FILENO);
 		if (!redirect_fds(data, cmd, i, j))
-			ft_putstr_fd("\n redirect failed\n", 1);
-
+			return (pid);
 		for (int k = 0; k < data->cmd_num - 1; k++)
 		{
 			close(data->pipe->fd[k][0]);
@@ -53,20 +53,23 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
 				}
 				else
-					ft_putstr_fd("FAILED TO EXECUTE CMD\n", 1);
+					error_handler(PATH_ER_MSG, PATH_ER, data, true);
+					//ft_putstr_fd("FAILED TO EXECUTE CMD\n", 1);
 			}
 			else
-				ft_putstr_fd("COMMAND NOT FOUND\n", 1);
+				error_handler(CMD_ER_MSG, CMD_ER, data, true);
+				//ft_putstr_fd("COMMAND NOT FOUND\n", 1);
 		}
 	}
 	else
 	{
 		if (is_env_builtin(cmd->cmd_str) && data->cmd_num == 1)
 		{
-			if (!redirect_fds(data, cmd, i, j))
-				ft_putstr_fd("\n redirect failed\n", 1);
-			exec_builtin(cmd, data);
 			pid = getpid();
+			if (!redirect_fds(data, cmd, i, j))
+				return (pid);
+				// ft_putstr_fd("\n redirect failed\n", 1);
+			exec_builtin(cmd, data);
 		}
 		if (i > 0)
 			close(data->pipe->fd[!j][0]);
@@ -78,23 +81,23 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 
 /**
  * @brief this function will execute the commands based on the type of command
- * 
+ * 	SHOULD MAKE FUNCTION BOOL?
  * @param data
  */
-void	execution(t_data *data)
+bool	execution(t_data *data)
 {
 	int	i;
 	int	j;
-	//int	status;
 
 	i = 0;
 	j = 0;
-
 	alloc_pids(data);
 	if (data->cmd_num > 1)
 	{
 		if (!make_pipes(data->pipe))
-			ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
+			return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
+			//return
+			//ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
 		while (data->cmds[i] != NULL)
 		{
 			data->pipe->pid[i] = exec_cmd(data->cmds[i], data, i, j);
@@ -102,7 +105,8 @@ void	execution(t_data *data)
 			{
 				close_pipe(data->pipe, !j);
 				if (pipe(data->pipe->fd[!j]) == -1)
-					ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
+					return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
+					//ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
 			}
 			i++;
 			j = !j;
@@ -117,4 +121,5 @@ void	execution(t_data *data)
 	}
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
+	return (true);
 }
