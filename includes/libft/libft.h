@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:21:10 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 14:25:11 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 22:31:45 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <stdint.h>
 # include <fcntl.h>
 # include <stdbool.h>
-
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
@@ -40,7 +39,7 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-bool 	ft_isspace(const char str);
+bool	ft_isspace(const char str);
 
 int		ft_atoi(const char *str);
 int		ft_strlen(const char *str);

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:05:28 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/03 21:34:28 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 22:29:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	valid_before_pipe(t_token **tokens, int index)
 }
 static bool	valid_after_pipe(t_token **tokens, int index)
 {
-	e_token_type	next_type;
+	t_token_type	next_type;
 	bool			after_pipe;
 	
 	if (tokens[index + 1] != NULL) 

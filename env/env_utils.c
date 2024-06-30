@@ -6,13 +6,13 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:51:26 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 14:19:53 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 22:09:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool		print_error(const char *arg)
+bool	print_error(const char *arg)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ bool		print_error(const char *arg)
  * @param src 
  * @return itll return the copied characters from the src without the = sign
  */
-char		*get_env_name(char *dest, const char *src)
+char	*get_env_name(char *dest, const char *src)
 {
 	int		i;
 
@@ -50,6 +50,7 @@ char		*get_env_name(char *dest, const char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
 /**
  * @brief check if the args that wanna be added to the enviroment
  *  is already in the env list then change it value to 
@@ -61,22 +62,15 @@ char		*get_env_name(char *dest, const char *src)
  * @return it returns 1 on succes of finding the name in the
  *  list and 0 on nothing to be found
  */
-bool		is_in_env(t_list *env, char *args)
+bool	is_in_env(t_list *env, char *args)
 {
 	char	env_name[BUFF_SIZE];
 	char	args_w[BUFF_SIZE];
 	char	*tmp;
 	t_list	*head;
 
-
 	head = NULL;
-	// env_name = malloc(BUFF_SIZE);
-	// memset(env_name, 0, BUFF_SIZE);
-	// args_w = malloc(BUFF_SIZE);
-	// memset(args_w, 0, BUFF_SIZE);
 	tmp = NULL;
-	// if (!env_name)
-	// 	return false;
 	head = env;
 	while (env)
 	{
@@ -86,22 +80,19 @@ bool		is_in_env(t_list *env, char *args)
 		if (ft_strcmp(env_name, args_w) == 0)
 		{
 			env->content = ft_strdup(args);
-			// free(env_name);
-			// free(args_w);
-			// args_w = NULL;
-			// env_name = NULL;
 			env = head;
 			return (true);
 		}
 		env = env->next;
 	}
 	env = head;
-	return false;
+	return (false);
 }
+
 /**
  * @brief this function checks if the env variable is valid or not 
- * in case if the value is digit the env is not valid and if its alpha numeric is also not valid
- * 
+ * in case if the value is digit the env is not valid and if its
+ * alpha numeric is also not valid
  * @param var 
  * @return 
  */

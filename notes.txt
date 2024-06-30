@@ -112,3 +112,5 @@ echo "        '"$hisham"'"
 
 
 cat <"./test_files/file name with spaces"
+
+push -f origin HEAD^:main

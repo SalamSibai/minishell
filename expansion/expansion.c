@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:22:07 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 14:41:50 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 22:22:02 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,46 @@ char	*get_var_name(char *token_string, int *end_idx)
 	var_name = ft_substr(token_string, 1, i - 1);
 	return (var_name);
 }
-// char	*replace_env_var_helper()
-// {
 
-// 	return (expanded_str);
-// }
+/**
+ * @brief this function itll process the env variable and
+ * replace it with the value of the variable in the env list
+ * @param str 
+ * @param env 
+ * @param start an int pointer to keep track of the index of the string
+ * @return 
+ */
+char	*process_env_var(char *str, t_list *env, int *start)
+{
+	char	*expanded_str;
+	char	*var_name;
 
+	if (*(str + 1) == '?')
+	{
+		expanded_str = ft_itoa(g_exit_status);
+		*start = 2;
+	}
+	else
+	{
+		var_name = get_var_name(str, start);
+		expanded_str = find_env_var_name(env, var_name);
+		free(var_name);
+		if (!expanded_str)
+			expanded_str = ft_strdup("");
+	}
+	return (expanded_str);
+}
+
+// Main function to replace environment variables in a string
+/**
+ * @brief this is the main function that will replace the env variable
+ * @param str the string to be checked for $ sign
+ * @param env env list to check for the variable name in it
+ * @return char* 
+ */
 char	*replace_env_var(char *str, t_list *env)
 {
 	char	*result;
-	char	*var_name;
 	char	*expanded_str;
 	int		start;
 
@@ -75,29 +105,17 @@ char	*replace_env_var(char *str, t_list *env)
 	{
 		if (*str == '$')
 		{
-			if (*(str + 1) == '?')
-				expanded_str = ft_itoa(g_exit_status);
-			else
-			{
-				var_name = get_var_name(str, &start);
-				expanded_str = find_env_var_name(env, var_name);
-				free(var_name);
-				if (!expanded_str)
-					expanded_str = ft_strdup("");
-			}
+			expanded_str = process_env_var(str, env, &start);
 			result = ft_strjoin_free(result, expanded_str, 3);
 			str += start;
 		}
 		else
-		{
-			result = ft_strjoin_free(result, ft_substr(str, 0, 1), 1);
-			str++;
-		}
+			result = ft_strjoin_free(result, ft_substr(str++, 0, 1), 1);
 	}
 	return (result);
 }
 
-t_token **check_expandable_var(t_token **tokens, t_list *env)
+t_token	**check_expandable_var(t_token **tokens, t_list *env)
 {
 	int		i;
 	char	*expanded_str;

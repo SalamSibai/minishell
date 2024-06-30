@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/28 07:08:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 22:33:22 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,35 @@
 # include <readline/readline.h>
 # include <termios.h>
 # include <sys/wait.h>
-#include <signal.h>
+# include <signal.h>
 
 # define BUFF_SIZE 4096
 
 typedef struct sigaction	t_sigaction;
 
-typedef enum e_token_type
-{
-	CMDS,				//0
-	PIPE,				//1
-	LIMITER,			//2
-	FILE_NAME,  		//3
-	REDIRECT_INPUT,		//4
-	REDIRECT_OUTPUT,	//5
-	HEREDOC,			//6
-	REDIRECT_APPEND,	//7
-	REDIR_INPUT_FAILED, //8
-	REDIR_OUTPUT_FAILDED,//9
-	FLAG,				//10
-	ID,					//11
-	EXEC_ID,			//12
-	DQOUTES,			//13
-	SQOUTES,			//14
-	NONE				//15
-} e_token_type;
+int							g_exit_status;
 
-/*
+typedef enum t_token_type
+{
+	CMDS,
+	PIPE,
+	LIMITER,
+	FILE_NAME,
+	REDIRECT_INPUT,
+	REDIRECT_OUTPUT,
+	HEREDOC,
+	REDIRECT_APPEND,
+	REDIR_INPUT_FAILED,
+	REDIR_OUTPUT_FAILDED,
+	FLAG,
+	ID,
+	EXEC_ID,
+	DQOUTES,
+	SQOUTES,
+	NONE
+}	t_token_type;
+
+/**
 * 	The pipe structure, which indludes:
 * 	1) the pipes (both of them)
 * 	2) the pids of the forked processes
@@ -63,10 +65,10 @@ typedef struct s_pipe
 /// @brief the redirection struct
 typedef struct s_redirection
 {
-	e_token_type			type;
+	t_token_type			type;
 	char					*file_name;
 	char					*limiter;
-	struct s_redirection	*next;	//TYPE LIST
+	struct s_redirection	*next;
 }	t_redirection;
 
 /// @brief 
@@ -86,27 +88,28 @@ typedef struct s_cmd
 typedef struct s_token
 {
 	char			*token_string;
-	e_token_type	type;
+	t_token_type	type;
 	bool			expandable;
 }				t_token;
 
-
+/**
+ * @brief this structure contains all the data
+ * thatll be used in our minishell
+ */
 typedef struct s_data
 {
 	t_token		**tokens;
 	t_list		*env;
 	t_list		*export_env;
-	char		**env_var;
-	char		**path;
 	t_cmd		**cmds;
 	t_pipe		*pipe;
+	char		**env_var;
+	char		**path;
 	char		*buf;
 	int			cmd_num;
 	int			cmd_ctr;
 	int			origin_fds[2];
 }	t_data;
-
-int g_exit_status;
 
 /* ************************************************************************** */
 /*								SYNTAX VALIDATION							  */
@@ -151,7 +154,7 @@ bool			is_cmd(char *cmd, t_data *data);
 /* ************************************************************************** */
 /*								REDIRECTION	UTILS							  */
 /* ************************************************************************** */
-t_redirection	*redir_new(e_token_type type, char *file_name, char *limiter);
+t_redirection	*redir_new(t_token_type type, char *file_name, char *limiter);
 t_redirection	*redir_last(t_redirection *redir);
 void			redir_add_back(t_redirection **redir, t_redirection *new);
 void			redir_add_front(t_redirection **redir, t_redirection *new);
@@ -164,7 +167,7 @@ void			check_redirections(t_cmd **cmds);
 void			check_type(t_cmd *cmd);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
-bool			redirect_fds(t_data *data,t_cmd *cmd, int i, int j);
+bool			redirect_fds(t_data *data, t_cmd *cmd, int i, int j);
 bool			redirect_file_input(t_cmd *cmd);
 bool			redirect_pipe_input(t_pipe *pipe, int j);
 bool			redirect_file_output(t_cmd *cmd);
@@ -198,7 +201,8 @@ bool			is_in_env(t_list *env, char *args);
 char			*get_env_name(char *dest, const char *src);
 void			print_env(t_list *env, bool export);
 bool			print_error(const char *arg);
-void			bubble_sort(t_list *head, int (*cmp)(const char *, const char *));
+void			bubble_sort(t_list *head, 
+					int (*cmp)(const char *, const char *));
 
 /* ************************************************************************** */
 /*									BUILTINS								  */

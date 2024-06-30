@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/27 22:17:34 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/30 22:29:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	cleanup(t_data *data)
  * @brief this function free the data structure for the next command
  * 	t_token		**tokens;
  * 						char			*token_string;
-						e_token_type	type;
+						t_token_type	type;
 	t_cmd		**cmds;
 						char			*cmd_path;
 						char			*cmd_str;
@@ -77,7 +77,7 @@ void	cleanup(t_data *data)
 						char			*flag;
 						t_list			*args;
 						t_redirection	*redirection;
-										e_token_type			type;
+										t_token_type			type;
 										char					*file_name;
 										char					*limiter;
 										struct s_redirection	*next;	//TYPE LIST
