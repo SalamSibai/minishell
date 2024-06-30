@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:51:26 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/27 19:08:54 by ++4              ###   ########.fr       */
+/*   Updated: 2024/06/30 14:19:53 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ bool		print_error(const char *arg)
 	write(2, "\n", 1);
 	return (false);
 }
+
 /**
- * @brief this function will copy the name of the vairable without its value and the equal sign from the list to be compared with the 
+ * @brief this function will copy the name of the vairable without its value
+ *  and the equal sign from the list to be compared with the 
  * the vairable that going be added by export funtion 
  * @param dest
  * @param src 
@@ -50,11 +52,14 @@ char		*get_env_name(char *dest, const char *src)
 }
 /**
  * @brief check if the args that wanna be added to the enviroment
- *  is already in the env list then change it value to the new added value
- * itll loop through the list and itll will compare the variable with the env
- * @param env t_env sturcture contains the enviroment list that itll look through
- * @param args the value of the env that need to be check if it already exist in the list
- * @return it returns 1 on succes of finding the name in the list and 0 on nothing to be found
+ *  is already in the env list then change it value to 
+ * 	the new added value itll loop through the list and 
+ * 	itll will compare the variable with the env
+ * @param env contains the enviroment list that itll look through
+ * @param args the value of the env that need to be check 
+ * 	if it already exist in the list
+ * @return it returns 1 on succes of finding the name in the
+ *  list and 0 on nothing to be found
  */
 bool		is_in_env(t_list *env, char *args)
 {

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:03:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 20:12:28 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:16:51 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 t_list	*env_init(char **envp)
 {
-	t_list *env;
-	t_list *new;
+	t_list	*env;
+	t_list	*new;
+	int		i;
 
-	int i = 0;
+	i = 0;
 	env = ft_lstnew(envp[i]);
 	while (envp[++i])
 	{
@@ -26,6 +27,7 @@ t_list	*env_init(char **envp)
 	}
 	return (env);
 }
+
 /**
  * @brief copy the env list to the export env list
  * 
@@ -34,8 +36,8 @@ t_list	*env_init(char **envp)
  */
 t_list	*export_env_init(t_list *env)
 {
-	t_list *export_env;
-	t_list *new;
+	t_list	*export_env;
+	t_list	*new;
 
 	export_env = ft_lstnew(env->content);
 	while (env->next)
@@ -55,10 +57,10 @@ t_list	*export_env_init(t_list *env)
  */
 char	**env_to_str(t_list *env)
 {
-	int i;
-	int j;
-	char **env_str;
-	char *tmp;
+	int		i;
+	int		j;
+	char	**env_str;
+	char	*tmp;
 
 	i = 0;
 	env_str = ft_calloc((ft_lstsize(env)), sizeof(char *));
