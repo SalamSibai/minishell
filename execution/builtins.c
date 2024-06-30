@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:37:54 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/23 17:30:00 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/27 18:05:07 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		exec_builtin(t_cmd *cmd, t_data *data)
 	if (ft_strcmp(cmd->cmd_str, "pwd") == 0)
 		result = ft_pwd();
 	if (ft_strcmp(cmd->cmd_str, "env") == 0)
-		ft_env(data->env, cmd->fd_out);
+		ft_env(data->env);
 	if (ft_strcmp(cmd->cmd_str, "export") == 0)
 		ft_export(cmd, data->export_env, data->env);
 	if (ft_strcmp(cmd->cmd_str, "unset") == 0)

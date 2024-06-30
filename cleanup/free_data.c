@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: ++4 <mohammoh@student.42abudhabi.ae>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 21:49:57 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/27 22:17:34 by ++4              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,12 @@ void	cleanup(t_data *data)
 		i++;
 	}
 	free(data->tokens);
+	free(data->pipe->pid);
+	free(data->pipe);
 	ft_free2d((void **)data->path);
 	ft_free2d((void **)data->env_var);
 	ft_lstclear(&data->env, (void *)del);
+	ft_lstclear(&data->export_env, free);
 	i = 0;
 	while (data->cmds[i])
 	{
@@ -61,6 +64,8 @@ void	cleanup(t_data *data)
 		i++;
 	}
 	ft_free2d((void **)data->cmds);
+	free(data->cmds);
+	free(data);
 }
 
 /**
@@ -99,7 +104,8 @@ void	free_data(t_data *data, bool done)
 		i++;
 	}
 	free(data->tokens);
-
+	free(data->pipe->pid);
+	free(data->pipe);
 	i = 0;
 	while (data->cmds[i])
 	{

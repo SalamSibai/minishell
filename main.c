@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 21:49:07 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/30 14:52:02 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int main(int ac, char **av, char **env)
 	t_data	data;
 	int		redir_return;
 
+	ft_memset(&data, 0, sizeof(t_data));
 	(void)av;
 	if (ac != 1 || !*env)
 		return (1);
@@ -57,7 +58,7 @@ int main(int ac, char **av, char **env)
 			add_history(data.buf);
 		if (!validate_syntax(data.buf))
 		{
-			printf("im here\n");
+			// printf("im here\n");
 			g_exit_status = 258;
 			free(data.buf);
 			continue;
@@ -69,7 +70,7 @@ int main(int ac, char **av, char **env)
 		{
 			free(data.buf);
 			g_exit_status = 258;
-			//free tokens
+			// free tokens
 			continue;
 		}
 		fill_data(&data);
@@ -83,10 +84,11 @@ int main(int ac, char **av, char **env)
 			error_handler(OUTFILE_ER_MSG, INFILE_ER, &data);
 		}
 		execution(&data);
-		free_data(&data, false);
-		
+		g_exit_status = 0;
+		// free_data(&data, false);
 		// printf("data.buf: %s\n", data.buf);
 	}
+	cleanup(&data);
 	// free_data(&data);
 	// return (0);
 }

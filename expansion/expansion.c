@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:22:07 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/06 22:02:17 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:41:50 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,15 @@
 	2-now we need to find the variable name in the enviroment
 	
 	2-We loop in the enviroment and check if the variable name found
-	if we found the variable name we replace the token with the value of the vairable name 
+	if we found the variable name we replace the token with the value
+	 of the vairable name 
 
 	so we need the enviroment to be passed to the function
-	and the parse data to loop thru all the tokens strings  except fot the string inside of the single quotes and check if we have a $ sign
+	and the parse data to loop thru all the tokens strings
+	except fot the string inside of the single quotes
+	and check if we have a $ sign
 */
 
-/**
- * @brief find the variable name in the enviroment
- * 
- * @param env 
- * @param var_name 
- * @return the expanded string if found and null if not found
- */
 char	*find_env_var_name(t_list *env, char *var_name)
 {
 	char	*expanded_str;
@@ -47,60 +43,78 @@ char	*find_env_var_name(t_list *env, char *var_name)
 	return (expanded_str);
 }
 
-/**
- * @brief replace the token string with the vairable name from the env
- * 
- * 
- * @param token_string 
- * @return 
- */
-char	*get_var_name(char *token_string)
+char	*get_var_name(char *token_string, int *end_idx)
 {
 	int		i;
 	char	*var_name;
 
 	i = 1;
-	while (token_string[i])
+	while (token_string[i] && 
+		(ft_isalnum(token_string[i]) || token_string[i] == '_'))
 		i++;
+	if (end_idx)
+		*end_idx = i;
 	var_name = ft_substr(token_string, 1, i - 1);
 	return (var_name);
 }
+// char	*replace_env_var_helper()
+// {
 
-/**
- * @brief 
- * 
- * @param tokens 
- * @param env 
- * @return updated tokens with the expanded variables
- 
- */
-t_token		**check_expandable_var(t_token **tokens, t_list *env)
+// 	return (expanded_str);
+// }
+
+char	*replace_env_var(char *str, t_list *env)
 {
-	int i;
-	char *var_name;
-	char *expanded_str;
+	char	*result;
+	char	*var_name;
+	char	*expanded_str;
+	int		start;
+
+	result = ft_strdup("");
+	while (*str)
+	{
+		if (*str == '$')
+		{
+			if (*(str + 1) == '?')
+				expanded_str = ft_itoa(g_exit_status);
+			else
+			{
+				var_name = get_var_name(str, &start);
+				expanded_str = find_env_var_name(env, var_name);
+				free(var_name);
+				if (!expanded_str)
+					expanded_str = ft_strdup("");
+			}
+			result = ft_strjoin_free(result, expanded_str, 3);
+			str += start;
+		}
+		else
+		{
+			result = ft_strjoin_free(result, ft_substr(str, 0, 1), 1);
+			str++;
+		}
+	}
+	return (result);
+}
+
+t_token **check_expandable_var(t_token **tokens, t_list *env)
+{
+	int		i;
+	char	*expanded_str;
 
 	i = 0;
 	while (tokens[i])
 	{
-		if (tokens[i]->type != REDIRECT_APPEND && tokens[i]->type != REDIRECT_INPUT 
-			 && tokens[i]->type != REDIRECT_OUTPUT && tokens[i]->type != PIPE && tokens[i]->type != SQOUTES)
+		if (tokens[i]->expandable == true && tokens[i]->type != REDIRECT_APPEND 
+			&& tokens[i]->type != REDIRECT_INPUT
+			&& tokens[i]->type != REDIRECT_OUTPUT
+			&& tokens[i]->type != PIPE && tokens[i]->type != SQOUTES)
 		{
 			if (ft_strchr(tokens[i]->token_string, '$'))
 			{
-				var_name = get_var_name(ft_strchr(tokens[i]->token_string, '$')); //need to free this 
-				expanded_str = find_env_var_name(env, var_name);
-				if (expanded_str)
-				{
-					tokens[i]->token_string = ft_strjoin(ft_strndup(tokens[i]->token_string, ft_strchr(tokens[i]->token_string, '$') - tokens[i]->token_string), expanded_str);
-					// free(tokens[i]->token_string); // i need to join first the token string with the expanded string //i need to join 
-				}
-				else
-				{
-					free(tokens[i]->token_string);
-					tokens[i]->token_string = ft_strdup("");
-				}
-				free(var_name);
+				expanded_str = replace_env_var(tokens[i]->token_string, env);
+				free(tokens[i]->token_string);
+				tokens[i]->token_string = expanded_str;
 			}
 		}
 		i++;

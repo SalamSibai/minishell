@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 17:03:04 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/13 23:37:16 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/30 14:25:40 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC =	ft_is/ft_isalnum.c \
 		ft_str/ft_strdup.c \
 		ft_str/ft_striteri.c \
 		ft_str/ft_strjoin.c \
+		ft_str/ft_strjoin_free.c \
 		ft_str/ft_strlcat.c \
 		ft_str/ft_strlcpy.c \
 		ft_str/ft_strlen.c \

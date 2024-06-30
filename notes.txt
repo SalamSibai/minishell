@@ -105,3 +105,10 @@ bash-3.2$ cat << l << k
 
 
 any syntax error 258 
+
+having parsing issue with this command
+echo "        '"$hisham"'"
+
+
+
+cat <"./test_files/file name with spaces"

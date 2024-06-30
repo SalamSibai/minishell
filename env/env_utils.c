@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:51:26 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/22 21:32:30 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:19:53 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ bool		print_error(const char *arg)
 	write(2, "\n", 1);
 	return (false);
 }
+
 /**
- * @brief this function will copy the name of the vairable without its value and the equal sign from the list to be compared with the 
+ * @brief this function will copy the name of the vairable without its value
+ *  and the equal sign from the list to be compared with the 
  * the vairable that going be added by export funtion 
  * @param dest
  * @param src 
@@ -50,28 +52,31 @@ char		*get_env_name(char *dest, const char *src)
 }
 /**
  * @brief check if the args that wanna be added to the enviroment
- *  is already in the env list then change it value to the new added value
- * itll loop through the list and itll will compare the variable with the env
- * @param env t_env sturcture contains the enviroment list that itll look through
- * @param args the value of the env that need to be check if it already exist in the list
- * @return it returns 1 on succes of finding the name in the list and 0 on nothing to be found
+ *  is already in the env list then change it value to 
+ * 	the new added value itll loop through the list and 
+ * 	itll will compare the variable with the env
+ * @param env contains the enviroment list that itll look through
+ * @param args the value of the env that need to be check 
+ * 	if it already exist in the list
+ * @return it returns 1 on succes of finding the name in the
+ *  list and 0 on nothing to be found
  */
 bool		is_in_env(t_list *env, char *args)
 {
-	char	*env_name;
-	char	*args_w;
+	char	env_name[BUFF_SIZE];
+	char	args_w[BUFF_SIZE];
 	char	*tmp;
 	t_list	*head;
 
 
 	head = NULL;
-	env_name = malloc(BUFF_SIZE);
-	memset(env_name, 0, BUFF_SIZE);
-	args_w = malloc(BUFF_SIZE);
-	memset(args_w, 0, BUFF_SIZE);
+	// env_name = malloc(BUFF_SIZE);
+	// memset(env_name, 0, BUFF_SIZE);
+	// args_w = malloc(BUFF_SIZE);
+	// memset(args_w, 0, BUFF_SIZE);
 	tmp = NULL;
-	if (!env_name)
-		return false;
+	// if (!env_name)
+	// 	return false;
 	head = env;
 	while (env)
 	{
@@ -81,10 +86,10 @@ bool		is_in_env(t_list *env, char *args)
 		if (ft_strcmp(env_name, args_w) == 0)
 		{
 			env->content = ft_strdup(args);
-			free(env_name);
-			free(args_w);
-			args_w = NULL;
-			env_name = NULL;
+			// free(env_name);
+			// free(args_w);
+			// args_w = NULL;
+			// env_name = NULL;
 			env = head;
 			return (true);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 21:49:53 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/28 07:08:25 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ typedef enum e_token_type
 	REDIRECT_OUTPUT,	//5
 	HEREDOC,			//6
 	REDIRECT_APPEND,	//7
-	REDIR_INPUT_FAILED,
-	REDIR_OUTPUT_FAILDED,
-	FLAG,				//8
-	ID,					//9
-	EXEC_ID,			//10
-	DQOUTES,			//11
-	SQOUTES,			//12
-	NONE				//13
+	REDIR_INPUT_FAILED, //8
+	REDIR_OUTPUT_FAILDED,//9
+	FLAG,				//10
+	ID,					//11
+	EXEC_ID,			//12
+	DQOUTES,			//13
+	SQOUTES,			//14
+	NONE				//15
 } e_token_type;
 
 /*
@@ -104,6 +104,7 @@ typedef struct s_token
 {
 	char			*token_string;
 	e_token_type	type;
+	bool			expandable;
 }				t_token;
 
 
@@ -212,7 +213,7 @@ bool			is_valid_env(const char *var);
 char			*add_quotes(char *value);
 bool			is_in_env(t_list *env, char *args);
 char			*get_env_name(char *dest, const char *src);
-void			print_env(t_list *env, bool export, int fd);
+void			print_env(t_list *env, bool export);
 bool			print_error(const char *arg);
 void			bubble_sort(t_list *head, int (*cmp)(const char *, const char *));
 
@@ -221,7 +222,7 @@ void			bubble_sort(t_list *head, int (*cmp)(const char *, const char *));
 /* ************************************************************************** */
 int				ft_cd(t_cmd *cmd, t_list *env);
 int				ft_echo(t_cmd *cmd);
-int				ft_env(t_list *env, int fd);
+int				ft_env(t_list *env);
 bool			ft_export(t_cmd *cmd, t_list *export_env, t_list *env);
 int				ft_pwd(void);
 int				ft_unset(t_list *args, t_list *env);

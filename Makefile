@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/06/25 18:52:55 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/06/28 10:44:14 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -L /Users/mohammoh/Documents/Tools/homebrew/opt/readline/lib -lreadline  -Iincludes/minishell.h -o minishell
 
+
 clean:
 	$(MAKE) clean -C ./includes/libft
 	$(RM) $(OBJ_DIR)
@@ -105,3 +106,16 @@ re: fclean all
 .phony:	all clean fclean re
 
 # valgrind --leak-check=full --show-leak-kinds=all ./minishell
+# $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) -c -I/Users/mohammoh/Documents/Tools/homebrew/opt/readline/include -I $(HEAD) $< -o $@
+	
+# $(NAME): $(OBJ) $(LIBFT)
+# 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -L /Users/mohammoh/Documents/Tools/homebrew/opt/readline/lib -lreadline  -Iincludes/minishell.h -o minishell
+
+
+# for my laptop
+# $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) -c -I/home/linuxbrew/.linuxbrew/opt/readline/include -I $(HEAD) $< -o $@
+	
+# $(NAME): $(OBJ) $(LIBFT)
+# 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -L //home/linuxbrew/.linuxbrew/opt/readline/lib -lreadline  -Iincludes/minishell.h -o minishell

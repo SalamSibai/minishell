@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:24:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 16:53:33 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/28 07:26:52 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	set_type(t_token *token)
 {
+	token->expandable = true;
 	if (ft_strcmp(token->token_string, "|") == 0)
 		token->type = PIPE;
 	else if (ft_strncmp(token->token_string, "-", 1) == 0)
@@ -43,7 +44,7 @@ int	token_count(char *av)
 	if (av[i + 1] == '\0')
 		return (token_ctr);
 	i = ft_skipspaces(av);
-	while (av[++i])
+	while (av[i++])
 	{
 		if (ft_isspace(av[i]))
 		{
