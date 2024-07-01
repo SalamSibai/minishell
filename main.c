@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 16:15:40 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/01 17:03:44 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int main(int ac, char **av, char **env)
 			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, &data, false);
 		}
 		execution(&data);
-		g_exit_status = 0;
+		// g_exit_status = 0;
 		// free_data(&data, false);
 		// printf("data.buf: %s\n", data.buf);
 	}

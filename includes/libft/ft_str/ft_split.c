@@ -82,15 +82,3 @@ char	**ft_split(char const *s, char c)
 	array[j] = 0;
 	return (array);
 }
-
-// int main()
-// {
-// 	char **array;
-// 	int i = -1;
-
-// 	array = ft_split("hello world hi how are you  ", ' ');
-// 	// while (array[++i] != '\0')
-// 	// 	printf("%s\n",array[i]);
-	
-// 	ft_free3d((void **)array);
-// }

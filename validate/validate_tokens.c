@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/28 08:25:22 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:40:19 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ bool	validate_tokens(t_data *data) //NOTE: add t_data *data to check to send the
 		}
 		else if (tokens[i]->type == DQOUTES || tokens[i]->type == SQOUTES)
 			validate_qoutes(i, data);
+
 	}
 	return (true);
 }

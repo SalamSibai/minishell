@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 10:44:42 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 22:01:04 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,21 @@
  */
 char	*add_quotes(char *value)
 {
-	char	*env_value = NULL;
-	char	*tmp = NULL;
-	char	*tmp1 = NULL;
-	char	*tmp2 = NULL;
-	
+	char	*env_value;
+	char	*tmp;
+	char	*tmp1;
+	char	*tmp2;
+
+	tmp = NULL;
+	tmp1 = NULL;
+	tmp2 = NULL;
+	env_value = NULL;
 	if (ft_strchr(value, '='))
 	{
 		if (*ft_strchr(value, '=') + 1 == '\"')
 			return (value);
 		tmp = ft_strndup(value, (ft_strchr(value, '=') + 1 - value));
-		tmp1 = ft_strjoin("\"", ft_strchr(value, '=')+ 1);
+		tmp1 = ft_strjoin("\"", ft_strchr(value, '=') + 1);
 		tmp2 = ft_strjoin(tmp1, "\"");
 		env_value = ft_strjoin(tmp, tmp2);
 		free(tmp);
@@ -50,9 +54,10 @@ char	*add_quotes(char *value)
  */
 void	print_env(t_list *env, bool export)
 {
-	t_list *tmp = env;
-	char *quoted_value;
+	t_list	*tmp;
+	char	*quoted_value;
 
+	tmp = env;
 	quoted_value = NULL;
 	while (env)
 	{
@@ -78,7 +83,7 @@ void	print_env(t_list *env, bool export)
 * @param env t_env sturcture contains the enviroment list to add to it
 * @returns int 0 if sucess
 */
-int		env_add(char *value, t_list *env)
+int	env_add(char *value, t_list *env)
 {
 	t_list	*new;
 	t_list	*tmp;
@@ -96,6 +101,7 @@ int		env_add(char *value, t_list *env)
 	new->next = tmp;
 	return (0);
 }
+
 /**
  * @brief this function set the export attribute for variables and 
  * it'll add the variable to the env and itll print it to the stdout 
@@ -130,4 +136,3 @@ bool	ft_export(t_cmd *cmd, t_list *export_env, t_list *env)
 	}
 	return (true);
 }
- 

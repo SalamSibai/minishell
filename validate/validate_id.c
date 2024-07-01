@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:02:50 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 20:14:37 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 21:16:30 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 bool validate_id(int index, t_data *data)
 {
 	t_token **tokens;
-	
+
 	tokens = data->tokens;
-	if (index == 0 || tokens[index - 1]->type == PIPE || tokens[index - 1]->type == FILE_NAME 
+	if (index == 0 || tokens[index - 1]->type == PIPE 
+			|| tokens[index - 1]->type == FILE_NAME 
 			|| tokens[index - 1]->type == LIMITER)
 	{
 		if (data->cmd_ctr == 0)
@@ -32,21 +33,17 @@ bool validate_id(int index, t_data *data)
 		else
 			tokens[index]->type = ID;
 	}
-	else if (tokens[index - 1]->type == REDIRECT_INPUT
-			|| tokens[index - 1] ->type == REDIRECT_APPEND
-			|| tokens[index - 1]->type == REDIRECT_OUTPUT) //|| tokens[index - 1]->type == FLAG// we need toc check if the file exist
+	else if (tokens[index - 1]->type == REDIRECT_INPUT 
+			|| tokens[index - 1] ->type == REDIRECT_APPEND 
+			|| tokens[index - 1]->type == REDIRECT_OUTPUT)
 		tokens[index]->type = FILE_NAME;
 	else if (tokens[index - 1]->type == HEREDOC)
 		tokens[index]->type = LIMITER;
 	else if (tokens[index - 1]->type == CMDS)
-		tokens[index]->type = ID;  //what this type for -> EXEC_ID
-	//else if (is_cmd(tokens[index]->token_string, data))
-	//{
-	// 		tokens[index]->type = CMDS;
+		tokens[index]->type = ID;  
 	else
 		tokens[index]->type = ID;
-	// }
-	return true;
+	return (true);
 }
 
 

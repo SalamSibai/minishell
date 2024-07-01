@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 13:31:17 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 21:54:52 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/06/30 22:55:44 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-t_redirection	*redir_new(e_token_type type, char *file_name, char *limiter)
+t_redirection	*redir_new(t_token_type type, char *file_name, char *limiter)
 {
 	t_redirection	*new;
 

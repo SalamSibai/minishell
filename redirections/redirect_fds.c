@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_fds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/30 17:09:55 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/01 17:04:04 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static bool	redirect_inputs(t_data *data,t_cmd *cmd, int i, int j)
 {
 	if (i == 0)
 	{
-		// data->origin_fds[0] = dup(STDIN_FILENO);
-		// data->origin_fds[1] = dup(STDOUT_FILENO);
 		if (cmd->fd_in != -1)
 		{
 			if (!redirect_file_input(cmd))

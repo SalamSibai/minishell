@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:23:56 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/24 22:35:42 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/06/30 22:55:12 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
  * @brief this function counts the number of commands in the tokens
  * based on the number of pipes except if there was a redirection output 
  * will start with one command and will increment the command number
- * because a pipe could never be the first token and to avoid accessing a null pointer
+ * because a pipe could never be the first token and to avoid accessing
+ *  a null pointer
  * and also because we will always start with one command
- * 
  * based on this number will malloc how many commands structure we have
- *
  * @param tokens 
  * @return number of commands 
  */
