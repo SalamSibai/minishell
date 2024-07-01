@@ -32,6 +32,8 @@ bool		is_builtin(char *command)
 		return (true);
 	if (ft_strcmp(command, "unset") == 0)
 		return (true);
+	if (ft_strcmp(command, "exit") == 0)
+		return (true);
 	return (false);
 }
 

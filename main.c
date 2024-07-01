@@ -49,8 +49,8 @@ int main(int ac, char **av, char **env)
 		data.buf = readline("minishell$ ");
 		if (!data.buf || ft_strcmp(data.buf, "exit") == 0)
 		{
-			printf("exit\n");
 			cleanup(&data);
+			ft_putstr_fd("exit\n", 1);
 			exit(1);
 		}
 		if (ft_strcmp(data.buf, "") == 0)
@@ -84,7 +84,9 @@ int main(int ac, char **av, char **env)
 		{
 			if (redir_return == -1)
 				error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, &data, false);
-			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, &data, false);
+			else
+				error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, &data, false);
+			continue;
 		}
 		execution(&data);
 		// g_exit_status = 0;

@@ -2,6 +2,7 @@
 2- check for validitiy - clean
 3- create the abstract syntax tree
 
+PASSWORD: CVb3d2023
 
 cases:
     1- redirecting to read from the standard input (heredoc)'<<'

@@ -79,6 +79,7 @@ bool	is_in_env(t_list *env, char *args)
 		get_env_name(args_w, args);
 		if (ft_strcmp(env_name, args_w) == 0)
 		{
+			free(env->content);
 			env->content = ft_strdup(args);
 			env = head;
 			return (true);
