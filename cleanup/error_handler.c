@@ -20,39 +20,38 @@
  * @param data reference to data
  * @param done whether minishell program should be terminated or not
  */
-void	error_handler(char *err_str, int err_type, t_data *data, bool done)
+void error_handler(char *err_str, int err_type, t_data *data, bool done)
 {
-	perror(err_str);
-	if (err_type == INVALID_IN_ER)
-	{
-		g_exit_status = 258;
-		free(data->buf);
-	}
-	else if (err_type == IN_REDIR_ER || err_type == OUT_REDIR_ER)
-	{
-		g_exit_status = 1;
-		//free(data->buf);
-	}
-	else if (err_type == PATH_ER)
-	{
-
-	}
-	else if (err_type == PIPE_ER)
-	{
-
-	}
-	else if (err_type == FORK_ER)
-	{
-
-	}
-	else if (err_type == CMD_ER)
-	{
-		
-	}
+    perror(err_str);
+    if (err_type == INVALID_IN_ER)
+    {
+        g_exit_status = 258;
+        free(data->buf);
+    }
+    else if (err_type == IN_REDIR_ER || err_type == OUT_REDIR_ER)
+    {
+        g_exit_status = 1;
+        //free(data->buf);
+    }
+    else if (err_type == PATH_ER)
+    {
+        g_exit_status = 127;
+    }
+    else if (err_type == PIPE_ER)
+    {
+        g_exit_status = 141;
+    }
+    else if (err_type == FORK_ER)
+    {
+        g_exit_status = 11;
+    }
+    else if (err_type == CMD_ER)
+    {
+        g_exit_status = 2;
+    }
 	if (done)
+	{
+		cleanup(data);
 		exit(g_exit_status);
-	/*
-		if the error is within input or output:
-			MAKE SURE: frees everything
-	*/
+	}
 }

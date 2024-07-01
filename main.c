@@ -82,7 +82,7 @@ int main(int ac, char **av, char **env)
 		if (redir_return < 0)
 		{
 			if (redir_return == -1)
-				error_handler(INPUT_REDIR_MSG, IN_REDIR_ER, &data, false);
+				error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, &data, false);
 			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, &data, false);
 		}
 		execution(&data);

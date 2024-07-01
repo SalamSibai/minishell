@@ -61,6 +61,7 @@ bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 		if (access(file_path, R_OK) != 0)
 		{
 			printf("access denied\n");
+			//set error code to access denied?
 			return (free(file_path), false);
 		}
 		free(file_path);

@@ -54,11 +54,9 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 				}
 				else
 					error_handler(PATH_ER_MSG, PATH_ER, data, true);
-					//ft_putstr_fd("FAILED TO EXECUTE CMD\n", 1);
 			}
 			else
 				error_handler(CMD_ER_MSG, CMD_ER, data, true);
-				//ft_putstr_fd("COMMAND NOT FOUND\n", 1);
 		}
 	}
 	else
@@ -117,7 +115,7 @@ bool	execution(t_data *data)
 	i = -1;
 	while (++i < data->cmd_num)
 	{
-		waitpid(data->pipe->pid[i], 0, 0);
+		waitpid(data->pipe->pid[i],  &g_exit_status, 0);
 	}
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
