@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:51:29 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/28 10:14:40 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:50:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	validate_dqoutes(int index, t_data *data)
 	t_token	**tokens;
 
 	tokens = data->tokens;
+	if ((tokens[index]->type == DQOUTES || tokens[index]->type == SQOUTES)
+		 && ft_strcmp(tokens[index]->token_string, "") == 0)
+		tokens[index]->type = ID;
 	if (is_cmd(tokens[index]->token_string, data) || index == 0 || tokens[index - 1]->type == PIPE)
 		tokens[index]->type = CMDS;
 	else if (tokens[index - 1]->type == REDIRECT_INPUT

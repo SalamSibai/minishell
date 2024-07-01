@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 22:33:22 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:59:44 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef enum t_token_type
 	EXEC_ID,
 	DQOUTES,
 	SQOUTES,
+	EMPTY_QOUTES,
 	NONE
 }	t_token_type;
 

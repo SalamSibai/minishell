@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/30 14:51:40 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:33:11 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	set_cmds(t_data *data)
 				redir_last(head)->limiter = ft_strdup(tokens[j]->token_string);
 				j++;
 			}
-			else if (tokens[j]->type == ID)
+			else if (tokens[j]->type == ID && tokens[j]->type == EMPTY_QOUTES)
 			{
 				if (c == 0)
 				{
