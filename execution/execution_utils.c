@@ -19,6 +19,11 @@ bool get_path(t_data *data, t_cmd *cmd)
 	int		i;
 
 	i = 0;
+	if (access(cmd->cmd_str, F_OK) == 0)
+	{
+		cmd->cmd_path = ft_strdup(cmd->cmd_str);
+		return (true);
+	}
 	while (data->path[i] != NULL)
 	{
 		cmd->cmd_path = ft_strjoin(data->path[i], cmd->cmd_str);

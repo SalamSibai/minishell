@@ -22,11 +22,11 @@
  */
 void error_handler(char *err_str, int err_type, t_data *data, bool done)
 {
-    perror(err_str);
+    ft_putstr_fd(err_str, 2);
     if (err_type == INVALID_IN_ER)
     {
         g_exit_status = 258;
-        free(data->buf);
+       // free(data->buf);
     }
     else if (err_type == IN_REDIR_ER || err_type == OUT_REDIR_ER)
     {

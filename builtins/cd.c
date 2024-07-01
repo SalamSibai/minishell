@@ -100,6 +100,7 @@ int	ft_cd(t_cmd *cmd, t_list *env)
 {
 	int	cd_ret;
 
+	ft_putstr_fd("calling cd\n", 1);
 	if (!cmd->args && !cmd->flag)
 		return (goto_path(0, env));
 	if (cmd->flag && ft_strcmp(cmd->flag, "-") == 0)
@@ -109,9 +110,9 @@ int	ft_cd(t_cmd *cmd, t_list *env)
 		cd_ret = chdir(cmd->args->content);
 		if (cd_ret == -1)
 		{
-			ft_putstr_fd("cd: ", 2);
-			ft_putstr_fd(cmd->args->content, 2);
-			ft_putendl_fd(": No such file or directory", 2);
+//			ft_putstr_fd("cd: ", 2);
+//			ft_putstr_fd(cmd->args->content, 2);
+//			ft_putendl_fd(": No such file or directory", 2);
 		}
 	}
 	g_exit_status = 0;

@@ -77,7 +77,7 @@ int main(int ac, char **av, char **env)
 		}
 		fill_data(&data);
 		//need to free the tokens
-		// print_data(&data);
+		//print_data(&data);
 		redir_return = check_redirections((&data)->cmds);
 		if (redir_return < 0)
 		{
