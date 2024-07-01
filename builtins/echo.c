@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:27:51 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 21:51:10 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 20:06:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_echo(t_cmd *cmd)
 	nl = 1;
 	if (nb_args(args) > 1)
 	{
-		if (cmd->flag && ft_strncmp(cmd->flag, "-n", 2) == 0)
+		if (cmd->flag && ft_strncmp(cmd->flag->content, "-n", 2) == 0)
 			nl = 0;
 	}
 	while (args)

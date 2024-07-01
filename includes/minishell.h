@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/01 17:03:51 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 20:41:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef enum t_token_type
 	EXEC_ID,
 	DQOUTES,
 	SQOUTES,
-	EMPTY_QOUTES,
 	NONE
 }	t_token_type;
 
@@ -98,7 +97,7 @@ typedef struct s_cmd
 	char			*cmd_path;
 	char			*cmd_str;
 	char			**cmd_with_flag;
-	char			*flag;
+	t_list			*flag;
 	t_list			*args;
 	t_redirection	*redirection;
 }	t_cmd;

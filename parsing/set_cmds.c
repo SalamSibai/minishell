@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/01 17:31:54 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 20:55:27 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ void	set_cmds(t_data *data)
 	int				i;
 	int				j;
 	int 			c;
+	int				k;
 	
 	i = 0;
 	j = 0;
 	tokens = data->tokens;
 	while (i < data->cmd_num)
 	{
+		k = 0;
 		c = 0;
 		head = NULL;
 		while (tokens[j] != NULL && tokens[j]->type != PIPE)
@@ -47,7 +49,16 @@ void	set_cmds(t_data *data)
 			}
 			else if (tokens[j]->type == FLAG)
 			{ 
-				data->cmds[i]->flag = ft_strdup(tokens[j]->token_string);
+				if (k == 0)
+				{
+					data->cmds[i]->flag = ft_lstnew(tokens[j]->token_string);
+					k = 1;
+				}
+				else
+				{
+					new_arg = ft_lstnew(tokens[j]->token_string);
+					ft_lstadd_back(&data->cmds[i]->flag, new_arg);
+				}
 				j++;
 			}
 			else if (tokens[j]->type == REDIRECT_INPUT)

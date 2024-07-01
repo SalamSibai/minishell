@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/01 17:32:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 21:11:15 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int main(int ac, char **av, char **env)
 		if (!data.buf || ft_strcmp(data.buf, "exit") == 0)
 		{
 			printf("exit\n");
+			cleanup(&data);
 			exit(1);
 		}
 		if (ft_strcmp(data.buf, "") == 0)
@@ -77,7 +78,7 @@ int main(int ac, char **av, char **env)
 		}
 		fill_data(&data);
 		//need to free the tokens
-		//print_data(&data);
+		// print_data(&data);
 		redir_return = check_redirections((&data)->cmds);
 		if (redir_return < 0)
 		{
@@ -87,7 +88,6 @@ int main(int ac, char **av, char **env)
 		}
 		execution(&data);
 		// g_exit_status = 0;
-		// free_data(&data, false);
 		// printf("data.buf: %s\n", data.buf);
 	}
 	cleanup(&data);

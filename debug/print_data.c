@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 22:31:36 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/25 19:00:57 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 20:56:46 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,22 @@ void	print_data(t_data *data)
 
 
 	printf("****************        After Parsing cmds values       ****************\n\n");
-	i = 0;
 	int k;
 	t_list *temp;
+	t_list *flag;
+	
+	i = 0;
 	while (i < data->cmd_num)
 	{
 		printf("*********        CMD NUMBER %d    *********\n", i);
 		printf("cmd[%d]->cmd: %s\n", i, data->cmds[i]->cmd_str);
-		printf("cmd[%d]->flag: %s\n", i, data->cmds[i]->flag);
+		flag = data->cmds[i]->flag;
+		while (data->cmds[i]->flag)
+		{
+			printf("cmd[%d]->flag: %s\n", i, (char *)data->cmds[i]->flag->content);
+			data->cmds[i]->flag = data->cmds[i]->flag->next;
+		}
+		data->cmds[i]->flag = flag;
 		k = 0;
 		temp = data->cmds[i]->args;
 		while (data->cmds[i]->args)

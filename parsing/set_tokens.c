@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:24:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/28 07:26:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 20:22:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	set_type(t_token *token)
 	token->expandable = true;
 	if (ft_strcmp(token->token_string, "|") == 0)
 		token->type = PIPE;
-	else if (ft_strncmp(token->token_string, "-", 1) == 0)
+	else if ((ft_strncmp(token->token_string, "-", 1) == 0 )
+		&& !(ft_strncmp(token->token_string, "-", 2) == 0 ))
 		token->type = FLAG;
 	else if (ft_strcmp(token->token_string, "<") == 0)
 		token->type = REDIRECT_INPUT;

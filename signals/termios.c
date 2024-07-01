@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:38:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 14:34:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 20:26:35 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	signals_handler(int sig, siginfo_t *siginfo, void *ptr)
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
+		rl_catch_signals = 0; //to stop the cruiser from going left
 		rl_redisplay();
 		g_exit_status = 1;
 	}

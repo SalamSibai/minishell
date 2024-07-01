@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 22:29:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/01 21:20:14 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	cleanup(t_data *data)
 	free(data->pipe);
 	ft_free2d((void **)data->path);
 	ft_free2d((void **)data->env_var);
-	ft_lstclear(&data->env, (void *)del);
+	ft_lstclear(&data->env, free);
 	ft_lstclear(&data->export_env, free);
 	i = 0;
 	while (data->cmds[i])
@@ -56,6 +56,8 @@ void	cleanup(t_data *data)
 			free(data->cmds[i]->flag);
 		if (data->cmds[i]->args)
 			ft_lstclear(&data->cmds[i]->args, (void *)del);
+		if (data->cmds[i]->flag)
+			ft_lstclear(&data->cmds[i]->flag, (void *)del);
 		if (data->cmds[i]->redirection)
 			redir_clear(&data->cmds[i]->redirection);
 		if (data->cmds[i]->cmd_with_flag)

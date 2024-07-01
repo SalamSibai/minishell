@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:00:18 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/22 15:36:09 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/01 20:24:39 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ bool get_path(t_data *data, t_cmd *cmd)
 bool	join_cmd_and_flag(t_cmd *cmd)
 {
 	t_list	*args_temp;
+	t_list	*flag_temp;
 	int		size;
 	int		i;
 
@@ -50,8 +51,13 @@ bool	join_cmd_and_flag(t_cmd *cmd)
 	cmd->cmd_with_flag = ft_calloc(size + 2, sizeof(char *));
 	args_temp = cmd->args;
 	cmd->cmd_with_flag[0] = ft_strdup(cmd->cmd_str);
+	flag_temp = cmd->flag;
 	if (cmd->flag)
-		cmd->cmd_with_flag[i++] = ft_strdup(cmd->flag);
+	{
+		cmd->cmd_with_flag[i++] = ft_strdup(cmd->flag->content);
+		cmd->flag = cmd->flag->next;
+	}
+	cmd->flag = flag_temp;
 	while (args_temp)
 	{
 		cmd->cmd_with_flag[i] = ft_strdup(args_temp->content);
