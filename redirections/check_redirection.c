@@ -12,18 +12,23 @@
 
 #include "../includes/minishell.h"
 
-void	check_redirections(t_cmd **cmds)
+int	check_redirections(t_cmd **cmds)
 {
 	int	i;
+	int	redir_value;
 
 	i = -1;
+	redir_value = 0;
 	while (cmds[++i])
 	{
 		if (cmds[i]->redirection != NULL)
 		{
-			check_type(cmds[i]);
+			redir_value = check_type(cmds[i]);
+			if (redir_value < 0)
+				return (redir_value);
 		}
 	}
+	return (redir_value);
 }
 
 /// @brief checks the type of the redirection, and calls the

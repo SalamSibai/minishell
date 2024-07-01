@@ -23,7 +23,7 @@ BUILTINS_DIR	= ./builtins
 EXEC_DIR		= ./execution
 FREE_DIR		= ./cleanup
 REDIR_DIR		= ./redirections
-SIG_DIR		= ./signals
+SIG_DIR			= ./signals
 
 SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/init_parsing.c \
@@ -62,6 +62,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${EXEC_DIR}/execution_utils.c \
 		${FREE_DIR}/free_data.c \
 		${FREE_DIR}/close_fds.c \
+		${FREE_DIR}/error_handler.c\
 		${SIG_DIR}/termios.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \

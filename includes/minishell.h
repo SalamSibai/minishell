@@ -43,7 +43,7 @@ typedef enum e_error_type
 	PIPE_ER,
 	FORK_ER,
 	CMD_ER
-} e_token_type;
+} e_error_type;
 
 typedef struct sigaction	t_sigaction;
 
@@ -179,10 +179,10 @@ void			redir_clear(t_redirection **redir);
 /*								PIPES,FDs REDIRECTION		 				  */
 /* ************************************************************************** */
 int				check_redirections(t_cmd **cmds);
-void			check_type(t_cmd *cmd);
+int				check_type(t_cmd *cmd);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
-bool				redirect_fds(t_data *data,t_cmd *cmd, int i, int j);
+bool			redirect_fds(t_data *data,t_cmd *cmd, int i, int j);
 bool			redirect_file_input(t_cmd *cmd);
 bool			redirect_pipe_input(t_pipe *pipe, int j);
 bool			redirect_file_output(t_cmd *cmd);
@@ -246,7 +246,7 @@ void			print_data(t_data *data);
 /* ************************************************************************** */
 /*								Error Handling								  */
 /* ************************************************************************** */
-void	error_handler(char *err_str, int err_type, t_data *data, bool done);
+void	 error_handler(char *err_str, int err_type, t_data *data, bool done);
 void	free_data(t_data *data, bool done);
 void	cleanup(t_data *data);
 bool	close_fd(int fd);
