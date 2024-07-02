@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/02 17:46:31 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/02 21:48:54 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	pid = fork();
 	if (pid == -1)
 		return (error_handler(FORK_ER_MSG, FORK_ER, data, false), pid);
-		//ft_putstr_fd("ERROR WITH FORK", 1);
 	if (pid == 0)
 	{
 		data->origin_fds[0] = dup(STDIN_FILENO);
 		data->origin_fds[1] = dup(STDOUT_FILENO);
 		if (!redirect_fds(data, cmd, i, j))
+		{
+			close_origin_fds(data);
 			return (pid);
-		// if (!close_fds(data, i))
-		// 	printf("CLOSING PROBLEM\n");
+		}
+		close_origin_fds(data);
 		for (int k = 0; k < data->cmd_num - 1; k++)
 		{
 			close(data->pipe->fd[k][0]);
@@ -45,7 +46,9 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			exit(2);
 		}
 		if (is_env_builtin(cmd->cmd_str))
-				exit (2);
+		{
+			exit(2);
+		}
 		else
 		{
 			if (join_cmd_and_flag(cmd))

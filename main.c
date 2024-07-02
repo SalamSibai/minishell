@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/01 21:11:15 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:51:03 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(int ac, char **av, char **env)
 		data.buf = readline("minishell$ ");
 		if (!data.buf || ft_strcmp(data.buf, "exit") == 0)
 		{
-			cleanup(&data);
+			//cleanup(&data);
 			ft_putstr_fd("exit\n", 1);
 			exit(1);
 		}

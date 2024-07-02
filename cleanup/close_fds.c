@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:25:27 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/23 17:31:31 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/02 21:47:53 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ bool	close_fd(int fd)
 	if (close(fd) == -1)
 		return (false);
 	return (true);
+}
+
+void	close_origin_fds(t_data *data)
+{
+	close(data->origin_fds[0]);
+	close(data->origin_fds[1]);
 }
 
 bool	close_pipe(t_pipe *pipe, int i)
