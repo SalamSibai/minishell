@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_qoutes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:51:29 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/01 17:32:35 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:21:40 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	validate_dqoutes(int index, t_data *data)
 		tokens[index]->type = CMDS;
 	else if (tokens[index - 1]->type == REDIRECT_INPUT
 			|| tokens[index - 1] ->type == REDIRECT_APPEND
-			|| tokens[index - 1]->type == REDIRECT_OUTPUT) 
+			|| tokens[index - 1]->type == REDIRECT_OUTPUT)
 		tokens[index]->type = FILE_NAME;
 	else if (tokens[index - 1]->type == HEREDOC)
 		tokens[index]->type = LIMITER;
