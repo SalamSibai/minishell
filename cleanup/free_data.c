@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/01 21:20:14 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:47:11 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	cleanup(t_data *data)
 		i++;
 	}
 	ft_free2d((void **)data->cmds);
+	close_fd(data->origin_fds[0]);
+	close_fd(data->origin_fds[1]);
 	//free(data->cmds);
 	//free(data);
 }

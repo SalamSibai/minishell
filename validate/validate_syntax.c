@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_syntax.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:43:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/28 20:00:59 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:56:17 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

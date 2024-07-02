@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/02 15:54:34 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/02 17:46:31 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ bool	execution(t_data *data)
 				if (pipe(data->pipe->fd[!j]) == -1)
 					return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
 					//ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
+				
 			}
 			i++;
 			j = !j;
