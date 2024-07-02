@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/02 17:46:31 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/02 20:20:16 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			exit(2);
 		}
 		if (is_env_builtin(cmd->cmd_str))
+		{
+				free_cmd(data);	
+				cleanup(data);
 				exit (2);
+		}
 		else
 		{
 			if (join_cmd_and_flag(cmd))

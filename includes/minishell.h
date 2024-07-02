@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/01 20:41:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:18:00 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <signal.h>
 
 # define BUFF_SIZE 4096
-# define INVALID_IN_MSG "Error: Invalid input\n"
+# define INVALID_IN_MSG "Error: Invalid syntax\n"
 # define INPUT_REDIR_ER_MSG "Error: Input redirection error.\n"
 # define OUTPUT_REDIR_ER_MSG "Error: Output redirection error.\n"
 # define PATH_ER_MSG "Error: Path doesn't exist\n"
@@ -250,8 +250,8 @@ void			print_data(t_data *data);
 /* ************************************************************************** */
 /*								Error Handling								  */
 /* ************************************************************************** */
-void	 error_handler(char *err_str, int err_type, t_data *data, bool done);
-void	free_data(t_data *data, bool done);
+void	error_handler(char *err_str, int err_type, t_data *data, bool done);
+void	free_cmd(t_data *data);
 void	cleanup(t_data *data);
 bool	close_fd(int fd);
 bool	close_fds(t_data *data, int i);

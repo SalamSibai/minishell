@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/01 21:11:15 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:29:02 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	set_env(t_data *data, char **env)
 	data->export_env = export_env_init(data->env);
 	data->env_var = env_to_str(data->env);
 	data->path = set_path(env, data);
+
 }
 
 static void	fill_data(t_data *data)
@@ -71,14 +72,12 @@ int main(int ac, char **av, char **env)
 		if (!validate_tokens(&data))
 		{
 			error_handler(INVALID_IN_MSG, INVALID_IN_ER, &data, false);
-			// free(data.buf);
-			// g_exit_status = 127;
-			// free tokens
 			continue;
 		}
+		
 		fill_data(&data);
 		//need to free the tokens
-		// print_data(&data);
+		 //print_data(&data);
 		redir_return = check_redirections((&data)->cmds);
 		if (redir_return < 0)
 		{
@@ -89,6 +88,7 @@ int main(int ac, char **av, char **env)
 			continue;
 		}
 		execution(&data);
+		free_cmd(&data);
 		// g_exit_status = 0;
 		// printf("data.buf: %s\n", data.buf);
 	}
