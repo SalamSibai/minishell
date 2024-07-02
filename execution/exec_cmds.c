@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 17:20:27 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/02 15:54:34 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		data->origin_fds[1] = dup(STDOUT_FILENO);
 		if (!redirect_fds(data, cmd, i, j))
 			return (pid);
+		// if (!close_fds(data, i))
+		// 	printf("CLOSING PROBLEM\n");
 		for (int k = 0; k < data->cmd_num - 1; k++)
 		{
 			close(data->pipe->fd[k][0]);
@@ -43,7 +45,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			exit(2);
 		}
 		if (is_env_builtin(cmd->cmd_str))
-				exit (2); 
+				exit (2);
 		else
 		{
 			if (join_cmd_and_flag(cmd))
@@ -66,7 +68,6 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			pid = getpid();
 			if (!redirect_fds(data, cmd, i, j))
 				return (pid);
-				// ft_putstr_fd("\n redirect failed\n", 1);
 			exec_builtin(cmd, data);
 		}
 		if (i > 0)

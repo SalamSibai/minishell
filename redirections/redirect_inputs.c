@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_inputs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:49:48 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/24 15:32:37 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:17:24 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ bool	redirect_stdin(t_data *data, t_cmd *cmd)
 		ft_putstr_fd("failed at input!!!!!!\n", 1);
 		return (false);
 	}
-	close(cmd->fd_in);
+	if (cmd->fd_in >= 0)
+		close(cmd->fd_in);
 	return (true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:49:57 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/24 15:32:40 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:17:03 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	redirect_stdout(t_data *data, t_cmd *cmd)
 		ft_putstr_fd("failed at output\n", 1);
 		return (false);
 	}
-	close(cmd->fd_out);
+	if (cmd->fd_out >= 0)
+		close(cmd->fd_out);
 	return (true);
 }
