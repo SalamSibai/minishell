@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:16:42 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/01 17:03:57 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 21:43:14 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ int	check_redirections(t_cmd **cmds)
 	redir_value = 0;
 	while (cmds[++i])
 	{
+		printf("REDIR CHECK\n");
 		if (cmds[i]->redirection != NULL)
 		{
+			printf("REDIR IS NOT NULL\n");
 			redir_value = check_type(cmds[i]);
 			if (redir_value < 0)
 				return (redir_value);

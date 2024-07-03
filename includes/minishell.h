@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 19:13:45 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 20:10:51 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef enum t_token_type
 	NONE
 }	t_token_type;
 
-/***
+/**
 * 	The pipe structure, which indludes:
 * 	1) the pipes (both of them)
 * 	2) the pids of the forked processes

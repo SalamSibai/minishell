@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:25:27 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 19:14:36 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 19:19:45 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	make_pipes(t_pipe *p)
 			return (false);
 		i ++;
 	}
-	return (close_pipe(data->pipe));
+	return (true);
 }
 
 void	alloc_pids(t_data *data)
