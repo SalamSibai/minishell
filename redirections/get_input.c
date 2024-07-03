@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 19:10:46 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 19:11:50 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ bool	execute_heredoc(t_cmd *cmd, t_redirection *redir)
 bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 {
 	char	 *path;
+	char	*file_path1;
 	char	*file_path;
 	char	cwd[PATH_MAX];
 
@@ -56,14 +57,15 @@ bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 	if (!heredoc)
 	{
 		path = getcwd(cwd, PATH_MAX);
-		file_path = ft_strjoin(path, "/");
-		file_path = ft_strjoin(file_path, redir->file_name);
+		file_path1 = ft_strjoin(path, "/");
+		file_path = ft_strjoin(file_path1, redir->file_name);
+		ft_free(&file_path1, 'p');
 		if (access(file_path, R_OK) != 0)
 		{
 			//set error code to access denied?
 			return (free(file_path), false);
 		}
-		free(file_path);
+		ft_free(&file_path, 'p');
 		cmd->fd_in = open(redir->file_name, O_RDONLY);
 		if (cmd->fd_in < 0)
 			return (false);

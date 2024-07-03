@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 13:31:17 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 18:26:52 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 19:12:19 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,10 @@ void	redir_clear(t_redirection **redir)
 		if (tmp->next != NULL)
 			next = tmp->next;
 		if (tmp->file_name)
-			free(tmp->file_name);
+			ft_free(&tmp->file_name, 'p');
 		if (tmp->limiter)
-			free(tmp->limiter);
-		if (tmp)
-			ft_free(&tmp, 'p');
+			ft_free(&tmp->limiter, 'p');
+		ft_free(&tmp, 'p');
 		if (next)
 			tmp = next;
 		else
