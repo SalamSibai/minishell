@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:05:28 by ssibai            #+#    #+#             */
-/*   Updated: 2024/06/30 22:29:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:08:57 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool validate_pipe(t_token **tokens, int index)
 	bool	before_pipe;
 	bool	after_pipe;
 	
-	if (index == 0) 
+	if (index == 0)
 		return false;
 	before_pipe = valid_before_pipe(tokens, index);
 	after_pipe = valid_after_pipe(tokens, index);

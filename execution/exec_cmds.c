@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/02 21:48:54 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 15:02:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		}
 		if (is_env_builtin(cmd->cmd_str))
 		{
-			exit(2);
+				free_cmd(data);	
+				cleanup(data);
+				exit (2);
 		}
 		else
 		{

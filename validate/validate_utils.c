@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:47:04 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/01 15:49:59 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:11:12 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,5 @@ bool	is_cmd(char *cmd, t_data *data)
 			return (free(cmd_path), true);
 		free(cmd_path);
 		i++;
-	}
-	printf("im here\n");
-	return (false);
+	}	return (false);
 }
