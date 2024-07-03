@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 17:08:42 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:10:41 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			close_origin_fds(data);
 			return (pid);
 		}
+		
 		close_origin_fds(data);
 		close_pipe(data->pipe, 0);
 		close_pipe(data->pipe, 1);
@@ -67,6 +68,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 				error_handler(CMD_ER_MSG, CMD_ER, data, true);
 		}
 		close_origin_fds(data); // Close in case of error
+		close_fds(data, i, true);
 	}
 	else
 	{
@@ -97,6 +99,8 @@ bool	execution(t_data *data)
 
 	i = 0;
 	j = 0;
+	if (data->cmds[0]->cmd_str == NULL)
+		return (true);
 	alloc_pids(data);
 	set_env_and_path(data, SET);
 	if (data->cmd_num > 1)
@@ -119,6 +123,9 @@ bool	execution(t_data *data)
 	}
 	else
 		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0 , 0);
+	i = -1;
+	while (++i < data->cmd_num)
+		close_fds(data, i, false);
 	i = -1;
 	while (++i < data->cmd_num)
 		waitpid(data->pipe->pid[i],  &g_exit_status, 0);

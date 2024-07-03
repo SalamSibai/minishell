@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 16:14:40 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:34:26 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,7 @@ void	error_handler(char *err_str, int err_type, t_data *data, bool done);
 void	free_cmd(t_data *data);
 void	cleanup(t_data *data);
 bool	close_fd(int fd);
-bool	close_fds(t_data *data, int i);
+bool	close_fds(t_data *data, int i, bool pipe);
 bool	close_pipe(t_pipe *pipe, int i);
 void	close_origin_fds(t_data *data);
 
