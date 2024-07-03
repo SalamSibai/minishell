@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:21:10 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 16:59:10 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:10:09 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ void	del(void *content);
 
 char	*get_next_line(int fd);
 char	*get_next_line_bonus(int fd);
+char	*ft_strjoin_gnl(char const *s1, char const *s2);
 #endif

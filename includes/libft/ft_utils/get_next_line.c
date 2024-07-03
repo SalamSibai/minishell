@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 14:30:38 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/13 23:26:43 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:09:51 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*ft_save_buffer(int fd, char *buffer_content)
 
 	ret = NULL;
 	if (buffer_content)
-		ret = ft_strjoin(ret, buffer_content);
+		ret = ft_strjoin_gnl(ret, buffer_content);
 	free(buffer_content);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
@@ -32,7 +32,7 @@ static char	*ft_save_buffer(int fd, char *buffer_content)
 		if (bytes_read == -1)
 			return (free(buffer), NULL);
 		buffer[bytes_read] = '\0';
-		ret = ft_strjoin(ret, buffer);
+		ret = ft_strjoin_gnl(ret, buffer);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
@@ -83,7 +83,7 @@ static char	*ft_update(char *buffer)
 	if (buffer[i])
 		i += 1;
 	length = ft_strlen(buffer + i);
-	updated_str = ft_strjoin(updated_str, buffer + (i));
+	updated_str = ft_strjoin_gnl(updated_str, buffer + (i));
 	free(buffer);
 	updated_str[length] = '\0';
 	if (updated_str[0] == '\0')
