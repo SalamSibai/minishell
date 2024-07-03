@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:25:27 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/02 21:47:53 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 19:19:31 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	close_pipe(t_pipe *pipe, int i)
 	return (true);
 }
 
-bool	close_fds(t_data *data, int i)
+bool	close_fds(t_data *data, int i, bool pipe)
 {
 	int	j;
 
@@ -52,14 +52,17 @@ bool	close_fds(t_data *data, int i)
 	}
 	if (data->cmds[i]->fd_out != -1)
 	{
-		if (close(data->cmds[i]->fd_out == -1))
+		if (close(data->cmds[i]->fd_out) == -1)
 			return (false);
 	}
-	while (j < 2)
+	if (pipe)
 	{
-		if (!close_pipe(data->pipe, j))
-			return (false);
-		j ++;
+		while (j < 2)
+		{
+			if (!close_pipe(data->pipe, j))
+				return (false);
+			j ++;
+		}
 	}
 	return (true);
 }

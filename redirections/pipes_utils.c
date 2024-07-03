@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 23:35:28 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 22:51:51 by mohammoh         ###   ########.fr       */
+/*   Created: 2024/06/19 18:25:27 by ssibai            #+#    #+#             */
+/*   Updated: 2024/07/03 19:19:45 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

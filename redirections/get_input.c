@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 18:04:30 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 22:41:34 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 		ft_free(&file_path, 'p');
 		cmd->fd_in = open(redir->file_name, O_RDONLY);
 		if (cmd->fd_in < 0)
+		{
 			return (false);
+		}
 	}
 	else
 	{

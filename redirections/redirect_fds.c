@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_fds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/01 17:04:04 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 22:41:22 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static bool	redirect_inputs(t_data *data,t_cmd *cmd, int i, int j)
 		if (cmd->fd_in != -1)
 		{
 			if (!redirect_file_input(cmd))
+			{
 				return (false);
+			}
 		}
 		else if (!redirect_stdin(data, cmd))
 			return (false);

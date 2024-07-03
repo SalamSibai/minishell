@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 22:44:23 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 22:54:12 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ int main(int ac, char **av, char **env)
 			error_handler(INVALID_IN_MSG, INVALID_IN_ER, &data, false);
 			continue;
 		}
-		
 		fill_data(&data);
-		print_data(&data);
+		//print_data(&data);
 		redir_return = check_redirections((&data)->cmds);
 		if (redir_return < 0)
 		{

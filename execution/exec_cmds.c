@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 22:46:07 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 22:54:38 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,17 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			return (pid);
 		}
 		close_origin_fds(data);
-		close_pipe(data->pipe, 0);
-		close_pipe(data->pipe, 1);
+		if (i != 0)
+		{
+			close_pipe(data->pipe, 0);
+			close_pipe(data->pipe, 1);
+		}
 		if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
 		{
 			exec_builtin(cmd, data);
-			// free_cmd(data);
-			set_env_and_path(data, FREE);	
-			// cleanup(data);
+			free_cmd(data);
+			set_env_and_path(data, FREE);
+			cleanup(data);
 			exit(2);
 		}
 		if (is_env_builtin(cmd->cmd_str))
@@ -66,7 +69,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			else
 				error_handler(CMD_ER_MSG, CMD_ER, data, true);
 		}
-		close_origin_fds(data); // Close in case of error
+		//close_origin_fds(data); // Close in case of error
+		//close_fds(data, i, true);
 	}
 	else
 	{
@@ -120,12 +124,16 @@ bool	execution(t_data *data)
 		close_pipe(data->pipe, !j);
 	}
 	else
-		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0 , 0);
+		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0, 0);
 	i = -1;
 	while (++i < data->cmd_num)
-		waitpid(data->pipe->pid[i],  &g_exit_status, 0);
-	dup2(data->origin_fds[0], STDIN_FILENO);
-	dup2(data->origin_fds[1], STDOUT_FILENO);
+		close_fds(data, i, false);
+	i = -1;
+	while (++i < data->cmd_num)		waitpid(data->pipe->pid[i],  &g_exit_status, 0);
+	// dup2(data->origin_fds[0], STDIN_FILENO);
+	// dup2(data->origin_fds[1], STDOUT_FILENO);
+	dup2(STDIN_FILENO, data->origin_fds[0]);
+	dup2(STDOUT_FILENO, data->origin_fds[1]);
 	set_env_and_path(data, FREE);
 	return (true);
 }
