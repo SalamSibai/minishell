@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 15:28:53 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 17:08:42 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,15 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
 		{
 			exec_builtin(cmd, data);
+			free_cmd(data);
+			set_env_and_path(data, FREE);	
+			cleanup(data);
 			exit(2);
 		}
 		if (is_env_builtin(cmd->cmd_str))
 		{
-			free_cmd(data);	
+			free_cmd(data);
+			set_env_and_path(data, FREE);	
 			cleanup(data);
 			exit (2);
 		}
@@ -54,7 +58,6 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			{
 				if (get_path(data, cmd))
 				{
-					data->env_var = env_to_str(data->env);
 					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
 				}
 				else
@@ -95,12 +98,11 @@ bool	execution(t_data *data)
 	i = 0;
 	j = 0;
 	alloc_pids(data);
+	set_env_and_path(data, SET);
 	if (data->cmd_num > 1)
 	{
 		if (!make_pipes(data->pipe))
 			return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
-			//return
-			//ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
 		while (data->cmds[i] != NULL)
 		{
 			data->pipe->pid[i] = exec_cmd(data->cmds[i], data, i, j);
@@ -122,5 +124,6 @@ bool	execution(t_data *data)
 		waitpid(data->pipe->pid[i],  &g_exit_status, 0);
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
+	set_env_and_path(data, FREE);
 	return (true);
 }

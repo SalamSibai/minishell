@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 15:28:03 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:14:40 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@
 # define PIPE_ER_MSG "Error: Couldn't opern pipes.\n"
 # define FORK_ER_MSG "Error: Fork.\n"
 # define CMD_ER_MSG "Error: Command doesn't exits.\n"
+
+typedef enum e_cmd_type
+{
+	SET,
+	FREE,
+} t_cmd_type;
 
 typedef enum e_error_type
 {
@@ -69,7 +75,7 @@ typedef enum t_token_type
 	NONE
 }	t_token_type;
 
-/**
+/***
 * 	The pipe structure, which indludes:
 * 	1) the pipes (both of them)
 * 	2) the pids of the forked processes
@@ -219,6 +225,7 @@ bool			is_in_env(t_list *env, char *args);
 char			*get_env_name(char *dest, const char *src);
 void			print_env(t_list *env, bool export);
 bool			print_error(const char *arg);
+bool			set_env_and_path(t_data *data, t_cmd_type type);
 void			bubble_sort(t_list *head, 
 					int (*cmp)(const char *, const char *));
 

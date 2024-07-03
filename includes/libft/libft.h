@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 16:21:10 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 22:31:45 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:59:10 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memdel(void *ptr);
 void	ft_free2d(void **arr);
+void	ft_free(void *address, char target);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(char *src);

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 15:28:42 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:24:43 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ static void	set_env(t_data *data, char **env)
 {
 	data->env = env_init(env);
 	data->export_env = export_env_init(data->env);
-	data->env_var = env_to_str(data->env);
-	data->path = set_path(env, data);
-	ft_free2d((void **)data->env_var);
+	// data->env_var = env_to_str(data->env);
+	// data->path = set_path(env, data);
 }
 
 static void	fill_data(t_data *data)
@@ -50,6 +49,7 @@ int main(int ac, char **av, char **env)
 		data.buf = readline("minishell$ ");
 		if (!data.buf || ft_strcmp(data.buf, "exit") == 0)
 		{
+			cleanup(&data);
 			ft_putstr_fd("exit\n", 1);
 			exit(1);
 		}
