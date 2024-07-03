@@ -47,7 +47,9 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		}
 		if (is_env_builtin(cmd->cmd_str))
 		{
-			exit(2);
+				free_cmd(data);	
+				cleanup(data);
+				exit (2);
 		}
 		else
 		{
