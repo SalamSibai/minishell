@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 15:01:51 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:27:23 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int main(int ac, char **av, char **env)
 		if (!data.buf || ft_strcmp(data.buf, "exit") == 0)
 		{
 			//cleanup(&data);
+			//close_fds(&data, -1);
 			ft_putstr_fd("exit\n", 1);
 			exit(1);
 		}
