@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 13:31:17 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 19:12:19 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/04 00:07:53 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,13 @@ void	redir_clear(t_redirection **redir)
 	next = NULL;
 	while (tmp)
 	{
-		if (tmp->next != NULL)
-			next = tmp->next;
+		next = tmp->next;
 		if (tmp->file_name)
 			ft_free(&tmp->file_name, 'p');
 		if (tmp->limiter)
 			ft_free(&tmp->limiter, 'p');
 		ft_free(&tmp, 'p');
-		if (next)
-			tmp = next;
-		else
-			tmp = NULL;
+		tmp = next;
 	}
 	*redir = NULL;
 }

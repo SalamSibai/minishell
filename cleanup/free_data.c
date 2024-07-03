@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 20:25:11 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 00:15:07 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 //MAKE SURE THAT WE RESET THE STDIN AND STDOUT FROM ORIGIN_FDS
 
-void	free_cmd(t_data *data)
+void	free_tokens(t_data *data)
 {
 	int	i;
 
@@ -41,9 +41,15 @@ void	free_cmd(t_data *data)
 		i++;
 	}
 	free(data->tokens);
+}
+void	free_cmd(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	free_tokens(data);
 	free(data->pipe->pid);
 	free(data->pipe);
-	i = 0;
 	while (data->cmds[i])
 	{
 		if (data->cmds[i]->cmd_str)

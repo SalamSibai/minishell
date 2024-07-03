@@ -123,3 +123,5 @@ push -f origin HEAD^:main
 reading from an invalid input and when thers is a pipe like "< 2 | ls"
 it should print invalid file or no such file and execute ls 
 
+we need to handle the exit with multiple arugments 
+

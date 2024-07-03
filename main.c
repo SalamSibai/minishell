@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 23:16:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 00:19:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int main(int ac, char **av, char **env)
 		data.cmd_ctr = 0;
 		if (!validate_tokens(&data))
 		{
+			free_tokens(&data);
 			error_handler(INVALID_IN_MSG, INVALID_IN_ER, &data, false);
 			continue;
 		}

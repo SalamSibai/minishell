@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 23:12:15 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 00:02:31 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,7 @@ void			print_data(t_data *data);
 /* ************************************************************************** */
 void	error_handler(char *err_str, int err_type, t_data *data, bool done);
 void	free_cmd(t_data *data);
+void	free_tokens(t_data *data);
 void	cleanup(t_data *data);
 bool	close_fd(int fd);
 bool	close_fds(t_data *data, int i, bool pipe);
