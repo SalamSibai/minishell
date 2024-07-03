@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 15:27:23 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:28:42 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	set_env(t_data *data, char **env)
 	data->export_env = export_env_init(data->env);
 	data->env_var = env_to_str(data->env);
 	data->path = set_path(env, data);
-
+	ft_free2d((void **)data->env_var);
 }
 
 static void	fill_data(t_data *data)
@@ -50,8 +50,6 @@ int main(int ac, char **av, char **env)
 		data.buf = readline("minishell$ ");
 		if (!data.buf || ft_strcmp(data.buf, "exit") == 0)
 		{
-			//cleanup(&data);
-			//close_fds(&data, -1);
 			ft_putstr_fd("exit\n", 1);
 			exit(1);
 		}
@@ -61,10 +59,7 @@ int main(int ac, char **av, char **env)
 			add_history(data.buf);
 		if (!validate_syntax(data.buf))
 		{
-			// printf("im here\n");
 			error_handler(INVALID_IN_MSG, INVALID_IN_ER, &data, false);
-			// g_exit_status = 127;
-			// free(data.buf);
 			continue;
 		}
 		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
@@ -77,7 +72,6 @@ int main(int ac, char **av, char **env)
 		}
 		
 		fill_data(&data);
-		//need to free the tokens
 		 //print_data(&data);
 		redir_return = check_redirections((&data)->cmds);
 		if (redir_return < 0)
@@ -90,10 +84,8 @@ int main(int ac, char **av, char **env)
 		}
 		execution(&data);
 		free_cmd(&data);
-		// g_exit_status = 0;
-		// printf("data.buf: %s\n", data.buf);
+		g_exit_status = 0;
 	}
 	cleanup(&data);
-	// free_data(&data);
-	// return (0);
+	return (0);
 }

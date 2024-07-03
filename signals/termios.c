@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termios.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:38:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/02 15:50:03 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 15:06:23 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	signals_handler(int sig, siginfo_t *siginfo, void *ptr)
 	{
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
-		//rl_replace_line("", 0);
-		//rl_catch_signals = 0; //to stop the cruiser from going left
+		rl_replace_line("", 0);
+		rl_catch_signals = 0; 
 		rl_redisplay();
 		g_exit_status = 1;
 	}

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 15:26:56 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:28:53 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			{
 				if (get_path(data, cmd))
 				{
-					close_fds(data, i);
+					data->env_var = env_to_str(data->env);
 					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
 				}
 				else
