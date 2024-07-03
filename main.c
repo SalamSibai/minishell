@@ -51,6 +51,7 @@ int main(int ac, char **av, char **env)
 		if (!data.buf || ft_strcmp(data.buf, "exit") == 0)
 		{
 			//cleanup(&data);
+			//close_fds(&data, -1);
 			ft_putstr_fd("exit\n", 1);
 			exit(1);
 		}

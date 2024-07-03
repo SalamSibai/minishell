@@ -35,11 +35,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			return (pid);
 		}
 		close_origin_fds(data);
-		for (int k = 0; k < data->cmd_num - 1; k++)
-		{
-			close(data->pipe->fd[k][0]);
-			close(data->pipe->fd[k][1]);
-		}
+		close_pipe(data->pipe, 0);
+		close_pipe(data->pipe, 1);
 		if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
 		{
 			exec_builtin(cmd, data);
@@ -47,9 +44,9 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		}
 		if (is_env_builtin(cmd->cmd_str))
 		{
-				free_cmd(data);	
-				cleanup(data);
-				exit (2);
+			free_cmd(data);	
+			cleanup(data);
+			exit (2);
 		}
 		else
 		{
@@ -57,6 +54,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			{
 				if (get_path(data, cmd))
 				{
+					close_fds(data, i);
 					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
 				}
 				else
@@ -65,6 +63,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			else
 				error_handler(CMD_ER_MSG, CMD_ER, data, true);
 		}
+		close_origin_fds(data); // Close in case of error
 	}
 	else
 	{
@@ -110,20 +109,17 @@ bool	execution(t_data *data)
 				close_pipe(data->pipe, !j);
 				if (pipe(data->pipe->fd[!j]) == -1)
 					return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
-					//ft_putstr_fd("ERROR WITH MAKING PIPES\n", 1);
-				
 			}
 			i++;
 			j = !j;
 		}
+		close_pipe(data->pipe, !j);
 	}
 	else
 		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0 , 0);
 	i = -1;
 	while (++i < data->cmd_num)
-	{
 		waitpid(data->pipe->pid[i],  &g_exit_status, 0);
-	}
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
 	return (true);

@@ -29,7 +29,7 @@ bool	close_pipe(t_pipe *pipe, int i)
 {
 	int	j;
 
-	j = 0;
+	j = -1;
 	while (++j < 2)
 	{
 		{
@@ -57,7 +57,7 @@ bool	close_fds(t_data *data, int i)
 	}
 	while (j < 2)
 	{
-		if (!close_pipe(data->pipe, i))
+		if (!close_pipe(data->pipe, j))
 			return (false);
 		j ++;
 	}
