@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:49:48 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 18:07:16 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 21:45:57 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 bool	redirect_file_input(t_cmd *cmd)
 {
+	printf("cmd fdin is: %d\n", cmd->fd_in);
 	if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
+	{
+		printf("FAILED\n");
 		return (false);
+	}
 	close(cmd->fd_in);
 	return (true);
 }
@@ -36,7 +40,6 @@ bool	redirect_stdin(t_data *data, t_cmd *cmd)
 {
 	if (dup2(data->origin_fds[0], STDIN_FILENO) == -1)
 	{
-		ft_putstr_fd("failed at input!!!!!!\n", 1);
 		return (false);
 	}
 	if (cmd->fd_in >= 0)

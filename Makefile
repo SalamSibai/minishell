@@ -6,7 +6,7 @@
 #    By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/07/03 19:12:35 by ssibai           ###   ########.fr        #
+#    Updated: 2024/07/03 20:47:39 by ssibai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${DEBUG_DIR}/print_data.c \
 		./main.c \
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra -g3
 
 RM = rm -rf
 
