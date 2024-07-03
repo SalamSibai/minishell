@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 18:56:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:17:45 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			close_origin_fds(data);
 			return (pid);
 		}
+		
 		close_origin_fds(data);
 		close_pipe(data->pipe, 0);
 		close_pipe(data->pipe, 1);
@@ -67,6 +68,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 				error_handler(CMD_ER_MSG, CMD_ER, data, true);
 		}
 		close_origin_fds(data); // Close in case of error
+		close_fds(data, i, true);
 	}
 	else
 	{
@@ -121,6 +123,9 @@ bool	execution(t_data *data)
 	}
 	else
 		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0 , 0);
+	i = -1;
+	while (++i < data->cmd_num)
+		close_fds(data, i, false);
 	i = -1;
 	while (++i < data->cmd_num)
 		waitpid(data->pipe->pid[i],  &g_exit_status, 0);

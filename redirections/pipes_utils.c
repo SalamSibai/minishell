@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 23:35:28 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/24 22:51:51 by mohammoh         ###   ########.fr       */
+/*   Created: 2024/06/19 18:25:27 by ssibai            #+#    #+#             */
+/*   Updated: 2024/07/03 19:14:36 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	make_pipes(t_pipe *p)
 			return (false);
 		i ++;
 	}
-	return (true);
+	return (close_pipe(data->pipe));
 }
 
 void	alloc_pids(t_data *data)
