@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 22:54:38 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 23:30:33 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,8 @@ bool	execution(t_data *data)
 	while (++i < data->cmd_num)
 		close_fds(data, i, false);
 	i = -1;
-	while (++i < data->cmd_num)		waitpid(data->pipe->pid[i],  &g_exit_status, 0);
-	// dup2(data->origin_fds[0], STDIN_FILENO);
-	// dup2(data->origin_fds[1], STDOUT_FILENO);
+	while (++i < data->cmd_num)
+		waitpid(data->pipe->pid[i],  &g_exit_status, 0);
 	dup2(STDIN_FILENO, data->origin_fds[0]);
 	dup2(STDOUT_FILENO, data->origin_fds[1]);
 	set_env_and_path(data, FREE);
