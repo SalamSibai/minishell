@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 21:39:06 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 22:41:34 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 		cmd->fd_in = open(redir->file_name, O_RDONLY);
 		if (cmd->fd_in < 0)
 		{
-			printf("setting fd in failed\n");
 			return (false);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 22:05:15 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 22:41:22 by ssibai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static bool	redirect_inputs(t_data *data,t_cmd *cmd, int i, int j)
 {
 	if (i == 0)
 	{
-			printf("cmd fdin is: %d\n", cmd->fd_in);
 		if (cmd->fd_in != -1)
 		{
-			printf("NOT EQUAL -1\n");
 			if (!redirect_file_input(cmd))
 			{
 				return (false);
@@ -76,6 +74,5 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 	{
 		return (error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false), false);
 	}
-	printf("return true\n");
 	return (true);
 }
