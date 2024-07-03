@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 17:08:42 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:30:14 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ bool	execution(t_data *data)
 
 	i = 0;
 	j = 0;
+	if (data->cmds[0]->cmd_str == NULL)
+		return (true);
 	alloc_pids(data);
 	set_env_and_path(data, SET);
 	if (data->cmd_num > 1)
