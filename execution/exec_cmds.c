@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 18:56:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 22:46:07 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
 		{
 			exec_builtin(cmd, data);
-			free_cmd(data);
+			// free_cmd(data);
 			set_env_and_path(data, FREE);	
-			cleanup(data);
+			// cleanup(data);
 			exit(2);
 		}
 		if (is_env_builtin(cmd->cmd_str))
 		{
 			free_cmd(data);
-			set_env_and_path(data, FREE);	
+			set_env_and_path(data, FREE);
 			cleanup(data);
 			exit (2);
 		}

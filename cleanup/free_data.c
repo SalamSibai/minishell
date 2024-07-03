@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 17:01:56 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:25:11 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	free_cmd(t_data *data)
 	free(data->tokens);
 	free(data->pipe->pid);
 	free(data->pipe);
-	// ft_free2d((void **)data->env_var);
 	i = 0;
 	while (data->cmds[i])
 	{

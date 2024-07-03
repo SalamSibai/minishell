@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 16:24:43 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/03 22:44:23 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static void	set_env(t_data *data, char **env)
 {
 	data->env = env_init(env);
 	data->export_env = export_env_init(data->env);
-	// data->env_var = env_to_str(data->env);
-	// data->path = set_path(env, data);
+
 }
 
 static void	fill_data(t_data *data)
@@ -72,7 +71,7 @@ int main(int ac, char **av, char **env)
 		}
 		
 		fill_data(&data);
-		 //print_data(&data);
+		print_data(&data);
 		redir_return = check_redirections((&data)->cmds);
 		if (redir_return < 0)
 		{

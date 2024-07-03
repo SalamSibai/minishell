@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_inputs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 20:49:48 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/02 16:17:24 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/03 20:34:22 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
