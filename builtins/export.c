@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:57:59 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 22:01:04 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 04:18:26 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	env_add(char *value, t_list *env)
 		env->content = ft_strdup(value);
 		return (0);
 	}
-	new = ft_lstnew(value);
+	new = ft_lstnew(ft_strdup(value));
 	while (env && env->next)
 		env = env->next;
 	tmp = env->next;

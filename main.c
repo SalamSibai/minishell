@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 00:19:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 04:29:03 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	set_env(t_data *data, char **env)
 {
 	data->env = env_init(env);
 	data->export_env = export_env_init(data->env);
-	set_env_and_path(data, SET);
 }
 
 static void	fill_data(t_data *data)
@@ -63,6 +62,7 @@ int main(int ac, char **av, char **env)
 		}
 		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
 		scan(data.buf, data.tokens);
+		set_env_and_path(&data, SET);
 		data.cmd_ctr = 0;
 		if (!validate_tokens(&data))
 		{
@@ -70,9 +70,8 @@ int main(int ac, char **av, char **env)
 			error_handler(INVALID_IN_MSG, INVALID_IN_ER, &data, false);
 			continue;
 		}
-		set_env_and_path(&data, FREE);
 		fill_data(&data);
-		//print_data(&data);
+		// print_data(&data);
 		redir_return = check_redirections((&data)->cmds);
 		if (redir_return < 0)
 		{
@@ -83,6 +82,7 @@ int main(int ac, char **av, char **env)
 			continue;
 		}
 		execution(&data);
+		set_env_and_path(&data, FREE);
 		free_cmd(&data);
 		g_exit_status = 0;
 	}

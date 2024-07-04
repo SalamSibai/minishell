@@ -125,3 +125,5 @@ it should print invalid file or no such file and execute ls
 
 we need to handle the exit with multiple arugments 
 
+when theres a heredoc then  a pipe the command doesnt work 
+

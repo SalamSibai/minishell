@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 23:30:33 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 02:08:54 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			if (join_cmd_and_flag(cmd))
 			{
 				if (get_path(data, cmd))
-				{
 					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
-				}
+
 				else
 					error_handler(PATH_ER_MSG, PATH_ER, data, true);
 			}
@@ -104,7 +103,6 @@ bool	execution(t_data *data)
 	if (data->cmds[0]->cmd_str == NULL)
 		return (true);
 	alloc_pids(data);
-	set_env_and_path(data, SET);
 	if (data->cmd_num > 1)
 	{
 		if (!make_pipes(data->pipe))
@@ -133,6 +131,5 @@ bool	execution(t_data *data)
 		waitpid(data->pipe->pid[i],  &g_exit_status, 0);
 	dup2(STDIN_FILENO, data->origin_fds[0]);
 	dup2(STDOUT_FILENO, data->origin_fds[1]);
-	set_env_and_path(data, FREE);
 	return (true);
 }

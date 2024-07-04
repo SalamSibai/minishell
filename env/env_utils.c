@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:51:26 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 22:09:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 05:50:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,13 @@ bool	is_valid_env(const char *var)
 		i++;
 	}
 	return (true);
+}
+
+void	ft_export_pwds(char *str, t_list *export_env, t_list *env)
+{
+	if (!is_in_env(export_env, str))
+		env_add(str, export_env);
+	if (!is_in_env(env, str))
+		env_add(str, env);
+	return ;
 }

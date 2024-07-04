@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 12:03:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 14:16:51 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 04:15:32 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ t_list	*env_init(char **envp)
 	int		i;
 
 	i = 0;
-	env = ft_lstnew(envp[i]);
+	env = ft_lstnew(ft_strdup(envp[i]));
 	while (envp[++i])
 	{
-		new = ft_lstnew(envp[i]);
+		new = ft_lstnew(ft_strdup(envp[i]));
 		ft_lstadd_back(&env, new);
 	}
 	return (env);
@@ -39,10 +39,10 @@ t_list	*export_env_init(t_list *env)
 	t_list	*export_env;
 	t_list	*new;
 
-	export_env = ft_lstnew(env->content);
+	export_env = ft_lstnew(ft_strdup(env->content));
 	while (env->next)
 	{
-		new = ft_lstnew(env->next->content);
+		new = ft_lstnew(ft_strdup(env->next->content));
 		ft_lstadd_back(&export_env, new);
 		env = env->next;
 	}

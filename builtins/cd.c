@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:05:21 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/01 20:40:32 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 05:45:46 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,28 @@ int	goto_path(int option, t_list *env)
 		env_path = get_env_path(env, "OLDPWD", 6);
 		if (!env_path)
 			return (ft_putendl_fd("minishell : cd: OLDPWD not set", 2), 42);
+		ft_putendl_fd(env_path, 1);
 	}
 	ret = chdir(env_path);
 	return (free(env_path), ret);
+}
+
+void	update_pwds(t_list *env, t_list *export_env)
+{
+	char	*pwd;
+	char	*oldpwd;
+	char	*tmp;
+
+	pwd = getcwd(NULL, 0);
+	oldpwd = get_env_path(env, "PWD", 3);
+	tmp = ft_strjoin("OLDPWD=", oldpwd);
+	ft_export_pwds(tmp, env, export_env);
+	free(tmp);
+	tmp = ft_strjoin("PWD=", pwd);
+	ft_export_pwds(tmp, env, export_env);
+	free(tmp);
+	free(pwd);
+	free(oldpwd);
 }
 
 //i need to update the enviroment content for pwd and oldpwd
@@ -96,15 +115,16 @@ int	goto_path(int option, t_list *env)
  * @return Returns 0 on success or -1 
  * if there was an error changing the directory.
  */
-int	ft_cd(t_cmd *cmd, t_list *env)
+int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env)
 {
 	int	cd_ret;
 
-	ft_putstr_fd("calling cd\n", 1);
-	if (!cmd->args && !cmd->flag)
+	if (!cmd->args)
 		return (goto_path(0, env));
-	if (cmd->flag && ft_strcmp(cmd->flag->content, "-") == 0)
+	else if (cmd->args && (ft_strcmp(cmd->args->content, "-") == 0))
+	{
 		cd_ret = goto_path(1, env);
+	}
 	else
 	{
 		cd_ret = chdir(cmd->args->content);
@@ -113,8 +133,11 @@ int	ft_cd(t_cmd *cmd, t_list *env)
 			ft_putstr_fd("cd: ", 2);
 			ft_putstr_fd(cmd->args->content, 2);
 			ft_putendl_fd(": No such file or directory", 2);
+			g_exit_status = 1;
+			return (cd_ret);
 		}
 	}
+	update_pwds(env, export_env);
 	g_exit_status = 0;
 	return (cd_ret);
 }

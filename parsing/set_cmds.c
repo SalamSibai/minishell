@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:16:25 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/01 20:55:27 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 04:32:41 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	set_cmds(t_data *data)
 			{ 
 				if (k == 0)
 				{
-					data->cmds[i]->flag = ft_lstnew(tokens[j]->token_string);
+					data->cmds[i]->flag = ft_lstnew(ft_strdup(tokens[j]->token_string));
 					k = 1;
 				}
 				else
 				{
-					new_arg = ft_lstnew(tokens[j]->token_string);
+					new_arg = ft_lstnew(ft_strdup(tokens[j]->token_string));
 					ft_lstadd_back(&data->cmds[i]->flag, new_arg);
 				}
 				j++;
@@ -90,12 +90,12 @@ void	set_cmds(t_data *data)
 			{
 				if (c == 0)
 				{
-					data->cmds[i]->args = ft_lstnew(tokens[j]->token_string);
+					data->cmds[i]->args = ft_lstnew(ft_strdup(tokens[j]->token_string));
 					c = 1;
 				}
 				else
 				{
-					new_arg = ft_lstnew(tokens[j]->token_string);
+					new_arg = ft_lstnew(ft_strdup(tokens[j]->token_string));
 					ft_lstadd_back(&data->cmds[i]->args, new_arg);
 				}
 				j++;

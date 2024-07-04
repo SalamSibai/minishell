@@ -6,13 +6,11 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 00:15:07 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 05:48:50 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-
 /*
 * 	1) free tokens
 		*tokens_string to be free
@@ -26,7 +24,6 @@
 			then free the redirection
 * 	3) free buf
 */
-
 //MAKE SURE THAT WE RESET THE STDIN AND STDOUT FROM ORIGIN_FDS
 
 void	free_tokens(t_data *data)
@@ -42,6 +39,7 @@ void	free_tokens(t_data *data)
 	}
 	free(data->tokens);
 }
+
 void	free_cmd(t_data *data)
 {
 	int	i;
@@ -54,8 +52,6 @@ void	free_cmd(t_data *data)
 	{
 		if (data->cmds[i]->cmd_str)
 			free(data->cmds[i]->cmd_str);
-		if (data->cmds[i]->flag)
-			free(data->cmds[i]->flag);
 		if (data->cmds[i]->args)
 			ft_lstclear(&data->cmds[i]->args, free);
 		if (data->cmds[i]->flag)
@@ -70,7 +66,6 @@ void	free_cmd(t_data *data)
 	}
 	free(data->cmds);
 }
-
 
 void	cleanup(t_data *data)
 {

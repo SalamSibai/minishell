@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 00:02:31 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 05:55:58 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef enum e_cmd_type
 {
 	SET,
 	FREE,
-} t_cmd_type;
+}	t_cmd_type;
 
 typedef enum e_error_type
 {
@@ -49,7 +49,7 @@ typedef enum e_error_type
 	PIPE_ER,
 	FORK_ER,
 	CMD_ER
-} e_error_type;
+}	t_error_type;
 
 typedef struct sigaction	t_sigaction;
 
@@ -210,7 +210,7 @@ t_token			**check_expandable_var(t_token **tokens, t_list *env);
 /* ************************************************************************** */
 /*									PATH									  */
 /* ************************************************************************** */
-char			**set_path(char **envp, t_data *data);
+char			**set_path(char **envp);
 bool			get_path(t_data *data, t_cmd *cmd);
 
 /* ************************************************************************** */
@@ -219,11 +219,14 @@ bool			get_path(t_data *data, t_cmd *cmd);
 t_list			*env_init(char **envp);
 t_list			*export_env_init(t_list *env);
 char			**env_to_str(t_list *env);
+void			ft_export_pwds(char *str, t_list *export_env, 
+					t_list *env);
 bool			is_valid_env(const char *var);
 char			*add_quotes(char *value);
 bool			is_in_env(t_list *env, char *args);
 char			*get_env_name(char *dest, const char *src);
 void			print_env(t_list *env, bool export);
+int				env_add(char *value, t_list *env);
 bool			print_error(const char *arg);
 bool			set_env_and_path(t_data *data, t_cmd_type type);
 void			bubble_sort(t_list *head, 
@@ -232,7 +235,7 @@ void			bubble_sort(t_list *head,
 /* ************************************************************************** */
 /*									BUILTINS								  */
 /* ************************************************************************** */
-int				ft_cd(t_cmd *cmd, t_list *env);
+int				ft_cd(t_cmd *cmd, t_list *env, t_list *export_env);
 int				ft_echo(t_cmd *cmd);
 int				ft_env(t_list *env);
 bool			ft_export(t_cmd *cmd, t_list *export_env, t_list *env);
@@ -257,13 +260,14 @@ void			print_data(t_data *data);
 /* ************************************************************************** */
 /*								Error Handling								  */
 /* ************************************************************************** */
-void	error_handler(char *err_str, int err_type, t_data *data, bool done);
-void	free_cmd(t_data *data);
-void	free_tokens(t_data *data);
-void	cleanup(t_data *data);
-bool	close_fd(int fd);
-bool	close_fds(t_data *data, int i, bool pipe);
-bool	close_pipe(t_pipe *pipe, int i);
-void	close_origin_fds(t_data *data);
+void			error_handler(char *err_str, int err_type,
+					t_data *data, bool done);
+void			free_cmd(t_data *data);
+void			free_tokens(t_data *data);
+void			cleanup(t_data *data);
+bool			close_fd(int fd);
+bool			close_fds(t_data *data, int i, bool pipe);
+bool			close_pipe(t_pipe *pipe, int i);
+void			close_origin_fds(t_data *data);
 
 #endif

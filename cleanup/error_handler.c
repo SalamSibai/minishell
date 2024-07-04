@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 15:17:41 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/04 00:15:20 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 05:48:12 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
  * @brief where error msgs are printed, and data is redirected to the necessary
  *        functions depending on what is needed to be freed.. etc
  * @param err_str the error msg (that have been defined in the header)
- * @param err_type the type of the error (to check what should be freed, also defined in the header)
+ * @param err_type the type of the error (to check what should be freed,
+ *  also defined in the header)
  * @param data reference to data
  * @param done whether minishell program should be terminated or not
  */
-void error_handler(char *err_str, int err_type, t_data *data, bool done)
+
+void	error_handler(char *err_str, int err_type, t_data *data, bool done)
 {
 	if (err_str != NULL)
 		ft_putstr_fd(err_str, 2);

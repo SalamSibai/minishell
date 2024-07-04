@@ -6,20 +6,19 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:00:00 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/03 16:41:24 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 05:52:10 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**set_path(char **envp, t_data *data)
+char	**set_path(char **envp)
 {
 	char	*full_path;
 	char	**split_path;
 	char	*tmp;
 	int		i;
 
-	(void)data;
 	i = -1;
 	full_path = NULL;
 	while (*envp)
@@ -31,10 +30,6 @@ char	**set_path(char **envp, t_data *data)
 		}
 		envp ++;
 	}
-
-	//if (full_path == NULL)
-	//CODE
-	// else
 	split_path = ft_split(full_path, ':');
 	while (split_path[++i] != NULL)
 	{
