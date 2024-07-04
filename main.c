@@ -71,7 +71,7 @@ int main(int ac, char **av, char **env)
 			continue;
 		}
 		fill_data(&data);
-		// print_data(&data);
+	//	print_data(&data);
 		redir_return = check_redirections((&data)->cmds);
 		if (redir_return < 0)
 		{
@@ -81,6 +81,7 @@ int main(int ac, char **av, char **env)
 				error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, &data, false);
 			continue;
 		}
+		printf("NUMBER OF COMMANDS: %d\n", data.cmd_num);
 		execution(&data);
 		set_env_and_path(&data, FREE);
 		free_cmd(&data);

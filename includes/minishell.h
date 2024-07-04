@@ -198,7 +198,6 @@ bool			redirect_file_output(t_cmd *cmd);
 bool			redirect_pipe_output(t_pipe *pipe, int j);
 bool			redirect_stdin(t_data *data, t_cmd *cmd);
 bool			redirect_stdout(t_data *data, t_cmd *cmd);
-bool			close_pipe(t_pipe *pipe, int i);
 void			alloc_pids(t_data *d);
 bool			make_pipes(t_pipe *p);
 
@@ -267,7 +266,7 @@ void			free_tokens(t_data *data);
 void			cleanup(t_data *data);
 bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i, bool pipe);
-bool			close_pipe(t_pipe *pipe, int i);
+bool			close_pipe(t_pipe *pipe, int i, bool both);
 void			close_origin_fds(t_data *data);
 
 #endif

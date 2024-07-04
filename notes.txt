@@ -128,3 +128,8 @@ we need to handle the exit with multiple arugments
 when theres a heredoc then  a pipe the command doesnt work  like 
 << a | ls
 
+Command not found error msg if
+
+things left:
+
+EXIT CODES FOR ALL CMDS(check with tester)

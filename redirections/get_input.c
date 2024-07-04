@@ -29,11 +29,11 @@ bool	execute_heredoc(t_cmd *cmd, t_redirection *redir)
 	line = get_next_line(0);
 	while (line)
 	{
-		if (!(ft_strncmp(line, redir->limiter, in_len)) && line[in_len + 1] == '\0')
+		if (!(ft_strncmp(line, redir->limiter, in_len)) && line[in_len] == '\n')
 			break ;
 		write(pipe_in[1], line, ft_strlen(line));
-		write (1, "> ", 2);
 		free(line);
+		write (1, "> ", 2);
 		line = get_next_line(0);
 	}
 	free(line);
@@ -62,7 +62,6 @@ bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 		ft_free(&file_path1, 'p');
 		if (access(file_path, R_OK) != 0)
 		{
-			//set error code to access denied?
 			return (free(file_path), false);
 		}
 		ft_free(&file_path, 'p');
