@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:00:00 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 05:52:10 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/04 06:29:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	**set_path(char **envp)
 		envp ++;
 	}
 	split_path = ft_split(full_path, ':');
+	if (!split_path)
+		return (NULL);
 	while (split_path[++i] != NULL)
 	{
 		tmp = ft_strdup(split_path[i]);
