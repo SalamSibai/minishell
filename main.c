@@ -86,6 +86,8 @@ int main(int ac, char **av, char **env)
 		free_cmd(&data);
 		g_exit_status = 0;
 	}
+	if (!close_everything())
+		printf("NOT WORKINGLOL \n");
 	cleanup(&data);
 	return (0);
 }

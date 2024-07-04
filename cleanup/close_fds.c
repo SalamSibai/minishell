@@ -12,6 +12,19 @@
 
 #include "../includes/minishell.h"
 
+bool	close_everything()
+{
+	int i;
+
+	i = 0;
+	while (i < 1025)
+	{
+		close(i);
+		i ++;
+	}
+	return (true);
+}
+
 bool	close_fd(int fd)
 {
 	if (close(fd) == -1)
@@ -25,16 +38,34 @@ void	close_origin_fds(t_data *data)
 	close(data->origin_fds[1]);
 }
 
-bool	close_pipe(t_pipe *pipe, int i)
+bool	close_pipe(t_pipe *pipe, int i, bool both)
 {
 	int	j;
 
 	j = -1;
-	while (++j < 2)
+	if (both)
 	{
+		i = -1;
+		while (++i < 2)
 		{
-			if (close(pipe->fd[i][j]) == -1)
-				return (false);
+			j = -1;
+			while (++j < 2)
+			{
+				{
+					if (close(pipe->fd[i][j]) == -1)
+						return (false);
+				}
+			}
+		}
+	}
+	else
+	{
+		while (++j < 2)
+		{
+			{
+				if (close(pipe->fd[i][j]) == -1)
+					return (false);
+			}
 		}
 	}
 	return (true);
@@ -57,12 +88,8 @@ bool	close_fds(t_data *data, int i, bool pipe)
 	}
 	if (pipe)
 	{
-		while (j < 2)
-		{
-			if (!close_pipe(data->pipe, j))
-				return (false);
-			j ++;
-		}
+		if (!close_pipe(data->pipe, j, true))
+			return (false);
 	}
 	return (true);
 }

@@ -22,64 +22,73 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
 	int	pid;
 
+    data->origin_fds[0] = dup(STDIN_FILENO);
+    data->origin_fds[1] = dup(STDOUT_FILENO);
 	pid = fork();
 	if (pid == -1)
 		return (error_handler(FORK_ER_MSG, FORK_ER, data, false), pid);
 	if (pid == 0)
 	{
-		data->origin_fds[0] = dup(STDIN_FILENO);
-		data->origin_fds[1] = dup(STDOUT_FILENO);
 		if (!redirect_fds(data, cmd, i, j))
 		{
 			close_origin_fds(data);
 			return (pid);
 		}
 		close_origin_fds(data);
-		if (i != 0)
-		{
-			close_pipe(data->pipe, 0);
-			close_pipe(data->pipe, 1);
-		}
-		if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
-		{
-			exec_builtin(cmd, data);
-			free_cmd(data);
-			set_env_and_path(data, FREE);
-			cleanup(data);
-			exit(2);
-		}
-		if (is_env_builtin(cmd->cmd_str))
-		{
-			free_cmd(data);
-			set_env_and_path(data, FREE);
-			cleanup(data);
-			exit (2);
-		}
-		else
-		{
-			if (join_cmd_and_flag(cmd))
-			{
-				if (get_path(data, cmd))
-					execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
-
-				else
-					error_handler(PATH_ER_MSG, PATH_ER, data, true);
-			}
-			else
-				error_handler(CMD_ER_MSG, CMD_ER, data, true);
-		}
-		//close_origin_fds(data); // Close in case of error
-		//close_fds(data, i, true);
+	//	if (i != 0)
+	//		close_pipe(data->pipe, 0, true);
+        if (cmd->cmd_str != NULL)
+        {
+            if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
+            {
+                exec_builtin(cmd, data);
+                free_cmd(data);
+                set_env_and_path(data, FREE);
+                cleanup(data);
+                exit(2);
+            }
+            if (is_env_builtin(cmd->cmd_str))
+            {
+                free_cmd(data);
+                set_env_and_path(data, FREE);
+                cleanup(data);
+                exit (2);
+            }
+            else
+            {
+                if (join_cmd_and_flag(cmd))
+                {
+                    if (get_path(data, cmd))
+                    {
+                        execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
+                    }
+                    else
+                    {
+                        error_handler(PATH_ER_MSG, PATH_ER, data, true);
+                    }
+                }
+                else
+                {
+                    close_fds(data, i, true);
+                    error_handler(CMD_ER_MSG, CMD_ER, data, true);
+                }
+            }
+            //close_origin_fds(data); // Close in case of error
+            //close_fds(data, i, true);
+        }
 	}
 	else
 	{
-		if (is_env_builtin(cmd->cmd_str) && data->cmd_num == 1)
-		{
-			pid = getpid();
-			if (!redirect_fds(data, cmd, i, j))
-				return (pid);
-			exec_builtin(cmd, data);
-		}
+        if (cmd->cmd_str != NULL)
+        {
+            if (is_env_builtin(cmd->cmd_str) && data->cmd_num == 1)
+            {
+                pid = getpid();
+                if (!redirect_fds(data, cmd, i, j))
+                    return (pid);
+                exec_builtin(cmd, data);
+            }
+        }
 		if (i > 0)
 			close(data->pipe->fd[!j][0]);
 		if (i < data->cmd_num - 1)
@@ -100,8 +109,8 @@ bool	execution(t_data *data)
 
 	i = 0;
 	j = 0;
-	if (data->cmds[0]->cmd_str == NULL)
-		return (true);
+//	if (data->cmds[0]->cmd_str == NULL)
+//		return (true);
 	alloc_pids(data);
 	if (data->cmd_num > 1)
 	{
@@ -112,14 +121,14 @@ bool	execution(t_data *data)
 			data->pipe->pid[i] = exec_cmd(data->cmds[i], data, i, j);
 			if (i >= 1 && i < data->cmd_num - 1)
 			{
-				close_pipe(data->pipe, !j);
+				close_pipe(data->pipe, !j, false);
 				if (pipe(data->pipe->fd[!j]) == -1)
 					return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
 			}
 			i++;
 			j = !j;
 		}
-		close_pipe(data->pipe, !j);
+		close_pipe(data->pipe, !j, false);
 	}
 	else
 		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0, 0);
