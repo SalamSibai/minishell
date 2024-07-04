@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 05:48:50 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 02:23:47 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	free_cmd(t_data *data)
 	{
 		if (data->cmds[i]->cmd_str)
 			free(data->cmds[i]->cmd_str);
+		if (data->cmds[i]->cmd_path)
+			free(data->cmds[i]->cmd_path);
 		if (data->cmds[i]->args)
 			ft_lstclear(&data->cmds[i]->args, free);
 		if (data->cmds[i]->flag)
@@ -75,5 +77,6 @@ void	cleanup(t_data *data)
 	ft_lstclear(&data->export_env, free);
 	close_fd(data->origin_fds[0]);
 	close_fd(data->origin_fds[1]);
+	for (int fd=0; fd<64; fd++) (void) close(fd);
 	free(data->buf);
 }

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 15:17:41 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/04 05:48:12 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 02:35:51 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	error_handler(char *err_str, int err_type, t_data *data, bool done)
 	else
 	{
 		if (err_type == CMD_ER)
-			g_exit_status = 2;
+			g_exit_status = 127;
 	}
 	if (done)
 	{

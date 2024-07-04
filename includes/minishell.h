@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 05:55:58 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 02:16:28 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define INVALID_IN_MSG "Error: Invalid syntax\n"
 # define INPUT_REDIR_ER_MSG "Error: Input redirection error.\n"
 # define OUTPUT_REDIR_ER_MSG "Error: Output redirection error.\n"
-# define PATH_ER_MSG "Error: Path doesn't exist\n"
-# define PIPE_ER_MSG "Error: Couldn't opern pipes.\n"
+# define PATH_ER_MSG "Error: Path not found\n"
+# define PIPE_ER_MSG "Error: Couldn't open pipes.\n"
 # define FORK_ER_MSG "Error: Fork.\n"
 # define CMD_ER_MSG "Error: Command doesn't exits.\n"
 

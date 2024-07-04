@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:00:18 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/01 20:24:39 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 02:25:04 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ bool get_path(t_data *data, t_cmd *cmd)
 		free(cmd->cmd_path);
 		i ++;
 	}
+	cmd->cmd_path = NULL;
 	return (false);
 }
 

@@ -128,3 +128,4 @@ we need to handle the exit with multiple arugments
 when theres a heredoc then  a pipe the command doesnt work  like 
 << a | ls
 
+<< l > 3 | ls
