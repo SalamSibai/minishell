@@ -85,6 +85,8 @@ int		exec_builtin(t_cmd *cmd, t_data *data)
 		ft_unset(cmd->args, data->env);
 		ft_unset(cmd->args, data->export_env);
 	}
+	if (ft_strcmp(cmd->cmd_str, "exit") == 0)
+		ft_exit(cmd, data);
 	g_exit_status = 0;
 	return (result);
 }

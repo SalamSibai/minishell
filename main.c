@@ -73,7 +73,7 @@ int main(int ac, char **av, char **env)
 			continue;
 		}
 		fill_data(&data);
-		// print_data(&data);
+		//print_data(&data);
 	//	redir_return = check_redirections((&data)->cmds, (&data)->env);
 	//	if (redir_return < 0)
 	//	{

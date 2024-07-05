@@ -53,7 +53,15 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		close_origin_fds(data);
 		if (cmd->cmd_str != NULL)
 		{
-			if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
+			if (is_env_builtin(cmd->cmd_str) && (data->cmd_num > 1))
+			{
+				for (int fd=0; fd<64; fd++) (void) close(fd);
+				set_env_and_path(data, FREE);
+				free_cmd(data);
+				cleanup(data);
+				exit (0);
+			}
+			if (is_builtin(cmd->cmd_str))
 			{
 				exec_builtin(cmd, data);
 				for (int fd=0; fd<64; fd++) (void) close(fd);
@@ -61,14 +69,6 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 				set_env_and_path(data, FREE);
 				cleanup(data);
 				exit(0);
-			}
-			if (is_env_builtin(cmd->cmd_str))
-			{
-				for (int fd=0; fd<64; fd++) (void) close(fd);
-				set_env_and_path(data, FREE);
-				free_cmd(data);
-				cleanup(data);
-				exit (0);
 			}
 			else
 			{

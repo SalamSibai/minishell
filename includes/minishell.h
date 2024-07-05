@@ -30,6 +30,8 @@
 # define INVALID_IN_MSG "Error: Invalid syntax\n"
 # define INPUT_REDIR_ER_MSG "Error: No such file or directory.\n"
 # define OUTPUT_REDIR_ER_MSG "Error: Output redirection error.\n"
+# define TOO_MANY_ARG "Error: too many arguments.\n"
+# define NUMERIC_REQ_MSG "Error: Numeric argument required\n"
 # define PATH_ER_MSG "Error: Path doesnt exists\n"
 # define PIPE_ER_MSG "Error: Couldn't open pipes.\n"
 # define FORK_ER_MSG "Error: Fork.\n"
@@ -43,7 +45,7 @@ typedef enum e_cmd_type
 
 typedef enum e_error_type
 {
-
+	NUM_REQ_ER,
 	INVALID_IN_ER,
 	IN_REDIR_ER,
 	OUT_REDIR_ER,
@@ -243,6 +245,7 @@ int				ft_env(t_list *env);
 bool			ft_export(t_cmd *cmd, t_list *export_env, t_list *env);
 int				ft_pwd(void);
 int				ft_unset(t_list *args, t_list *env);
+void			ft_exit(t_cmd *cmd, t_data *data);
 
 /* ************************************************************************** */
 /*									EXECUTION								  */
