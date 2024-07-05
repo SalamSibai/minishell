@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/05 01:29:53 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 07:31:49 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int main(int ac, char **av, char **env)
 		}
 		fill_data(&data);
 		// print_data(&data);
-		redir_return = check_redirections((&data)->cmds);
+		redir_return = check_redirections((&data)->cmds, (&data)->env);
 		if (redir_return < 0)
 		{
 			if (redir_return == -1)
@@ -87,8 +87,6 @@ int main(int ac, char **av, char **env)
 		free_cmd(&data);
 		g_exit_status = 0;
 	}
-	if (!close_everything())
-		printf("NOT WORKINGLOL \n");
 	cleanup(&data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:22:07 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 22:22:02 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 07:42:50 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,12 @@ char	*replace_env_var(char *str, t_list *env)
 			str += start;
 		}
 		else
-			result = ft_strjoin_free(result, ft_substr(str++, 0, 1), 1);
+			result = ft_strjoin_free(result, ft_substr(str++, 0, 1), 3);
+	}
+	if (result[0] == '\0')
+	{
+		free(result);
+		result = ft_strdup("");
 	}
 	return (result);
 }

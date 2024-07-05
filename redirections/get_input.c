@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:21:59 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 22:41:34 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/05 07:34:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 ///			NOTE: HEREDOC APPENDS TO WHATEVER THE OUTPUT IS.
 /// @param redir the redir struct
 /// @return true if open succeeds.
-bool	execute_heredoc(t_cmd *cmd, t_redirection *redir)
+bool	execute_heredoc(t_cmd *cmd, t_redirection *redir, t_list *env)
 {
 	int		in_len;
 	char	*line;
+	char	*expanded_line;
 	int		pipe_in[2];
 
 	if (pipe(pipe_in) == -1)
@@ -31,6 +32,12 @@ bool	execute_heredoc(t_cmd *cmd, t_redirection *redir)
 	{
 		if (!(ft_strncmp(line, redir->limiter, in_len)) && line[in_len + 1] == '\0')
 			break ;
+		if (strchr(line, '$'))
+		{
+			expanded_line = replace_env_var(line, env);
+			free(line);
+			line = expanded_line;
+		}
 		write(pipe_in[1], line, ft_strlen(line));
 		write (1, "> ", 2);
 		free(line);
@@ -42,7 +49,7 @@ bool	execute_heredoc(t_cmd *cmd, t_redirection *redir)
 	return (true);
 }
 
-bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
+bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env)
 {
 	char	 *path;
 	char	*file_path1;
@@ -74,7 +81,7 @@ bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir)
 	}
 	else
 	{
-		if (!execute_heredoc(cmd, redir))
+		if (!execute_heredoc(cmd, redir, env))
 			return (false);
 	}
 	return (true);

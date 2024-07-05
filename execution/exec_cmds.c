@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/05 02:27:38 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 05:44:37 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	{
 		if (!redirect_fds(data, cmd, i, j))
 		{
-			for (int fd=3; fd<64; fd++) (void) close(fd);
+			close_everything();
 			close_origin_fds(data);
 			free_cmd(data);
 			set_env_and_path(data, FREE);
@@ -39,68 +39,63 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			return (pid);
 		}
 		close_origin_fds(data);
-	//	if (i != 0)
-	//		close_pipe(data->pipe, 0, true);
-        if (cmd->cmd_str != NULL)
-        {
-            if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
-            {
-                exec_builtin(cmd, data);
+		if (cmd->cmd_str != NULL)
+		{
+			if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
+			{
+				exec_builtin(cmd, data);
 				for (int fd=0; fd<64; fd++) (void) close(fd);
-                free_cmd(data);
-                set_env_and_path(data, FREE);
-                cleanup(data);
-                exit(2);
-            }
-            if (is_env_builtin(cmd->cmd_str))
-            {
+				free_cmd(data);
+				set_env_and_path(data, FREE);
+				cleanup(data);
+				exit(2);
+			}
+			if (is_env_builtin(cmd->cmd_str))
+			{
 				for (int fd=0; fd<64; fd++) (void) close(fd);
-                set_env_and_path(data, FREE);
-                free_cmd(data);
-                cleanup(data);
-                exit (2);
-            }
-            else
-            {
-                if (join_cmd_and_flag(cmd))
-                {
-                    if (get_path(data, cmd))
-                    {
-						for (int fd=3; fd<64; fd++) (void) close(fd);
-                        execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
-                    }
-                    else
-                    {
+				set_env_and_path(data, FREE);
+				free_cmd(data);
+				cleanup(data);
+				exit (2);
+			}
+			else
+			{
+				if (join_cmd_and_flag(cmd))
+				{
+					if (get_path(data, cmd))
+					{
+						close_everything();
+						execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
+					}
+					else
+					{
 						free_cmd(data);
 						set_env_and_path(data, FREE);
-                        error_handler(PATH_ER_MSG, PATH_ER, data, true);
-                    }
-                }
-                else
-                {
-                    close_fds(data, i, true);
+						error_handler(PATH_ER_MSG, PATH_ER, data, true);
+					}
+				}
+				else
+				{
+					close_fds(data, i, true);
 					set_env_and_path(data, FREE);
 					free_cmd(data);
-                    error_handler(CMD_ER_MSG, CMD_ER, data, true);
-                }
-            }
-            //close_origin_fds(data); // Close in case of error
-            //close_fds(data, i, true);
-        }
+					error_handler(CMD_ER_MSG, CMD_ER, data, true);
+				}
+			}
+		}
 	}
 	else
 	{
-        if (cmd->cmd_str != NULL)
-        {
-            if (is_env_builtin(cmd->cmd_str) && data->cmd_num == 1)
-            {
-				ft_putendl_fd("100 percent im here", 1);
-                pid = getpid();
-                if (!redirect_fds(data, cmd, i, j))
+		if (cmd->cmd_str != NULL)
+		{
+			if (is_env_builtin(cmd->cmd_str) && data->cmd_num == 1)
+			{
+				pid = getpid();
+				if (!redirect_fds(data, cmd, i, j))
 				{
 					close_origin_fds(data);
 					for (int fd=3; fd<64; fd++) (void) close(fd);
-                    return (pid);
+					return (pid);
 				}
 				exec_builtin(cmd, data);
 				dup2(data->origin_fds[0], STDIN_FILENO);
@@ -109,13 +104,13 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 				for (int fd=3; fd<64; fd++) (void) close(fd);
 				return (pid);
 			}
-        }
+		}
 		if (i > 0)
 			close(data->pipe->fd[!j][0]);
 		if (i < data->cmd_num - 1)
 			close(data->pipe->fd[j][1]);
 	}
-	return (pid);
+return (pid);
 }
 
 /**
@@ -163,6 +158,6 @@ bool	execution(t_data *data)
 	dup2(STDIN_FILENO, data->origin_fds[0]);
 	dup2(STDOUT_FILENO, data->origin_fds[1]);
 	close_origin_fds(data);
-	for (int fd=3; fd<64; fd++) (void) close(fd);
+	close_everything();
 	return (true);
 }

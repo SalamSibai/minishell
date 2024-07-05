@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   close_fds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:25:27 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 19:19:31 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/05 05:42:05 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool	close_everything()
+void	close_everything()
 {
-	int i;
+	int	i;
 
-	i = 0;
-	while (i < 1025)
+	i = 3;
+	while (i < 64)
 	{
-		close(i);
-		i ++;
+		(void) close(i);
+		i++;
 	}
-	return (true);
 }
 
 bool	close_fd(int fd)

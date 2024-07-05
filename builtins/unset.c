@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 13:58:41 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 22:02:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 06:38:22 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 int	is_in_env_remove(t_list *env, char *args)
 {
 	t_list	*head;
+	t_list *tmp;
 	char	var_name[BUFF_SIZE];
 	char	env_name[BUFF_SIZE];
+	
 
 	head = env;
 	get_env_name(var_name, args);
@@ -31,9 +33,16 @@ int	is_in_env_remove(t_list *env, char *args)
 	{
 		if ((env)->next && (env)->next->content)
 		{
+			
 			get_env_name(env_name, (env)->next->content);
 			if (ft_strcmp(var_name, env_name) == 0)
+			{
+				tmp = env->next;
 				env->next = env->next->next;
+				free(tmp->content);
+				free(tmp);
+				
+			}
 		}
 		env = env->next;
 	}
