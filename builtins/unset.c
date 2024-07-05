@@ -71,5 +71,6 @@ int	ft_unset(t_list *args, t_list *env)
 		is_in_env_remove(env, tmp->content);
 		tmp = tmp->next;
 	}
+	g_exit_status = 0;
 	return (1);
 }

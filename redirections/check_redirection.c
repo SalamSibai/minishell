@@ -12,22 +12,20 @@
 
 #include "../includes/minishell.h"
 
-int	check_redirections(t_cmd **cmds, t_list *env)
+int	check_redirections(t_cmd *cmd, t_list *env)
 {
-	int	i;
 	int	redir_value;
 
-	i = -1;
 	redir_value = 0;
-	while (cmds[++i])
-	{
-		if (cmds[i]->redirection != NULL)
+//	while (cmds[++i])
+//	{
+		if (cmd->redirection != NULL)
 		{
-			redir_value = check_type(cmds[i], env);
+			redir_value = check_type(cmd, env);
 			if (redir_value < 0)
 				return (redir_value);
 		}
-	}
+//	}
 	return (redir_value);
 }
 

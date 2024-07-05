@@ -43,7 +43,7 @@ typedef enum e_cmd_type
 
 typedef enum e_error_type
 {
-	
+
 	INVALID_IN_ER,
 	IN_REDIR_ER,
 	OUT_REDIR_ER,
@@ -189,7 +189,7 @@ void			redir_clear(t_redirection **redir);
 /* ************************************************************************** */
 /*								PIPES,FDs REDIRECTION		 				  */
 /* ************************************************************************** */
-int				check_redirections(t_cmd **cmds, t_list *env);
+int				check_redirections(t_cmd *cmd, t_list *env);
 int				check_type(t_cmd *cmd, t_list *env);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
@@ -213,7 +213,7 @@ char			*replace_env_var(char *str, t_list *env);
 /*									PATH									  */
 /* ************************************************************************** */
 char			**set_path(char **envp);
-bool			get_path(t_data *data, t_cmd *cmd);
+bool			get_path(t_data *data, t_cmd *cmd, bool *cmd_exists);
 
 /* ************************************************************************** */
 /*									ENVIROMENT								  */
