@@ -103,7 +103,7 @@ char	*replace_env_var(char *str, t_list *env)
 	result = ft_strdup("");
 	while (*str)
 	{
-		if (*str == '$')
+		if (*str == '$' && (*(str + 1) != '\0' && *(str + 1) != ' '))
 		{
 			expanded_str = process_env_var(str, env, &start);
 			result = ft_strjoin_free(result, expanded_str, 3);

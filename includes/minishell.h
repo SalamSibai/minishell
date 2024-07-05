@@ -26,6 +26,7 @@
 # include <signal.h>
 
 # define BUFF_SIZE 4096
+# define INVALID_EXP_MSG "Export: not a valid identifier\n"
 # define INVALID_IN_MSG "Error: Invalid syntax\n"
 # define INPUT_REDIR_ER_MSG "Error: No such file or directory.\n"
 # define OUTPUT_REDIR_ER_MSG "Error: Output redirection error.\n"
@@ -42,6 +43,7 @@ typedef enum e_cmd_type
 
 typedef enum e_error_type
 {
+	
 	INVALID_IN_ER,
 	IN_REDIR_ER,
 	OUT_REDIR_ER,
