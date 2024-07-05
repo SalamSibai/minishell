@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 05:55:58 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 07:35:03 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 
 # define BUFF_SIZE 4096
 # define INVALID_IN_MSG "Error: Invalid syntax\n"
-# define INPUT_REDIR_ER_MSG "Error: Input redirection error.\n"
+# define INPUT_REDIR_ER_MSG "Error: No such file or directory.\n"
 # define OUTPUT_REDIR_ER_MSG "Error: Output redirection error.\n"
-# define PATH_ER_MSG "Error: Path doesn't exist\n"
-# define PIPE_ER_MSG "Error: Couldn't opern pipes.\n"
+# define PATH_ER_MSG "Error: Path doesnt exists\n"
+# define PIPE_ER_MSG "Error: Couldn't open pipes.\n"
 # define FORK_ER_MSG "Error: Fork.\n"
 # define CMD_ER_MSG "Error: Command doesn't exits.\n"
 
@@ -187,9 +187,9 @@ void			redir_clear(t_redirection **redir);
 /* ************************************************************************** */
 /*								PIPES,FDs REDIRECTION		 				  */
 /* ************************************************************************** */
-int				check_redirections(t_cmd **cmds);
-int				check_type(t_cmd *cmd);
-bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir);
+int				check_redirections(t_cmd **cmds, t_list *env);
+int				check_type(t_cmd *cmd, t_list *env);
+bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
 bool			redirect_fds(t_data *data, t_cmd *cmd, int i, int j);
 bool			redirect_file_input(t_cmd *cmd);
@@ -205,6 +205,7 @@ bool			make_pipes(t_pipe *p);
 /*									EXPANSION								  */
 /* ************************************************************************** */
 t_token			**check_expandable_var(t_token **tokens, t_list *env);
+char			*replace_env_var(char *str, t_list *env);
 
 /* ************************************************************************** */
 /*									PATH									  */
@@ -268,5 +269,7 @@ bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i, bool pipe);
 bool			close_pipe(t_pipe *pipe, int i, bool both);
 void			close_origin_fds(t_data *data);
+void			close_everything();
+
 
 #endif

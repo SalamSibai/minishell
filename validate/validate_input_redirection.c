@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:23:52 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/04 06:02:31 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/05 05:47:04 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ bool	validate_input_redirection(t_token **tokens, int index)
 {
 	if (tokens[index + 1] != NULL)
 	{
-		if (tokens[index + 1]->type == ID)
+		if (tokens[index + 1]->type == ID
+			|| tokens[index + 1]->type == DQOUTES
+			|| tokens[index + 1]->type == SQOUTES)
 			return (true);
 	}
 	return (false);

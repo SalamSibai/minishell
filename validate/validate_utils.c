@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:47:04 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/02 20:11:12 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/05 06:02:52 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param token the token we are looking for
  * @return return 1 if the token is found, 0 if not
  */
-int		ft_peek(char **ps, char *es, char *token)
+int	ft_peek(char **ps, char *es, char *token)
 {
 	char	*s;
 
@@ -35,7 +35,7 @@ bool	validate_unbalanced_qoutes(char *line)
 {
 	int		i;
 	char	qoute;
- 
+
 	i = 0;
 	while (line[i])
 	{
@@ -58,10 +58,10 @@ bool	validate_unbalanced_qoutes(char *line)
 	return (true);
 }
 
-bool validate_pipes(char *line)
+bool	validate_pipes(char *line)
 {
-	char *ps;
-	char *es;
+	char	*ps;
+	char	*es;
 
 	ps = line;
 	es = line + ft_strlen(line);
@@ -88,7 +88,7 @@ bool validate_pipes(char *line)
 		else
 			ps++;
 	}
-	return true;
+	return (true);
 }
 
 /// @brief checks whether the ID sent is a command
@@ -105,5 +105,6 @@ bool	is_cmd(char *cmd, t_data *data)
 			return (free(cmd_path), true);
 		free(cmd_path);
 		i++;
-	}	return (false);
+	}
+	return (false);
 }

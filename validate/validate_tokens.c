@@ -3,38 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   validate_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/02 20:06:53 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/05 06:05:28 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
-	to validate the entire input:
-		1) if only 1 id, must be an executable that works
-		2) if heredoc, next token must be an ID
-		3) if redirection into a file (>), its fine.
-		4) if appending into a file, its fine
-		
-		 we must have an ID that is not an executable
-		5) if redirection from a file, the file we are redirecting from must exist in the directory provided
-		6) NO DOUBLE REDIRECTIONS AFTER ONE ANOTHER (except heredoc)
-		7) a pipe must have an input its reading from, and an output its reading to
-*/
-
-
-
+// static bool	validate_tokens_helper()
+// {
+// }
 
 /// @brief validates whether the tokens provided are syntactically correct
 /// @param parse the parse struct
 /// @return true if all passed tokens are valid
-bool	validate_tokens(t_data *data) //NOTE: add t_data *data to check to send the id to validate id to check if its executable or not 
+bool	validate_tokens(t_data *data)
 {
-	int i;
-	t_token **tokens;
+	t_token	**tokens;
+	int		i;
 
 	tokens = data->tokens;
 	i = -1;

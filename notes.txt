@@ -78,6 +78,19 @@ bash-3.2$ < mn ls -l obj includes
 				- if everything is fine, we initialize and store
 	*/
 
+/*
+	to validate the entire input:
+		1) if only 1 id, must be an executable that works
+		2) if heredoc, next token must be an ID
+		3) if redirection into a file (>), its fine.
+		4) if appending into a file, its fine
+		
+		 we must have an ID that is not an executable
+		5) if redirection from a file, the file we are redirecting from must exist in the directory provided
+		6) NO DOUBLE REDIRECTIONS AFTER ONE ANOTHER (except heredoc)
+		7) a pipe must have an input its reading from, and an output its reading to
+*/
+
 
 counting numbers of cmds we based on the number of pipes but for the excep of a pipe preceded with a output redirection
 
@@ -128,8 +141,4 @@ we need to handle the exit with multiple arugments
 when theres a heredoc then  a pipe the command doesnt work  like 
 << a | ls
 
-Command not found error msg if
-
-things left:
-
-EXIT CODES FOR ALL CMDS(check with tester)
+<< l > 3 | ls

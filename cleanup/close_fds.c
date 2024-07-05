@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   close_fds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:25:27 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 19:19:31 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/05 05:42:05 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	close_everything()
+{
+	int	i;
+
+	i = 3;
+	while (i < 64)
+	{
+		(void) close(i);
+		i++;
+	}
+}
 
 bool	close_fd(int fd)
 {
@@ -32,23 +44,18 @@ bool	close_pipe(t_pipe *pipe, int i, bool both)
 	j = -1;
 	if (both)
 	{
-		i = 0;
-		while (i < 2)
+		i = -1;
+		while (++i < 2)
 		{
 			j = -1;
 			while (++j < 2)
 			{
 				{
 					if (close(pipe->fd[i][j]) == -1)
-					{
-						printf("closing pipe %d failed\n", i);
 						return (false);
-					}
 				}
 			}
-			i ++;
 		}
-		return (true);
 	}
 	else
 	{
@@ -59,9 +66,8 @@ bool	close_pipe(t_pipe *pipe, int i, bool both)
 					return (false);
 			}
 		}
-		return (true);
 	}
-	return (false);
+	return (true);
 }
 
 bool	close_fds(t_data *data, int i, bool pipe)
@@ -90,13 +96,8 @@ bool	close_fds(t_data *data, int i, bool pipe)
 	}
 	if (pipe)
 	{
-		printf("PIPE IS TRUE\n");
-		printf("the command is %s\n", data->cmds[i]->cmd_str);
 		if (!close_pipe(data->pipe, j, true))
-		{
-			printf("pipe closing failed\n");
 			return (false);
-		}
 	}
 	return (true);
 }

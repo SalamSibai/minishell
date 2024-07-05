@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:16:42 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 22:41:00 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/05 07:31:22 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_redirections(t_cmd **cmds)
+int	check_redirections(t_cmd **cmds, t_list *env)
 {
 	int	i;
 	int	redir_value;
@@ -23,7 +23,7 @@ int	check_redirections(t_cmd **cmds)
 	{
 		if (cmds[i]->redirection != NULL)
 		{
-			redir_value = check_type(cmds[i]);
+			redir_value = check_type(cmds[i], env);
 			if (redir_value < 0)
 				return (redir_value);
 		}
@@ -35,7 +35,7 @@ int	check_redirections(t_cmd **cmds)
 //			corresponding function to store the fd of 
 //			that redirection
 /// @param redir redirection struct
-int	check_type(t_cmd *cmd)
+int	check_type(t_cmd *cmd, t_list *env)
 {
 	t_redirection	*temp;
 	int				ret_value;
@@ -46,7 +46,7 @@ int	check_type(t_cmd *cmd)
 	{
 		if (temp->type == REDIRECT_INPUT)
 		{
-			if (!get_input(cmd, false, temp))
+			if (!get_input(cmd, false, temp, env))
 			{
 				temp->type = REDIR_INPUT_FAILED;
 				ret_value = -1;
@@ -54,7 +54,7 @@ int	check_type(t_cmd *cmd)
 		}
 		else if (temp->type == HEREDOC)
 		{
-			if (!get_input(cmd, true, temp))
+			if (!get_input(cmd, true, temp, env))
 			{
 				temp->type = REDIR_INPUT_FAILED;
 				ret_value = -1;
