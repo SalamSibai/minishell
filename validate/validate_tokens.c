@@ -25,8 +25,8 @@ bool	validate_tokens(t_data *data)
 	int		i;
 
 	tokens = data->tokens;
-	i = -1;
-	while (tokens[++i])
+	i = 0;
+	while (tokens[i])
 	{
 		if (tokens[i]->type == ID)
 		{
@@ -54,13 +54,15 @@ bool	validate_tokens(t_data *data)
 		}
 		else if (tokens[i]->type == DQOUTES || tokens[i]->type == SQOUTES)
 		{
-			validate_qoutes(i, data);
-			if (tokens[i]->type == PIPE)
-			{
-				data->cmd_num++;
-				data->cmd_ctr = 0;
-			}
+			i = validate_quotes(i, data);
+			continue;
+//			if (tokens[i]->type == PIPE)
+//			{
+//				data->cmd_num++;
+//				data->cmd_ctr = 0;
+//			}
 		}
+		i ++;
 	}
 	return (true);
 }

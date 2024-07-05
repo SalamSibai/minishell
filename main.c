@@ -60,7 +60,8 @@ int main(int ac, char **av, char **env)
 			error_handler(INVALID_IN_MSG, INVALID_IN_ER, &data, false);
 			continue;
 		}
-		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
+		data.token_ctr = token_count(data.buf);
+		data.tokens = ft_calloc(data.token_ctr, sizeof(t_token *));
 		scan(data.buf, data.tokens);
 		set_env_and_path(&data, SET);
 		data.cmd_ctr = 0;

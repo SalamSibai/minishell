@@ -132,6 +132,7 @@ typedef struct s_data
 	char		*buf;
 	int			cmd_num;
 	int			cmd_ctr;
+	int			token_ctr;
 	int			origin_fds[2];
 }	t_data;
 
@@ -146,7 +147,7 @@ bool			validate_id(int index, t_data *data);
 bool			validate_pipe(t_token **tokens, int index);
 bool			validate_input_redirection(t_token **tokens, int index);
 bool			validate_output_redirection(t_token **tokens, int index);
-bool			validate_qoutes(int index, t_data *data);
+int				validate_quotes(int index, t_data *data);
 
 /* ************************************************************************** */
 /*									SIGNALS									  */
@@ -174,6 +175,7 @@ void			*ft_safe_malloc(size_t size, char *msg);
 void			set_type(t_token *token);
 int				token_count(char *av);
 bool			is_cmd(char *cmd, t_data *data);
+
 
 /* ************************************************************************** */
 /*								REDIRECTION	UTILS							  */

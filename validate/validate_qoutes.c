@@ -12,11 +12,35 @@
 
 #include "../includes/minishell.h"
 
-void	validate_dqoutes(int index, t_data *data)
+
+
+int	validate_dquotes(int index, t_data *data)
 {
 	t_token	**tokens;
+	char	**dquoted_strs;
+	int		i;
 
-	tokens = data->tokens;
+	i = 0;
+	dquoted_strs = ft_split(tokens[index]->token_string, ' ');
+	while (dquoted_strs[i] != NULL)
+		i++;
+
+	/*while (tokens[index]->token_string[i] != '\0')
+	{
+		if (tokens[index]->token_string[i] == '$')
+		{
+			temp = ft_substr(tokens[index]->token_string, i, ft_strlen(tokens[index]->token_string));
+			
+			printf("temp len is: %d\n", (int)temp_len);
+			printf("temp is: %s\n", temp);
+			printf("rest is: %s\n", rest_str);
+			//check the string till where there's a space and store that somewhere
+			free(temp);
+		}
+		i ++;
+	}*/
+
+/*
 	if (ft_strcmp(tokens[index]->token_string, "|") == 0)
 		tokens[index]->type = PIPE;
 	else if ((is_cmd(tokens[index]->token_string, data) && index == 0)
@@ -32,10 +56,13 @@ void	validate_dqoutes(int index, t_data *data)
 		tokens[index]->type = ID;
 	else
 		tokens[index]->type = ID;
+*/
 }
 
-bool	validate_qoutes(int index, t_data *data)
+
+int	validate_quotes(int index, t_data *data)
 {
-	validate_dqoutes(index, data);
-	return (true);
+	if (data->tokens[index]->type == DQOUTES)
+		return (validate_dquotes(index, data));
+	return (index + 1);
 }
