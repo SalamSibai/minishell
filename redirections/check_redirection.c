@@ -14,16 +14,14 @@
 
 int	check_redirections(t_cmd *cmd, t_list *env)
 {
-	int	redir_value;
-
-	redir_value = 0;
 	if (cmd->redirection != NULL)
 	{
-		redir_value = check_type(cmd, env);
-		if (redir_value < 0)
-			return (redir_value);
+		if (!check_input_type(cmd, env))
+			return (-1);
+		if (!check_output_type(cmd, env))
+			return (-2);
 	}
-	return (redir_value);
+	return (0);
 }
 
 
@@ -53,35 +51,52 @@ int outputs(t_cmd *cmd, t_redirection *redir, bool append)
 	return (ret_value);
 }
 
-
 /// @brief checks the type of the redirection, and calls the
 //			corresponding function to store the fd of 
 //			that redirection
 /// @param redir redirection struct
-int	check_type(t_cmd *cmd, t_list *env)
+bool	check_input_type(t_cmd *cmd, t_list *env)
 {
 	t_redirection	*temp;
-	int				ret_value;
+	int				redir_value;
 
-	ret_value = 0;
+	redir_value = 0;
 	temp = cmd->redirection;
 	while (temp)
 	{
 		if ((temp->type == REDIRECT_INPUT) || (temp->type == HEREDOC))
 		{
 			if (temp->type == HEREDOC)
-				ret_value = inputs(cmd, temp, true, env);
+				redir_value = inputs(cmd, temp, true, env);
 			else
-				ret_value = inputs(cmd, temp, true, env);
-		}
-		else if ((temp->type == REDIRECT_OUTPUT) || (temp->type == REDIRECT_APPEND))
-		{
-			if (temp->type == REDIRECT_APPEND)
-				ret_value = outputs(cmd, temp, true);
-			else
-				ret_value = outputs(cmd, temp, false);
+				redir_value = inputs(cmd, temp, true, env);
+			if (redir_value < 0)
+				return (false);
 		}
 		temp = temp->next;
 	}
-	return (ret_value);
+	return (true);
+}
+
+bool	check_output_type(t_cmd *cmd, t_list *env)
+{
+	t_redirection	*temp;
+	int				redir_value;
+
+	redir_value = 0;
+	temp = cmd->redirection;
+	while (temp)
+	{
+		if ((temp->type == REDIRECT_OUTPUT) || (temp->type == REDIRECT_APPEND))
+		{
+			if (temp->type == REDIRECT_APPEND)
+				redir_value = outputs(cmd, temp, true);
+			else
+				redir_value = outputs(cmd, temp, false);
+			if (redir_value < 0)
+				return (false);
+		}
+		temp = temp->next;
+	}
+	return (true);
 }
