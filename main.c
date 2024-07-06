@@ -35,7 +35,7 @@ int main(int ac, char **av, char **env)
 	t_data	data;
 	//int		redir_return;
 
-	g_exit_status = 0;
+	// g_exit_status = 0;
 	ft_memset(&data, 0, sizeof(t_data));
 	(void)av;
 	if (ac != 1 || !*env)
@@ -73,16 +73,7 @@ int main(int ac, char **av, char **env)
 			continue;
 		}
 		fill_data(&data);
-		//print_data(&data);
-	//	redir_return = check_redirections((&data)->cmds, (&data)->env);
-	//	if (redir_return < 0)
-	//	{
-	//		if (redir_return == -1)
-	//			error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, &data, false);
-	//		else
-	//			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, &data, false);
-	//		continue;
-	//	}
+		// print_data(&data);
 		execution(&data);
 		set_env_and_path(&data, FREE);
 		free_cmd(&data);

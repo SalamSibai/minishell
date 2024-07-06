@@ -18,6 +18,8 @@
  */
 bool	set_output(t_cmd *cmd, bool append, t_redirection *redir)
 {
+	char	*file_path;
+
 	if (cmd->fd_out != -1)
 	{
 		if (!close_fd(cmd->fd_out))
@@ -37,5 +39,15 @@ bool	set_output(t_cmd *cmd, bool append, t_redirection *redir)
 		if (!cmd->fd_out)
 			return (false);
 	}
+
+	file_path = get_file_path(redir->file_name);
+	if (access(file_path, W_OK) != 0)
+    {
+       free(file_path);
+		close_fd(cmd->fd_out);
+        cmd->fd_out = -1;
+        return (false);
+	}
+	free(file_path);
 	return (true);
 }

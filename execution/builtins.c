@@ -78,7 +78,10 @@ int		exec_builtin(t_cmd *cmd, t_data *data)
 	if (ft_strcmp(cmd->cmd_str, "export") == 0)
 	{
 		if (!ft_export(cmd, data->export_env, data->env))
-			error_handler(INVALID_EXP_MSG, IN_REDIR_ER, NULL, true);
+		{
+			error_handler(INVALID_EXP_MSG, IN_REDIR_ER, NULL, false);
+			return (0);
+		}
 	}
 	if (ft_strcmp(cmd->cmd_str, "unset") == 0)
 	{

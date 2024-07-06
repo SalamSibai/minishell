@@ -52,6 +52,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${REDIR_DIR}/redirect_inputs.c\
 		${REDIR_DIR}/redirect_output.c\
 		${REDIR_DIR}/pipes_utils.c\
+		${REDIR_DIR}/redirect_utils.c\
 		${BUILTINS_DIR}/cd.c \
 		${BUILTINS_DIR}/echo.c \
 		${BUILTINS_DIR}/env.c \

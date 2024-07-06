@@ -122,7 +122,7 @@ int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env)
 	if (!cmd->args)
 		return (goto_path(0, env));
 	else if (ft_lstsize(cmd->args) > 1)
-		error_handler("Error: Too many arguments", 1, NULL, true);
+		error_handler("Error: Too many arguments", IN_REDIR_ER, NULL, true);
 	else if (cmd->args && (ft_strcmp(cmd->args->content, "-") == 0))
 	{
 		cd_ret = goto_path(1, env);
@@ -135,7 +135,7 @@ int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env)
 			//ft_putstr_fd("cd: ", 2);
 			//ft_putstr_fd(cmd->args->content, 2);
 			//ft_putendl_fd(": No such file or directory", 2);
-			error_handler("No such file or directory", 1, NULL, true);
+			error_handler("No such file or directory", IN_REDIR_ER, NULL, true);
 
 			//g_exit_status = 1;
 			return (cd_ret);

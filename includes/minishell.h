@@ -202,6 +202,7 @@ bool			redirect_file_output(t_cmd *cmd);
 bool			redirect_pipe_output(t_pipe *pipe, int j);
 bool			redirect_stdin(t_data *data, t_cmd *cmd);
 bool			redirect_stdout(t_data *data, t_cmd *cmd);
+char    *get_file_path(const char *file_name);
 void			alloc_pids(t_data *d);
 bool			make_pipes(t_pipe *p);
 

@@ -20,7 +20,9 @@ bool	validate_output_redirection(t_token **tokens, int index)
 {
 	if (tokens[index + 1] != NULL)
 	{
-		if (tokens[index + 1]->type == ID)
+		if (tokens[index + 1]->type == ID
+			|| tokens[index + 1]->type == DQOUTES
+			|| tokens[index + 1]->type == SQOUTES)
 			return (true);
 	}
 	return (false);
