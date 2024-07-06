@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/05 05:44:37 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:47:38 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 				{
 					if (!get_path(data, cmd, &cmd_exist))
 					{
-						free_cmd(data);
+						// free_cmd(data);
 						set_env_and_path(data, FREE);
 						error_handler(PATH_ER_MSG, PATH_ER, data, true);
 					}
@@ -90,8 +90,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 						else
 						{
 							close_fds(data, i, true);
+							// free_cmd(data);
 							set_env_and_path(data, FREE);
-							//free_cmd(data);
 							error_handler(CMD_ER_MSG, CMD_ER, data, true);
 						}
 					}
@@ -179,15 +179,15 @@ bool	execution(t_data *data)
 		close_fds(data, i, false);
 	i = -1;
 
-    while (++i < data->cmd_num)
-    {
-        waitpid(data->pipe->pid[i], &status, 0);
-        if (i == data->cmd_num - 1)  // Only update g_exit_status for the last command
-        {
-            if (WIFEXITED(status))
-                g_exit_status = WEXITSTATUS(status);
-        }
-    }
+	while (++i < data->cmd_num)
+	{
+		waitpid(data->pipe->pid[i], &status, 0);
+		if (i == data->cmd_num - 1)  // Only update g_exit_status for the last command
+		{
+			if (WIFEXITED(status))
+				g_exit_status = WEXITSTATUS(status);
+		}
+	}
 	dup2(STDIN_FILENO, data->origin_fds[0]);
 	dup2(STDOUT_FILENO, data->origin_fds[1]);
 	close_origin_fds(data);

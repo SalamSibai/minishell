@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/07/04 04:37:36 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/07/06 16:20:40 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SIG_DIR			= ./signals
 
 SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/init_parsing.c \
+		${PARSE_DIR}/malloc_tokens.c \
 		${PARSE_DIR}/set_tokens.c \
 		${PARSE_DIR}/set_cmds.c \
 		${PARSE_DIR}/initialization.c \

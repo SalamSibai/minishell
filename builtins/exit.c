@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 05:46:16 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 05:46:22 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 14:48:13 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	ft_isnum(char *str)
 void	ft_exit(t_cmd *cmd, t_data *data)
 {
 	size_t	args_num;
-	int		exit_code;
+	int		exit_code = 0;
 	t_list	*temp_args;
 	size_t	flags_num;
 	t_list	*temp_flags;
@@ -86,5 +86,5 @@ void	ft_exit(t_cmd *cmd, t_data *data)
 		}
 	}
 	cleanup(data);
-	exit(exit_code);		
+	exit(exit_code);
 }

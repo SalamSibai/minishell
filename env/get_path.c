@@ -6,20 +6,16 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:00:00 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 06:29:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:00:27 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**set_path(char **envp)
+char	*get_full_path(char **envp)
 {
 	char	*full_path;
-	char	**split_path;
-	char	*tmp;
-	int		i;
 
-	i = -1;
 	full_path = NULL;
 	while (*envp)
 	{
@@ -30,6 +26,23 @@ char	**set_path(char **envp)
 		}
 		envp ++;
 	}
+	return (full_path);
+}
+
+/**
+ * @brief this function will set the path for the shell
+ * @param envp is the envp that contains the path
+ * @return itll return the path in a double pointer
+ */
+char	**set_path(char **envp)
+{
+	char	*full_path;
+	char	**split_path;
+	char	*tmp;
+	int		i;
+
+	i = -1;
+	full_path = get_full_path(envp);
 	split_path = ft_split(full_path, ':');
 	if (!split_path)
 		return (NULL);

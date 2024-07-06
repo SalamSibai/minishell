@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/05 06:05:28 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:07:26 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ bool	validate_tokens(t_data *data)
 			data->cmd_ctr = 0;
 		}
 		else if (tokens[i]->type == REDIRECT_INPUT
-				|| tokens[i]->type == HEREDOC)
+			|| tokens[i]->type == HEREDOC)
 		{
 			if (!validate_input_redirection(tokens, i))
 				return (false);
 		}
 		else if (tokens[i]->type == REDIRECT_OUTPUT
-				|| tokens[i]->type == REDIRECT_APPEND)
+			|| tokens[i]->type == REDIRECT_APPEND)
 		{
 			if (!validate_output_redirection(tokens, i))
 				return (false);

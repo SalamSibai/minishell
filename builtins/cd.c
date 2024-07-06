@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:05:21 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 05:45:46 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:54:25 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env)
 {
 	int	cd_ret;
 
+	cd_ret = 0;
 	if (!cmd->args)
 		return (goto_path(0, env));
 	else if (ft_lstsize(cmd->args) > 1)
@@ -132,12 +133,7 @@ int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env)
 		cd_ret = chdir(cmd->args->content);
 		if (cd_ret == -1)
 		{
-			//ft_putstr_fd("cd: ", 2);
-			//ft_putstr_fd(cmd->args->content, 2);
-			//ft_putendl_fd(": No such file or directory", 2);
 			error_handler("No such file or directory", IN_REDIR_ER, NULL, true);
-
-			//g_exit_status = 1;
 			return (cd_ret);
 		}
 	}

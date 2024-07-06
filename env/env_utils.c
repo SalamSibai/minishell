@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:51:26 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 05:50:47 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:56:24 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,9 @@
 
 bool	print_error(const char *arg)
 {
-//	int	i;
-(void) arg;
-//	i = 0;
+	(void) arg;
 	ft_putstr_fd("export: not a valid identifier\n", 2);
 	g_exit_status = 1;
-//	while (arg[i] && arg[i] != '=')
-//	{
-	//	write(2, &arg[i], 1);
-//		i++;
-//	}
-//	write(2, "\n", 1);
 	return (false);
 }
 

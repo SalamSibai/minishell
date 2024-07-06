@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_output.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:41:26 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/02 16:09:29 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/06 14:59:12 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ bool	set_output(t_cmd *cmd, bool append, t_redirection *redir)
 
 	file_path = get_file_path(redir->file_name);
 	if (access(file_path, W_OK) != 0)
-    {
-       free(file_path);
+	{
+		free(file_path);
 		close_fd(cmd->fd_out);
-        cmd->fd_out = -1;
-        return (false);
+		cmd->fd_out = -1;
+		return (false);
 	}
 	free(file_path);
 	return (true);

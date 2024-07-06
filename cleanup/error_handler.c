@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 15:17:41 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/05 02:35:51 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:52:05 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ void	error_handler(char *err_str, int err_type, t_data *data, bool done)
 	if (done)
 	{
 		if (data)
+		{
 			cleanup(data);
+		}
 		exit(g_exit_status);
 	}
 }

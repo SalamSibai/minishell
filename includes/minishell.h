@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/05 07:35:03 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:21:54 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,10 @@ void			scan(char *av, t_token **tokens);
 void			init_cmds(t_data *data);
 void			set_cmds(t_data *data);
 int				count_cmds(t_token **tokens);
+void			malloc_each_token(int *token_ctr, t_token **tokens, char *buff, 
+					int c, size_t len, int *i, int x);
+void			malloc_qoutes_token(t_token **tokens, int *token_ctr, char *buff, 
+					int c, int len, int type, bool expandable);
 
 /* ************************************************************************** */
 /*									PARSE UTILS								  */
@@ -193,7 +197,8 @@ void			redir_clear(t_redirection **redir);
 /* ************************************************************************** */
 int				check_redirections(t_cmd *cmd, t_list *env);
 int				check_type(t_cmd *cmd, t_list *env);
-bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env);
+bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir,
+					t_list *env);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
 bool			redirect_fds(t_data *data, t_cmd *cmd, int i, int j);
 bool			redirect_file_input(t_cmd *cmd);
@@ -202,7 +207,7 @@ bool			redirect_file_output(t_cmd *cmd);
 bool			redirect_pipe_output(t_pipe *pipe, int j);
 bool			redirect_stdin(t_data *data, t_cmd *cmd);
 bool			redirect_stdout(t_data *data, t_cmd *cmd);
-char    *get_file_path(const char *file_name);
+char			*get_file_path(const char *file_name);
 void			alloc_pids(t_data *d);
 bool			make_pipes(t_pipe *p);
 
@@ -275,7 +280,6 @@ bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i, bool pipe);
 bool			close_pipe(t_pipe *pipe, int i, bool both);
 void			close_origin_fds(t_data *data);
-void			close_everything();
-
+void			close_everything(void);
 
 #endif
