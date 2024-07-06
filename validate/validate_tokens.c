@@ -55,7 +55,7 @@ bool	validate_tokens(t_data *data)
 		else if (tokens[i]->type == DQOUTES || tokens[i]->type == SQOUTES)
 		{
 			i = validate_quotes(i, data);
-			continue;
+	//		continue;
 //			if (tokens[i]->type == PIPE)
 //			{
 //				data->cmd_num++;

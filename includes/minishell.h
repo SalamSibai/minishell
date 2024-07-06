@@ -196,7 +196,7 @@ void			redir_clear(t_redirection **redir);
 int				check_redirections(t_cmd *cmd, t_list *env);
 //int				check_type(t_cmd *cmd, t_list *env);
 bool			check_input_type(t_cmd *cmd, t_list *env);
-bool			check_output_type(t_cmd *cmd, t_list *env);
+bool			check_output_type(t_cmd *cmd);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
 bool			redirect_fds(t_data *data, t_cmd *cmd, int i, int j);

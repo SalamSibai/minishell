@@ -12,9 +12,7 @@
 
 #include "../includes/minishell.h"
 
-
-
-int	validate_dquotes(int index, t_data *data)
+void	validate_dqoutes(int index, t_data *data)
 {
 	t_token	**tokens;
 
@@ -52,10 +50,8 @@ int	validate_dquotes(int index, t_data *data)
 			tokens[index]->type = ID;
 }
 
-
-int	validate_quotes(int index, t_data *data)
+bool	validate_qoutes(int index, t_data *data)
 {
-	if (data->tokens[index]->type == DQOUTES)
-		return (validate_dquotes(index, data));
-	return (index + 1);
+	validate_dqoutes(index, data);
+	return (true);
 }

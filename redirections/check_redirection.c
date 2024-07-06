@@ -18,7 +18,7 @@ int	check_redirections(t_cmd *cmd, t_list *env)
 	{
 		if (!check_input_type(cmd, env))
 			return (-1);
-		if (!check_output_type(cmd, env))
+		if (!check_output_type(cmd))
 			return (-2);
 	}
 	return (0);
@@ -78,7 +78,7 @@ bool	check_input_type(t_cmd *cmd, t_list *env)
 	return (true);
 }
 
-bool	check_output_type(t_cmd *cmd, t_list *env)
+bool	check_output_type(t_cmd *cmd)
 {
 	t_redirection	*temp;
 	int				redir_value;
