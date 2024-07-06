@@ -12,6 +12,33 @@
 
 #include "../includes/minishell.h"
 
+
+void	redirect(t_cmd *cmd, t_data *data, int i, int j)
+{
+	int	redir_return;
+
+	redir_return = check_redirections(cmd, data->env);
+	if (redir_return < 0)
+	{
+		if (redir_return == -1)
+			error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, true);
+		else
+			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, true);
+	}
+	if (!redirect_fds(data, cmd, i, j))
+	{
+		close_everything();
+		close_origin_fds(data);
+		free_cmd(data);
+		set_env_and_path(data, FREE);
+		cleanup(data);
+		exit(1);
+	}
+	close_origin_fds(data);
+}
+
+
+
 /// @brief executes the commands
 /// @param cmd pntr to cmd struct
 /// @param data pntr to data struct
@@ -33,6 +60,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		return (error_handler(FORK_ER_MSG, FORK_ER, data, false), pid);
 	if (pid == 0)
 	{
+		redirect(cmd, data, i, j);
+/*	
 		redir_return = check_redirections(cmd, data->env);
 		if (redir_return < 0)
 		{
@@ -51,6 +80,8 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			exit(1);
 		}
 		close_origin_fds(data);
+*/	
+
 		if (cmd->cmd_str != NULL)
 		{
 			if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
