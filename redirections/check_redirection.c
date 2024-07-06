@@ -17,17 +17,42 @@ int	check_redirections(t_cmd *cmd, t_list *env)
 	int	redir_value;
 
 	redir_value = 0;
-//	while (cmds[++i])
-//	{
-		if (cmd->redirection != NULL)
-		{
-			redir_value = check_type(cmd, env);
-			if (redir_value < 0)
-				return (redir_value);
-		}
-//	}
+	if (cmd->redirection != NULL)
+	{
+		redir_value = check_type(cmd, env);
+		if (redir_value < 0)
+			return (redir_value);
+	}
 	return (redir_value);
 }
+
+
+int	inputs(t_cmd *cmd, t_redirection *redir, bool heredoc, t_list *env)
+{
+	int	ret_value;
+
+	ret_value = 0;
+	if (!get_input(cmd, heredoc, redir, env))
+	{
+		redir->type = REDIR_INPUT_FAILED;
+		ret_value = -1;
+	}
+	return (ret_value);
+}
+
+int outputs(t_cmd *cmd, t_redirection *redir, bool append)
+{
+	int	ret_value;
+
+	ret_value = 0;
+	if (!set_output(cmd, append, redir))
+	{
+		redir->type = REDIR_OUTPUT_FAILDED;
+		ret_value = -2;
+	}
+	return (ret_value);
+}
+
 
 /// @brief checks the type of the redirection, and calls the
 //			corresponding function to store the fd of 
@@ -42,37 +67,19 @@ int	check_type(t_cmd *cmd, t_list *env)
 	temp = cmd->redirection;
 	while (temp)
 	{
-		if (temp->type == REDIRECT_INPUT)
+		if ((temp->type == REDIRECT_INPUT) || (temp->type == HEREDOC))
 		{
-			if (!get_input(cmd, false, temp, env))
-			{
-				temp->type = REDIR_INPUT_FAILED;
-				ret_value = -1;
-			}
+			if (temp->type == HEREDOC)
+				ret_value = inputs(cmd, temp, true, env);
+			else
+				ret_value = inputs(cmd, temp, true, env);
 		}
-		else if (temp->type == HEREDOC)
+		else if ((temp->type == REDIRECT_OUTPUT) || (temp->type == REDIRECT_APPEND))
 		{
-			if (!get_input(cmd, true, temp, env))
-			{
-				temp->type = REDIR_INPUT_FAILED;
-				ret_value = -1;
-			}
-		}
-		else if (temp->type == REDIRECT_OUTPUT)
-		{
-			if (!set_output(cmd, false, temp))
-			{
-				temp->type = REDIR_OUTPUT_FAILDED;
-				ret_value = -2;
-			}
-		}
-		else if (temp->type == REDIRECT_APPEND)
-		{
-			if (!set_output(cmd, true, temp))
-			{
-				temp->type = REDIR_OUTPUT_FAILDED;
-				ret_value = -2;
-			}
+			if (temp->type == REDIRECT_APPEND)
+				ret_value = outputs(cmd, temp, true);
+			else
+				ret_value = outputs(cmd, temp, false);
 		}
 		temp = temp->next;
 	}
