@@ -166,9 +166,9 @@ void			scan(char *av, t_token **tokens);
 void			init_cmds(t_data *data);
 void			set_cmds(t_data *data);
 int				count_cmds(t_token **tokens);
-void			malloc_each_token(int *token_ctr, t_token **tokens, char *buff, 
+void			malloc_each_token(int *token_ctr, t_token **tokens, char *buff,
 					int c, size_t len, int *i, int x);
-void			malloc_qoutes_token(t_token **tokens, int *token_ctr, char *buff, 
+void			malloc_qoutes_token(t_token **tokens, int *token_ctr, char *buff,
 					int c, int len, int type, bool expandable);
 
 /* ************************************************************************** */
@@ -230,7 +230,7 @@ bool			get_path(t_data *data, t_cmd *cmd, bool *cmd_exists);
 t_list			*env_init(char **envp);
 t_list			*export_env_init(t_list *env);
 char			**env_to_str(t_list *env);
-void			ft_export_pwds(char *str, t_list *export_env, 
+void			ft_export_pwds(char *str, t_list *export_env,
 					t_list *env);
 bool			is_valid_env(const char *var);
 char			*add_quotes(char *value);
@@ -240,7 +240,7 @@ void			print_env(t_list *env, bool export);
 int				env_add(char *value, t_list *env);
 bool			print_error(const char *arg);
 bool			set_env_and_path(t_data *data, t_cmd_type type);
-void			bubble_sort(t_list *head, 
+void			bubble_sort(t_list *head,
 					int (*cmp)(const char *, const char *));
 
 /* ************************************************************************** */

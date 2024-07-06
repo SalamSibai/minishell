@@ -30,12 +30,10 @@ void	error_handler(char *err_str, int err_type, t_data *data, bool done)
 		g_exit_status = 0;
 	else if (err_type == INVALID_IN_ER)
 		g_exit_status = 258;
-	else if (err_type == IN_REDIR_ER || err_type == OUT_REDIR_ER)
+	else if (err_type == IN_REDIR_ER || err_type == OUT_REDIR_ER || PATH_ER)
 		g_exit_status = 1;
-	else if (err_type ==NUM_REQ_ER)
+	else if (err_type == NUM_REQ_ER)
 		g_exit_status = 255;
-	else if (err_type == PATH_ER)
-		g_exit_status = 1;
 	else if (err_type == PIPE_ER)
 		g_exit_status = 141;
 	else if (err_type == FORK_ER)
@@ -48,9 +46,7 @@ void	error_handler(char *err_str, int err_type, t_data *data, bool done)
 	if (done)
 	{
 		if (data)
-		{
 			cleanup(data);
-		}
 		exit(g_exit_status);
 	}
 }

@@ -64,7 +64,7 @@ char	*ft_line(char *buffer)
 		line[i] = '\n';
 		line[i + 1] = '\0';
 	}
-	else 
+	else
 		line[i] = '\0';
 	return (line);
 }
@@ -94,7 +94,7 @@ char	*ft_update(char *buffer)
 char	*get_next_line_bonus(int fd)
 {
 	static char	*buffer_content[1024];
-	char		*line; 
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);

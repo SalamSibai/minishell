@@ -40,7 +40,7 @@ int	ft_atoi(const char *str)
 	ret = 0;
 	sign = 1;
 	str = is_space(str);
-	while ((str[i] == '+' || str[i] == '-') 
+	while ((str[i] == '+' || str[i] == '-')
 		&& (str[i + 1] != '+' && str[i + 1] != '-'))
 	{
 		sign = check_if_negative(sign, str[i]);

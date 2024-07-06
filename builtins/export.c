@@ -123,7 +123,7 @@ bool	ft_export(t_cmd *cmd, t_list *export_env, t_list *env)
 		args = cmd->args;
 		while (cmd->args)
 		{
-			if (!is_valid_env(cmd->args->content) 
+			if (!is_valid_env(cmd->args->content)
 				|| ft_strncmp(cmd->args->content, "=", 1) == 0)
 				return (false);
 			if (!is_in_env(export_env, cmd->args->content))

@@ -49,8 +49,8 @@ char	*get_var_name(char *token_string, int *end_idx)
 	char	*var_name;
 
 	i = 1;
-	while (token_string[i] && 
-		(ft_isalnum(token_string[i]) || token_string[i] == '_'))
+	while ((token_string[i])
+		&& (ft_isalnum(token_string[i]) || token_string[i] == '_'))
 		i++;
 	if (end_idx)
 		*end_idx = i;
@@ -128,7 +128,7 @@ t_token	**check_expandable_var(t_token **tokens, t_list *env)
 	i = 0;
 	while (tokens[i])
 	{
-		if (tokens[i]->expandable == true && tokens[i]->type != REDIRECT_APPEND 
+		if (tokens[i]->expandable == true && tokens[i]->type != REDIRECT_APPEND
 			&& tokens[i]->type != REDIRECT_INPUT
 			&& tokens[i]->type != REDIRECT_OUTPUT
 			&& tokens[i]->type != PIPE && tokens[i]->type != SQOUTES)

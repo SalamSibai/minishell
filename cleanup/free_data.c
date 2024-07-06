@@ -44,11 +44,11 @@ void	free_cmd(t_data *data)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	free_tokens(data);
 	free(data->pipe->pid);
 	free(data->pipe);
-	while (data->cmds[i])
+	while (data->cmds[++i])
 	{
 		if (data->cmds[i]->cmd_str)
 			free(data->cmds[i]->cmd_str);
@@ -64,19 +64,22 @@ void	free_cmd(t_data *data)
 			ft_free2d((void **)data->cmds[i]->cmd_with_flag);
 		if (data->cmds[i])
 			free(data->cmds[i]);
-		i++;
 	}
 	free(data->cmds);
 }
 
 void	cleanup(t_data *data)
 {
+	int	fd;
+
+	fd = -1;
 	ft_free(&data->path, 'a');
 	ft_free(&data->env_var, 'a');
 	ft_lstclear(&data->env, free);
 	ft_lstclear(&data->export_env, free);
 	close_fd(data->origin_fds[0]);
 	close_fd(data->origin_fds[1]);
-	for (int fd=0; fd<64; fd++) (void) close(fd);
+	while (++fd < 64)
+		(void) close(fd);
 	free(data->buf);
 }

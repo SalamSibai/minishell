@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void	close_everything()
+void	close_everything(void)
 {
 	int	i;
 
@@ -50,10 +50,8 @@ bool	close_pipe(t_pipe *pipe, int i, bool both)
 			j = -1;
 			while (++j < 2)
 			{
-				{
-					if (close(pipe->fd[i][j]) == -1)
-						return (false);
-				}
+				if (close(pipe->fd[i][j]) == -1)
+					return (false);
 			}
 		}
 	}
@@ -61,10 +59,8 @@ bool	close_pipe(t_pipe *pipe, int i, bool both)
 	{
 		while (++j < 2)
 		{
-			{
-				if (close(pipe->fd[i][j]) == -1)
-					return (false);
-			}
+			if (close(pipe->fd[i][j]) == -1)
+				return (false);
 		}
 	}
 	return (true);
