@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 16:21:54 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:41:36 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct s_data
 	int			cmd_num;
 	int			cmd_ctr;
 	int			origin_fds[2];
+	bool		duped;
 }	t_data;
 
 /* ************************************************************************** */

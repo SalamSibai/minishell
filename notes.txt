@@ -145,3 +145,7 @@ when theres a heredoc then  a pipe the command doesnt work  like
 
 $ cd
 minishell : cd: HOME not set
+
+test 58
+test 56
+test 55

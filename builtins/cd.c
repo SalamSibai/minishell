@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:05:21 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 15:54:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/06 20:02:22 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env)
 	if (!cmd->args)
 		return (goto_path(0, env));
 	else if (ft_lstsize(cmd->args) > 1)
-		error_handler("Error: Too many arguments", IN_REDIR_ER, NULL, true);
+		error_handler(NULL, -1, NULL, true);
 	else if (cmd->args && (ft_strcmp(cmd->args->content, "-") == 0))
 	{
 		cd_ret = goto_path(1, env);
