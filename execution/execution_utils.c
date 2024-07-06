@@ -14,7 +14,7 @@
 
 /// @brief returns the path where the cmd is
 /// @return true if the path was found
-bool get_path(t_data *data, t_cmd *cmd)
+bool get_path(t_data *data, t_cmd *cmd, bool *cmd_exists)
 {
 	int		i;
 
@@ -24,6 +24,8 @@ bool get_path(t_data *data, t_cmd *cmd)
 		cmd->cmd_path = ft_strdup(cmd->cmd_str);
 		return (true);
 	}
+	if (data->path[i] == NULL)
+		return (false);
 	while (data->path[i] != NULL)
 	{
 		cmd->cmd_path = ft_strjoin(data->path[i], cmd->cmd_str);
@@ -32,8 +34,8 @@ bool get_path(t_data *data, t_cmd *cmd)
 		free(cmd->cmd_path);
 		i ++;
 	}
-	cmd->cmd_path = NULL;
-	return (false);
+	*cmd_exists = false;
+	return (true);
 }
 
 /// @brief fills the double pointer that holds the cmd and its flags &args

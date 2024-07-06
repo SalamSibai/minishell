@@ -5,3 +5,9 @@
         "string_view": "c"
     }
 }
+{
+    "files.associations": {
+        "minishell.h": "c",
+        "signal.h": "c"
+    }
+}

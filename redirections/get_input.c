@@ -51,10 +51,7 @@ bool	execute_heredoc(t_cmd *cmd, t_redirection *redir, t_list *env)
 
 bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env)
 {
-	char	 *path;
-	char	*file_path1;
 	char	*file_path;
-	char	cwd[PATH_MAX];
 
 	if (cmd->fd_in != -1)
 	{
@@ -62,11 +59,10 @@ bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env)
 			return (false);
 	}
 	if (!heredoc)
-	{
-		path = getcwd(cwd, PATH_MAX);
-		file_path1 = ft_strjoin(path, "/");
-		file_path = ft_strjoin(file_path1, redir->file_name);
-		ft_free(&file_path1, 'p');
+	{	
+		file_path = get_file_path(redir->file_name);
+		// if (!file_path)
+
 		if (access(file_path, R_OK) != 0)
 		{
 			return (free(file_path), false);

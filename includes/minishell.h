@@ -26,9 +26,12 @@
 # include <signal.h>
 
 # define BUFF_SIZE 4096
+# define INVALID_EXP_MSG "Export: not a valid identifier\n"
 # define INVALID_IN_MSG "Error: Invalid syntax\n"
 # define INPUT_REDIR_ER_MSG "Error: No such file or directory.\n"
 # define OUTPUT_REDIR_ER_MSG "Error: Output redirection error.\n"
+# define TOO_MANY_ARG "Error: too many arguments.\n"
+# define NUMERIC_REQ_MSG "Error: Numeric argument required\n"
 # define PATH_ER_MSG "Error: Path doesnt exists\n"
 # define PIPE_ER_MSG "Error: Couldn't open pipes.\n"
 # define FORK_ER_MSG "Error: Fork.\n"
@@ -42,6 +45,7 @@ typedef enum e_cmd_type
 
 typedef enum e_error_type
 {
+	NUM_REQ_ER,
 	INVALID_IN_ER,
 	IN_REDIR_ER,
 	OUT_REDIR_ER,
@@ -189,7 +193,7 @@ void			redir_clear(t_redirection **redir);
 /* ************************************************************************** */
 /*								PIPES,FDs REDIRECTION		 				  */
 /* ************************************************************************** */
-int				check_redirections(t_cmd **cmds, t_list *env);
+int				check_redirections(t_cmd *cmd, t_list *env);
 int				check_type(t_cmd *cmd, t_list *env);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
@@ -200,6 +204,7 @@ bool			redirect_file_output(t_cmd *cmd);
 bool			redirect_pipe_output(t_pipe *pipe, int j);
 bool			redirect_stdin(t_data *data, t_cmd *cmd);
 bool			redirect_stdout(t_data *data, t_cmd *cmd);
+char    *get_file_path(const char *file_name);
 void			alloc_pids(t_data *d);
 bool			make_pipes(t_pipe *p);
 
@@ -213,7 +218,7 @@ char			*replace_env_var(char *str, t_list *env);
 /*									PATH									  */
 /* ************************************************************************** */
 char			**set_path(char **envp);
-bool			get_path(t_data *data, t_cmd *cmd);
+bool			get_path(t_data *data, t_cmd *cmd, bool *cmd_exists);
 
 /* ************************************************************************** */
 /*									ENVIROMENT								  */
@@ -243,6 +248,7 @@ int				ft_env(t_list *env);
 bool			ft_export(t_cmd *cmd, t_list *export_env, t_list *env);
 int				ft_pwd(void);
 int				ft_unset(t_list *args, t_list *env);
+void			ft_exit(t_cmd *cmd, t_data *data);
 
 /* ************************************************************************** */
 /*									EXECUTION								  */

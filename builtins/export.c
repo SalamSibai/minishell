@@ -125,7 +125,7 @@ bool	ft_export(t_cmd *cmd, t_list *export_env, t_list *env)
 		{
 			if (!is_valid_env(cmd->args->content) 
 				|| ft_strncmp(cmd->args->content, "=", 1) == 0)
-				return (print_error(cmd->args->content));
+				return (false);
 			if (!is_in_env(export_env, cmd->args->content))
 				env_add(cmd->args->content, export_env);
 			if (!is_in_env(env, cmd->args->content))

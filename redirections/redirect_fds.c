@@ -66,12 +66,18 @@ static bool	redirect_outputs(t_data *data,t_cmd *cmd, int i, int j)
 
 bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 {
-	if (!redirect_inputs(data, cmd, i, j))
+	bool	input_redir;
+	bool	output_redir;
+
+	input_redir = redirect_inputs(data, cmd, i, j);
+	output_redir = redirect_outputs(data, cmd, i, j);
+	if (!input_redir)
 	{
 		return (error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, false), false);
 	}
-	if (!redirect_outputs(data, cmd, i, j))
+	if (!output_redir)
 	{
+		ft_putstr_fd("FAILED OUT\n", 2);
 		return (error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false), false);
 	}
 	return (true);

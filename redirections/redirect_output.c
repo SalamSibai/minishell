@@ -32,7 +32,6 @@ bool	redirect_stdout(t_data *data, t_cmd *cmd)
 {
 	if (dup2(data->origin_fds[1], STDOUT_FILENO) == -1)
 	{
-		ft_putstr_fd("failed at output\n", 1);
 		return (false);
 	}
 	if (cmd->fd_out >= 0)

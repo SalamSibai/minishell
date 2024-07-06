@@ -14,16 +14,17 @@
 
 bool	print_error(const char *arg)
 {
-	int	i;
-
-	i = 0;
-	ft_putstr_fd("export: not a valid identifier: ", 2);
-	while (arg[i] && arg[i] != '=')
-	{
-		write(2, &arg[i], 1);
-		i++;
-	}
-	write(2, "\n", 1);
+//	int	i;
+(void) arg;
+//	i = 0;
+	ft_putstr_fd("export: not a valid identifier\n", 2);
+	g_exit_status = 1;
+//	while (arg[i] && arg[i] != '=')
+//	{
+	//	write(2, &arg[i], 1);
+//		i++;
+//	}
+//	write(2, "\n", 1);
 	return (false);
 }
 
