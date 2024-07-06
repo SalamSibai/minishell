@@ -151,7 +151,7 @@ bool			validate_id(int index, t_data *data);
 bool			validate_pipe(t_token **tokens, int index);
 bool			validate_input_redirection(t_token **tokens, int index);
 bool			validate_output_redirection(t_token **tokens, int index);
-int				validate_quotes(int index, t_data *data);
+bool    		validate_qoutes(int index, t_data *data);
 
 /* ************************************************************************** */
 /*									SIGNALS									  */
