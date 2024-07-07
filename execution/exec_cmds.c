@@ -58,16 +58,12 @@ int	exec_child(t_cmd *cmd, t_data *data, int i, bool *cmd_exist)
  */
 int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
 {
-	int	pid;
-
-	pid = 0;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
 	if (cmd->cmd_str != NULL)
 	{
 		if (is_builtin(cmd->cmd_str) && data->cmd_num == 1)
 		{
-			pid = getpid();
 			if (!redirect_fds(data, cmd, i, j))
 			{
 				close_origin_fds(data);
@@ -83,7 +79,7 @@ int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
 	close_origin_fds(data);
-	return (pid);
+	return (0);
 }
 
 /**

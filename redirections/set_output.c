@@ -13,13 +13,33 @@
 #include "../includes/minishell.h"
 
 /**
+ * @brief this function checks for the access permission of the file
+ * 
+ * @return true 
+ * @return false 
+ */
+static bool	check_output_access(t_cmd *cmd, t_redirection *redir)
+{
+	char	*file_path;
+
+	file_path = get_file_path(redir->file_name);
+	if (access(file_path, W_OK) != 0)
+	{
+		free(file_path);
+		close_fd(cmd->fd_out);
+		cmd->fd_out = -1;
+		return (false);
+	}
+	free(file_path);
+	return (true);
+}
+
+/**
  * @brief 
  * 
  */
 bool	set_output(t_cmd *cmd, bool append, t_redirection *redir)
 {
-	char	*file_path;
-
 	if (cmd->fd_out != -1)
 	{
 		if (!close_fd(cmd->fd_out))
@@ -39,15 +59,7 @@ bool	set_output(t_cmd *cmd, bool append, t_redirection *redir)
 		if (!cmd->fd_out)
 			return (false);
 	}
-
-	file_path = get_file_path(redir->file_name);
-	if (access(file_path, W_OK) != 0)
-	{
-		free(file_path);
-		close_fd(cmd->fd_out);
-		cmd->fd_out = -1;
+	if (!check_output_access(cmd, redir))
 		return (false);
-	}
-	free(file_path);
 	return (true);
 }

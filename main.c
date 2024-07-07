@@ -35,7 +35,7 @@ int main(int ac, char **av, char **env)
 	t_data	data;
 	//int		redir_return;
 
-	// g_exit_status = 0;
+	// data.g_exit_status = 0;
 	ft_memset(&data, 0, sizeof(t_data));
 	data.duped = false;
 	(void)av;

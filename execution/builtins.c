@@ -18,7 +18,7 @@
  * @param command 
  * @return 
  */
-bool		is_builtin(char *command)
+bool	is_builtin(char *command)
 {
 	if (ft_strcmp(command, "echo") == 0)
 		return (true);
@@ -46,13 +46,13 @@ bool		is_builtin(char *command)
 bool	is_env_builtin(char *command)
 {
 	if (ft_strcmp(command, "cd") == 0)
-		return(true);
+		return (true);
 	if (ft_strcmp(command, "env") == 0)
-		return(true);
+		return (true);
 	if (ft_strcmp(command, "export") == 0)
-		return(true);
+		return (true);
 	if (ft_strcmp(command, "unset") == 0)
-		return(true);
+		return (true);
 	return (false);
 }
 
@@ -62,7 +62,7 @@ bool	is_env_builtin(char *command)
  * @param exec 
  * @return 
  */
-int		exec_builtin(t_cmd *cmd, t_data *data)
+int	exec_builtin(t_cmd *cmd, t_data *data)
 {
 	int		result;
 
@@ -78,10 +78,8 @@ int		exec_builtin(t_cmd *cmd, t_data *data)
 	if (ft_strcmp(cmd->cmd_str, "export") == 0)
 	{
 		if (!ft_export(cmd, data->export_env, data->env))
-		{
-			error_handler(INVALID_EXP_MSG, IN_REDIR_ER, NULL, false);
-			return (1);
-		}
+			return (error_handler(INVALID_EXP_MSG, IN_REDIR_ER,
+					data, false), 1);
 	}
 	if (ft_strcmp(cmd->cmd_str, "unset") == 0)
 	{

@@ -33,7 +33,13 @@ void	processes_queue(t_data *data, int *status)
 		}
 	}
 }
-
+/**
+ * @brief this function check the file directory is path and permission 
+ * 
+ * @param path 
+ * @return true 
+ * @return false 
+ */
 bool	is_directory(const char *path)
 {
 	struct stat	path_stat;
@@ -101,9 +107,8 @@ bool	join_cmd_and_flag(t_cmd *cmd)
 	cmd->flag = flag_temp;
 	while (args_temp)
 	{
-		cmd->cmd_with_flag[i] = ft_strdup(args_temp->content);
+		cmd->cmd_with_flag[i++] = ft_strdup(args_temp->content);
 		args_temp = args_temp->next;
-		i ++;
 	}
 	cmd->cmd_with_flag[i] = NULL;
 	if (!cmd->cmd_with_flag)
