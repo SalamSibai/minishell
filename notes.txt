@@ -149,3 +149,6 @@ minishell : cd: HOME not set
 test 58
 test 56
 test 55
+
+
+OUTPUT REDIRECTION IS FAILING WITH CAT IF THERES A PIPE AFTER

@@ -12,11 +12,11 @@
 
 #include "../includes/minishell.h"
 
-void	close_everything(void)
+void	close_all_fds(int start)
 {
 	int	i;
 
-	i = 3;
+	i = start;
 	while (i < 64)
 	{
 		(void) close(i);

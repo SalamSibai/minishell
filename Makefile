@@ -64,6 +64,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${EXEC_DIR}/builtins.c \
 		${EXEC_DIR}/exec_cmds.c \
 		${EXEC_DIR}/execution_utils.c \
+		${EXEC_DIR}/execution_utils2.c \
 		${FREE_DIR}/free_data.c \
 		${FREE_DIR}/close_fds.c \
 		${FREE_DIR}/error_handler.c\

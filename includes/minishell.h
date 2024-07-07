@@ -267,6 +267,12 @@ void			execute_cmds(t_data *data);
 bool			execution(t_data *data);
 bool			join_cmd_and_flag(t_cmd *cmd);
 bool			is_directory(const char *path);
+bool			set_redir(t_cmd *cmd, t_data *data);
+void			dup_origin(t_data *data);
+bool			exec_redir(t_data *data, t_cmd *cmd, int i, int j);
+bool			check_builtin(t_cmd *cmd, t_data *data);
+bool			check_env_builtin(t_cmd *cmd, t_data *data);
+
 
 /* ************************************************************************** */
 /*									DEBUG									  */
@@ -285,6 +291,6 @@ bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i, bool pipe);
 bool			close_pipe(t_pipe *pipe, int i, bool both);
 void			close_origin_fds(t_data *data);
-void			close_everything(void);
+void			close_all_fds(int	start);
 
 #endif

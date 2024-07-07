@@ -12,6 +12,78 @@
 
 #include "../includes/minishell.h"
 
+int	exec_child(t_cmd *cmd, t_data *data, int i, bool *cmd_exist)
+{
+	if (join_cmd_and_flag(cmd))
+	{
+		if (is_directory(cmd->cmd_str))
+			return (error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false), 126);
+		if (!get_path(data, cmd, cmd_exist))
+			return (set_env_and_path(data, FREE),
+				error_handler(PATH_ER_MSG, PATH_ER, data, true), 127);
+		else
+		{
+			if (*cmd_exist)
+			{
+				close_all_fds(3);
+				execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
+			}
+			else
+			{
+				close_fds(data, i, true);
+				free_cmd(data);
+				set_env_and_path(data, FREE);
+				error_handler(CMD_ER_MSG, CMD_ER, data, true);
+			}
+		}
+	}
+	return (0);
+}
+
+int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
+{
+	int	pid;
+
+	pid = 0;
+	if (cmd->cmd_str != NULL)
+	{
+		if (is_builtin(cmd->cmd_str) && data->cmd_num == 1)
+		{
+			pid = getpid();
+			if (!redirect_fds(data, cmd, i, j))
+			{
+				close_origin_fds(data);
+				for (int fd=3; fd<64; fd++) (void) close(fd);
+			}
+			g_exit_status = exec_builtin(cmd, data);
+		}
+	}
+	if (i > 0)
+		close(data->pipe->fd[!j][0]);
+	if (i < data->cmd_num - 1)
+		close(data->pipe->fd[j][1]);
+	dup2(data->origin_fds[0], STDIN_FILENO);
+	dup2(data->origin_fds[1], STDOUT_FILENO);
+	for (int fd=3; fd<64; fd++) (void) close(fd);
+	close_origin_fds(data);
+	return (pid);
+}
+
+void	check_cmd(t_cmd *cmd, t_data *data, int i)
+{
+	bool	cmd_exist;
+
+	cmd_exist = true;
+	if (cmd->cmd_str != NULL)
+	{
+		if (check_builtin(cmd, data))
+			exit (0);
+		if (check_env_builtin(cmd, data))
+			exit (0);
+		exit (exec_child(cmd, data, i, &cmd_exist));
+	}
+}
+
 /// @brief executes the commands
 /// @param cmd pntr to cmd struct
 /// @param data pntr to data struct
@@ -20,121 +92,26 @@
 /// @return pid
 int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 {
-	int		pid;
-	int		redir_return;
-	bool	cmd_exist;
+	int	pid;
 
-	cmd_exist = true;
-	redir_return = 0;
-	redir_return = check_redirections(cmd, data->env);
-	if (redir_return < 0)
-	{
-		if (redir_return == -1)
-			error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, false);
-		else
-			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false);
+	if (!set_redir(cmd, data))
 		return (-1);
-	}
 	else
 	{
-		data->origin_fds[0] = dup(STDIN_FILENO);
-		data->origin_fds[1] = dup(STDOUT_FILENO);
-		data->duped = true;
+		dup_origin(data);
 		pid = fork();
 		if (pid == -1)
 			return (error_handler(FORK_ER_MSG, FORK_ER, data, false), pid);
 		if (pid == 0)
 		{
-			if (!redirect_fds(data, cmd, i, j))
-			{
-				close_everything();
-				close_origin_fds(data);
-				free_cmd(data);
-				set_env_and_path(data, FREE);
-				cleanup(data);
+			if (!exec_redir(data, cmd, i, j))
 				exit(24);
-			}
 			close_origin_fds(data);
-			if (cmd->cmd_str != NULL)
-			{
-				if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
-				{
-					g_exit_status = exec_builtin(cmd, data);
-					for (int fd=0; fd<64; fd++) (void) close(fd);
-					free_cmd(data);
-					set_env_and_path(data, FREE);
-					cleanup(data);
-					exit(0);
-				}
-				if (is_env_builtin(cmd->cmd_str) || (is_builtin(cmd->cmd_str) && (data->cmd_num == 1)) )
-				{
-					for (int fd=0; fd<64; fd++) (void) close(fd);
-					set_env_and_path(data, FREE);
-					free_cmd(data);
-					cleanup(data);
-					exit (0);
-				}
-				else
-				{
-					if (join_cmd_and_flag(cmd))
-					{
-						if (is_directory(cmd->cmd_str))
-						{
-							error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false);
-							exit(126);
-						}
-						if (!get_path(data, cmd, &cmd_exist))
-						{
-							set_env_and_path(data, FREE);
-							error_handler(PATH_ER_MSG, PATH_ER, data, true);
-							exit(127);
-						}
-						else
-						{
-							if (cmd_exist)
-							{
-								close_everything();
-								execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
-							}
-							else
-							{
-								close_fds(data, i, true);
-								free_cmd(data);
-								set_env_and_path(data, FREE);
-								error_handler(CMD_ER_MSG, CMD_ER, data, true);
-							}
-						}
-					}
-				}
-			}
-			exit(0);
+			check_cmd(cmd, data, i);
+			exit (0);
 		}
 		else
-		{
-			if (cmd->cmd_str != NULL)
-			{
-				if (is_builtin(cmd->cmd_str) && data->cmd_num == 1)
-				{
-					pid = getpid();
-					//redir_return = check_redirections(cmd, data->env);
-					if (!redirect_fds(data, cmd, i, j))
-					{
-						close_origin_fds(data);
-						for (int fd=3; fd<64; fd++) (void) close(fd);
-					}
-					g_exit_status = exec_builtin(cmd, data);
-					//was here
-				}
-			}
-			if (i > 0)
-				close(data->pipe->fd[!j][0]);
-			if (i < data->cmd_num - 1)
-				close(data->pipe->fd[j][1]);
-			dup2(data->origin_fds[0], STDIN_FILENO);
-			dup2(data->origin_fds[1], STDOUT_FILENO);
-			for (int fd=3; fd<64; fd++) (void) close(fd);
-			close_origin_fds(data);
-		}
+			pid = exec_parent(cmd, data, i, j);
 	}
 	return (pid);
 }
@@ -151,11 +128,8 @@ bool	execution(t_data *data)
 	int status;
 	
 	status = 0;
-	//signal(SIGPIPE, SIG_IGN);
 	i = 0;
 	j = 0;
-//	if (data->cmds[0]->cmd_str == NULL)
-//		return (true);
 	alloc_pids(data);
 	if (data->cmd_num > 1)
 	{
@@ -186,7 +160,7 @@ bool	execution(t_data *data)
 		dup2(STDIN_FILENO, data->origin_fds[0]);
 		dup2(STDOUT_FILENO, data->origin_fds[1]);
 		close_origin_fds(data);
-		close_everything();
+		close_all_fds(3);
 	}
 	if (data->cmd_num > 1)
 	{
