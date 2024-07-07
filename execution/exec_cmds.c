@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/07 04:04:58 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 05:13:12 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	int		pid;
 	int		redir_return;
 	bool	cmd_exist;
-	pid = getpid();
-
 
 	cmd_exist = true;
 	redir_return = 0;
@@ -35,11 +33,6 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, false);
 		else
 			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false);
-		return (-1);
-	}
-	if (is_directory(cmd->cmd_str))
-	{
-		error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false);
 		return (-1);
 	}
 	else
@@ -81,20 +74,20 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 					cleanup(data);
 					exit (0);
 				}
-				if (is_builtin(cmd->cmd_str) && data->cmd_num == 1)
-				{
-					//execute builtins in child process only to get the correct exit status without affecting the output
-					
-				}
 				else
 				{
 					if (join_cmd_and_flag(cmd))
 					{
+						if (is_directory(cmd->cmd_str))
+						{
+							error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false);
+							exit(126);
+						}
 						if (!get_path(data, cmd, &cmd_exist))
 						{
-							// free_cmd(data);
 							set_env_and_path(data, FREE);
 							error_handler(PATH_ER_MSG, PATH_ER, data, true);
+							exit(127);
 						}
 						else
 						{
@@ -106,7 +99,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 							else
 							{
 								close_fds(data, i, true);
-								// free_cmd(data);
+								free_cmd(data);
 								set_env_and_path(data, FREE);
 								error_handler(CMD_ER_MSG, CMD_ER, data, true);
 							}
