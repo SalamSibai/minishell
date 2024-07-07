@@ -42,17 +42,13 @@ int main(int ac, char **av, char **env)
 	if (ac != 1 || !*env)
 		return (1);
 	set_env(&data, env);
-	disable_ctrl_c_echo();
-	init_sigaction();
 	while (1)
 	{
+		disable_ctrl_c_echo();
+		init_sigaction();
 		data.buf = readline("minishell$ ");
-		if (!data.buf || ft_strcmp(data.buf, "exit") == 0)
-		{
-			cleanup(&data);
-			ft_putstr_fd("exit\n", 1);
-			exit(1);
-		}
+		if (!data.buf)
+			break ;
 		if (ft_strcmp(data.buf, "") == 0)
 				continue;
 		if (ft_strlen(data.buf) > 0)
@@ -79,6 +75,7 @@ int main(int ac, char **av, char **env)
 		set_env_and_path(&data, FREE);
 		free_cmd(&data);
 	}
+	write(1, "\n", 1);
 	cleanup(&data);
 	return (0);
 }

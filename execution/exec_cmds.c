@@ -61,6 +61,8 @@ int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
 	int	pid;
 
 	pid = 0;
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	if (cmd->cmd_str != NULL)
 	{
 		if (is_builtin(cmd->cmd_str) && data->cmd_num == 1)
