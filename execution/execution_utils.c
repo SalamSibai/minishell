@@ -12,6 +12,21 @@
 
 #include "../includes/minishell.h"
 
+void	processes_queue(t_data *data, int *status)
+{
+	int i;
+
+	i = -1;
+	while (++i < data->cmd_num)
+	{
+		waitpid(data->pipe->pid[i], status, 0);
+		if (i == data->cmd_num - 1 && !is_builtin(data->cmds[i]->cmd_str))
+		{
+			if (WIFEXITED(*status) && (!is_builtin(data->cmds[i]->cmd_str)))
+				g_exit_status = WEXITSTATUS(*status);
+		}
+	}
+}
 
 bool	is_directory(const char *path)
 {

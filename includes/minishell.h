@@ -141,6 +141,7 @@ typedef struct s_data
 	int			cmd_ctr;
 	int			origin_fds[2];
 	bool		duped;
+	int			g_exit_status;
 }	t_data;
 
 /* ************************************************************************** */
@@ -195,6 +196,7 @@ t_redirection	*redir_last(t_redirection *redir);
 void			redir_add_back(t_redirection **redir, t_redirection *new);
 void			redir_add_front(t_redirection **redir, t_redirection *new);
 void			redir_clear(t_redirection **redir);
+void			reset_fds(t_data  *data);
 
 /* ************************************************************************** */
 /*								PIPES,FDs REDIRECTION		 				  */

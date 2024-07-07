@@ -64,7 +64,6 @@ int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
 		close(data->pipe->fd[j][1]);
 	dup2(data->origin_fds[0], STDIN_FILENO);
 	dup2(data->origin_fds[1], STDOUT_FILENO);
-	for (int fd=3; fd<64; fd++) (void) close(fd);
 	close_origin_fds(data);
 	return (pid);
 }
@@ -116,6 +115,28 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	return (pid);
 }
 
+bool	exec_multiple(t_data *data, int i)
+{
+	int	j;
+
+	j = 0;
+	if (!make_pipes(data->pipe))
+		return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
+	while (data->cmds[++i] != NULL)
+	{
+		data->pipe->pid[i] = exec_cmd(data->cmds[i], data, i, j);
+		if (i >= 1 && i < data->cmd_num - 1)
+		{
+			close_pipe(data->pipe, !j, false);
+			if (pipe(data->pipe->fd[!j]) == -1)
+				return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
+		}
+		j = !j;
+	}
+	close_pipe(data->pipe, !j, false);
+	return (true);
+}
+
 /**
  * @brief this function will execute the commands based on the type of command
  * 	SHOULD MAKE FUNCTION BOOL?
@@ -124,46 +145,25 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 bool	execution(t_data *data)
 {
 	int	i;
-	int	j;
 	int status;
 	
 	status = 0;
-	i = 0;
-	j = 0;
+	i = -1;
 	alloc_pids(data);
 	if (data->cmd_num > 1)
 	{
-		if (!make_pipes(data->pipe))
-			return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
-		while (data->cmds[i] != NULL)
-		{
-			data->pipe->pid[i] = exec_cmd(data->cmds[i], data, i, j);
-			if (i >= 1 && i < data->cmd_num - 1)
-			{
-				close_pipe(data->pipe, !j, false);
-				if (pipe(data->pipe->fd[!j]) == -1)
-					return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
-			}
-			i++;
-			j = !j;
-		}
-		close_pipe(data->pipe, !j, false);
+		if (!exec_multiple(data, i))
+			return (false);
 	}
 	else
 		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0, 0);
-	i = -1;
-	while (++i < data->cmd_num)
-		close_fds(data, i, false);
+//	close_all_fds(3);
 	i = -1;
 	if (data->duped)
-	{
-		dup2(STDIN_FILENO, data->origin_fds[0]);
-		dup2(STDOUT_FILENO, data->origin_fds[1]);
-		close_origin_fds(data);
-		close_all_fds(3);
-	}
+		reset_fds(data);
 	if (data->cmd_num > 1)
 	{
+		//processes_queue(data, &status);
 		i = -1;
 		while (++i < data->cmd_num)
 		{
@@ -171,7 +171,7 @@ bool	execution(t_data *data)
 			if (i == data->cmd_num - 1 && !is_builtin(data->cmds[i]->cmd_str))
 			{
 				if (WIFEXITED(status) && (!is_builtin(data->cmds[i]->cmd_str)))
-					g_exit_status = WEXITSTATUS(status);
+					data->g_exit_status = WEXITSTATUS(status);
 			}
 		}
 	}
