@@ -7,7 +7,7 @@ bool	set_redir(t_cmd *cmd, t_data *data)
 	int		redir_return;
 
 	redir_return = 0;
-	redir_return = check_redirections(cmd, data->env);
+	redir_return = check_redirections(cmd, data);
 	if (redir_return < 0)
 	{
 		if (redir_return == -1)
@@ -44,7 +44,7 @@ bool	check_builtin(t_cmd *cmd, t_data *data)
 {
 	if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
 	{
-		g_exit_status = exec_builtin(cmd, data);
+		data->g_exit_status = exec_builtin(cmd, data);
 		close_all_fds(0);
 		free_cmd(data);
 		set_env_and_path(data, FREE);

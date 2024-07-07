@@ -23,7 +23,7 @@ void	processes_queue(t_data *data, int *status)
 		if (i == data->cmd_num - 1 && !is_builtin(data->cmds[i]->cmd_str))
 		{
 			if (WIFEXITED(*status) && (!is_builtin(data->cmds[i]->cmd_str)))
-				g_exit_status = WEXITSTATUS(*status);
+				data->g_exit_status = WEXITSTATUS(*status);
 		}
 	}
 }

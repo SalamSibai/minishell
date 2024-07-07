@@ -53,9 +53,9 @@ int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
 			if (!redirect_fds(data, cmd, i, j))
 			{
 				close_origin_fds(data);
-				for (int fd=3; fd<64; fd++) (void) close(fd);
+				close_all_fds(3);
 			}
-			g_exit_status = exec_builtin(cmd, data);
+			data->g_exit_status = exec_builtin(cmd, data);
 		}
 	}
 	if (i > 0)
@@ -129,56 +129,13 @@ bool	exec_multiple(t_data *data, int i)
 		{
 			close_pipe(data->pipe, !j, false);
 			if (pipe(data->pipe->fd[!j]) == -1)
-				return (error_handler(PIPE_ER_MSG, PIPE_ER, data, false), false);
+			{
+				error_handler(PIPE_ER_MSG, PIPE_ER, data, false);
+				return (false);
+			}
 		}
 		j = !j;
 	}
 	close_pipe(data->pipe, !j, false);
-	return (true);
-}
-
-/**
- * @brief this function will execute the commands based on the type of command
- * 	SHOULD MAKE FUNCTION BOOL?
- * @param data
- */
-bool	execution(t_data *data)
-{
-	int	i;
-	int status;
-	
-	status = 0;
-	i = -1;
-	alloc_pids(data);
-	if (data->cmd_num > 1)
-	{
-		if (!exec_multiple(data, i))
-			return (false);
-	}
-	else
-		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0, 0);
-//	close_all_fds(3);
-	i = -1;
-	if (data->duped)
-		reset_fds(data);
-	if (data->cmd_num > 1)
-	{
-		//processes_queue(data, &status);
-		i = -1;
-		while (++i < data->cmd_num)
-		{
-			waitpid(data->pipe->pid[i], &status, 0);
-			if (i == data->cmd_num - 1 && !is_builtin(data->cmds[i]->cmd_str))
-			{
-				if (WIFEXITED(status) && (!is_builtin(data->cmds[i]->cmd_str)))
-					data->g_exit_status = WEXITSTATUS(status);
-			}
-		}
-	}
-	else if (data->cmds[0]->cmd_str && !is_builtin(data->cmds[0]->cmd_str) && data->pipe->pid[0] != -1)
-	{
-		waitpid(data->pipe->pid[0], &status, 0);
-		g_exit_status = WEXITSTATUS(status);
-	}
 	return (true);
 }

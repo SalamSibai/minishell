@@ -66,14 +66,14 @@ char	*get_var_name(char *token_string, int *end_idx)
  * @param start an int pointer to keep track of the index of the string
  * @return 
  */
-char	*process_env_var(char *str, t_list *env, int *start)
+char	*process_env_var(char *str, t_list *env, int *start, t_data *data)
 {
 	char	*expanded_str;
 	char	*var_name;
 
 	if (*(str + 1) == '?')
-	{
-		expanded_str = ft_itoa(g_exit_status);
+	{ 
+		expanded_str = ft_itoa(data->g_exit_status);
 		*start = 2;
 	}
 	else
@@ -94,7 +94,7 @@ char	*process_env_var(char *str, t_list *env, int *start)
  * @param env env list to check for the variable name in it
  * @return char* 
  */
-char	*replace_env_var(char *str, t_list *env)
+char	*replace_env_var(char *str, t_list *env, t_data *data)
 {
 	char	*result;
 	char	*expanded_str;
@@ -105,7 +105,7 @@ char	*replace_env_var(char *str, t_list *env)
 	{
 		if (*str == '$' && (*(str + 1) != '\0' && *(str + 1) != ' '))
 		{
-			expanded_str = process_env_var(str, env, &start);
+			expanded_str = process_env_var(str, env, &start, data);
 			result = ft_strjoin_free(result, expanded_str, 3);
 			str += start;
 		}
@@ -120,11 +120,13 @@ char	*replace_env_var(char *str, t_list *env)
 	return (result);
 }
 
-t_token	**check_expandable_var(t_token **tokens, t_list *env)
+t_token	**check_expandable_var(t_token **tokens, t_data *data)
 {
 	int		i;
 	char	*expanded_str;
+	t_list	*env;
 
+	env = data->env;
 	i = 0;
 	while (tokens[i])
 	{
@@ -135,7 +137,7 @@ t_token	**check_expandable_var(t_token **tokens, t_list *env)
 		{
 			if (ft_strchr(tokens[i]->token_string, '$'))
 			{
-				expanded_str = replace_env_var(tokens[i]->token_string, env);
+				expanded_str = replace_env_var(tokens[i]->token_string, env, data);
 				free(tokens[i]->token_string);
 				tokens[i]->token_string = expanded_str;
 			}

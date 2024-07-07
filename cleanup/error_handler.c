@@ -24,33 +24,37 @@
 
 void	error_handler(char *err_str, int err_type, t_data *data, bool done)
 {
+	int	exit_code;
+
+	exit_code = 0;
 	if (err_str != NULL)
 		ft_putstr_fd(err_str, 2);
 	if (err_type < 0)
-		g_exit_status = 0;
+		data->g_exit_status = 0;
 	else if (err_type == INVALID_IN_ER)
-		g_exit_status = 258;
+		data->g_exit_status = 258;
 	else if (err_type == IN_REDIR_ER || err_type == OUT_REDIR_ER)
-		g_exit_status = 1;
+		data->g_exit_status = 1;
 	else if (err_type == NUM_REQ_ER)
-		g_exit_status = 255;
+		data->g_exit_status = 255;
 	else if (err_type == PATH_ER)
-		g_exit_status = 1;
+		data->g_exit_status = 1;
 	else if (err_type == DIR_EXEC_ER)
-		g_exit_status = 126;
+		data->g_exit_status = 126;
 	else if (err_type == PIPE_ER)
-		g_exit_status = 141;
+		data->g_exit_status = 141;
 	else if (err_type == FORK_ER)
-		g_exit_status = 11;
+		data->g_exit_status = 11;
 	else
 	{
 		if (err_type == CMD_ER)
-			g_exit_status = 127;
+			data->g_exit_status = 127;
 	}
+	exit_code = data->g_exit_status;
 	if (done)
 	{
 		if (data)
 			cleanup(data);
-		exit(g_exit_status);
+		exit(exit_code);
 	}
 }

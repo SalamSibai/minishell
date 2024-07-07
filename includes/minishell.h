@@ -201,10 +201,10 @@ void			reset_fds(t_data  *data);
 /* ************************************************************************** */
 /*								PIPES,FDs REDIRECTION		 				  */
 /* ************************************************************************** */
-int				check_redirections(t_cmd *cmd, t_list *env);
-int				check_type(t_cmd *cmd, t_list *env);
+int				check_redirections(t_cmd *cmd, t_data *data);
+int				check_type(t_cmd *cmd, t_data *data);
 bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir,
-					t_list *env);
+					t_data *data);
 bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
 bool			redirect_fds(t_data *data, t_cmd *cmd, int i, int j);
 bool			redirect_file_input(t_cmd *cmd);
@@ -220,8 +220,8 @@ bool			make_pipes(t_pipe *p);
 /* ************************************************************************** */
 /*									EXPANSION								  */
 /* ************************************************************************** */
-t_token			**check_expandable_var(t_token **tokens, t_list *env);
-char			*replace_env_var(char *str, t_list *env);
+t_token			**check_expandable_var(t_token **tokens, t_data *data);
+char			*replace_env_var(char *str, t_list *env, t_data *data);
 
 /* ************************************************************************** */
 /*									PATH									  */
@@ -274,7 +274,9 @@ void			dup_origin(t_data *data);
 bool			exec_redir(t_data *data, t_cmd *cmd, int i, int j);
 bool			check_builtin(t_cmd *cmd, t_data *data);
 bool			check_env_builtin(t_cmd *cmd, t_data *data);
-
+void			processes_queue(t_data *data, int *status);
+bool			exec_multiple(t_data *data, int i);
+int				exec_cmd(t_cmd *cmd, t_data *data, int i, int j);
 
 /* ************************************************************************** */
 /*									DEBUG									  */

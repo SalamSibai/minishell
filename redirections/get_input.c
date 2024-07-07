@@ -16,7 +16,7 @@
 ///			NOTE: HEREDOC APPENDS TO WHATEVER THE OUTPUT IS.
 /// @param redir the redir struct
 /// @return true if open succeeds.
-bool	execute_heredoc(t_cmd *cmd, t_redirection *redir, t_list *env)
+bool	execute_heredoc(t_cmd *cmd, t_redirection *redir, t_list *env, t_data *data)
 {
 	int		in_len;
 	char	*line;
@@ -34,7 +34,7 @@ bool	execute_heredoc(t_cmd *cmd, t_redirection *redir, t_list *env)
 			break ;
 		if (strchr(line, '$'))
 		{
-			expanded_line = replace_env_var(line, env);
+			expanded_line = replace_env_var(line, env, data);
 			free(line);
 			line = expanded_line;
 		}
@@ -49,10 +49,12 @@ bool	execute_heredoc(t_cmd *cmd, t_redirection *redir, t_list *env)
 	return (true);
 }
 
-bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env)
+bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_data *data)
 {
 	char	*file_path;
+	t_list	*env;
 
+	env = data->env;
 	if (cmd->fd_in != -1)
 	{
 		if (!close_fd(cmd->fd_in))
@@ -77,7 +79,7 @@ bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir, t_list *env)
 	}
 	else
 	{
-		if (!execute_heredoc(cmd, redir, env))
+		if (!execute_heredoc(cmd, redir, env, data))
 			return (false);
 	}
 	return (true);

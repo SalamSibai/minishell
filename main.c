@@ -22,7 +22,7 @@ static void	set_env(t_data *data, char **env)
 
 static void	fill_data(t_data *data)
 {
-	data->tokens = check_expandable_var(data->tokens, data->env);
+	data->tokens = check_expandable_var(data->tokens, data);
 	data->cmd_num = count_cmds(data->tokens);
 	data->cmds = ft_calloc(data->cmd_num + 1, sizeof(t_cmd *));
 	data->pipe = ft_calloc(1, sizeof(t_pipe));

@@ -12,16 +12,16 @@
 
 #include "../includes/minishell.h"
 
-int	check_redirections(t_cmd *cmd, t_list *env)
+int	check_redirections(t_cmd *cmd, t_data *data)
 {
-	int	redir_value;
+	int		redir_value;
 
 	redir_value = 0;
 //	while (cmds[++i])
 //	{
 		if (cmd->redirection != NULL)
 		{
-			redir_value = check_type(cmd, env);
+			redir_value = check_type(cmd, data);
 			if (redir_value < 0)
 				return (redir_value);
 		}
@@ -33,7 +33,7 @@ int	check_redirections(t_cmd *cmd, t_list *env)
 //			corresponding function to store the fd of 
 //			that redirection
 /// @param redir redirection struct
-int	check_type(t_cmd *cmd, t_list *env)
+int	check_type(t_cmd *cmd, t_data *data)
 {
 	t_redirection	*temp;
 	int				ret_value;
@@ -44,7 +44,7 @@ int	check_type(t_cmd *cmd, t_list *env)
 	{
 		if (temp->type == REDIRECT_INPUT)
 		{
-			if (!get_input(cmd, false, temp, env))
+			if (!get_input(cmd, false, temp, data))
 			{
 				temp->type = REDIR_INPUT_FAILED;
 				ret_value = -1;
@@ -52,7 +52,7 @@ int	check_type(t_cmd *cmd, t_list *env)
 		}
 		else if (temp->type == HEREDOC)
 		{
-			if (!get_input(cmd, true, temp, env))
+			if (!get_input(cmd, true, temp, data))
 			{
 				temp->type = REDIR_INPUT_FAILED;
 				ret_value = -1;
