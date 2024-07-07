@@ -28,6 +28,13 @@ bool	ft_isnum(char *str)
 	return (true);
 }
 
+/**
+ * @brief 
+ * 
+ * @param temp_args 
+ * @param data 
+ * @return int 
+ */
 int	two_args(t_list	*temp_args, t_data *data)
 {
 	int	exit_code;

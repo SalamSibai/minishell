@@ -12,6 +12,14 @@
 
 #include "../includes/minishell.h"
 
+/**
+ * @brief executes the command in the child
+ * @param cmd cmd struct reference
+ * @param data data struct reference
+ * @param i command index
+ * @param cmd_exist whether the command exists or not
+ * @return int the exit code of that execution
+ */
 int	exec_child(t_cmd *cmd, t_data *data, int i, bool *cmd_exist)
 {
 	if (join_cmd_and_flag(cmd))
@@ -40,6 +48,14 @@ int	exec_child(t_cmd *cmd, t_data *data, int i, bool *cmd_exist)
 	return (0);
 }
 
+/**
+ * @brief execute the command in the parent
+ * @param cmd cmd struct reference
+ * @param data data struct reference
+ * @param i command index
+ * @param j pipe "flip flop"
+ * @return int returns the pid of that process
+ */
 int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
 {
 	int	pid;
@@ -68,6 +84,14 @@ int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
 	return (pid);
 }
 
+/**
+ * @brief 	checks if the command is a builtin, 
+ * 			env builtin, or something to be executed
+ * 			in execve.
+ * @param cmd cmd struct reference
+ * @param data data struct reference
+ * @param i command index
+ */
 void	check_cmd(t_cmd *cmd, t_data *data, int i)
 {
 	bool	cmd_exist;
@@ -115,6 +139,14 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	return (pid);
 }
 
+/**
+ * @brief 	called if multiple commands are entered into the terminal.
+ * 			loops through and executes each command entered.
+ * @param data data struct reference
+ * @param i cmd index
+ * @return true if the execution, creation of pipes, and everything passes
+ * @return false false if making pipes fails.
+ */
 bool	exec_multiple(t_data *data, int i)
 {
 	int	j;
