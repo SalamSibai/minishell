@@ -113,28 +113,28 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 		{
 			if (cmd->cmd_str != NULL)
 			{
-
 				if (is_builtin(cmd->cmd_str) && data->cmd_num == 1)
 				{
 					pid = getpid();
-				//	redir_return = check_redirections(cmd, data->env);
+					//redir_return = check_redirections(cmd, data->env);
 					if (!redirect_fds(data, cmd, i, j))
 					{
 						close_origin_fds(data);
 						for (int fd=3; fd<64; fd++) (void) close(fd);
 					}
 					g_exit_status = exec_builtin(cmd, data);
-					close_origin_fds(data);
-					for (int fd=3; fd<64; fd++) (void) close(fd);
+					//was here
 				}
 			}
 			if (i > 0)
 				close(data->pipe->fd[!j][0]);
 			if (i < data->cmd_num - 1)
 				close(data->pipe->fd[j][1]);
+			dup2(data->origin_fds[0], STDIN_FILENO);
+			dup2(data->origin_fds[1], STDOUT_FILENO);
+			for (int fd=3; fd<64; fd++) (void) close(fd);
+			close_origin_fds(data);
 		}
-		dup2(data->origin_fds[0], STDIN_FILENO);
-		dup2(data->origin_fds[1], STDOUT_FILENO);
 	}
 	return (pid);
 }
