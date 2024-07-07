@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:36:11 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 16:30:21 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:42:18 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	handle_double_quotes(int *i, int *token_ctr, t_token **tokens, char *buff)
 	*i = c + 1;
 }
 
+
 void	handle_single_quotes(int *i, int *token_ctr, t_token **tokens, char *buff)
 {
 	int	c;
@@ -32,8 +33,12 @@ void	handle_single_quotes(int *i, int *token_ctr, t_token **tokens, char *buff)
 	while (buff[c] && buff[++c] != '\'')
 		;
 	if (c > *i)
+	{
 		malloc_qoutes_token(tokens, token_ctr, buff, *i + 1, c - *i - 1, SQOUTES, false);
-	*i = c + 1;
+		*i = c + 1;
+	}
+	else
+		*i = c + 1;
 }
 
 void	handle_other_chars(int *i, int *token_ctr, t_token **tokens, char *buff)

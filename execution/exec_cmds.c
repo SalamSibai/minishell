@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 19:54:30 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 04:04:58 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 	bool	cmd_exist;
 	pid = getpid();
 
-	//ft_putnbr_fd(i, 2);
-	//ft_putstr_fd("\n",2);
+
 	cmd_exist = true;
 	redir_return = 0;
 	redir_return = check_redirections(cmd, data->env);
@@ -36,9 +35,12 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, false);
 		else
 			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false);
-		//for (int fd=0; fd<64; fd++) (void) close(fd);
-		// close_origin_fds(data);
-		//return (getppid());
+		return (-1);
+	}
+	if (is_directory(cmd->cmd_str))
+	{
+		error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false);
+		return (-1);
 	}
 	else
 	{
@@ -57,14 +59,14 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 				free_cmd(data);
 				set_env_and_path(data, FREE);
 				cleanup(data);
-				exit(1);
+				exit(24);
 			}
 			close_origin_fds(data);
 			if (cmd->cmd_str != NULL)
 			{
 				if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
 				{
-					exec_builtin(cmd, data);
+					g_exit_status = exec_builtin(cmd, data);
 					for (int fd=0; fd<64; fd++) (void) close(fd);
 					free_cmd(data);
 					set_env_and_path(data, FREE);
@@ -78,6 +80,11 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 					free_cmd(data);
 					cleanup(data);
 					exit (0);
+				}
+				if (is_builtin(cmd->cmd_str) && data->cmd_num == 1)
+				{
+					//execute builtins in child process only to get the correct exit status without affecting the output
+					
 				}
 				else
 				{
@@ -123,7 +130,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 						for (int fd=3; fd<64; fd++) (void) close(fd);
 						return (pid);
 					}
-					exec_builtin(cmd, data);
+					g_exit_status = exec_builtin(cmd, data);
 					dup2(data->origin_fds[0], STDIN_FILENO);
 					dup2(data->origin_fds[1], STDOUT_FILENO);
 					close_origin_fds(data);
@@ -190,14 +197,23 @@ bool	execution(t_data *data)
 		close_origin_fds(data);
 		close_everything();
 	}
-	while (++i < data->cmd_num)
+	if (data->cmd_num > 1)
 	{
-		waitpid(data->pipe->pid[i], &status, 0);
-		// if (i == data->cmd_num - 1)
-		// {
-		// 	// if (WIFEXITED(status))
-		// 		g_exit_status = WEXITSTATUS(status);
-		// }
+		i = -1;
+		while (++i < data->cmd_num)
+		{
+			waitpid(data->pipe->pid[i], &status, 0);
+			if (i == data->cmd_num - 1 && !is_builtin(data->cmds[i]->cmd_str))
+			{
+				if (WIFEXITED(status) && (!is_builtin(data->cmds[i]->cmd_str)))
+					g_exit_status = WEXITSTATUS(status);
+			}
+		}
+	}
+	else if (!is_builtin(data->cmds[0]->cmd_str) && data->pipe->pid[0] != -1)
+	{
+		waitpid(data->pipe->pid[0], &status, 0);
+		g_exit_status = WEXITSTATUS(status);
 	}
 	return (true);
 }

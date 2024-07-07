@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:05:21 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 20:02:22 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 04:00:59 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env)
 	if (!cmd->args)
 		return (goto_path(0, env));
 	else if (ft_lstsize(cmd->args) > 1)
-		error_handler(NULL, -1, NULL, true);
+		error_handler(NULL, -1, NULL, false);
 	else if (cmd->args && (ft_strcmp(cmd->args->content, "-") == 0))
 	{
 		cd_ret = goto_path(1, env);
@@ -133,8 +133,8 @@ int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env)
 		cd_ret = chdir(cmd->args->content);
 		if (cd_ret == -1)
 		{
-			error_handler("No such file or directory", IN_REDIR_ER, NULL, true);
-			return (cd_ret);
+			error_handler("No such file or directory", IN_REDIR_ER, NULL, false);
+			return (1);
 		}
 	}
 	update_pwds(env, export_env);
