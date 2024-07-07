@@ -22,6 +22,16 @@
  * @param done whether minishell program should be terminated or not
  */
 
+void	done_done(t_data *data, bool done, int exit_code)
+{
+	if (done)
+	{
+		if (data)
+			cleanup(data);
+		exit(exit_code);
+	}
+}
+
 void	error_handler(char *err_str, int err_type, t_data *data, bool done)
 {
 	int	exit_code;
@@ -45,16 +55,8 @@ void	error_handler(char *err_str, int err_type, t_data *data, bool done)
 		data->g_exit_status = 141;
 	else if (err_type == FORK_ER)
 		data->g_exit_status = 11;
-	else
-	{
-		if (err_type == CMD_ER)
-			data->g_exit_status = 127;
-	}
+	else if (err_type == CMD_ER)
+		data->g_exit_status = 127;
 	exit_code = data->g_exit_status;
-	if (done)
-	{
-		if (data)
-			cleanup(data);
-		exit(exit_code);
-	}
+	done_done(data, done, exit_code);
 }

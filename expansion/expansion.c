@@ -72,7 +72,7 @@ char	*process_env_var(char *str, t_list *env, int *start, t_data *data)
 	char	*var_name;
 
 	if (*(str + 1) == '?')
-	{ 
+	{
 		expanded_str = ft_itoa(data->g_exit_status);
 		*start = 2;
 	}
@@ -137,7 +137,8 @@ t_token	**check_expandable_var(t_token **tokens, t_data *data)
 		{
 			if (ft_strchr(tokens[i]->token_string, '$'))
 			{
-				expanded_str = replace_env_var(tokens[i]->token_string, env, data);
+				expanded_str
+					= replace_env_var(tokens[i]->token_string, env, data);
 				free(tokens[i]->token_string);
 				tokens[i]->token_string = expanded_str;
 			}

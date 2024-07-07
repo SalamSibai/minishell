@@ -32,6 +32,25 @@ int	nb_args(t_list *args)
 	return (i);
 }
 
+void	check_args(t_list *args)
+{
+	while (args)
+	{
+		ft_putstr_fd(args->content, 1);
+		args = args->next;
+		if (args)
+		{
+			if (ft_strcmp(args->content, "") == 0 && args->next != NULL)
+			{
+				ft_putstr_fd(args->next->content, 1);
+				args = args->next->next;
+			}
+			if (args)
+				ft_putstr_fd(" ", 1);
+		}
+	}
+}
+
 /**
  * @brief this function display the a line of text that given by args[0]
  * @param args An array of strings representing the
@@ -53,21 +72,7 @@ int	ft_echo(t_cmd *cmd)
 		if (cmd->flag && ft_strncmp(cmd->flag->content, "-n", 2) == 0)
 			nl = 0;
 	}
-	while (args)
-	{
-		ft_putstr_fd(args->content, 1);
-		args = args->next;
-		if (args)
-		{
-			if (ft_strcmp(args->content, "") == 0 && args->next != NULL)
-			{
-				ft_putstr_fd(args->next->content, 1);
-				args = args->next->next;
-			}
-			if (args)
-				ft_putstr_fd(" ", 1);
-		}
-	}
+	check_args(args);
 	if (nl)
 		ft_putstr_fd("\n", 1);
 	return (0);

@@ -10,8 +10,8 @@
 bool	execution(t_data *data)
 {
 	int	i;
-	int status;
-	
+	int	status;
+
 	status = 0;
 	i = -1;
 	alloc_pids(data);
@@ -27,7 +27,7 @@ bool	execution(t_data *data)
 		reset_fds(data);
 	if (data->cmd_num > 1)
 		processes_queue(data, &status);
-	else if (data->cmds[0]->cmd_str && !is_builtin(data->cmds[0]->cmd_str) 
+	else if (data->cmds[0]->cmd_str && !is_builtin(data->cmds[0]->cmd_str)
 		&& data->pipe->pid[0] != -1)
 	{
 		waitpid(data->pipe->pid[0], &status, 0);

@@ -133,7 +133,8 @@ int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env)
 		cd_ret = chdir(cmd->args->content);
 		if (cd_ret == -1)
 		{
-			error_handler("No such file or directory", IN_REDIR_ER, NULL, false);
+			error_handler("No such file or directory",
+				IN_REDIR_ER, NULL, false);
 			return (1);
 		}
 	}
