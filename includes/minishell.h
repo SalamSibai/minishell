@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 19:41:36 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 00:58:11 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <termios.h>
 # include <sys/wait.h>
 # include <signal.h>
+#include <sys/stat.h>
 
 # define BUFF_SIZE 4096
 # define INVALID_EXP_MSG "Export: not a valid identifier\n"
@@ -35,7 +36,8 @@
 # define PATH_ER_MSG "Error: Path doesnt exists\n"
 # define PIPE_ER_MSG "Error: Couldn't open pipes.\n"
 # define FORK_ER_MSG "Error: Fork.\n"
-# define CMD_ER_MSG "Error: Command doesn't exits.\n"
+# define CMD_ER_MSG "Error: Command doesn't exits\n"
+# define DIR_EXEC_MSG "Error: No such file or directory\n"
 
 typedef enum e_cmd_type
 {
@@ -52,6 +54,7 @@ typedef enum e_error_type
 	PATH_ER,
 	PIPE_ER,
 	FORK_ER,
+	DIR_EXEC_ER,
 	CMD_ER
 }	t_error_type;
 
@@ -263,6 +266,7 @@ int				exec_builtin(t_cmd *cmd, t_data *data);
 void			execute_cmds(t_data *data);
 bool			execution(t_data *data);
 bool			join_cmd_and_flag(t_cmd *cmd);
+bool			is_directory(const char *path);
 
 /* ************************************************************************** */
 /*									DEBUG									  */

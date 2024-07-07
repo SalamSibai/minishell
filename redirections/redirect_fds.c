@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_fds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssibai < ssibai@student.42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:44:06 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/03 22:41:22 by ssibai           ###   ########.fr       */
+/*   Updated: 2024/07/07 00:31:53 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 	}
 	if (!output_redir)
 	{
-		ft_putstr_fd("FAILED OUT\n", 2);
 		return (error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false), false);
 	}
 	return (true);

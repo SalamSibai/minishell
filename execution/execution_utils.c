@@ -6,11 +6,25 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:00:18 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/05 02:25:04 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:25:59 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+
+bool	is_directory(const char *path)
+{
+	struct stat path_stat;
+
+	if (stat(path, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
+	{
+		if (access(path, X_OK) != 0)
+			return (false);
+		return (true);
+	}
+	return (false);
+}
 
 /// @brief returns the path where the cmd is
 /// @return true if the path was found
@@ -19,7 +33,7 @@ bool get_path(t_data *data, t_cmd *cmd, bool *cmd_exists)
 	int		i;
 
 	i = 0;
-	if (access(cmd->cmd_str, F_OK) == 0)
+	if (access(cmd->cmd_str, X_OK) == 0)
 	{
 		cmd->cmd_path = ft_strdup(cmd->cmd_str);
 		return (true);

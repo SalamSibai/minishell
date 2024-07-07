@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:37:54 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 01:18:25 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 03:59:37 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		exec_builtin(t_cmd *cmd, t_data *data)
 		if (!ft_export(cmd, data->export_env, data->env))
 		{
 			error_handler(INVALID_EXP_MSG, IN_REDIR_ER, NULL, false);
-			return (0);
+			return (1);
 		}
 	}
 	if (ft_strcmp(cmd->cmd_str, "unset") == 0)
@@ -90,6 +90,5 @@ int		exec_builtin(t_cmd *cmd, t_data *data)
 	}
 	if (ft_strcmp(cmd->cmd_str, "exit") == 0)
 		ft_exit(cmd, data);
-	g_exit_status = 0;
 	return (result);
 }

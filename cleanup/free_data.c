@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:40:49 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 15:49:11 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 04:49:07 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	free_cmd(t_data *data)
 			free(data->cmds[i]->cmd_str);
 		if (data->cmds[i]->args)
 			ft_lstclear(&data->cmds[i]->args, free);
-		if (data->cmds[i]->cmd_path)
-			free(data->cmds[i]->cmd_path);
+		// if (data->cmds[i]->cmd_path)
+		// 	ft_free(&data->cmds[i]->cmd_path, 'p');
 		if (data->cmds[i]->flag)
 			ft_lstclear(&data->cmds[i]->flag, free);
 		if (data->cmds[i]->redirection)

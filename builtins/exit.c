@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 05:46:16 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 14:48:13 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 05:24:01 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_exit(t_cmd *cmd, t_data *data)
 	args_num = ft_lstsize(cmd->args);
 	flags_num = ft_lstsize(cmd->flag);
 	temp_flags = cmd->flag;
+	exit_code = 0;
 	if (args_num == 0 && flags_num == 0)
 	{
 		cleanup(data);

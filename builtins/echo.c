@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:27:51 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/01 20:06:29 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:55:45 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,15 @@ int	ft_echo(t_cmd *cmd)
 		ft_putstr_fd(args->content, 1);
 		args = args->next;
 		if (args)
-			ft_putstr_fd(" ", 1);
+		{
+			if (ft_strcmp(args->content, "") == 0 && args->next != NULL)
+			{
+				ft_putstr_fd(args->next->content, 1);
+				args = args->next->next;
+			}
+			if (args)
+				ft_putstr_fd(" ", 1);
+		}
 	}
 	if (nl)
 		ft_putstr_fd("\n", 1);

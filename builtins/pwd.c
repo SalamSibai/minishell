@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 14:14:41 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/06/30 22:01:42 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/07 03:58:54 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	ft_pwd(void)
 	if (getcwd(cwd, PATH_MAX))
 	{
 		ft_putendl_fd(cwd, 1);
-		return (1);
+		return (0);
 	}
 	else
-		return (0);
+		return (1);
 }
