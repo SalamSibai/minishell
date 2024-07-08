@@ -29,7 +29,9 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${PARSE_DIR}/init_parsing.c \
 		${PARSE_DIR}/malloc_tokens.c \
 		${PARSE_DIR}/set_tokens.c \
+		${PARSE_DIR}/set_tokens_utils.c \
 		${PARSE_DIR}/set_cmds.c \
+		${PARSE_DIR}/set_cmds_utils.c \
 		${PARSE_DIR}/initialization.c \
 		${PARSE_DIR}/redir_utils.c \
 		${ENV_DIR}/env_init.c\

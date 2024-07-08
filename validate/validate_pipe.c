@@ -22,7 +22,7 @@ static bool	valid_before_pipe(t_token **tokens, int index)
 		if (tokens[i]->type == CMDS || tokens[i]->type == FILE_NAME
 			|| tokens[i]->type == LIMITER || tokens[i]->type == REDIRECT_OUTPUT
 			|| tokens[i]->type == DQOUTES || tokens[i]->type == SQOUTES
-			|| tokens[i]->type == ID || tokens[i]->type == FLAG) 
+			|| tokens[i]->type == ID || tokens[i]->type == FLAG)
 		{
 			return (true);
 		}

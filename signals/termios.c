@@ -29,6 +29,7 @@ void	disable_ctrl_c_echo(void)
 	term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
+
 /**
  * @brief this function listens to the signals
  * SIGINT and SIGQUIT
@@ -57,11 +58,11 @@ void	signals_handler(int sig, siginfo_t *siginfo, void *ptr)
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		// rl_catch_signals = 0; 
 		rl_redisplay();
 		g_exit_status = 1;
 	}
 }
+
 /**
  * @brief this function masks the signals and by mask we mean 
  * that the signals is blocked temporarily and will be 

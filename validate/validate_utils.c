@@ -47,7 +47,7 @@ bool	validate_unbalanced_qoutes(char *line)
 				i++;
 			if (!line[i])
 			{
-				printf("Error: unmatched qoutes\n"); 
+				printf("Error: unmatched qoutes\n");
 				return (false);
 			}
 			i++;

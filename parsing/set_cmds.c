@@ -12,6 +12,14 @@
 
 #include "includes/minishell.h"
 
+void	init(t_var *var)
+{
+	var->i = 0;
+	var->j = 0;
+	var->c = 0;
+	var->k = 0;
+}
+
 /**
  * @brief loops through the given tokens and sets all arguments and
  * redirections linked to that specific command + strjoins all into 1 token
@@ -25,86 +33,28 @@
 void	set_cmds(t_data *data)
 {
 	t_token			**tokens;
-	t_list			*new_arg;
 	t_redirection	*head;
-	int				i;
-	int				j;
-	int 			c;
-	int				k;
-	
-	i = 0;
-	j = 0;
+	t_var			var;
+	t_list			*new_arg;
+
+	new_arg = NULL;
 	tokens = data->tokens;
-	while (i < data->cmd_num)
+	init(&var);
+	while (var.i < data->cmd_num)
 	{
-		k = 0;
-		c = 0;
 		head = NULL;
-		while (tokens[j] != NULL && tokens[j]->type != PIPE)
+		var.k = 0;
+		var.c = 0;
+		while (tokens[var.j] != NULL && tokens[var.j]->type != PIPE)
 		{
-			if (tokens[j]->type == CMDS)
-			{
-				data->cmds[i]->cmd_str = ft_strdup(tokens[j]->token_string);
-				j++;
-			}
-			else if (tokens[j]->type == FLAG)
-			{ 
-				if (k == 0)
-				{
-					data->cmds[i]->flag = ft_lstnew(ft_strdup(tokens[j]->token_string));
-					k = 1;
-				}
-				else
-				{
-					new_arg = ft_lstnew(ft_strdup(tokens[j]->token_string));
-					ft_lstadd_back(&data->cmds[i]->flag, new_arg);
-				}
-				j++;
-			}
-			else if (tokens[j]->type == REDIRECT_INPUT)
-			{
-				redir_add_back(&head, redir_new(REDIRECT_INPUT, NULL, NULL));
-				j++;
-			}
-			else if (tokens[j]->type == REDIRECT_OUTPUT || tokens[j]->type == REDIRECT_APPEND)
-			{
-				redir_add_back(&head, redir_new(tokens[j]->type, NULL, NULL));
-				j++;
-			}
-			else if (tokens[j]->type == HEREDOC)
-			{
-				redir_add_back(&head, redir_new(HEREDOC, NULL, NULL));
-				j++;
-			}
-			else if (tokens[j]->type == FILE_NAME)
-			{
-				redir_last(head)->file_name = ft_strdup(tokens[j]->token_string);
-				j++;
-			}
-			else if (tokens[j]->type == LIMITER)
-			{
-				redir_last(head)->limiter = ft_strdup(tokens[j]->token_string);
-				j++;
-			}
-			else if (tokens[j]->type == ID)
-			{
-				if (c == 0)
-				{
-					data->cmds[i]->args = ft_lstnew(ft_strdup(tokens[j]->token_string));
-					c = 1;
-				}
-				else
-				{
-					new_arg = ft_lstnew(ft_strdup(tokens[j]->token_string));
-					ft_lstadd_back(&data->cmds[i]->args, new_arg);
-				}
-				j++;
-			}
-			else
-				j++;
+			if (check_if_cmd(data, &var, tokens)
+				|| check_if_flag(data, &var, tokens, new_arg)
+				|| check_if_redir(&var, tokens, &head)
+				|| check_if_id(data, &var, tokens, new_arg))
+				continue ;
+			var.j++;
 		}
-		data->cmds[i]->redirection = head;
-		i++;
-		j++;
+		data->cmds[var.i++]->redirection = head;
+		var.j++;
 	}
 }

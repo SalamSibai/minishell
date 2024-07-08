@@ -54,7 +54,7 @@ bool	set_output(t_cmd *cmd, bool append, t_redirection *redir)
 	}
 	else
 	{
-		cmd->fd_out =  open(redir->file_name,
+		cmd->fd_out = open(redir->file_name,
 				O_APPEND | O_CREAT | O_WRONLY, 0644);
 		if (!cmd->fd_out)
 			return (false);

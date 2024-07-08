@@ -102,6 +102,7 @@ typedef struct s_var
 	int				tkn_ctr;
 	int				c;
 	int				x;
+	int				k;
 	t_token_type	type;
 	bool			expandable;
 
@@ -180,12 +181,18 @@ void			disable_ctrl_c_echo(void);
 /* ************************************************************************** */
 /*									PARSEING								  */
 /* ************************************************************************** */
-void			scan(char *av, t_token **tokens);
-void			init_cmds(t_data *data);
-void			set_cmds(t_data *data);
-int				count_cmds(t_token **tokens);
-void			malloc_each_token(t_var *var, t_token **tokens, char *buff);
-void			malloc_qoutes_token(t_token **tokens, char *buff, t_var *var);
+void	scan(char *av, t_token **tokens);
+void	init_cmds(t_data *data);
+void	set_cmds(t_data *data);
+int		count_cmds(t_token **tokens);
+void	malloc_each_token(t_var *var, t_token **tokens, char *buff);
+void	malloc_qoutes_token(t_token **tokens, char *buff, t_var *var);
+bool   	check_if_cmd(t_data *data, t_var *var, t_token **tokens);
+bool 	check_if_flag(t_data *data, t_var *var, t_token **tokens, t_list *new_arg);
+bool	check_if_redir(t_var *var, t_token **tokens, t_redirection **head);
+bool	check_if_id(t_data *data, t_var *var, t_token **tokens, t_list *new_arg);
+void    itir_tokens(int *token_ctr, int *in_t, char *av, int *i);
+
 
 /* ************************************************************************** */
 /*									PARSE UTILS								  */
@@ -196,9 +203,13 @@ void			*ft_safe_malloc(size_t size, char *msg);
 /* ************************************************************************** */
 /*									TOKENS UTILS							  */
 /* ************************************************************************** */
-void			set_type(t_token *token);
-int				token_count(char *av);
-bool			is_cmd(char *cmd, t_data *data);
+void	set_type(t_token *token);
+int		token_count(char *av);
+bool	is_cmd(char *cmd, t_data *data);
+bool	is_dquote_or_quote(int *token_ctr, int *in_t, char *av, int *i);
+bool 	is_append_or_heredoc(int *token_ctr, int *in_t, char *av, int *i);
+bool	is_pipe_or_redir(int *token_ctr, int *in_token, char *av, int i);
+int		skip_spaces(int *token_ctr, int *in_token, char *av, int i);
 
 /* ************************************************************************** */
 /*								REDIRECTION	UTILS							  */
@@ -213,21 +224,21 @@ void			reset_fds(t_data  *data);
 /* ************************************************************************** */
 /*								PIPES,FDs REDIRECTION		 				  */
 /* ************************************************************************** */
-int				check_redirections(t_cmd *cmd, t_data *data);
-int				check_type(t_cmd *cmd, t_data *data);
-bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir,
-					t_data *data);
-bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
-bool			redirect_fds(t_data *data, t_cmd *cmd, int i, int j);
-bool			redirect_file_input(t_cmd *cmd);
-bool			redirect_pipe_input(t_pipe *pipe, int j);
-bool			redirect_file_output(t_cmd *cmd);
-bool			redirect_pipe_output(t_pipe *pipe, int j);
-bool			redirect_stdin(t_data *data, t_cmd *cmd);
-bool			redirect_stdout(t_data *data, t_cmd *cmd);
-char			*get_file_path(const char *file_name);
-void			alloc_pids(t_data *d);
-bool			make_pipes(t_pipe *p);
+void	check_redirections(t_cmd *cmd, t_data *data, int *in_val, int *out_val);
+int		check_type(t_cmd *cmd, t_data *data);
+bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir,
+			t_data *data);
+bool	set_output(t_cmd *cmd, bool append, t_redirection *redir);
+bool	redirect_fds(t_data *data, t_cmd *cmd, int i, int j);
+bool	redirect_file_input(t_cmd *cmd);
+bool	redirect_pipe_input(t_pipe *pipe, int j);
+bool	redirect_file_output(t_cmd *cmd);
+bool	redirect_pipe_output(t_pipe *pipe, int j);
+bool	redirect_stdin(t_data *data, t_cmd *cmd);
+bool	redirect_stdout(t_data *data, t_cmd *cmd);
+char	*get_file_path(const char *file_name);
+void	alloc_pids(t_data *d);
+bool	make_pipes(t_pipe *p);
 
 /* ************************************************************************** */
 /*									EXPANSION								  */

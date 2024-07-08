@@ -1,19 +1,20 @@
+
 #include "../includes/minishell.h"
 
-void	reset_fds(t_data  *data)
+void	reset_fds(t_data *data)
 {
 	dup2(STDIN_FILENO, data->origin_fds[0]);
 	dup2(STDOUT_FILENO, data->origin_fds[1]);
 	close_origin_fds(data);
-	close_all_fds(3); 
+	close_all_fds(3);
 }
 
-char    *get_file_path(const char *file_name)
+char	*get_file_path(const char *file_name)
 {
-	char *path;
-	char *file_path1;
-	char *file_path;
-	char cwd[PATH_MAX];
+	char	*path;
+	char	*file_path1;
+	char	*file_path;
+	char	cwd[PATH_MAX];
 
 	path = getcwd(cwd, PATH_MAX);
 	if (!path)

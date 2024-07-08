@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-static bool	redirect_inputs(t_data *data,t_cmd *cmd, int i, int j)
+static bool	redirect_inputs(t_data *data, t_cmd *cmd, int i, int j)
 {
 	if (i == 0)
 	{
@@ -39,7 +39,7 @@ static bool	redirect_inputs(t_data *data,t_cmd *cmd, int i, int j)
 	return (true);
 }
 
-static bool	redirect_outputs(t_data *data,t_cmd *cmd, int i, int j)
+static bool	redirect_outputs(t_data *data, t_cmd *cmd, int i, int j)
 {
 	if (i == data->cmd_num - 1)
 	{
@@ -64,7 +64,7 @@ static bool	redirect_outputs(t_data *data,t_cmd *cmd, int i, int j)
 	return (true);
 }
 
-bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
+bool	redirect_fds(t_data *data, t_cmd *cmd, int i, int j)
 {
 	bool	input_redir;
 	bool	output_redir;
@@ -73,11 +73,13 @@ bool	redirect_fds(t_data *data,t_cmd *cmd, int i, int j)
 	output_redir = redirect_outputs(data, cmd, i, j);
 	if (!input_redir)
 	{
-		return (error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, false), false);
+		return (error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, false),
+			false);
 	}
 	if (!output_redir)
 	{
-		return (error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false), false);
+		return (error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false),
+			false);
 	}
 	return (true);
 }

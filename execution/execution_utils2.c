@@ -11,16 +11,20 @@
  */
 bool	set_redir(t_cmd *cmd, t_data *data)
 {
-	int		redir_return;
+	int		in_redir_return;
+	int		out_redir_return;
 
-	redir_return = 0;
-	redir_return = check_redirections(cmd, data);
-	if (redir_return < 0)
+	in_redir_return = 0;
+	out_redir_return = 0;
+	check_redirections(cmd, data, &in_redir_return, &out_redir_return);
+	if (in_redir_return == -1)
 	{
-		if (redir_return == -1)
-			error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, false);
-		else
-			error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false);
+		error_handler(INPUT_REDIR_ER_MSG, IN_REDIR_ER, data, false);
+		return (false);
+	}
+	if (out_redir_return == -1)
+	{
+		error_handler(OUTPUT_REDIR_ER_MSG, OUT_REDIR_ER, data, false);
 		return (false);
 	}
 	return (true);
