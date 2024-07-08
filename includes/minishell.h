@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/07 00:58:11 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:06:33 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 # define BUFF_SIZE 4096
 # define INVALID_EXP_MSG "Export: not a valid identifier\n"
 # define INVALID_IN_MSG "Error: Invalid syntax\n"
-# define INPUT_REDIR_ER_MSG "Error: No such file or directory.\n"
-# define OUTPUT_REDIR_ER_MSG "Error: Output redirection error.\n"
-# define TOO_MANY_ARG "Error: too many arguments.\n"
+# define INPUT_REDIR_ER_MSG "Error: No such file or directory\n"
+# define OUTPUT_REDIR_ER_MSG "Error: Output redirection error\n"
+# define TOO_MANY_ARG "Error: too many arguments\n"
 # define NUMERIC_REQ_MSG "Error: Numeric argument required\n"
 # define PATH_ER_MSG "Error: Path doesnt exists\n"
-# define PIPE_ER_MSG "Error: Couldn't open pipes.\n"
+# define PIPE_ER_MSG "Error: Couldn't open pipes\n"
 # define FORK_ER_MSG "Error: Fork.\n"
 # define CMD_ER_MSG "Error: Command doesn't exits\n"
 # define DIR_EXEC_MSG "Error: No such file or directory\n"
@@ -92,6 +92,20 @@ typedef struct s_pipe
 	int	fd[2][2];
 	int	*pid;
 }	t_pipe;
+
+
+typedef struct s_var
+{
+	int				i;
+	int				j;
+	int				len;
+	int				tkn_ctr;
+	int				c;
+	int				x;
+	t_token_type	type;
+	bool			expandable;
+
+}	t_var;
 
 /// @brief the redirection struct
 typedef struct s_redirection
@@ -170,10 +184,8 @@ void			scan(char *av, t_token **tokens);
 void			init_cmds(t_data *data);
 void			set_cmds(t_data *data);
 int				count_cmds(t_token **tokens);
-void			malloc_each_token(int *token_ctr, t_token **tokens, char *buff,
-					int c, size_t len, int *i, int x);
-void			malloc_qoutes_token(t_token **tokens, int *token_ctr, char *buff,
-					int c, int len, int type, bool expandable);
+void			malloc_each_token(t_var *var, t_token **tokens, char *buff);
+void			malloc_qoutes_token(t_token **tokens, char *buff, t_var *var);
 
 /* ************************************************************************** */
 /*									PARSE UTILS								  */
