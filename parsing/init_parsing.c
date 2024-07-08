@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:36:11 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/08 14:13:08 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:17:11 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	handle_special_chars(t_var *var, t_token **tkns, char *buff)
 
 void	scan(char *buff, t_token **tkns)
 {
-	t_var var;
+	t_var	var;
 
 	var.i = 0;
 	var.tkn_ctr = 0;

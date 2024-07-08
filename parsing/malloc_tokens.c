@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:19:16 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/08 14:07:16 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:21:16 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	malloc_each_token(t_var *var, t_token **tokens, char *buff)
 	(var->tkn_ctr)++;
 	var->i += var->x;
 }
+
 /**
  * @brief this function malloc for each token and set the type of the token
  * 
