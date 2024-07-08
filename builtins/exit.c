@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 05:46:16 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/07 05:24:01 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:59:43 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ int	two_args(t_list	*temp_args, t_data *data)
 		if (exit_code > 255)
 			exit_code = exit_code % 256;
 	}
+	else if (ft_lstsize(temp_args) >= 2 && (ft_isnum(temp_args->content)
+			&& !ft_isnum(temp_args->next->content)))
+		return (error_handler(TOO_MANY_ARG, IN_REDIR_ER, data, false), 1);
 	else
 		error_handler(TOO_MANY_ARG, IN_REDIR_ER, data, true);
 	return (exit_code);
@@ -73,7 +76,7 @@ int	one_arg(t_list *temp_args, t_list *temp_flag, t_data *data)
 	if (flags_num == 1 && args_num == 0)
 	{
 		if (!ft_isnum(temp_flag->content))
-			error_handler(NUMERIC_REQ_MSG, NUM_REQ_ER, data, true);
+			error_handler("too many arguments l", NUM_REQ_ER, data, true);
 		exit_code = 156;
 	}
 	if (flags_num == 0 && args_num == 1)
@@ -87,7 +90,7 @@ int	one_arg(t_list *temp_args, t_list *temp_flag, t_data *data)
 	return (exit_code);
 }
 
-void	ft_exit(t_cmd *cmd, t_data *data)
+int	ft_exit(t_cmd *cmd, t_data *data)
 {
 	size_t	args_num;
 	int		exit_code;
@@ -101,16 +104,16 @@ void	ft_exit(t_cmd *cmd, t_data *data)
 	temp_flags = cmd->flag;
 	exit_code = 0;
 	if (args_num == 0 && flags_num == 0)
-	{
-		cleanup(data);
-		exit(0);
-	}
+		return (cleanup(data), exit(0), 0);
 	else if (args_num > 2 || flags_num > 1)
 		error_handler(TOO_MANY_ARG, IN_REDIR_ER, data, true);
 	else if (args_num == 2 && flags_num == 0)
+	{
 		exit_code = two_args(temp_args, data);
+		if (exit_code == 1)
+			return (1);
+	}
 	else
 		exit_code = one_arg(temp_args, temp_flags, data);
-	cleanup(data);
-	exit(exit_code);
+	return (cleanup(data), exit(exit_code), 0);
 }

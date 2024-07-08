@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/07 07:27:47 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:03:13 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,17 @@ int	exec_child(t_cmd *cmd, t_data *data, int i, bool *cmd_exist)
 	if (join_cmd_and_flag(cmd))
 	{
 		if (is_directory(cmd->cmd_str))
-			return (error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false), 126);
+		{
+			if (ft_strncmp(cmd->cmd_str, "./", 2) == 0)
+				return (error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false), 126);
+			return (error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false), 127);
+		}
 		if (!get_path(data, cmd, cmd_exist))
-			return (set_env_and_path(data, FREE),
+		{
+			if (ft_strncmp(cmd->cmd_str, "./", 2) == 0)
+				return (set_env_and_path(data, FREE),
 				error_handler(PATH_ER_MSG, PATH_ER, data, true), 127);
+		}
 		else
 		{
 			if (*cmd_exist)
@@ -76,8 +83,8 @@ int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
 		close(data->pipe->fd[!j][0]);
 	if (i < data->cmd_num - 1)
 		close(data->pipe->fd[j][1]);
-	dup2(data->origin_fds[0], STDIN_FILENO);
-	dup2(data->origin_fds[1], STDOUT_FILENO);
+	dup2(STDIN_FILENO, data->origin_fds[0]);
+	dup2(STDOUT_FILENO, data->origin_fds[1]);
 	close_origin_fds(data);
 	return (0);
 }
@@ -93,12 +100,17 @@ int	exec_parent(t_cmd *cmd, t_data *data, int i, int j)
 void	check_cmd(t_cmd *cmd, t_data *data, int i)
 {
 	bool	cmd_exist;
+	int		exit_code;
 
+	exit_code = -1;
 	cmd_exist = true;
 	if (cmd->cmd_str != NULL)
 	{
-		if (check_builtin(cmd, data))
-			exit (0);
+		exit_code = check_builtin(cmd, data);
+		if (exit_code != -1)
+		{
+			exit (exit_code);
+		}
 		if (check_env_builtin(cmd, data))
 			exit (0);
 		exit (exec_child(cmd, data, i, &cmd_exist));

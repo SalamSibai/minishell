@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:58:53 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/07 03:04:09 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:19:03 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int main(int ac, char **av, char **env)
 		if (!data.buf)
 			break ;
 		if (ft_strcmp(data.buf, "") == 0)
-				continue;
+			continue ;
 		if (ft_strlen(data.buf) > 0)
 			add_history(data.buf);
 		if (!validate_syntax(data.buf))
 		{
 			error_handler(INVALID_IN_MSG, INVALID_IN_ER, &data, false);
-			continue;
+			continue ;
 		}
 		data.tokens = ft_calloc(token_count(data.buf), sizeof(t_token *));
 		scan(data.buf, data.tokens);

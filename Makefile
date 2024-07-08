@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/07/07 05:47:34 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/07/08 17:25:17 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,7 +111,7 @@ fclean: clean
 	$(RM) $(NAME)
 
 leak:
-	valgrind --suppressions=readlineleak.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes ./minishell
+	valgrind --suppressions=readlineleak.txt --leak-check=full --show-leak-kinds=all --track-origins=yes  --trace-children=yes --track-fds=yes ./minishell
 re: fclean all
 
 .phony:	all clean fclean re leak

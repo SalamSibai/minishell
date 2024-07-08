@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution_utils2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/08 18:28:17 by mohammoh          #+#    #+#             */
+/*   Updated: 2024/07/08 20:25:04 by mohammoh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
@@ -64,7 +74,7 @@ bool	exec_redir(t_data *data, t_cmd *cmd, int i, int j)
 	}
 	return (true);
 }
-
+ 
 /**
  * @brief 	checks whether the command is a builtin or not,
  * 			and if there are multiple commands.
@@ -73,18 +83,22 @@ bool	exec_redir(t_data *data, t_cmd *cmd, int i, int j)
  * @return true if it is a builtin and there are more than 1 cmds
  * @return false if it is not a builtin OR if it is the only command
  */
-bool	check_builtin(t_cmd *cmd, t_data *data)
+int	check_builtin(t_cmd *cmd, t_data *data)
 {
+	int ret;
+
+	ret = -1;
 	if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
 	{
 		data->g_exit_status = exec_builtin(cmd, data);
+		ret = data->g_exit_status;
 		close_all_fds(0);
 		free_cmd(data);
 		set_env_and_path(data, FREE);
 		cleanup(data);
-		return (true);
+		return (ret);
 	}
-	return (false);
+	return (ret);
 }
 
 /**

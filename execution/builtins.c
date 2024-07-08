@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:37:54 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/07 03:59:37 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:04:20 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ bool	is_env_builtin(char *command)
 }
 
 /**
- * @brief 
- * @param cmd 
- * @param exec 
- * @return 
+ * @brief executes the command if it is a builtin
+ * @param cmd the built in commands 
+ * @return exit code of the command
  */
 int	exec_builtin(t_cmd *cmd, t_data *data)
 {
@@ -70,7 +69,7 @@ int	exec_builtin(t_cmd *cmd, t_data *data)
 	if (ft_strcmp(cmd->cmd_str, "echo") == 0)
 		result = ft_echo(cmd);
 	if (ft_strcmp(cmd->cmd_str, "cd") == 0)
-		result = ft_cd(cmd, data->env, data->export_env);
+		result = ft_cd(cmd, data->env, data->export_env, data);
 	if (ft_strcmp(cmd->cmd_str, "pwd") == 0)
 		result = ft_pwd();
 	if (ft_strcmp(cmd->cmd_str, "env") == 0)
@@ -87,6 +86,6 @@ int	exec_builtin(t_cmd *cmd, t_data *data)
 		ft_unset(cmd->args, data->export_env);
 	}
 	if (ft_strcmp(cmd->cmd_str, "exit") == 0)
-		ft_exit(cmd, data);
+		result = ft_exit(cmd, data);
 	return (result);
 }

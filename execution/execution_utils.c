@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:00:18 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/07 01:25:59 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:14:01 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,15 @@ void	processes_queue(t_data *data, int *status)
 		waitpid(data->pipe->pid[i], status, 0);
 		if (i == data->cmd_num - 1 && !is_builtin(data->cmds[i]->cmd_str))
 		{
-			if (WIFEXITED(*status) && (!is_builtin(data->cmds[i]->cmd_str)))
+			if (WIFEXITED(*status))
 				data->g_exit_status = WEXITSTATUS(*status);
+		}
+		else if (i == data->cmd_num - 1 && is_builtin(data->cmds[i]->cmd_str))
+		{
+			if (data->pipe->pid[i] == -1)
+				data->g_exit_status = 1;
+			else
+				data->g_exit_status = 0;
 		}
 	}
 }

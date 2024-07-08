@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/08 14:06:33 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:29:11 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,13 +274,13 @@ void			bubble_sort(t_list *head,
 /* ************************************************************************** */
 /*									BUILTINS								  */
 /* ************************************************************************** */
-int				ft_cd(t_cmd *cmd, t_list *env, t_list *export_env);
+int				ft_cd(t_cmd *cmd, t_list *env, t_list *export_env, t_data *data);
 int				ft_echo(t_cmd *cmd);
 int				ft_env(t_list *env);
 bool			ft_export(t_cmd *cmd, t_list *export_env, t_list *env);
 int				ft_pwd(void);
 int				ft_unset(t_list *args, t_list *env);
-void			ft_exit(t_cmd *cmd, t_data *data);
+int				ft_exit(t_cmd *cmd, t_data *data);
 
 /* ************************************************************************** */
 /*									EXECUTION								  */
@@ -295,7 +295,7 @@ bool			is_directory(const char *path);
 bool			set_redir(t_cmd *cmd, t_data *data);
 void			dup_origin(t_data *data);
 bool			exec_redir(t_data *data, t_cmd *cmd, int i, int j);
-bool			check_builtin(t_cmd *cmd, t_data *data);
+int				check_builtin(t_cmd *cmd, t_data *data);
 bool			check_env_builtin(t_cmd *cmd, t_data *data);
 void			processes_queue(t_data *data, int *status);
 bool			exec_multiple(t_data *data, int i);

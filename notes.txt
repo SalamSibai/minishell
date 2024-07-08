@@ -152,3 +152,8 @@ test 55
 
 
 OUTPUT REDIRECTION IS FAILING WITH CAT IF THERES A PIPE AFTER
+
+exit code on exiting need to be Updated
+
+
+echo hi >  3 | cat 3 | wc -l
