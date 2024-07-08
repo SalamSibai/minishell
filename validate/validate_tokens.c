@@ -6,15 +6,38 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:50:58 by ssibai            #+#    #+#             */
-/*   Updated: 2024/07/06 16:07:26 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 22:31:29 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// static bool	validate_tokens_helper()
-// {
-// }
+void	tokens_itir(t_data *data, int i, t_token **tokens)
+{
+	while (tokens[++i])
+	{
+		if (if_id(data, i, tokens) == -1)
+			return ;
+		else if (if_id(data, i, tokens) == 1)
+			continue ;
+		if (if_pipe(data, i, tokens) == -1)
+			return ;
+		else if (if_pipe(data, i, tokens) == 1)
+			continue ;
+		if (if_input(i, tokens) == -1)
+			return ;
+		else if (if_input(i, tokens) == 1)
+			continue ;
+		if (if_output(i, tokens) == -1)
+			return ;
+		else if (if_output(i, tokens) == 1)
+			continue ;
+		if (if_quote_or_dquote(i, tokens, data) == -1)
+			return ;
+		else if (if_quote_or_dquote(i, tokens, data) == 1)
+			continue ;
+	}
+}
 
 /// @brief validates whether the tokens provided are syntactically correct
 /// @param parse the parse struct
@@ -26,41 +49,6 @@ bool	validate_tokens(t_data *data)
 
 	tokens = data->tokens;
 	i = -1;
-	while (tokens[++i])
-	{
-		if (tokens[i]->type == ID)
-		{
-			if (!validate_id(i, data))
-				return (false);
-		}
-		else if (tokens[i]->type == PIPE)
-		{
-			if (!validate_pipe(tokens, i))
-				return (false);
-			data->cmd_num++;
-			data->cmd_ctr = 0;
-		}
-		else if (tokens[i]->type == REDIRECT_INPUT
-			|| tokens[i]->type == HEREDOC)
-		{
-			if (!validate_input_redirection(tokens, i))
-				return (false);
-		}
-		else if (tokens[i]->type == REDIRECT_OUTPUT
-			|| tokens[i]->type == REDIRECT_APPEND)
-		{
-			if (!validate_output_redirection(tokens, i))
-				return (false);
-		}
-		else if (tokens[i]->type == DQOUTES || tokens[i]->type == SQOUTES)
-		{
-			validate_qoutes(i, data);
-			if (tokens[i]->type == PIPE)
-			{
-				data->cmd_num++;
-				data->cmd_ctr = 0;
-			}
-		}
-	}
+	tokens_itir(data, i, tokens);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 21:45:24 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/08 21:03:13 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 22:00:39 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,17 @@ int	exec_child(t_cmd *cmd, t_data *data, int i, bool *cmd_exist)
 		if (is_directory(cmd->cmd_str))
 		{
 			if (ft_strncmp(cmd->cmd_str, "./", 2) == 0)
-				return (error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false), 126);
-			return (error_handler(DIR_EXEC_MSG, DIR_EXEC_ER, data, false), 127);
+				return (error_handler(DIR_MSG, DIR_EXEC_ER, data, false), 126);
+			return (error_handler(DIR_MSG, DIR_EXEC_ER, data, false), 127);
 		}
 		if (!get_path(data, cmd, cmd_exist))
 		{
 			if (ft_strncmp(cmd->cmd_str, "./", 2) == 0)
 				return (set_env_and_path(data, FREE),
-				error_handler(PATH_ER_MSG, PATH_ER, data, true), 127);
+					error_handler(PATH_ER_MSG, PATH_ER, data, true), 127);
 		}
 		else
-		{
-			if (*cmd_exist)
-			{
-				close_all_fds(3);
-				execve(cmd->cmd_path, cmd->cmd_with_flag, data->env_var);
-			}
-			else
-			{
-				close_fds(data, i, true);
-				free_cmd(data);
-				set_env_and_path(data, FREE);
-				error_handler(CMD_ER_MSG, CMD_ER, data, true);
-			}
-		}
+			exec_in_v(cmd, data, i, cmd_exist);
 	}
 	return (0);
 }

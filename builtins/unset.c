@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 13:58:41 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 15:55:14 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:40:42 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	is_in_env_remove(t_list *env, char *args)
  * @return it returns 0 if theres no arguments for
  *  unset and it return on succes 
  */
-int	ft_unset(t_list *args, t_list *env)
+int	ft_unset(t_list *args, t_list *env, t_data *data)
 {
 	t_list	*tmp;
 
@@ -68,6 +68,6 @@ int	ft_unset(t_list *args, t_list *env)
 		is_in_env_remove(env, tmp->content);
 		tmp = tmp->next;
 	}
-	g_exit_status = 0;
+	data->g_exit_status = 0;
 	return (1);
 }

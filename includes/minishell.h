@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:17:44 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/08 18:29:11 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 22:36:17 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <termios.h>
 # include <sys/wait.h>
 # include <signal.h>
-#include <sys/stat.h>
+# include <sys/stat.h>
 
 # define BUFF_SIZE 4096
 # define INVALID_EXP_MSG "Export: not a valid identifier\n"
@@ -37,7 +37,8 @@
 # define PIPE_ER_MSG "Error: Couldn't open pipes\n"
 # define FORK_ER_MSG "Error: Fork.\n"
 # define CMD_ER_MSG "Error: Command doesn't exits\n"
-# define DIR_EXEC_MSG "Error: No such file or directory\n"
+# define DIR_MSG "Error: No such file or directory\n"
+# define PIPE_MISSING "Error: syntax error near unexpected token '|'\n"
 
 typedef enum e_cmd_type
 {
@@ -60,7 +61,7 @@ typedef enum e_error_type
 
 typedef struct sigaction	t_sigaction;
 
-int							g_exit_status;
+int							g_recived_signal;
 
 typedef enum t_token_type
 {
@@ -92,7 +93,6 @@ typedef struct s_pipe
 	int	fd[2][2];
 	int	*pid;
 }	t_pipe;
-
 
 typedef struct s_var
 {
@@ -171,28 +171,34 @@ bool			validate_pipe(t_token **tokens, int index);
 bool			validate_input_redirection(t_token **tokens, int index);
 bool			validate_output_redirection(t_token **tokens, int index);
 bool			validate_qoutes(int index, t_data *data);
+int				if_id(t_data *data, int i, t_token **tokens);
+int				if_pipe(t_data *data, int i, t_token **tokens);
+int				if_input(int i, t_token **tokens);
+int				if_output(int i, t_token **tokens);
+int				if_quote_or_dquote(int i, t_token **tokens, t_data *data);
 
 /* ************************************************************************** */
 /*									SIGNALS									  */
 /* ************************************************************************** */
-void			init_sigaction(void);
+void			init_sigaction(t_data *data);
 void			disable_ctrl_c_echo(void);
 
 /* ************************************************************************** */
 /*									PARSEING								  */
 /* ************************************************************************** */
-void	scan(char *av, t_token **tokens);
-void	init_cmds(t_data *data);
-void	set_cmds(t_data *data);
-int		count_cmds(t_token **tokens);
-void	malloc_each_token(t_var *var, t_token **tokens, char *buff);
-void	malloc_qoutes_token(t_token **tokens, char *buff, t_var *var);
-bool   	check_if_cmd(t_data *data, t_var *var, t_token **tokens);
-bool 	check_if_flag(t_data *data, t_var *var, t_token **tokens, t_list *new_arg);
-bool	check_if_redir(t_var *var, t_token **tokens, t_redirection **head);
-bool	check_if_id(t_data *data, t_var *var, t_token **tokens, t_list *new_arg);
-void    itir_tokens(int *token_ctr, int *in_t, char *av, int *i);
-
+void			scan(char *av, t_token **tokens);
+void			init_cmds(t_data *data);
+void			set_cmds(t_data *data);
+int				count_cmds(t_token **tokens);
+void			malloc_each_token(t_var *var, t_token **tokens, char *buff);
+void			malloc_qoutes_token(t_token **tokens, char *buff, t_var *var);
+bool			check_if_cmd(t_data *data, t_var *var, t_token **tokens);
+bool			check_if_flag(t_data *d, t_var *v, t_token **ts, t_list *n);
+bool			check_if_redir(t_var *var, t_token **tokens,
+					t_redirection **head);
+bool			check_if_id(t_data *data, t_var *var, t_token **tokens,
+					t_list *new_arg);
+void			itir_tokens(int *token_ctr, int *in_t, char *av, int *i);
 
 /* ************************************************************************** */
 /*									PARSE UTILS								  */
@@ -203,13 +209,13 @@ void			*ft_safe_malloc(size_t size, char *msg);
 /* ************************************************************************** */
 /*									TOKENS UTILS							  */
 /* ************************************************************************** */
-void	set_type(t_token *token);
-int		token_count(char *av);
-bool	is_cmd(char *cmd, t_data *data);
-bool	is_dquote_or_quote(int *token_ctr, int *in_t, char *av, int *i);
-bool 	is_append_or_heredoc(int *token_ctr, int *in_t, char *av, int *i);
-bool	is_pipe_or_redir(int *token_ctr, int *in_token, char *av, int i);
-int		skip_spaces(int *token_ctr, int *in_token, char *av, int i);
+void			set_type(t_token *token);
+int				token_count(char *av);
+bool			is_cmd(char *cmd, t_data *data);
+bool			is_dquote_or_quote(int *tkn_ctr, int *in_t, char *av, int *i);
+bool			is_append_or_heredoc(int *tn_ctr, int *in_t, char *av, int *i);
+bool			is_pipe_or_redir(int *tkn_ctr, int *in_tokn, char *av, int i);
+int				skip_spaces(int *token_ctr, int *in_token, char *av, int i);
 
 /* ************************************************************************** */
 /*								REDIRECTION	UTILS							  */
@@ -219,26 +225,26 @@ t_redirection	*redir_last(t_redirection *redir);
 void			redir_add_back(t_redirection **redir, t_redirection *new);
 void			redir_add_front(t_redirection **redir, t_redirection *new);
 void			redir_clear(t_redirection **redir);
-void			reset_fds(t_data  *data);
+void			reset_fds(t_data *data);
 
 /* ************************************************************************** */
 /*								PIPES,FDs REDIRECTION		 				  */
 /* ************************************************************************** */
-void	check_redirections(t_cmd *cmd, t_data *data, int *in_val, int *out_val);
-int		check_type(t_cmd *cmd, t_data *data);
-bool	get_input(t_cmd *cmd, bool heredoc, t_redirection *redir,
-			t_data *data);
-bool	set_output(t_cmd *cmd, bool append, t_redirection *redir);
-bool	redirect_fds(t_data *data, t_cmd *cmd, int i, int j);
-bool	redirect_file_input(t_cmd *cmd);
-bool	redirect_pipe_input(t_pipe *pipe, int j);
-bool	redirect_file_output(t_cmd *cmd);
-bool	redirect_pipe_output(t_pipe *pipe, int j);
-bool	redirect_stdin(t_data *data, t_cmd *cmd);
-bool	redirect_stdout(t_data *data, t_cmd *cmd);
-char	*get_file_path(const char *file_name);
-void	alloc_pids(t_data *d);
-bool	make_pipes(t_pipe *p);
+void			check_redirections(t_cmd *cmd, t_data *data,
+					int *in_val, int *out_val);
+bool			get_input(t_cmd *cmd, bool heredoc, t_redirection *redir,
+					t_data *data);
+bool			set_output(t_cmd *cmd, bool append, t_redirection *redir);
+bool			redirect_fds(t_data *data, t_cmd *cmd, int i, int j);
+bool			redirect_file_input(t_cmd *cmd);
+bool			redirect_pipe_input(t_pipe *pipe, int j);
+bool			redirect_file_output(t_cmd *cmd);
+bool			redirect_pipe_output(t_pipe *pipe, int j);
+bool			redirect_stdin(t_data *data, t_cmd *cmd);
+bool			redirect_stdout(t_data *data, t_cmd *cmd);
+char			*get_file_path(const char *file_name);
+void			alloc_pids(t_data *d);
+bool			make_pipes(t_pipe *p);
 
 /* ************************************************************************** */
 /*									EXPANSION								  */
@@ -274,12 +280,12 @@ void			bubble_sort(t_list *head,
 /* ************************************************************************** */
 /*									BUILTINS								  */
 /* ************************************************************************** */
-int				ft_cd(t_cmd *cmd, t_list *env, t_list *export_env, t_data *data);
+int				ft_cd(t_cmd *cmd, t_list *env, t_list *exp_env, t_data *data);
 int				ft_echo(t_cmd *cmd);
 int				ft_env(t_list *env);
 bool			ft_export(t_cmd *cmd, t_list *export_env, t_list *env);
 int				ft_pwd(void);
-int				ft_unset(t_list *args, t_list *env);
+int				ft_unset(t_list *args, t_list *env, t_data *data);
 int				ft_exit(t_cmd *cmd, t_data *data);
 
 /* ************************************************************************** */
@@ -288,7 +294,6 @@ int				ft_exit(t_cmd *cmd, t_data *data);
 bool			is_builtin(char *command);
 bool			is_env_builtin(char *command);
 int				exec_builtin(t_cmd *cmd, t_data *data);
-void			execute_cmds(t_data *data);
 bool			execution(t_data *data);
 bool			join_cmd_and_flag(t_cmd *cmd);
 bool			is_directory(const char *path);
@@ -300,6 +305,7 @@ bool			check_env_builtin(t_cmd *cmd, t_data *data);
 void			processes_queue(t_data *data, int *status);
 bool			exec_multiple(t_data *data, int i);
 int				exec_cmd(t_cmd *cmd, t_data *data, int i, int j);
+void			exec_in_v(t_cmd *cmd, t_data *data, int i, bool *cmd_exist);
 
 /* ************************************************************************** */
 /*									DEBUG									  */
@@ -318,6 +324,6 @@ bool			close_fd(int fd);
 bool			close_fds(t_data *data, int i, bool pipe);
 bool			close_pipe(t_pipe *pipe, int i, bool both);
 void			close_origin_fds(t_data *data);
-void			close_all_fds(int	start);
+void			close_all_fds(int start);
 
 #endif

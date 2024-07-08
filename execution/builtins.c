@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:37:54 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/08 18:04:20 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:40:56 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	exec_builtin(t_cmd *cmd, t_data *data)
 	}
 	if (ft_strcmp(cmd->cmd_str, "unset") == 0)
 	{
-		ft_unset(cmd->args, data->env);
-		ft_unset(cmd->args, data->export_env);
+		ft_unset(cmd->args, data->env, data);
+		ft_unset(cmd->args, data->export_env, data);
 	}
 	if (ft_strcmp(cmd->cmd_str, "exit") == 0)
 		result = ft_exit(cmd, data);

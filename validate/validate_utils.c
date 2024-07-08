@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 19:47:04 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/05 06:02:52 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 22:36:51 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ bool	validate_unbalanced_qoutes(char *line)
 	return (true);
 }
 
+bool	find_pipe(char *ps, char *es)
+{
+	if (ft_peek(&ps, es, "|"))
+	{
+		printf(PIPE_MISSING);
+		return (false);
+	}
+	return (true);
+}
+
 bool	validate_pipes(char *line)
 {
 	char	*ps;
@@ -67,11 +77,8 @@ bool	validate_pipes(char *line)
 	es = line + ft_strlen(line);
 	while (ps < es && ft_isspace(*ps))
 		ps++;
-	if (ft_peek(&ps, es, "|"))
-	{
-		printf("Error: syntax error near unexpected token 1 '|'\n");
+	if (!find_pipe(ps, es))
 		return (false);
-	}
 	while (ps < es)
 	{
 		if (*ps == '|')
@@ -80,10 +87,7 @@ bool	validate_pipes(char *line)
 			while (ps < es && ft_isspace(*ps))
 				ps++;
 			if (ps == es || *ps == '|')
-			{
-				printf("Error: syntax error near unexpected token 2 '|'\n");
-				return (false);
-			}
+				return (printf(PIPE_MISSING), false);
 		}
 		else
 			ps++;

@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:05:21 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/08 16:30:32 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 22:25:22 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	update_pwds(t_list *env, t_list *export_env)
 int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env, t_data *data)
 {
 	int	cd_ret;
-	
+
 	cd_ret = 0;
 	if (!cmd->args)
 		return (goto_path(0, env));
@@ -131,11 +131,11 @@ int	ft_cd(t_cmd *cmd, t_list *env, t_list *export_env, t_data *data)
 		cd_ret = chdir(cmd->args->content);
 		if (cd_ret == -1)
 		{
-			error_handler(DIR_EXEC_MSG, IN_REDIR_ER, data, false);
+			error_handler(DIR_MSG, IN_REDIR_ER, data, false);
 			return (1);
 		}
 	}
 	update_pwds(env, export_env);
-	g_exit_status = 0;
+	data->g_exit_status = 0;
 	return (cd_ret);
 }

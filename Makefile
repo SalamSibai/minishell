@@ -6,7 +6,7 @@
 #    By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 11:41:44 by mohammoh          #+#    #+#              #
-#    Updated: 2024/07/08 17:25:17 by mohammoh         ###   ########.fr        #
+#    Updated: 2024/07/08 22:15:23 by mohammoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${VALIDATE_DIR}/validate_syntax.c \
 		${VALIDATE_DIR}/validate_utils.c \
 		${VALIDATE_DIR}/validate_tokens.c \
+		${VALIDATE_DIR}/validate_tokens_utils.c \
 		${VALIDATE_DIR}/validate_qoutes.c \
 		${REDIR_DIR}/check_redirection.c\
 		${REDIR_DIR}/get_input.c\
@@ -66,13 +67,13 @@ SRC	=	${PARSE_DIR}/parse_utils.c \
 		${EXEC_DIR}/execution.c \
 		${EXEC_DIR}/builtins.c \
 		${EXEC_DIR}/exec_cmds.c \
+		${EXEC_DIR}/exec_cmds_utils.c \
 		${EXEC_DIR}/execution_utils.c \
 		${EXEC_DIR}/execution_utils2.c \
 		${FREE_DIR}/free_data.c \
 		${FREE_DIR}/close_fds.c \
 		${FREE_DIR}/error_handler.c\
 		${SIG_DIR}/termios.c \
-		${DEBUG_DIR}/print_data.c \
 		./main.c \
 
 CFLAGS = -Wall -Werror -Wextra -g3

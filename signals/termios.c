@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:38:15 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/04 06:12:26 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:51:12 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	signals_handler(int sig, siginfo_t *siginfo, void *ptr)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		g_exit_status = 1;
+		g_recived_signal = 1;
 	}
 }
 
@@ -87,15 +87,19 @@ void	mask_sig(t_sigaction *sa)
  * so we will use the term struct to disable the ctrl+c echo
  * @param data 
  */
-void	init_sigaction(void)
+void	init_sigaction(t_data *data)
 {
 	t_sigaction	sa;
 
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_sigaction = &signals_handler;
+	if (g_recived_signal == 1)
+	{
+		data->g_exit_status = 1;
+		g_recived_signal = 0;
+	}
 	sa.sa_flags = 0;
 	sa.sa_flags = SA_SIGINFO;
-	g_exit_status = 0;
 	mask_sig(&sa);
 	catch_sig(&sa);
 }

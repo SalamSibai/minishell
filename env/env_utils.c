@@ -6,19 +6,19 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 19:51:26 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/06 15:56:24 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:39:51 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool	print_error(const char *arg)
+/* bool	print_error(const char *arg)
 {
 	(void) arg;
 	ft_putstr_fd("export: not a valid identifier\n", 2);
 	g_exit_status = 1;
 	return (false);
-}
+} */
 
 /**
  * @brief this function will copy the name of the vairable without its value

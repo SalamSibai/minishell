@@ -6,7 +6,7 @@
 /*   By: mohammoh <mohammoh@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:28:17 by mohammoh          #+#    #+#             */
-/*   Updated: 2024/07/08 20:25:04 by mohammoh         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:07:45 by mohammoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ bool	exec_redir(t_data *data, t_cmd *cmd, int i, int j)
 	}
 	return (true);
 }
- 
+
 /**
  * @brief 	checks whether the command is a builtin or not,
  * 			and if there are multiple commands.
@@ -85,7 +85,7 @@ bool	exec_redir(t_data *data, t_cmd *cmd, int i, int j)
  */
 int	check_builtin(t_cmd *cmd, t_data *data)
 {
-	int ret;
+	int	ret;
 
 	ret = -1;
 	if (is_builtin(cmd->cmd_str) && (data->cmd_num > 1))
