@@ -62,6 +62,7 @@ bool	execute_single_cmd(t_data *data)
 			dup2(out, STDOUT_FILENO);  // Restore the original stdout
 			close(out);  // Close the duplicated stdout
 		}
+		close_all_fds(3);
 	}
 	else
 		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0, 0);
