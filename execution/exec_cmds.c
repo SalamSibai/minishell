@@ -124,7 +124,7 @@ int	exec_cmd(t_cmd *cmd, t_data *data, int i, int j)
 			return (error_handler(FORK_ER_MSG, FORK_ER, data, false), pid);
 		if (pid == 0)
 		{
-			if (!exec_redir(data, cmd, i, j))
+			if (!redirect_fds(data, cmd, i, j))
 				exit(24);
 			close_origin_fds(data);
 			check_cmd(cmd, data, i);
