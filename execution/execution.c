@@ -18,7 +18,7 @@
  * @param data 
  */
 bool	execute_single_cmd(t_data *data)
-{echo
+{
 	bool duped_in;
     bool duped_out;
 
