@@ -12,53 +12,22 @@
 
 #include "../includes/minishell.h"
 
-/**
- * @brief this function will execute the commands based on the type of command
- * either its a builtin or a command to be executed in the parent or the child
- * @param data 
- */
-bool	execute_single_cmd(t_data *data)
+bool	single_cmd_builtin_redi(t_data *data, bool *duped_in, bool *duped_out)
 {
-	bool duped_in;
-    bool duped_out;
-
-    int out;
-    int in;  // Added this line to store the original stdin
-
-    duped_in = false;
-    duped_out = false;
-    if (is_builtin(data->cmds[0]->cmd_str))
-    {
-        out = dup(STDOUT_FILENO);
-        in = dup(STDIN_FILENO);  // Duplicate the original stdin
-        if (!set_redir(data->cmds[0], data))
-            return (false);
-        if (data->cmds[0]->fd_in != -1)
-        {
-            dup2(data->cmds[0]->fd_in, STDIN_FILENO);
-            close(data->cmds[0]->fd_in);  // Close the fd_in after duplication
-            duped_in = true;
-        }
-        if (data->cmds[0]->fd_out != -1)
-        {
-            dup2(data->cmds[0]->fd_out, STDOUT_FILENO);
-            close(data->cmds[0]->fd_out);  // Close the fd_out after duplication
-            duped_out = true;
-        }
-        data->g_exit_status = exec_builtin(data->cmds[0], data);
-        if (duped_in)
-        {
-            dup2(in, STDIN_FILENO);  // Restore the original stdin
-            close(in);  // Close the duplicated stdin
-        }
-        if (duped_out)
-        {
-            dup2(out, STDOUT_FILENO);  // Restore the original stdout
-            close(out);  // Close the duplicated stdout
-        }
-    }
-	else
-		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0, 0);
+	if (!set_redir(data->cmds[0], data))
+        return (false);
+    if (data->cmds[0]->fd_in != -1)
+	{
+		dup2(data->cmds[0]->fd_in, STDIN_FILENO);
+		close(data->cmds[0]->fd_in);  // Close the fd_in after duplication
+		*duped_in = true;
+	}
+	if (data->cmds[0]->fd_out != -1)
+	{
+		dup2(data->cmds[0]->fd_out, STDOUT_FILENO);
+		close(data->cmds[0]->fd_out);  // Close the fd_out after duplication
+		*duped_out = true;
+	}
 	return (true);
 }
 
@@ -67,12 +36,36 @@ bool	execute_single_cmd(t_data *data)
  * either its a builtin or a command to be executed in the parent or the child
  * @param data 
  */
-void	execute_single_cmd(t_data *data)
+bool	execute_single_cmd(t_data *data)
 {
+	bool	duped_in;
+	bool	duped_out;
+	int		out;
+	int		in;  // Added this line to store the original stdin
+
+	duped_in = false;
+	duped_out = false;
 	if (is_builtin(data->cmds[0]->cmd_str))
+	{
+		out = dup(STDOUT_FILENO);
+		in = dup(STDIN_FILENO);  // Duplicate the original stdin
+		if (!single_cmd_builtin_redi(data, &duped_in, &duped_out))
+			return (false);
 		data->g_exit_status = exec_builtin(data->cmds[0], data);
+		if (duped_in)
+		{
+			dup2(in, STDIN_FILENO);  // Restore the original stdin
+			close(in);  // Close the duplicated stdin
+		}
+		if (duped_out)
+		{
+			dup2(out, STDOUT_FILENO);  // Restore the original stdout
+			close(out);  // Close the duplicated stdout
+		}
+	}
 	else
 		data->pipe->pid[0] = exec_cmd(data->cmds[0], data, 0, 0);
+	return (true);
 }
 
 /**
